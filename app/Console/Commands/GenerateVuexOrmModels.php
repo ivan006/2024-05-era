@@ -114,9 +114,17 @@ EOT;
         preg_match('/relatedPivotKey: ?\'(\w+)\'/', $relationString, $relatedForeignKeyMatch);
         preg_match('/pivotTable: ?\'(\w+)\'/', $relationString, $pivotTableMatch);
 
+        $relatedModel = $modelMatch ? $modelMatch[1] : null;
+        $foreignKey = $foreignKeyMatch ? $foreignKeyMatch[1] : null;
+
+        // If the foreignKey was not matched, infer it from the relation name
+        if (!$foreignKey && $relatedModel) {
+            $foreignKey = Str::snake($relatedModel) . '_id';
+        }
+
         return [
-            'relatedModel' => $modelMatch ? $modelMatch[1] : null,
-            'foreignKey' => $foreignKeyMatch ? $foreignKeyMatch[1] : null,
+            'relatedModel' => $relatedModel,
+            'foreignKey' => $foreignKey,
             'relatedForeignKey' => $relatedForeignKeyMatch ? $relatedForeignKeyMatch[1] : null,
             'pivotTable' => $pivotTableMatch ? $pivotTableMatch[1] : null
         ];
