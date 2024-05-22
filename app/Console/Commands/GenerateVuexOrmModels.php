@@ -88,10 +88,12 @@ EOT;
                     $relations[] = "'$relationName': this.belongsTo({$relationDetails['relatedModel']}, '$foreignKey')";
                     break;
                 case 'hasMany':
-                    $relations[] = "'$relationName': this.hasMany({$relationDetails['relatedModel']})";
+                    $foreignKey = $relationDetails['foreignKey'] ?: Str::snake($modelName) . '_id';
+                    $relations[] = "'$relationName': this.hasMany({$relationDetails['relatedModel']}, '$foreignKey')";
                     break;
                 case 'hasOne':
-                    $relations[] = "'$relationName': this.hasOne({$relationDetails['relatedModel']})";
+                    $foreignKey = $relationDetails['foreignKey'] ?: Str::snake($modelName) . '_id';
+                    $relations[] = "'$relationName': this.hasOne({$relationDetails['relatedModel']}, '$foreignKey')";
                     break;
                 case 'belongsToMany':
                     $pivotTable = $relationDetails['pivotTable'] ?: Str::snake(Str::plural($modelName)) . '_' . Str::snake(Str::plural($relationDetails['relatedModel']));
