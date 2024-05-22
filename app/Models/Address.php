@@ -22,21 +22,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $Dispatch
  * @property float $Latitude
  * @property float $Longitude
- * @property Systemcode $systemcode
- * @property Systemcode $systemcode
+ * @property Systemcode $countrySystemcode
+ * @property Systemcode $typeSystemcode
  */
 class Address extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'address';
 
     /**
      * The primary key for the model.
-     * 
+     *
      * @var string
      */
     protected $primaryKey = 'Id';
@@ -49,7 +49,7 @@ class Address extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function systemcode()
+    public function countrySystemcode()
     {
         return $this->belongsTo('App\Models\Systemcode', 'Country', 'Id');
     }
@@ -57,7 +57,7 @@ class Address extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function systemcode()
+    public function typeSystemcode()
     {
         return $this->belongsTo('App\Models\Systemcode', 'Type', 'Id');
     }
