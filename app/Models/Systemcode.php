@@ -32,14 +32,14 @@ class Systemcode extends Model
 {
     /**
      * The table associated with the model.
-     * 
+     *
      * @var string
      */
     protected $table = 'systemcode';
 
     /**
      * The primary key for the model.
-     * 
+     *
      * @var string
      */
     protected $primaryKey = 'Id';
@@ -52,7 +52,7 @@ class Systemcode extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function addresses()
+    public function countryAddresses()
     {
         return $this->hasMany('App\Models\Address', 'Country', 'Id');
     }
@@ -60,7 +60,7 @@ class Systemcode extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function addresses()
+    public function typeAddresses()
     {
         return $this->hasMany('App\Models\Address', 'Type', 'Id');
     }
