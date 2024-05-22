@@ -30,7 +30,7 @@ class GenerateVuexOrmModels extends Command
             }
 
             $fieldsString = implode(",\n            ", $fields);
-            $relations = $this->getModelRelations($modelName);
+            $relations = $this->getModelRelations($tableName);
             $imports = $this->generateImports($modelName, $relations['imports']);
 
             $relationsString = implode(",\n            ", $relations['relations']);
@@ -58,50 +58,27 @@ EOT;
         }
     }
 
-    protected function getModelRelations($modelName)
+    protected function getModelRelations($tableName)
     {
-        $modelPath = app_path("Models/{$modelName}.php");
+        $foreignKeys = DB::select("SELECT
+            COLUMN_NAME,
+            REFERENCED_TABLE_NAME,
+            REFERENCED_COLUMN_NAME
+            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+            WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND REFERENCED_COLUMN_NAME IS NOT NULL", [env('DB_DATABASE'), $tableName]);
 
-        if (!File::exists($modelPath)) {
-            return ['relations' => [], 'imports' => []];
-        }
-
-        $fileContent = File::get($modelPath);
         $relations = [];
         $imports = [];
 
-        preg_match_all('/public function (\w+)\(\)\s*{\s*return \$this->(\w+)\(([^)]+)\)/', $fileContent, $matches, PREG_SET_ORDER);
-        foreach ($matches as $match) {
-            $relationName = $match[1];
-            $relationType = $match[2];
-            $relationString = $match[3];
+        foreach ($foreignKeys as $foreignKey) {
+            $relationName = Str::camel(Str::singular($foreignKey->COLUMN_NAME));
+            $relatedModel = Str::studly(Str::singular($foreignKey->REFERENCED_TABLE_NAME));
 
-            $relationDetails = $this->extractRelationDetails($relationString);
-
-            if ($relationDetails['relatedModel'] && !in_array($relationDetails['relatedModel'], $imports)) {
-                $imports[] = $relationDetails['relatedModel'];
+            if (!in_array($relatedModel, $imports)) {
+                $imports[] = $relatedModel;
             }
 
-            switch ($relationType) {
-                case 'belongsTo':
-                    $foreignKey = $relationDetails['foreignKey'] ?: Str::snake($relationName) . '_id';
-                    $relations[] = "'$relationName': this.belongsTo({$relationDetails['relatedModel']}, '$foreignKey')";
-                    break;
-                case 'hasMany':
-                    $foreignKey = $relationDetails['foreignKey'] ?: Str::snake($modelName) . '_id';
-                    $relations[] = "'$relationName': this.hasMany({$relationDetails['relatedModel']}, '$foreignKey')";
-                    break;
-                case 'hasOne':
-                    $foreignKey = $relationDetails['foreignKey'] ?: Str::snake($modelName) . '_id';
-                    $relations[] = "'$relationName': this.hasOne({$relationDetails['relatedModel']}, '$foreignKey')";
-                    break;
-                case 'belongsToMany':
-                    $pivotTable = $relationDetails['pivotTable'] ?: Str::snake(Str::plural($modelName)) . '_' . Str::snake(Str::plural($relationDetails['relatedModel']));
-                    $foreignKey = $relationDetails['foreignKey'] ?: Str::snake($modelName) . '_id';
-                    $relatedForeignKey = $relationDetails['relatedForeignKey'] ?: Str::snake($relationDetails['relatedModel']) . '_id';
-                    $relations[] = "'$relationName': this.belongsToMany({$relationDetails['relatedModel']}, '$pivotTable', '$foreignKey', '$relatedForeignKey')";
-                    break;
-            }
+            $relations[] = "'$relationName': this.belongsTo($relatedModel, '{$foreignKey->COLUMN_NAME}')";
         }
 
         return ['relations' => $relations, 'imports' => $imports];
@@ -110,21 +87,13 @@ EOT;
     protected function extractRelationDetails($relationString)
     {
         preg_match('/\'App\\\\Models\\\\(\w+)\'/', $relationString, $modelMatch);
-        preg_match('/foreignKey: ?\'(\w+)\'/', $relationString, $foreignKeyMatch);
-        preg_match('/relatedPivotKey: ?\'(\w+)\'/', $relationString, $relatedForeignKeyMatch);
-        preg_match('/pivotTable: ?\'(\w+)\'/', $relationString, $pivotTableMatch);
-
-        $relatedModel = $modelMatch ? $modelMatch[1] : null;
-        $foreignKey = $foreignKeyMatch ? $foreignKeyMatch[1] : null;
-
-        // If the foreignKey was not matched, infer it from the relation name
-        if (!$foreignKey && $relatedModel) {
-            $foreignKey = Str::snake($relatedModel) . '_id';
-        }
+        preg_match('/,\s*\'(\w+)\'/', $relationString, $foreignKeyMatch);
+        preg_match('/relatedPivotKey:\s*\'(\w+)\'/', $relationString, $relatedForeignKeyMatch);
+        preg_match('/pivotTable:\s*\'(\w+)\'/', $relationString, $pivotTableMatch);
 
         return [
-            'relatedModel' => $relatedModel,
-            'foreignKey' => $foreignKey,
+            'relatedModel' => $modelMatch ? $modelMatch[1] : null,
+            'foreignKey' => $foreignKeyMatch ? $foreignKeyMatch[1] : null,
             'relatedForeignKey' => $relatedForeignKeyMatch ? $relatedForeignKeyMatch[1] : null,
             'pivotTable' => $pivotTableMatch ? $pivotTableMatch[1] : null
         ];
