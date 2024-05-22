@@ -31,7 +31,7 @@ class GenerateVuexOrmModels extends Command
 
             $fieldsString = implode(",\n            ", $fields);
             $relations = $this->getModelRelations($modelName);
-            $imports = $this->generateImports($modelName, $relations['imports']);
+            $imports = $this->generateImports($modelName, $relations['imports'], $relations['relationTypes']);
 
             $relationsString = implode(",\n            ", $relations['relations']);
 
@@ -63,12 +63,13 @@ EOT;
         $modelPath = app_path("Models/{$modelName}.php");
 
         if (!File::exists($modelPath)) {
-            return ['relations' => [], 'imports' => []];
+            return ['relations' => [], 'imports' => [], 'relationTypes' => []];
         }
 
         $fileContent = File::get($modelPath);
         $relations = [];
         $imports = [];
+        $relationTypes = [];
 
         preg_match_all('/public function (\w+)\(\)\s*{\s*return \$this->(\w+)\(([^)]+)\)/', $fileContent, $matches, PREG_SET_ORDER);
         foreach ($matches as $match) {
@@ -78,6 +79,10 @@ EOT;
 
             if ($relatedModel && !in_array($relatedModel, $imports)) {
                 $imports[] = $relatedModel;
+            }
+
+            if (!in_array($relationType, $relationTypes)) {
+                $relationTypes[] = $relationType;
             }
 
             switch ($relationType) {
@@ -96,7 +101,7 @@ EOT;
             }
         }
 
-        return ['relations' => $relations, 'imports' => $imports];
+        return ['relations' => $relations, 'imports' => $imports, 'relationTypes' => $relationTypes];
     }
 
     protected function extractRelatedModel($relationString)
@@ -105,13 +110,13 @@ EOT;
         return $match ? $match[1] : null;
     }
 
-    protected function generateImports($modelName, $relatedModels)
+    protected function generateImports($modelName, $relatedModels, $relationTypes)
     {
         $imports = array_map(function($relatedModel) {
             return "import $relatedModel from './$relatedModel';";
         }, $relatedModels);
 
-        array_unshift($imports, "import { Model } from '@vuex-orm/core';");
+        array_unshift($imports, "import { Model, " . implode(', ', $relationTypes) . " } from '@vuex-orm/core';");
         return implode("\n", $imports);
     }
 }
