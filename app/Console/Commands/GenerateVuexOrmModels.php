@@ -74,24 +74,24 @@ EOT;
         foreach ($matches as $match) {
             $relationName = $match[1];
             $relationType = $match[2];
-            $relatedModel = $this->extractRelatedModel($match[3]);
+            $relationDetails = $this->extractRelationDetails($match[3]);
 
-            if ($relatedModel && !in_array($relatedModel, $imports)) {
-                $imports[] = $relatedModel;
+            if ($relationDetails['relatedModel'] && !in_array($relationDetails['relatedModel'], $imports)) {
+                $imports[] = $relationDetails['relatedModel'];
             }
 
             switch ($relationType) {
                 case 'belongsTo':
-                    $relations[] = "'$relationName': this.belongsTo($relatedModel)";
+                    $relations[] = "'$relationName': this.belongsTo($relationDetails[relatedModel], '$relationDetails[foreignKey]')";
                     break;
                 case 'hasMany':
-                    $relations[] = "'$relationName': this.hasMany($relatedModel)";
+                    $relations[] = "'$relationName': this.hasMany($relationDetails[relatedModel])";
                     break;
                 case 'hasOne':
-                    $relations[] = "'$relationName': this.hasOne($relatedModel)";
+                    $relations[] = "'$relationName': this.hasOne($relationDetails[relatedModel])";
                     break;
                 case 'belongsToMany':
-                    $relations[] = "'$relationName': this.belongsToMany($relatedModel)";
+                    $relations[] = "'$relationName': this.belongsToMany($relationDetails[relatedModel], '$relationDetails[pivotTable]', '$relationDetails[foreignKey]', '$relationDetails[relatedForeignKey]')";
                     break;
             }
         }
@@ -99,10 +99,17 @@ EOT;
         return ['relations' => $relations, 'imports' => $imports];
     }
 
-    protected function extractRelatedModel($relationString)
+    protected function extractRelationDetails($relationString)
     {
-        preg_match('/\'App\\\\Models\\\\(\w+)\'/', $relationString, $match);
-        return $match ? $match[1] : null;
+        preg_match('/\'App\\\\Models\\\\(\w+)\'/', $relationString, $modelMatch);
+        preg_match('/foreignKey: \'(\w+)\'/', $relationString, $foreignKeyMatch);
+        preg_match('/relatedPivotKey: \'(\w+)\'/', $relationString, $relatedForeignKeyMatch);
+
+        return [
+            'relatedModel' => $modelMatch ? $modelMatch[1] : null,
+            'foreignKey' => $foreignKeyMatch ? $foreignKeyMatch[1] : null,
+            'relatedForeignKey' => $relatedForeignKeyMatch ? $relatedForeignKeyMatch[1] : null
+        ];
     }
 
     protected function generateImports($modelName, $relatedModels)
@@ -115,3 +122,4 @@ EOT;
         return implode("\n", $imports);
     }
 }
+?>
