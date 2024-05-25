@@ -34,7 +34,7 @@ class GenerateVuexOrmModels extends Command
                 $fieldName = $column->Field;
                 $fieldMeta = "{}";
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
-                    $relatedFieldName = $this->generateAlias($fieldName, $relations['foreignKeys']);
+                    $relatedFieldName = Str::camel(Str::singular($fieldName));
                     $parentWithables[] = "'$relatedFieldName': '$fieldName'";
                     $fieldMeta = "{ relationRules: { linkables: (user) => { return {} } } }";
                 }
@@ -156,7 +156,7 @@ EOT;
         foreach ($foreignKeys as $foreignKey) {
             $relationFieldName = $foreignKey->COLUMN_NAME;
             $relatedModel = Str::studly(Str::singular($foreignKey->REFERENCED_TABLE_NAME));
-            $relationName = $this->generateAlias($relationFieldName, $foreignKey);
+            $relationName = Str::camel(Str::singular($foreignKey->COLUMN_NAME));
 
             if (!in_array($relatedModel, $imports)) {
                 $imports[] = $relatedModel;
@@ -167,19 +167,6 @@ EOT;
         }
 
         return ['relations' => $relations, 'imports' => $imports, 'foreignKeys' => $foreignKeysArray];
-    }
-
-    protected function generateAlias($fieldName, $foreignKeys)
-    {
-        $relatedModelName = Str::camel(Str::singular($fieldName));
-        foreach ($foreignKeys as $foreignKey) {
-            if ($foreignKey['COLUMN_NAME'] === $fieldName) {
-                if (Str::studly(Str::singular($foreignKey['REFERENCED_TABLE_NAME'])) === Str::studly(Str::singular($fieldName))) {
-                    return $relatedModelName . 'Object';
-                }
-            }
-        }
-        return $relatedModelName;
     }
 
     protected function generateFieldMetadata($fieldName)
