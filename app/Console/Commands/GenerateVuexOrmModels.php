@@ -166,6 +166,22 @@ EOT;
             $foreignKeysArray[] = ['COLUMN_NAME' => $foreignKey->COLUMN_NAME, 'RELATED_MODEL' => $relatedModel];
         }
 
+        // Add hasMany relationships
+        $childRelations = DB::select("SELECT
+            TABLE_NAME,
+            COLUMN_NAME
+            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+            WHERE TABLE_SCHEMA = ? AND REFERENCED_TABLE_NAME = ?", [env('DB_DATABASE'), $tableName]);
+
+        foreach ($childRelations as $childRelation) {
+            $relationName = Str::camel(Str::plural($childRelation->TABLE_NAME));
+            $relatedModel = Str::studly(Str::singular($childRelation->TABLE_NAME));
+            $relations[] = "'$relationName': this.hasMany($relatedModel, '{$childRelation->COLUMN_NAME}')";
+            if (!in_array($relatedModel, $imports)) {
+                $imports[] = $relatedModel;
+            }
+        }
+
         return ['relations' => $relations, 'imports' => $imports, 'foreignKeys' => $foreignKeysArray];
     }
 
