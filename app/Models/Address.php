@@ -62,10 +62,10 @@ class Address extends Model
         return $this->belongsTo(Systemcode::class, 'Country');
     }
 
-        public function systemcode(): BelongsTo
-    {
-        return $this->belongsTo(Systemcode::class, 'Type');
-    }
+//        public function systemcode(): BelongsTo
+//    {
+//        return $this->belongsTo(Systemcode::class, 'Type');
+//    }
 
-    
+
 }

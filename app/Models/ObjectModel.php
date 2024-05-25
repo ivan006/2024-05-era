@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Object extends Model
+class ObjectModel extends Model
 {
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -32,7 +32,7 @@ class Object extends Model
         'ChildType'
     ];
 
-    
 
-    
+
+
 }

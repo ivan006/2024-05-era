@@ -125,7 +125,7 @@ EOT;
         return <<<EOT
 
 // API routes for $tableName
-Route::apiResource('$routeName', 'Api\\$controllerName');
+Route::apiResource('$routeName', \\App\\Http\\Controllers\\Api\\$controllerName::class);
 EOT;
     }
 }

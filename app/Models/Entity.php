@@ -61,22 +61,22 @@ class Entity extends Model
         'IsPaid'
     ];
 
-    
+
 
         public function entitygoods(): HasMany
     {
         return $this->hasMany(Entitygood::class);
     }
 
-        public function entitygoodapprovals(): HasMany
-    {
-        return $this->hasMany(Entitygoodapproval::class);
-    }
+//        public function entitygoodapprovals(): HasMany
+//    {
+//        return $this->hasMany(Entitygoodapproval::class);
+//    }
 
-        public function entitygoodapprovals(): HasMany
-    {
-        return $this->hasMany(Entitygoodapproval::class);
-    }
+//        public function entitygoodapprovals(): HasMany
+//    {
+//        return $this->hasMany(Entitygoodapproval::class);
+//    }
 
         public function entitygoodapprovals(): HasMany
     {

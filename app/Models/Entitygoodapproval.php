@@ -57,15 +57,15 @@ class Entitygoodapproval extends Model
         return $this->belongsTo(Entity::class, 'ApprovedBy');
     }
 
-        public function entity(): BelongsTo
-    {
-        return $this->belongsTo(Entity::class, 'InvoiceApprovedBy');
-    }
+//        public function entity(): BelongsTo
+//    {
+//        return $this->belongsTo(Entity::class, 'InvoiceApprovedBy');
+//    }
 
-        public function entity(): BelongsTo
-    {
-        return $this->belongsTo(Entity::class, 'Entity');
-    }
+//        public function entity(): BelongsTo
+//    {
+//        return $this->belongsTo(Entity::class, 'Entity');
+//    }
 
         public function queryheader(): BelongsTo
     {

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
-use App\Models\Object;
+use App\Models\ObjectModel;
 use Illuminate\Http\Request;
 
 class ObjectController extends Controller
@@ -14,7 +14,7 @@ class ObjectController extends Controller
 
     public function __construct()
     {
-        $this->model = new Object();
+        $this->model = new ObjectModel();
     }
 
     /**

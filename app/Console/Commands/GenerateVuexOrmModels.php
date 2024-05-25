@@ -21,6 +21,7 @@ class GenerateVuexOrmModels extends Command
             $tableName = $table->{"Tables_in_$database"};
             $modelName = Str::studly(Str::singular($tableName));
             $jsModelName = Str::camel(Str::singular($tableName));
+            $pluralTableName = Str::plural($tableName);
 
             $columns = DB::select("SHOW COLUMNS FROM $tableName");
 
@@ -52,7 +53,7 @@ $imports
 
 export default class $modelName extends MyBaseModel {
     static entity = '$jsModelName';
-    static entityUrl = '/rest/v1/$tableName';
+    static entityUrl = '/rest/v1/$pluralTableName';
 
     static parentWithables = [
         $parentWithablesString

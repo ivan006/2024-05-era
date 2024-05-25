@@ -67,10 +67,10 @@ class Systemcode extends Model
         return $this->hasMany(Address::class);
     }
 
-        public function addresses(): HasMany
-    {
-        return $this->hasMany(Address::class);
-    }
+//        public function addresses(): HasMany
+//    {
+//        return $this->hasMany(Address::class);
+//    }
 
         public function contactnumbers(): HasMany
     {
