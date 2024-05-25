@@ -28,17 +28,24 @@ class GenerateVuexOrmModels extends Command
             $fieldsMetadata = [];
             $relations = $this->getModelRelations($tableName);
             $imports = $this->generateImports($modelName, $relations['imports']);
+            $parentWithables = [];
 
             foreach ($columns as $column) {
                 $fieldName = $column->Field;
-                $fieldMeta = $this->generateFieldMetadata($fieldName);
+                $fieldMeta = "{}";
+                if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
+                    $relatedFieldName = $this->generateAlias($fieldName, $relations['foreignKeys']);
+                    $parentWithables[] = "'$relatedFieldName': '$fieldName'";
+                    $fieldMeta = "{ relationRules: { linkables: (user) => { return {} } } }";
+                }
                 $fields[] = "'$fieldName': this.attr('', $fieldMeta)";
-                $fieldsMetadata[] = "$fieldName: { usageType: '', linkable: true }"; // Example metadata
+                $fieldsMetadata[] = "$fieldName: { }"; // Placeholder for actual metadata logic
             }
 
             $fieldsString = implode(",\n            ", $fields);
             $fieldsMetadataString = implode(",\n            ", $fieldsMetadata);
             $relationsString = implode(",\n            ", $relations['relations']);
+            $parentWithablesString = implode(",\n        ", $parentWithables);
 
             $jsModel = <<<EOT
 $imports
@@ -48,7 +55,7 @@ export default class $modelName extends MyBaseModel {
     static entityUrl = '/rest/v1/$tableName';
 
     static parentWithables = [
-        // Add parent withables based on relations
+        $parentWithablesString
     ];
 
     static rules = {
@@ -144,19 +151,35 @@ EOT;
 
         $relations = [];
         $imports = [];
+        $foreignKeysArray = [];
 
         foreach ($foreignKeys as $foreignKey) {
-            $relationName = Str::camel(Str::singular($foreignKey->COLUMN_NAME));
+            $relationFieldName = $foreignKey->COLUMN_NAME;
             $relatedModel = Str::studly(Str::singular($foreignKey->REFERENCED_TABLE_NAME));
+            $relationName = $this->generateAlias($relationFieldName, $foreignKey);
 
             if (!in_array($relatedModel, $imports)) {
                 $imports[] = $relatedModel;
             }
 
-            $relations[] = "'$relationName': this.belongsTo($relatedModel, '{$foreignKey->COLUMN_NAME}')";
+            $relations[] = "'$relationName': this.belongsTo($relatedModel, '$relationFieldName')";
+            $foreignKeysArray[] = ['COLUMN_NAME' => $foreignKey->COLUMN_NAME, 'RELATED_MODEL' => $relatedModel];
         }
 
-        return ['relations' => $relations, 'imports' => $imports];
+        return ['relations' => $relations, 'imports' => $imports, 'foreignKeys' => $foreignKeysArray];
+    }
+
+    protected function generateAlias($fieldName, $foreignKeys)
+    {
+        $relatedModelName = Str::camel(Str::singular($fieldName));
+        foreach ($foreignKeys as $foreignKey) {
+            if ($foreignKey['COLUMN_NAME'] === $fieldName) {
+                if (Str::studly(Str::singular($foreignKey['REFERENCED_TABLE_NAME'])) === Str::studly(Str::singular($fieldName))) {
+                    return $relatedModelName . 'Object';
+                }
+            }
+        }
+        return $relatedModelName;
     }
 
     protected function generateFieldMetadata($fieldName)
