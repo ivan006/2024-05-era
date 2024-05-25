@@ -3,42 +3,44 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $SystemUser
- * @property string $Hash
- * @property string $Salt
- * @property string $CreatedOn
- * @property string $CreatedBy
- * @property string $ChangedOn
- * @property string $ChangedBy
- * @property integer $FbId
- */
 class Passwordhash extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'passwordhash';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'SystemUser';
+    public function rules()
+    {
+        return [
+            'SystemUser' => 'required',
+            'Hash' => 'required',
+            'Salt' => 'required',
+            'CreatedOn' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'ChangedOn' => 'nullable',
+            'ChangedBy' => 'nullable',
+            'FbId' => 'nullable'
+        ];
+    }
 
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    public $incrementing = false;
+    protected $fillable = [
+        'SystemUser',
+        'Hash',
+        'Salt',
+        'CreatedOn',
+        'CreatedBy',
+        'ChangedOn',
+        'ChangedBy',
+        'FbId'
+    ];
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Hash', 'Salt', 'CreatedOn', 'CreatedBy', 'ChangedOn', 'ChangedBy', 'FbId'];
+    
+
+    
 }

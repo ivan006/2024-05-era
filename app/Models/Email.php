@@ -3,41 +3,41 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Address
- * @property integer $Type
- * @property integer $Person
- * @property boolean $Preferred
- * @property Systemcode $systemcode
- */
 class Email extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'email';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Address', 'Type', 'Person', 'Preferred'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemcode()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Systemcode', 'Type', 'Id');
+        return [
+            'systemcode'
+        ];
     }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Address' => 'required',
+            'Type' => 'required',
+            'Person' => 'nullable',
+            'Preferred' => 'required'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Address',
+        'Type',
+        'Person',
+        'Preferred'
+    ];
+
+        public function systemcode(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Type');
+    }
+
+    
 }

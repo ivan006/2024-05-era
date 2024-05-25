@@ -3,38 +3,50 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $EntityA
- * @property integer $EntityB
- * @property integer $EntityARelationship
- * @property integer $EntityBRelationship
- * @property integer $EntityAStatus
- * @property integer $EntityBStatus
- * @property integer $EntityAQualifier
- * @property integer $EntityBQualifier
- * @property integer $EntityALevel
- * @property integer $EntityBLevel
- */
 class Entityrelationship extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'entityrelationship';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'EntityA' => 'nullable',
+            'EntityB' => 'nullable',
+            'EntityARelationship' => 'nullable',
+            'EntityBRelationship' => 'nullable',
+            'EntityAStatus' => 'nullable',
+            'EntityBStatus' => 'nullable',
+            'EntityAQualifier' => 'nullable',
+            'EntityBQualifier' => 'nullable',
+            'EntityALevel' => 'nullable',
+            'EntityBLevel' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['EntityA', 'EntityB', 'EntityARelationship', 'EntityBRelationship', 'EntityAStatus', 'EntityBStatus', 'EntityAQualifier', 'EntityBQualifier', 'EntityALevel', 'EntityBLevel'];
+    protected $fillable = [
+        'Id',
+        'EntityA',
+        'EntityB',
+        'EntityARelationship',
+        'EntityBRelationship',
+        'EntityAStatus',
+        'EntityBStatus',
+        'EntityAQualifier',
+        'EntityBQualifier',
+        'EntityALevel',
+        'EntityBLevel'
+    ];
+
+    
+
+    
 }

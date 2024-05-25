@@ -3,90 +3,77 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $ServiceRequest
- * @property integer $ServiceProvider
- * @property integer $CreatedBy
- * @property integer $TreatmentDetails
- * @property string $CreatedOn
- * @property string $ReportDate
- * @property boolean $Approved
- * @property boolean $Rejected
- * @property Externalproducer[] $externalproducers
- * @property Servicerequest $servicerequest
- * @property Entity $entity
- * @property Systemuser $systemuser
- * @property Treatmentdetail $treatmentdetail
- * @property Treatmentdetail[] $treatmentdetails
- */
 class Servicerequestreport extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'servicerequestreport';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['ServiceRequest', 'ServiceProvider', 'CreatedBy', 'TreatmentDetails', 'CreatedOn', 'ReportDate', 'Approved', 'Rejected'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function externalproducers()
+    public function relationships()
     {
-        return $this->hasMany('App\Models\Externalproducer', 'ServiceRequestReport', 'Id');
+        return [
+            'servicerequest',
+            'entity',
+            'systemuser',
+            'treatmentdetail',
+            'externalproducers',
+            'treatmentdetails'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function servicerequest()
+    public function rules()
     {
-        return $this->belongsTo('App\Models\Servicerequest', 'ServiceRequest', 'Id');
+        return [
+            'Id' => 'required',
+            'ServiceRequest' => 'required',
+            'ServiceProvider' => 'required',
+            'CreatedBy' => 'nullable',
+            'TreatmentDetails' => 'nullable',
+            'CreatedOn' => 'nullable',
+            'ReportDate' => 'nullable',
+            'Approved' => 'required',
+            'Rejected' => 'required'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function entity()
+    protected $fillable = [
+        'Id',
+        'ServiceRequest',
+        'ServiceProvider',
+        'CreatedBy',
+        'TreatmentDetails',
+        'CreatedOn',
+        'ReportDate',
+        'Approved',
+        'Rejected'
+    ];
+
+        public function servicerequest(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Entity', 'ServiceProvider', 'Id');
+        return $this->belongsTo(Servicerequest::class, 'ServiceRequest');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemuser()
+        public function entity(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Systemuser', 'CreatedBy', 'Id');
+        return $this->belongsTo(Entity::class, 'ServiceProvider');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function treatmentdetail()
+        public function systemuser(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Treatmentdetail', 'TreatmentDetails', 'Id');
+        return $this->belongsTo(Systemuser::class, 'CreatedBy');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function treatmentdetails()
+        public function treatmentdetail(): BelongsTo
     {
-        return $this->hasMany('App\Models\Treatmentdetail', 'ServiceRequestReport', 'Id');
+        return $this->belongsTo(Treatmentdetail::class, 'TreatmentDetails');
+    }
+
+        public function externalproducers(): HasMany
+    {
+        return $this->hasMany(Externalproducer::class);
+    }
+
+        public function treatmentdetails(): HasMany
+    {
+        return $this->hasMany(Treatmentdetail::class);
     }
 }

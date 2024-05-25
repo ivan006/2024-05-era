@@ -3,36 +3,46 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Name
- * @property string $Branch
- * @property string $BranchName
- * @property integer $Type
- * @property integer $BankType
- * @property string $Account
- * @property integer $Verified
- * @property integer $Entity
- */
 class Bank extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'bank';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Name' => 'nullable',
+            'Branch' => 'nullable',
+            'BranchName' => 'nullable',
+            'Type' => 'nullable',
+            'BankType' => 'nullable',
+            'Account' => 'nullable',
+            'Verified' => 'nullable',
+            'Entity' => 'required'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Name', 'Branch', 'BranchName', 'Type', 'BankType', 'Account', 'Verified', 'Entity'];
+    protected $fillable = [
+        'Id',
+        'Name',
+        'Branch',
+        'BranchName',
+        'Type',
+        'BankType',
+        'Account',
+        'Verified',
+        'Entity'
+    ];
+
+    
+
+    
 }

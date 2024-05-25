@@ -3,36 +3,46 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Rule
- * @property string $TableName
- * @property string $ColumnName
- * @property string $ColumnType
- * @property string $Operand
- * @property string $Value
- * @property string $Description
- * @property string $SystemCodeValue
- */
 class Ruleconfig extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'ruleconfig';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Rule' => 'nullable',
+            'TableName' => 'nullable',
+            'ColumnName' => 'nullable',
+            'ColumnType' => 'nullable',
+            'Operand' => 'nullable',
+            'Value' => 'nullable',
+            'Description' => 'nullable',
+            'SystemCodeValue' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Rule', 'TableName', 'ColumnName', 'ColumnType', 'Operand', 'Value', 'Description', 'SystemCodeValue'];
+    protected $fillable = [
+        'Id',
+        'Rule',
+        'TableName',
+        'ColumnName',
+        'ColumnType',
+        'Operand',
+        'Value',
+        'Description',
+        'SystemCodeValue'
+    ];
+
+    
+
+    
 }

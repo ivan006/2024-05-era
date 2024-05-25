@@ -2,24 +2,37 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
 {
-    use HasFactory;
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            'id' => 'required',
+            'created_at' => 'nullable',
+            'updated_at' => 'nullable',
+            'name' => 'required'
+        ];
+    }
 
     protected $fillable = [
-        'name',
+        'id',
+        'created_at',
+        'updated_at',
+        'name'
     ];
 
-    public function Tags(): BelongsToMany
-    {
-        return $this->belongsToMany(Tags::class);
-    }
+    
 
-    public function PostTags(): HasMany
-    {
-        return $this->hasMany(PostTag::class);
-    }
+    
 }

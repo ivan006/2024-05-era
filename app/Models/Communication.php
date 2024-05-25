@@ -3,45 +3,49 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Type
- * @property string $Status
- * @property integer $SentBy
- * @property string $SentTo
- * @property string $SentOn
- * @property string $Content
- * @property string $RelativeName
- * @property integer $RelativeID
- * @property Systemuser $systemuser
- */
 class Communication extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'communication';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Type', 'Status', 'SentBy', 'SentTo', 'SentOn', 'Content', 'RelativeName', 'RelativeID'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemuser()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Systemuser', 'SentBy', 'Id');
+        return [
+            'systemuser'
+        ];
     }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Type' => 'nullable',
+            'Status' => 'nullable',
+            'SentBy' => 'nullable',
+            'SentTo' => 'nullable',
+            'SentOn' => 'nullable',
+            'Content' => 'nullable',
+            'RelativeName' => 'nullable',
+            'RelativeID' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Type',
+        'Status',
+        'SentBy',
+        'SentTo',
+        'SentOn',
+        'Content',
+        'RelativeName',
+        'RelativeID'
+    ];
+
+        public function systemuser(): BelongsTo
+    {
+        return $this->belongsTo(Systemuser::class, 'SentBy');
+    }
+
+    
 }

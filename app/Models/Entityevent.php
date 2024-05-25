@@ -3,33 +3,40 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $TableID
- * @property string $TableName
- * @property string $Event
- * @property string $Date
- * @property integer $Instance
- */
 class Entityevent extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'entityevent';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'TableID' => 'nullable',
+            'TableName' => 'nullable',
+            'Event' => 'nullable',
+            'Date' => 'nullable',
+            'Instance' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['TableID', 'TableName', 'Event', 'Date', 'Instance'];
+    protected $fillable = [
+        'Id',
+        'TableID',
+        'TableName',
+        'Event',
+        'Date',
+        'Instance'
+    ];
+
+    
+
+    
 }

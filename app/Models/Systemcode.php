@@ -3,113 +3,99 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Context
- * @property string $Field
- * @property string $Description
- * @property string $Value
- * @property string $Code
- * @property boolean $Active
- * @property boolean $UserGenerated
- * @property integer $ContextualId
- * @property string $CreatedOn
- * @property string $CreatedBy
- * @property string $ChangedOn
- * @property string $ChangedBy
- * @property integer $Entity
- * @property Address[] $addresses
- * @property Address[] $addresses
- * @property Contactnumber[] $contactnumbers
- * @property Email[] $emails
- * @property Servicerequestfrequency[] $servicerequestfrequencies
- * @property Entity $entity
- * @property Transaction[] $transactions
- * @property Userconfiguration[] $userconfigurations
- */
 class Systemcode extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'systemcode';
-
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Context', 'Field', 'Description', 'Value', 'Code', 'Active', 'UserGenerated', 'ContextualId', 'CreatedOn', 'CreatedBy', 'ChangedOn', 'ChangedBy', 'Entity'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function countryAddresses()
+    public function relationships()
     {
-        return $this->hasMany('App\Models\Address', 'Country', 'Id');
+        return [
+            'entity',
+            'addresses',
+            'addresses',
+            'contactnumbers',
+            'emails',
+            'servicerequestfrequencies',
+            'transactions',
+            'userconfigurations'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function typeAddresses()
+    public function rules()
     {
-        return $this->hasMany('App\Models\Address', 'Type', 'Id');
+        return [
+            'Id' => 'required',
+            'Context' => 'nullable',
+            'Field' => 'nullable',
+            'Description' => 'nullable',
+            'Value' => 'required',
+            'Code' => 'nullable',
+            'Active' => 'nullable',
+            'UserGenerated' => 'required',
+            'ContextualId' => 'nullable',
+            'CreatedOn' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'ChangedOn' => 'nullable',
+            'ChangedBy' => 'nullable',
+            'Entity' => 'nullable'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function contactnumbers()
+    protected $fillable = [
+        'Id',
+        'Context',
+        'Field',
+        'Description',
+        'Value',
+        'Code',
+        'Active',
+        'UserGenerated',
+        'ContextualId',
+        'CreatedOn',
+        'CreatedBy',
+        'ChangedOn',
+        'ChangedBy',
+        'Entity'
+    ];
+
+        public function entity(): BelongsTo
     {
-        return $this->hasMany('App\Models\Contactnumber', 'Type', 'Id');
+        return $this->belongsTo(Entity::class, 'Entity');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function emails()
+        public function addresses(): HasMany
     {
-        return $this->hasMany('App\Models\Email', 'Type', 'Id');
+        return $this->hasMany(Address::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicerequestfrequencies()
+        public function addresses(): HasMany
     {
-        return $this->hasMany('App\Models\Servicerequestfrequency', 'ReportFrequency', 'Id');
+        return $this->hasMany(Address::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function entity()
+        public function contactnumbers(): HasMany
     {
-        return $this->belongsTo('App\Models\Entity', 'Entity', 'Id');
+        return $this->hasMany(Contactnumber::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function transactions()
+        public function emails(): HasMany
     {
-        return $this->hasMany('App\Models\Transaction', 'Type', 'Id');
+        return $this->hasMany(Email::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function userconfigurations()
+        public function servicerequestfrequencies(): HasMany
     {
-        return $this->hasMany('App\Models\Userconfiguration', 'Language', 'Id');
+        return $this->hasMany(Servicerequestfrequency::class);
+    }
+
+        public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+        public function userconfigurations(): HasMany
+    {
+        return $this->hasMany(Userconfiguration::class);
     }
 }

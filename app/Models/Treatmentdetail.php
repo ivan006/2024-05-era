@@ -3,47 +3,53 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $ServiceRequestReport
- * @property float $OpeningBalance
- * @property float $Refurbished
- * @property float $Recovered
- * @property float $Export
- * @property float $Energy
- * @property float $Landfill
- * @property float $LocalSecondaryProducts
- * @property Servicerequestreport[] $servicerequestreports
- * @property Servicerequestreport $servicerequestreport
- */
 class Treatmentdetail extends Model
 {
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['ServiceRequestReport', 'OpeningBalance', 'Refurbished', 'Recovered', 'Export', 'Energy', 'Landfill', 'LocalSecondaryProducts'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicerequestreports()
+    public function relationships()
     {
-        return $this->hasMany('App\Models\Servicerequestreport', 'TreatmentDetails', 'Id');
+        return [
+            'servicerequestreport',
+            'servicerequestreports'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function servicerequestreport()
+    public function rules()
     {
-        return $this->belongsTo('App\Models\Servicerequestreport', 'ServiceRequestReport', 'Id');
+        return [
+            'Id' => 'required',
+            'ServiceRequestReport' => 'nullable',
+            'OpeningBalance' => 'nullable',
+            'Refurbished' => 'nullable',
+            'Recovered' => 'nullable',
+            'Export' => 'nullable',
+            'Energy' => 'nullable',
+            'Landfill' => 'nullable',
+            'LocalSecondaryProducts' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'ServiceRequestReport',
+        'OpeningBalance',
+        'Refurbished',
+        'Recovered',
+        'Export',
+        'Energy',
+        'Landfill',
+        'LocalSecondaryProducts'
+    ];
+
+        public function servicerequestreport(): BelongsTo
+    {
+        return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
+    }
+
+        public function servicerequestreports(): HasMany
+    {
+        return $this->hasMany(Servicerequestreport::class);
     }
 }

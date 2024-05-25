@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Model
+class PersonalAccessToken extends Model
 {
     public function relationships()
     {
@@ -19,11 +19,13 @@ class User extends Model
     {
         return [
             'id' => 'required',
+            'tokenable_type' => 'required',
+            'tokenable_id' => 'required',
             'name' => 'required',
-            'email' => 'required',
-            'email_verified_at' => 'nullable',
-            'password' => 'required',
-            'remember_token' => 'nullable',
+            'token' => 'required',
+            'abilities' => 'nullable',
+            'last_used_at' => 'nullable',
+            'expires_at' => 'nullable',
             'created_at' => 'nullable',
             'updated_at' => 'nullable'
         ];
@@ -31,11 +33,13 @@ class User extends Model
 
     protected $fillable = [
         'id',
+        'tokenable_type',
+        'tokenable_id',
         'name',
-        'email',
-        'email_verified_at',
-        'password',
-        'remember_token',
+        'token',
+        'abilities',
+        'last_used_at',
+        'expires_at',
         'created_at',
         'updated_at'
     ];

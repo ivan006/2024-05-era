@@ -3,34 +3,41 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $SystemUser
- * @property string $DeviceKey
- * @property string $Name
- * @property string $LastUsed
- * @property integer $FbId
- * @property Systemuser $systemuser
- */
 class Userdevice extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'userdevice';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Name', 'LastUsed', 'FbId'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemuser()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Systemuser', 'SystemUser', 'Id');
+        return [
+            'systemuser'
+        ];
     }
+
+    public function rules()
+    {
+        return [
+            'SystemUser' => 'required',
+            'DeviceKey' => 'required',
+            'Name' => 'required',
+            'LastUsed' => 'nullable',
+            'FbId' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'SystemUser',
+        'DeviceKey',
+        'Name',
+        'LastUsed',
+        'FbId'
+    ];
+
+        public function systemuser(): BelongsTo
+    {
+        return $this->belongsTo(Systemuser::class, 'SystemUser');
+    }
+
+    
 }

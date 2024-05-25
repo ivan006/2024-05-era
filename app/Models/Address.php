@@ -3,62 +3,71 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $StreetNo
- * @property string $StreetName
- * @property string $Building
- * @property string $Postal
- * @property string $Suburb
- * @property string $City
- * @property string $Province
- * @property integer $Country
- * @property string $PostCode
- * @property integer $Type
- * @property integer $Person
- * @property string $MoveDate
- * @property boolean $Preferred
- * @property boolean $Dispatch
- * @property float $Latitude
- * @property float $Longitude
- * @property Systemcode $countrySystemcode
- * @property Systemcode $typeSystemcode
- */
 class Address extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'address';
-
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['StreetNo', 'StreetName', 'Building', 'Postal', 'Suburb', 'City', 'Province', 'Country', 'PostCode', 'Type', 'Person', 'MoveDate', 'Preferred', 'Dispatch', 'Latitude', 'Longitude'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function countrySystemcode()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Systemcode', 'Country', 'Id');
+        return [
+            'systemcode',
+            'systemcode'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function typeSystemcode()
+    public function rules()
     {
-        return $this->belongsTo('App\Models\Systemcode', 'Type', 'Id');
+        return [
+            'Id' => 'required',
+            'StreetNo' => 'nullable',
+            'StreetName' => 'nullable',
+            'Building' => 'nullable',
+            'Postal' => 'nullable',
+            'Suburb' => 'nullable',
+            'City' => 'nullable',
+            'Province' => 'nullable',
+            'Country' => 'nullable',
+            'PostCode' => 'nullable',
+            'Type' => 'nullable',
+            'Person' => 'nullable',
+            'MoveDate' => 'nullable',
+            'Preferred' => 'nullable',
+            'Dispatch' => 'nullable',
+            'Latitude' => 'nullable',
+            'Longitude' => 'nullable'
+        ];
     }
+
+    protected $fillable = [
+        'Id',
+        'StreetNo',
+        'StreetName',
+        'Building',
+        'Postal',
+        'Suburb',
+        'City',
+        'Province',
+        'Country',
+        'PostCode',
+        'Type',
+        'Person',
+        'MoveDate',
+        'Preferred',
+        'Dispatch',
+        'Latitude',
+        'Longitude'
+    ];
+
+        public function systemcode(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Country');
+    }
+
+        public function systemcode(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Type');
+    }
+
+    
 }

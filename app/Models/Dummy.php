@@ -3,21 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property string $textData
- */
 class Dummy extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'dummy';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['textData'];
+    public function rules()
+    {
+        return [
+            'textData' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'textData'
+    ];
+
+    
+
+    
 }

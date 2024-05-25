@@ -3,32 +3,37 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Name
- * @property integer $ServiceRequestReport
- * @property Servicerequestreport $servicerequestreport
- */
 class Externalproducer extends Model
 {
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Name', 'ServiceRequestReport'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function servicerequestreport()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Servicerequestreport', 'ServiceRequestReport', 'Id');
+        return [
+            'servicerequestreport'
+        ];
     }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Name' => 'required',
+            'ServiceRequestReport' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Name',
+        'ServiceRequestReport'
+    ];
+
+        public function servicerequestreport(): BelongsTo
+    {
+        return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
+    }
+
+    
 }

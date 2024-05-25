@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Tag extends Model
+class PasswordResetToken extends Model
 {
     public function relationships()
     {
@@ -18,18 +18,16 @@ class Tag extends Model
     public function rules()
     {
         return [
-            'id' => 'required',
-            'created_at' => 'nullable',
-            'updated_at' => 'nullable',
-            'name' => 'required'
+            'email' => 'required',
+            'token' => 'required',
+            'created_at' => 'nullable'
         ];
     }
 
     protected $fillable = [
-        'id',
-        'created_at',
-        'updated_at',
-        'name'
+        'email',
+        'token',
+        'created_at'
     ];
 
     

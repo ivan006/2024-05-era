@@ -3,23 +3,34 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property mixed $Data
- * @property integer $ProducerId
- */
 class WebsiteProducerRegistration extends Model
 {
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Data', 'ProducerId'];
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Data' => 'required',
+            'ProducerId' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Data',
+        'ProducerId'
+    ];
+
+    
+
+    
 }

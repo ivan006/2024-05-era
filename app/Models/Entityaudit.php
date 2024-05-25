@@ -3,43 +3,45 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Entity Name
- * @property integer $Entity Id
- * @property string $Operation
- * @property integer $SystemUser
- * @property mixed $Changes
- * @property string $Audit_TS
- * @property Systemuser $systemuser
- */
 class Entityaudit extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'entityaudit';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Entity Name', 'Entity Id', 'Operation', 'SystemUser', 'Changes', 'Audit_TS'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemuser()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Systemuser', 'SystemUser', 'Id');
+        return [
+            'systemuser'
+        ];
     }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Entity Name' => 'required',
+            'Entity Id' => 'required',
+            'Operation' => 'required',
+            'SystemUser' => 'nullable',
+            'Changes' => 'nullable',
+            'Audit_TS' => 'required'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Entity Name',
+        'Entity Id',
+        'Operation',
+        'SystemUser',
+        'Changes',
+        'Audit_TS'
+    ];
+
+        public function systemuser(): BelongsTo
+    {
+        return $this->belongsTo(Systemuser::class, 'SystemUser');
+    }
+
+    
 }

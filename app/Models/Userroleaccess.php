@@ -3,28 +3,44 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $UserRole
- * @property integer $SystemAction
- * @property string $CreatedOn
- * @property string $CreatedBy
- * @property string $ChangedOn
- * @property string $ChangedBy
- * @property integer $FbId
- * @property integer $Rule
- */
 class Userroleaccess extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'userroleaccess';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['CreatedOn', 'CreatedBy', 'ChangedOn', 'ChangedBy', 'FbId', 'Rule'];
+    public function rules()
+    {
+        return [
+            'UserRole' => 'required',
+            'SystemAction' => 'required',
+            'CreatedOn' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'ChangedOn' => 'nullable',
+            'ChangedBy' => 'nullable',
+            'FbId' => 'nullable',
+            'Rule' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'UserRole',
+        'SystemAction',
+        'CreatedOn',
+        'CreatedBy',
+        'ChangedOn',
+        'ChangedBy',
+        'FbId',
+        'Rule'
+    ];
+
+    
+
+    
 }

@@ -3,74 +3,69 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $ServiceRequestNo
- * @property integer $ServiceProvider
- * @property integer $CreatedBy
- * @property string $CreatedOn
- * @property string $FromDate
- * @property string $ToDate
- * @property string $Services
- * @property string $Locations
- * @property string $Deliverables
- * @property string $DeliveryDate
- * @property Entity $entity
- * @property Systemuser $systemuser
- * @property Servicerequestfrequency[] $servicerequestfrequencies
- * @property Servicerequestreport[] $servicerequestreports
- */
 class Servicerequest extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'servicerequest';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['ServiceRequestNo', 'ServiceProvider', 'CreatedBy', 'CreatedOn', 'FromDate', 'ToDate', 'Services', 'Locations', 'Deliverables', 'DeliveryDate'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function entity()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Entity', 'ServiceProvider', 'Id');
+        return [
+            'entity',
+            'systemuser',
+            'servicerequestfrequencies',
+            'servicerequestreports'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemuser()
+    public function rules()
     {
-        return $this->belongsTo('App\Models\Systemuser', 'CreatedBy', 'Id');
+        return [
+            'Id' => 'required',
+            'ServiceRequestNo' => 'nullable',
+            'ServiceProvider' => 'required',
+            'CreatedBy' => 'required',
+            'CreatedOn' => 'required',
+            'FromDate' => 'required',
+            'ToDate' => 'required',
+            'Services' => 'nullable',
+            'Locations' => 'nullable',
+            'Deliverables' => 'nullable',
+            'DeliveryDate' => 'nullable'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicerequestfrequencies()
+    protected $fillable = [
+        'Id',
+        'ServiceRequestNo',
+        'ServiceProvider',
+        'CreatedBy',
+        'CreatedOn',
+        'FromDate',
+        'ToDate',
+        'Services',
+        'Locations',
+        'Deliverables',
+        'DeliveryDate'
+    ];
+
+        public function entity(): BelongsTo
     {
-        return $this->hasMany('App\Models\Servicerequestfrequency', 'ServiceRequest', 'Id');
+        return $this->belongsTo(Entity::class, 'ServiceProvider');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicerequestreports()
+        public function systemuser(): BelongsTo
     {
-        return $this->hasMany('App\Models\Servicerequestreport', 'ServiceRequest', 'Id');
+        return $this->belongsTo(Systemuser::class, 'CreatedBy');
+    }
+
+        public function servicerequestfrequencies(): HasMany
+    {
+        return $this->hasMany(Servicerequestfrequency::class);
+    }
+
+        public function servicerequestreports(): HasMany
+    {
+        return $this->hasMany(Servicerequestreport::class);
     }
 }

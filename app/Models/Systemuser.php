@@ -3,115 +3,105 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Entity
- * @property string $Username
- * @property boolean $Active
- * @property string $LastSeen
- * @property integer $LoginCount
- * @property integer $FailedLoginAttempts
- * @property string $LockedSince
- * @property string $Secret
- * @property string $Email
- * @property string $Phone
- * @property string $CreatedOn
- * @property string $CreatedBy
- * @property string $ChangedOn
- * @property string $ChangedBy
- * @property integer $FbId
- * @property Communication[] $communications
- * @property Domainuser $domainuser
- * @property Entityaudit[] $entityaudits
- * @property Servicerequest[] $servicerequests
- * @property Servicerequestreport[] $servicerequestreports
- * @property Useraccess[] $useraccesses
- * @property Userconfiguration $userconfiguration
- * @property Userdevice[] $userdevices
- */
 class Systemuser extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'systemuser';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Entity', 'Username', 'Active', 'LastSeen', 'LoginCount', 'FailedLoginAttempts', 'LockedSince', 'Secret', 'Email', 'Phone', 'CreatedOn', 'CreatedBy', 'ChangedOn', 'ChangedBy', 'FbId'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function communications()
+    public function relationships()
     {
-        return $this->hasMany('App\Models\Communication', 'SentBy', 'Id');
+        return [
+            'communications',
+            'domainusers',
+            'entityaudits',
+            'servicerequests',
+            'servicerequestreports',
+            'useraccesses',
+            'userconfigurations',
+            'userdevices'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function domainuser()
+    public function rules()
     {
-        return $this->hasOne('App\Models\Domainuser', 'SystemUser', 'Id');
+        return [
+            'Id' => 'required',
+            'Entity' => 'required',
+            'Username' => 'nullable',
+            'Active' => 'required',
+            'LastSeen' => 'nullable',
+            'LoginCount' => 'nullable',
+            'FailedLoginAttempts' => 'nullable',
+            'LockedSince' => 'nullable',
+            'Secret' => 'nullable',
+            'Email' => 'nullable',
+            'Phone' => 'nullable',
+            'CreatedOn' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'ChangedOn' => 'nullable',
+            'ChangedBy' => 'nullable',
+            'FbId' => 'nullable'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function entityaudits()
+    protected $fillable = [
+        'Id',
+        'Entity',
+        'Username',
+        'Active',
+        'LastSeen',
+        'LoginCount',
+        'FailedLoginAttempts',
+        'LockedSince',
+        'Secret',
+        'Email',
+        'Phone',
+        'CreatedOn',
+        'CreatedBy',
+        'ChangedOn',
+        'ChangedBy',
+        'FbId'
+    ];
+
+    
+
+        public function communications(): HasMany
     {
-        return $this->hasMany('App\Models\Entityaudit', 'SystemUser', 'Id');
+        return $this->hasMany(Communication::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicerequests()
+        public function domainusers(): HasMany
     {
-        return $this->hasMany('App\Models\Servicerequest', 'CreatedBy', 'Id');
+        return $this->hasMany(Domainuser::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicerequestreports()
+        public function entityaudits(): HasMany
     {
-        return $this->hasMany('App\Models\Servicerequestreport', 'CreatedBy', 'Id');
+        return $this->hasMany(Entityaudit::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function useraccesses()
+        public function servicerequests(): HasMany
     {
-        return $this->hasMany('App\Models\Useraccess', 'SystemUser', 'Id');
+        return $this->hasMany(Servicerequest::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function userconfiguration()
+        public function servicerequestreports(): HasMany
     {
-        return $this->hasOne('App\Models\Userconfiguration', 'SystemUser', 'Id');
+        return $this->hasMany(Servicerequestreport::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function userdevices()
+        public function useraccesses(): HasMany
     {
-        return $this->hasMany('App\Models\Userdevice', 'SystemUser', 'Id');
+        return $this->hasMany(Useraccess::class);
+    }
+
+        public function userconfigurations(): HasMany
+    {
+        return $this->hasMany(Userconfiguration::class);
+    }
+
+        public function userdevices(): HasMany
+    {
+        return $this->hasMany(Userdevice::class);
     }
 }

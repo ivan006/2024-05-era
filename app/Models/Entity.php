@@ -3,115 +3,105 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $ExternalNo
- * @property integer $Level
- * @property integer $Type
- * @property integer $Title
- * @property string $Name
- * @property string $Surname
- * @property string $Identity
- * @property string $BirthDate
- * @property integer $Gender
- * @property integer $Language
- * @property integer $Status
- * @property string $Note
- * @property string $Passport
- * @property boolean $HasPhoto
- * @property boolean $IsPaid
- * @property Entitygood[] $entitygoods
- * @property Entitygoodapproval[] $entitygoodapprovals
- * @property Entitygoodapproval[] $entitygoodapprovals
- * @property Entitygoodapproval[] $entitygoodapprovals
- * @property Good[] $goods
- * @property Servicerequest[] $servicerequests
- * @property Servicerequestreport[] $servicerequestreports
- * @property Systemcode[] $systemcodes
- */
 class Entity extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'entity';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['ExternalNo', 'Level', 'Type', 'Title', 'Name', 'Surname', 'Identity', 'BirthDate', 'Gender', 'Language', 'Status', 'Note', 'Passport', 'HasPhoto', 'IsPaid'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function entitygoods()
+    public function relationships()
     {
-        return $this->hasMany('App\Models\Entitygood', 'Entity', 'Id');
+        return [
+            'entitygoods',
+            'entitygoodapprovals',
+            'entitygoodapprovals',
+            'entitygoodapprovals',
+            'goods',
+            'servicerequests',
+            'servicerequestreports',
+            'systemcodes'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function entitygoodapprovals()
+    public function rules()
     {
-        return $this->hasMany('App\Models\Entitygoodapproval', 'ApprovedBy', 'Id');
+        return [
+            'Id' => 'required',
+            'ExternalNo' => 'nullable',
+            'Level' => 'nullable',
+            'Type' => 'nullable',
+            'Title' => 'nullable',
+            'Name' => 'nullable',
+            'Surname' => 'nullable',
+            'Identity' => 'nullable',
+            'BirthDate' => 'nullable',
+            'Gender' => 'nullable',
+            'Language' => 'nullable',
+            'Status' => 'nullable',
+            'Note' => 'nullable',
+            'Passport' => 'nullable',
+            'HasPhoto' => 'nullable',
+            'IsPaid' => 'nullable'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function entitygoodapprovals()
+    protected $fillable = [
+        'Id',
+        'ExternalNo',
+        'Level',
+        'Type',
+        'Title',
+        'Name',
+        'Surname',
+        'Identity',
+        'BirthDate',
+        'Gender',
+        'Language',
+        'Status',
+        'Note',
+        'Passport',
+        'HasPhoto',
+        'IsPaid'
+    ];
+
+    
+
+        public function entitygoods(): HasMany
     {
-        return $this->hasMany('App\Models\Entitygoodapproval', 'InvoiceApprovedBy', 'Id');
+        return $this->hasMany(Entitygood::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function entitygoodapprovals()
+        public function entitygoodapprovals(): HasMany
     {
-        return $this->hasMany('App\Models\Entitygoodapproval', 'Entity', 'Id');
+        return $this->hasMany(Entitygoodapproval::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function goods()
+        public function entitygoodapprovals(): HasMany
     {
-        return $this->hasMany('App\Models\Good', 'Sector', 'Id');
+        return $this->hasMany(Entitygoodapproval::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicerequests()
+        public function entitygoodapprovals(): HasMany
     {
-        return $this->hasMany('App\Models\Servicerequest', 'ServiceProvider', 'Id');
+        return $this->hasMany(Entitygoodapproval::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function servicerequestreports()
+        public function goods(): HasMany
     {
-        return $this->hasMany('App\Models\Servicerequestreport', 'ServiceProvider', 'Id');
+        return $this->hasMany(Good::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function systemcodes()
+        public function servicerequests(): HasMany
     {
-        return $this->hasMany('App\Models\Systemcode', 'Entity', 'Id');
+        return $this->hasMany(Servicerequest::class);
+    }
+
+        public function servicerequestreports(): HasMany
+    {
+        return $this->hasMany(Servicerequestreport::class);
+    }
+
+        public function systemcodes(): HasMany
+    {
+        return $this->hasMany(Systemcode::class);
     }
 }

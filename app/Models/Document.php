@@ -3,44 +3,47 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $RelativeName
- * @property integer $RelativeID
- * @property string $Comment
- * @property string $Title
- * @property integer $CreatedBy
- * @property string $CreatedOn
- * @property mixed $Access
- * @property Documentdetail[] $documentdetails
- */
 class Document extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'document';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['RelativeName', 'RelativeID', 'Comment', 'Title', 'CreatedBy', 'CreatedOn', 'Access'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function documentdetails()
+    public function relationships()
     {
-        return $this->hasMany('App\Models\Documentdetail', 'Document', 'Id');
+        return [
+            'documentdetails'
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'RelativeName' => 'nullable',
+            'RelativeID' => 'nullable',
+            'Comment' => 'nullable',
+            'Title' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'CreatedOn' => 'nullable',
+            'Access' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'RelativeName',
+        'RelativeID',
+        'Comment',
+        'Title',
+        'CreatedBy',
+        'CreatedOn',
+        'Access'
+    ];
+
+    
+
+        public function documentdetails(): HasMany
+    {
+        return $this->hasMany(Documentdetail::class);
     }
 }

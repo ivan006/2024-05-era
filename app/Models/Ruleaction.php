@@ -3,36 +3,46 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Rule
- * @property string $Process
- * @property string $Result
- * @property string $ResultNegative
- * @property string $ResultType
- * @property string $Description
- * @property string $ResultSystemCode
- * @property string $NegativeSystemCode
- */
 class Ruleaction extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'ruleaction';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Rule' => 'nullable',
+            'Process' => 'nullable',
+            'Result' => 'nullable',
+            'ResultNegative' => 'nullable',
+            'ResultType' => 'nullable',
+            'Description' => 'nullable',
+            'ResultSystemCode' => 'nullable',
+            'NegativeSystemCode' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Rule', 'Process', 'Result', 'ResultNegative', 'ResultType', 'Description', 'ResultSystemCode', 'NegativeSystemCode'];
+    protected $fillable = [
+        'Id',
+        'Rule',
+        'Process',
+        'Result',
+        'ResultNegative',
+        'ResultType',
+        'Description',
+        'ResultSystemCode',
+        'NegativeSystemCode'
+    ];
+
+    
+
+    
 }

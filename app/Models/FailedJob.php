@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Tag extends Model
+class FailedJob extends Model
 {
     public function relationships()
     {
@@ -19,17 +19,23 @@ class Tag extends Model
     {
         return [
             'id' => 'required',
-            'created_at' => 'nullable',
-            'updated_at' => 'nullable',
-            'name' => 'required'
+            'uuid' => 'required',
+            'connection' => 'required',
+            'queue' => 'required',
+            'payload' => 'required',
+            'exception' => 'required',
+            'failed_at' => 'required'
         ];
     }
 
     protected $fillable = [
         'id',
-        'created_at',
-        'updated_at',
-        'name'
+        'uuid',
+        'connection',
+        'queue',
+        'payload',
+        'exception',
+        'failed_at'
     ];
 
     

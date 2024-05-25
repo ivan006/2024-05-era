@@ -3,36 +3,46 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Name
- * @property string $Description
- * @property string $ContentType
- * @property string $Path
- * @property string $RelativeName
- * @property integer $RelativeID
- * @property string $CreatedOn
- * @property integer $CreatedBy
- */
 class Attachment extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'attachment';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Name' => 'nullable',
+            'Description' => 'nullable',
+            'ContentType' => 'nullable',
+            'Path' => 'nullable',
+            'RelativeName' => 'nullable',
+            'RelativeID' => 'nullable',
+            'CreatedOn' => 'required',
+            'CreatedBy' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Name', 'Description', 'ContentType', 'Path', 'RelativeName', 'RelativeID', 'CreatedOn', 'CreatedBy'];
+    protected $fillable = [
+        'Id',
+        'Name',
+        'Description',
+        'ContentType',
+        'Path',
+        'RelativeName',
+        'RelativeID',
+        'CreatedOn',
+        'CreatedBy'
+    ];
+
+    
+
+    
 }

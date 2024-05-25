@@ -3,29 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $ObjectName
- */
 class Instanceno extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'instanceno';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'ObjectName' => 'required'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['ObjectName'];
+    protected $fillable = [
+        'Id',
+        'ObjectName'
+    ];
+
+    
+
+    
 }

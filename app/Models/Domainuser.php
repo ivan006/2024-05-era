@@ -3,50 +3,45 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $SystemUser
- * @property string $DomainName
- * @property string $DomainAccount
- * @property string $CreatedOn
- * @property string $CreatedBy
- * @property string $ChangedOn
- * @property string $ChangedBy
- * @property Systemuser $systemuser
- */
 class Domainuser extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'domainuser';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'SystemUser';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['DomainName', 'DomainAccount', 'CreatedOn', 'CreatedBy', 'ChangedOn', 'ChangedBy'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemuser()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Systemuser', 'SystemUser', 'Id');
+        return [
+            'systemuser'
+        ];
     }
+
+    public function rules()
+    {
+        return [
+            'SystemUser' => 'required',
+            'DomainName' => 'required',
+            'DomainAccount' => 'required',
+            'CreatedOn' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'ChangedOn' => 'nullable',
+            'ChangedBy' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'SystemUser',
+        'DomainName',
+        'DomainAccount',
+        'CreatedOn',
+        'CreatedBy',
+        'ChangedOn',
+        'ChangedBy'
+    ];
+
+        public function systemuser(): BelongsTo
+    {
+        return $this->belongsTo(Systemuser::class, 'SystemUser');
+    }
+
+    
 }

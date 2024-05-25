@@ -3,55 +3,43 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $SystemUser
- * @property integer $Language
- * @property integer $FbId
- * @property Systemcode $systemcode
- * @property Systemuser $systemuser
- */
 class Userconfiguration extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'userconfiguration';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'SystemUser';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     * 
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Language', 'FbId'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemcode()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Systemcode', 'Language', 'Id');
+        return [
+            'systemuser',
+            'systemcode'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemuser()
+    public function rules()
     {
-        return $this->belongsTo('App\Models\Systemuser', 'SystemUser', 'Id');
+        return [
+            'SystemUser' => 'required',
+            'Language' => 'required',
+            'FbId' => 'nullable'
+        ];
     }
+
+    protected $fillable = [
+        'SystemUser',
+        'Language',
+        'FbId'
+    ];
+
+        public function systemuser(): BelongsTo
+    {
+        return $this->belongsTo(Systemuser::class, 'SystemUser');
+    }
+
+        public function systemcode(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Language');
+    }
+
+    
 }

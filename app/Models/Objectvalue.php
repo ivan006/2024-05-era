@@ -3,34 +3,42 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Trait
- * @property string $Value
- * @property integer $Instance
- * @property mixed $ValueJson
- * @property integer $Object
- * @property integer $Entity
- */
 class Objectvalue extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'objectvalue';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Trait' => 'nullable',
+            'Value' => 'nullable',
+            'Instance' => 'nullable',
+            'ValueJson' => 'nullable',
+            'Object' => 'nullable',
+            'Entity' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Trait', 'Value', 'Instance', 'ValueJson', 'Object', 'Entity'];
+    protected $fillable = [
+        'Id',
+        'Trait',
+        'Value',
+        'Instance',
+        'ValueJson',
+        'Object',
+        'Entity'
+    ];
+
+    
+
+    
 }

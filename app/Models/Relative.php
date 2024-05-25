@@ -3,35 +3,44 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Entity
- * @property integer $Relative
- * @property integer $Relationship
- * @property integer $Adopted
- * @property integer $Student
- * @property integer $Disabled
- * @property integer $TraditionalMarriage
- */
 class Relative extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'relative';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Entity' => 'nullable',
+            'Relative' => 'nullable',
+            'Relationship' => 'nullable',
+            'Adopted' => 'nullable',
+            'Student' => 'nullable',
+            'Disabled' => 'nullable',
+            'TraditionalMarriage' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Entity', 'Relative', 'Relationship', 'Adopted', 'Student', 'Disabled', 'TraditionalMarriage'];
+    protected $fillable = [
+        'Id',
+        'Entity',
+        'Relative',
+        'Relationship',
+        'Adopted',
+        'Student',
+        'Disabled',
+        'TraditionalMarriage'
+    ];
+
+    
+
+    
 }

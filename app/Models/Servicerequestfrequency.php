@@ -3,49 +3,45 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $ServiceRequest
- * @property integer $ReportFrequency
- * @property boolean $Active
- * @property Servicerequest $servicerequest
- * @property Systemcode $systemcode
- */
 class Servicerequestfrequency extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'servicerequestfrequency';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['ServiceRequest', 'ReportFrequency', 'Active'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function servicerequest()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Servicerequest', 'ServiceRequest', 'Id');
+        return [
+            'servicerequest',
+            'systemcode'
+        ];
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemcode()
+    public function rules()
     {
-        return $this->belongsTo('App\Models\Systemcode', 'ReportFrequency', 'Id');
+        return [
+            'Id' => 'required',
+            'ServiceRequest' => 'required',
+            'ReportFrequency' => 'required',
+            'Active' => 'nullable'
+        ];
     }
+
+    protected $fillable = [
+        'Id',
+        'ServiceRequest',
+        'ReportFrequency',
+        'Active'
+    ];
+
+        public function servicerequest(): BelongsTo
+    {
+        return $this->belongsTo(Servicerequest::class, 'ServiceRequest');
+    }
+
+        public function systemcode(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'ReportFrequency');
+    }
+
+    
 }

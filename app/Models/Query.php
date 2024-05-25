@@ -3,35 +3,44 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $ParentQuery
- * @property string $AssignedTo
- * @property string $Description
- * @property integer $CreatedBy
- * @property string $CreatedOn
- * @property string $ClosedOn
- * @property integer $ClosedBy
- */
 class Query extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'query';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'ParentQuery' => 'required',
+            'AssignedTo' => 'nullable',
+            'Description' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'CreatedOn' => 'nullable',
+            'ClosedOn' => 'nullable',
+            'ClosedBy' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['ParentQuery', 'AssignedTo', 'Description', 'CreatedBy', 'CreatedOn', 'ClosedOn', 'ClosedBy'];
+    protected $fillable = [
+        'Id',
+        'ParentQuery',
+        'AssignedTo',
+        'Description',
+        'CreatedBy',
+        'CreatedOn',
+        'ClosedOn',
+        'ClosedBy'
+    ];
+
+    
+
+    
 }

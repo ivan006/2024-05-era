@@ -3,44 +3,47 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Name
- * @property boolean $Active
- * @property string $CreatedOn
- * @property string $CreatedBy
- * @property string $ChangedOn
- * @property string $ChangedBy
- * @property integer $FbId
- * @property Useraccess[] $useraccesses
- */
 class Userrole extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'userrole';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Name', 'Active', 'CreatedOn', 'CreatedBy', 'ChangedOn', 'ChangedBy', 'FbId'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function useraccesses()
+    public function relationships()
     {
-        return $this->hasMany('App\Models\Useraccess', 'UserRole', 'Id');
+        return [
+            'useraccesses'
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Name' => 'required',
+            'Active' => 'required',
+            'CreatedOn' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'ChangedOn' => 'nullable',
+            'ChangedBy' => 'nullable',
+            'FbId' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Name',
+        'Active',
+        'CreatedOn',
+        'CreatedBy',
+        'ChangedOn',
+        'ChangedBy',
+        'FbId'
+    ];
+
+    
+
+        public function useraccesses(): HasMany
+    {
+        return $this->hasMany(Useraccess::class);
     }
 }

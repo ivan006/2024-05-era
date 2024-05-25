@@ -3,32 +3,38 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Name
- * @property string $Description
- * @property string $RuleType
- * @property integer $NextRule
- */
 class Rule extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'rule';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Name' => 'nullable',
+            'Description' => 'nullable',
+            'RuleType' => 'nullable',
+            'NextRule' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Name', 'Description', 'RuleType', 'NextRule'];
+    protected $fillable = [
+        'Id',
+        'Name',
+        'Description',
+        'RuleType',
+        'NextRule'
+    ];
+
+    
+
+    
 }

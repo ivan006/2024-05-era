@@ -3,25 +3,38 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Rule
- * @property string $TableName
- * @property string $ColumnName
- * @property string $ColumnType
- */
 class Ruleactiondatum extends Model
 {
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Rule', 'TableName', 'ColumnName', 'ColumnType'];
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Rule' => 'nullable',
+            'TableName' => 'nullable',
+            'ColumnName' => 'nullable',
+            'ColumnType' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Rule',
+        'TableName',
+        'ColumnName',
+        'ColumnType'
+    ];
+
+    
+
+    
 }

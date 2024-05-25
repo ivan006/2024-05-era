@@ -3,46 +3,51 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Subject
- * @property integer $Status
- * @property integer $Type
- * @property string $RelativeName
- * @property integer $RelativeID
- * @property integer $CreatedBy
- * @property string $CreatedOn
- * @property integer $ClosedBy
- * @property string $ClosedOn
- * @property Entitygoodapproval[] $entitygoodapprovals
- */
 class Queryheader extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'queryheader';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Subject', 'Status', 'Type', 'RelativeName', 'RelativeID', 'CreatedBy', 'CreatedOn', 'ClosedBy', 'ClosedOn'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function entitygoodapprovals()
+    public function relationships()
     {
-        return $this->hasMany('App\Models\Entitygoodapproval', 'Query', 'Id');
+        return [
+            'entitygoodapprovals'
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Subject' => 'nullable',
+            'Status' => 'nullable',
+            'Type' => 'nullable',
+            'RelativeName' => 'nullable',
+            'RelativeID' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'CreatedOn' => 'required',
+            'ClosedBy' => 'nullable',
+            'ClosedOn' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Subject',
+        'Status',
+        'Type',
+        'RelativeName',
+        'RelativeID',
+        'CreatedBy',
+        'CreatedOn',
+        'ClosedBy',
+        'ClosedOn'
+    ];
+
+    
+
+        public function entitygoodapprovals(): HasMany
+    {
+        return $this->hasMany(Entitygoodapproval::class);
     }
 }

@@ -3,37 +3,48 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $EntityRole
- * @property integer $Entity
- * @property integer $UserRole
- * @property integer $Rule
- * @property integer $Priority
- * @property integer $CRUD_Create
- * @property integer $CRUD_Read
- * @property integer $CRUD_Update
- * @property integer $CRUD_Delete
- */
 class Ruleentityrole extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'ruleentityrole';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'EntityRole' => 'nullable',
+            'Entity' => 'nullable',
+            'UserRole' => 'nullable',
+            'Rule' => 'required',
+            'Priority' => 'nullable',
+            'CRUD_Create' => 'nullable',
+            'CRUD_Read' => 'nullable',
+            'CRUD_Update' => 'nullable',
+            'CRUD_Delete' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['EntityRole', 'Entity', 'UserRole', 'Rule', 'Priority', 'CRUD_Create', 'CRUD_Read', 'CRUD_Update', 'CRUD_Delete'];
+    protected $fillable = [
+        'Id',
+        'EntityRole',
+        'Entity',
+        'UserRole',
+        'Rule',
+        'Priority',
+        'CRUD_Create',
+        'CRUD_Read',
+        'CRUD_Update',
+        'CRUD_Delete'
+    ];
+
+    
+
+    
 }

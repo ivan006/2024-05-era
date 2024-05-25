@@ -3,46 +3,51 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Document
- * @property integer $Section
- * @property integer $Position
- * @property string $Title
- * @property string $Description
- * @property mixed $Comments
- * @property integer $Style
- * @property integer $CreatedBy
- * @property string $CreatedOn
- * @property Document $document
- */
 class Documentdetail extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'documentdetail';
-
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['Document', 'Section', 'Position', 'Title', 'Description', 'Comments', 'Style', 'CreatedBy', 'CreatedOn'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function document()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Document', 'Document', 'Id');
+        return [
+            'document'
+        ];
     }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Document' => 'nullable',
+            'Section' => 'nullable',
+            'Position' => 'nullable',
+            'Title' => 'nullable',
+            'Description' => 'nullable',
+            'Comments' => 'nullable',
+            'Style' => 'nullable',
+            'CreatedBy' => 'nullable',
+            'CreatedOn' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'Document',
+        'Section',
+        'Position',
+        'Title',
+        'Description',
+        'Comments',
+        'Style',
+        'CreatedBy',
+        'CreatedOn'
+    ];
+
+        public function document(): BelongsTo
+    {
+        return $this->belongsTo(Document::class, 'Document');
+    }
+
+    
 }

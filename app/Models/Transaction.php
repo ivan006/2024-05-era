@@ -3,43 +3,59 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $TransNo
- * @property string $Description
- * @property string $TransactionDate
- * @property string $CaptureDate
- * @property string $AccountCode
- * @property integer $Entity
- * @property integer $EntityProduct
- * @property float $Debit
- * @property float $Credit
- * @property string $Source
- * @property integer $Period
- * @property string $Reference
- * @property integer $Type
- * @property Systemcode $systemcode
- */
 class Transaction extends Model
 {
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
-
-    /**
-     * @var array
-     */
-    protected $fillable = ['TransNo', 'Description', 'TransactionDate', 'CaptureDate', 'AccountCode', 'Entity', 'EntityProduct', 'Debit', 'Credit', 'Source', 'Period', 'Reference', 'Type'];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function systemcode()
+    public function relationships()
     {
-        return $this->belongsTo('App\Models\Systemcode', 'Type', 'Id');
+        return [
+            'systemcode'
+        ];
     }
+
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'TransNo' => 'required',
+            'Description' => 'nullable',
+            'TransactionDate' => 'nullable',
+            'CaptureDate' => 'nullable',
+            'AccountCode' => 'nullable',
+            'Entity' => 'nullable',
+            'EntityProduct' => 'nullable',
+            'Debit' => 'nullable',
+            'Credit' => 'nullable',
+            'Source' => 'nullable',
+            'Period' => 'nullable',
+            'Reference' => 'nullable',
+            'Type' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'TransNo',
+        'Description',
+        'TransactionDate',
+        'CaptureDate',
+        'AccountCode',
+        'Entity',
+        'EntityProduct',
+        'Debit',
+        'Credit',
+        'Source',
+        'Period',
+        'Reference',
+        'Type'
+    ];
+
+        public function systemcode(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Type');
+    }
+
+    
 }

@@ -3,38 +3,50 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Service
- * @property string $Category
- * @property integer $Code
- * @property string $Name
- * @property integer $Required
- * @property string $Path
- * @property integer $Display
- * @property string $SystemCodeContext
- * @property string $SystemCodeField
- * @property integer $ValueType
- */
 class Requirement extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'requirement';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Service' => 'nullable',
+            'Category' => 'nullable',
+            'Code' => 'nullable',
+            'Name' => 'nullable',
+            'Required' => 'nullable',
+            'Path' => 'nullable',
+            'Display' => 'nullable',
+            'SystemCodeContext' => 'nullable',
+            'SystemCodeField' => 'nullable',
+            'ValueType' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Service', 'Category', 'Code', 'Name', 'Required', 'Path', 'Display', 'SystemCodeContext', 'SystemCodeField', 'ValueType'];
+    protected $fillable = [
+        'Id',
+        'Service',
+        'Category',
+        'Code',
+        'Name',
+        'Required',
+        'Path',
+        'Display',
+        'SystemCodeContext',
+        'SystemCodeField',
+        'ValueType'
+    ];
+
+    
+
+    
 }

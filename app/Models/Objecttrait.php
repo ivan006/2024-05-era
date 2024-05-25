@@ -3,39 +3,52 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $Name
- * @property string $Description
- * @property integer $Object
- * @property string $Type
- * @property string $Level
- * @property boolean $IsRule
- * @property boolean $SpecialType
- * @property boolean $IsDisabled
- * @property boolean $IsHidden
- * @property string $SystemCodeContext
- * @property string $SystemCodeField
- */
 class Objecttrait extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'objecttrait';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Name' => 'required',
+            'Description' => 'nullable',
+            'Object' => 'required',
+            'Type' => 'nullable',
+            'Level' => 'nullable',
+            'IsRule' => 'nullable',
+            'SpecialType' => 'nullable',
+            'IsDisabled' => 'nullable',
+            'IsHidden' => 'nullable',
+            'SystemCodeContext' => 'nullable',
+            'SystemCodeField' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Name', 'Description', 'Object', 'Type', 'Level', 'IsRule', 'SpecialType', 'IsDisabled', 'IsHidden', 'SystemCodeContext', 'SystemCodeField'];
+    protected $fillable = [
+        'Id',
+        'Name',
+        'Description',
+        'Object',
+        'Type',
+        'Level',
+        'IsRule',
+        'SpecialType',
+        'IsDisabled',
+        'IsHidden',
+        'SystemCodeContext',
+        'SystemCodeField'
+    ];
+
+    
+
+    
 }

@@ -3,33 +3,40 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property integer $Entity
- * @property integer $EntityProduct
- * @property string $Contact
- * @property string $Description
- * @property integer $Status
- */
 class Crm extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'crm';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * The primary key for the model.
-     * 
-     * @var string
-     */
-    protected $primaryKey = 'Id';
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'Entity' => 'nullable',
+            'EntityProduct' => 'nullable',
+            'Contact' => 'nullable',
+            'Description' => 'nullable',
+            'Status' => 'nullable'
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['Entity', 'EntityProduct', 'Contact', 'Description', 'Status'];
+    protected $fillable = [
+        'Id',
+        'Entity',
+        'EntityProduct',
+        'Contact',
+        'Description',
+        'Status'
+    ];
+
+    
+
+    
 }

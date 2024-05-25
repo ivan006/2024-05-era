@@ -3,29 +3,46 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * @property integer $Id
- * @property string $LogDate
- * @property string $LogLevel
- * @property string $Logger
- * @property string $SystemUser
- * @property string $CallSite
- * @property string $Message
- * @property string $Exception
- * @property string $StackTrace
- */
 class Systemlog extends Model
 {
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'systemlog';
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
 
-    /**
-     * @var array
-     */
-    protected $fillable = ['LogLevel', 'Logger', 'SystemUser', 'CallSite', 'Message', 'Exception', 'StackTrace'];
+    public function rules()
+    {
+        return [
+            'Id' => 'required',
+            'LogDate' => 'required',
+            'LogLevel' => 'nullable',
+            'Logger' => 'nullable',
+            'SystemUser' => 'nullable',
+            'CallSite' => 'nullable',
+            'Message' => 'nullable',
+            'Exception' => 'nullable',
+            'StackTrace' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'Id',
+        'LogDate',
+        'LogLevel',
+        'Logger',
+        'SystemUser',
+        'CallSite',
+        'Message',
+        'Exception',
+        'StackTrace'
+    ];
+
+    
+
+    
 }
