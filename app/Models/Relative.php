@@ -18,7 +18,6 @@ class Relative extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Entity' => 'nullable',
             'Relative' => 'nullable',
             'Relationship' => 'nullable',
@@ -30,7 +29,6 @@ class Relative extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Entity',
         'Relative',
         'Relationship',

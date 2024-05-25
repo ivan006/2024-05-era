@@ -18,14 +18,12 @@ class WebsiteProducerRegistration extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Data' => 'required',
             'ProducerId' => 'nullable'
         ];
     }
 
     protected $fillable = [
-        'Id',
         'Data',
         'ProducerId'
     ];

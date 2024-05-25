@@ -25,7 +25,6 @@ class Systemuser extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Entity' => 'required',
             'Username' => 'nullable',
             'Active' => 'required',
@@ -45,7 +44,6 @@ class Systemuser extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Entity',
         'Username',
         'Active',

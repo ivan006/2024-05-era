@@ -18,7 +18,6 @@ class Userrole extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Name' => 'required',
             'Active' => 'required',
             'CreatedOn' => 'nullable',
@@ -30,7 +29,6 @@ class Userrole extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Name',
         'Active',
         'CreatedOn',

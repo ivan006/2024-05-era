@@ -18,7 +18,6 @@ class PostTag extends Model
     public function rules()
     {
         return [
-            'id' => 'required',
             'created_at' => 'nullable',
             'updated_at' => 'nullable',
             'post_id' => 'required',
@@ -27,7 +26,6 @@ class PostTag extends Model
     }
 
     protected $fillable = [
-        'id',
         'created_at',
         'updated_at',
         'post_id',

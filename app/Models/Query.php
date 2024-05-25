@@ -18,7 +18,6 @@ class Query extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'ParentQuery' => 'required',
             'AssignedTo' => 'nullable',
             'Description' => 'nullable',
@@ -30,7 +29,6 @@ class Query extends Model
     }
 
     protected $fillable = [
-        'Id',
         'ParentQuery',
         'AssignedTo',
         'Description',

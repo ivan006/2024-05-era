@@ -18,7 +18,6 @@ class Transaction extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'TransNo' => 'required',
             'Description' => 'nullable',
             'TransactionDate' => 'nullable',
@@ -36,7 +35,6 @@ class Transaction extends Model
     }
 
     protected $fillable = [
-        'Id',
         'TransNo',
         'Description',
         'TransactionDate',

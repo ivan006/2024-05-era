@@ -18,14 +18,12 @@ class Migration extends Model
     public function rules()
     {
         return [
-            'id' => 'required',
             'migration' => 'required',
             'batch' => 'required'
         ];
     }
 
     protected $fillable = [
-        'id',
         'migration',
         'batch'
     ];

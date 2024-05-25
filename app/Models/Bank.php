@@ -18,7 +18,6 @@ class Bank extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Name' => 'nullable',
             'Branch' => 'nullable',
             'BranchName' => 'nullable',
@@ -31,7 +30,6 @@ class Bank extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Name',
         'Branch',
         'BranchName',

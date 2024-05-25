@@ -18,13 +18,11 @@ class Instanceno extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'ObjectName' => 'required'
         ];
     }
 
     protected $fillable = [
-        'Id',
         'ObjectName'
     ];
 

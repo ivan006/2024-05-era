@@ -18,7 +18,6 @@ class PersonalAccessToken extends Model
     public function rules()
     {
         return [
-            'id' => 'required',
             'tokenable_type' => 'required',
             'tokenable_id' => 'required',
             'name' => 'required',
@@ -32,7 +31,6 @@ class PersonalAccessToken extends Model
     }
 
     protected $fillable = [
-        'id',
         'tokenable_type',
         'tokenable_id',
         'name',

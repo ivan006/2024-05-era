@@ -23,7 +23,6 @@ class Servicerequestreport extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'ServiceRequest' => 'required',
             'ServiceProvider' => 'required',
             'CreatedBy' => 'nullable',
@@ -36,7 +35,6 @@ class Servicerequestreport extends Model
     }
 
     protected $fillable = [
-        'Id',
         'ServiceRequest',
         'ServiceProvider',
         'CreatedBy',

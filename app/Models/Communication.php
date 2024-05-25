@@ -18,7 +18,6 @@ class Communication extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Type' => 'nullable',
             'Status' => 'nullable',
             'SentBy' => 'nullable',
@@ -31,7 +30,6 @@ class Communication extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Type',
         'Status',
         'SentBy',

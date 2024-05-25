@@ -18,7 +18,6 @@ class Entityrelationship extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'EntityA' => 'nullable',
             'EntityB' => 'nullable',
             'EntityARelationship' => 'nullable',
@@ -33,7 +32,6 @@ class Entityrelationship extends Model
     }
 
     protected $fillable = [
-        'Id',
         'EntityA',
         'EntityB',
         'EntityARelationship',

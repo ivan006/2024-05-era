@@ -21,7 +21,6 @@ class Servicerequest extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'ServiceRequestNo' => 'nullable',
             'ServiceProvider' => 'required',
             'CreatedBy' => 'required',
@@ -36,7 +35,6 @@ class Servicerequest extends Model
     }
 
     protected $fillable = [
-        'Id',
         'ServiceRequestNo',
         'ServiceProvider',
         'CreatedBy',

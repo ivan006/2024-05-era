@@ -18,7 +18,6 @@ class Queryheader extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Subject' => 'nullable',
             'Status' => 'nullable',
             'Type' => 'nullable',
@@ -32,7 +31,6 @@ class Queryheader extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Subject',
         'Status',
         'Type',

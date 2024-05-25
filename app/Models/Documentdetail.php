@@ -18,7 +18,6 @@ class Documentdetail extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Document' => 'nullable',
             'Section' => 'nullable',
             'Position' => 'nullable',
@@ -32,7 +31,6 @@ class Documentdetail extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Document',
         'Section',
         'Position',

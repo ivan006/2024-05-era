@@ -25,7 +25,6 @@ class Systemcode extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Context' => 'nullable',
             'Field' => 'nullable',
             'Description' => 'nullable',
@@ -43,7 +42,6 @@ class Systemcode extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Context',
         'Field',
         'Description',

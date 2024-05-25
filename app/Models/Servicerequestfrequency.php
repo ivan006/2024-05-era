@@ -19,7 +19,6 @@ class Servicerequestfrequency extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'ServiceRequest' => 'required',
             'ReportFrequency' => 'required',
             'Active' => 'nullable'
@@ -27,7 +26,6 @@ class Servicerequestfrequency extends Model
     }
 
     protected $fillable = [
-        'Id',
         'ServiceRequest',
         'ReportFrequency',
         'Active'

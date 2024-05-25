@@ -18,7 +18,6 @@ class Systemlog extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'LogDate' => 'required',
             'LogLevel' => 'nullable',
             'Logger' => 'nullable',
@@ -31,7 +30,6 @@ class Systemlog extends Model
     }
 
     protected $fillable = [
-        'Id',
         'LogDate',
         'LogLevel',
         'Logger',

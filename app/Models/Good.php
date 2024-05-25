@@ -19,7 +19,6 @@ class Good extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'HSCode' => 'nullable',
             'Description' => 'nullable',
             'EU6' => 'nullable',
@@ -34,7 +33,6 @@ class Good extends Model
     }
 
     protected $fillable = [
-        'Id',
         'HSCode',
         'Description',
         'EU6',

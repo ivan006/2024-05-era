@@ -18,7 +18,6 @@ class Objectvalue extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Trait' => 'nullable',
             'Value' => 'nullable',
             'Instance' => 'nullable',
@@ -29,7 +28,6 @@ class Objectvalue extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Trait',
         'Value',
         'Instance',

@@ -18,7 +18,6 @@ class Ruleconfig extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Rule' => 'nullable',
             'TableName' => 'nullable',
             'ColumnName' => 'nullable',
@@ -31,7 +30,6 @@ class Ruleconfig extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Rule',
         'TableName',
         'ColumnName',

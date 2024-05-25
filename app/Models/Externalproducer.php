@@ -18,14 +18,12 @@ class Externalproducer extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Name' => 'required',
             'ServiceRequestReport' => 'nullable'
         ];
     }
 
     protected $fillable = [
-        'Id',
         'Name',
         'ServiceRequestReport'
     ];

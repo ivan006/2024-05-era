@@ -18,14 +18,12 @@ class Systemconfiguration extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Name' => 'required',
             'Value' => 'required'
         ];
     }
 
     protected $fillable = [
-        'Id',
         'Name',
         'Value'
     ];

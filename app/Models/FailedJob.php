@@ -18,7 +18,6 @@ class FailedJob extends Model
     public function rules()
     {
         return [
-            'id' => 'required',
             'uuid' => 'required',
             'connection' => 'required',
             'queue' => 'required',
@@ -29,7 +28,6 @@ class FailedJob extends Model
     }
 
     protected $fillable = [
-        'id',
         'uuid',
         'connection',
         'queue',

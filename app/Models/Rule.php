@@ -18,7 +18,6 @@ class Rule extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Name' => 'nullable',
             'Description' => 'nullable',
             'RuleType' => 'nullable',
@@ -27,7 +26,6 @@ class Rule extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Name',
         'Description',
         'RuleType',

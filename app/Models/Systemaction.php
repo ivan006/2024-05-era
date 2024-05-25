@@ -18,7 +18,6 @@ class Systemaction extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Module' => 'required',
             'Context' => 'required',
             'Action' => 'required',
@@ -32,7 +31,6 @@ class Systemaction extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Module',
         'Context',
         'Action',

@@ -20,7 +20,6 @@ class Useraccess extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'SystemUser' => 'nullable',
             'UserRole' => 'nullable',
             'SystemAction' => 'nullable',
@@ -34,7 +33,6 @@ class Useraccess extends Model
     }
 
     protected $fillable = [
-        'Id',
         'SystemUser',
         'UserRole',
         'SystemAction',

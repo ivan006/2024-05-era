@@ -20,7 +20,6 @@ class Entitygood extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Entity' => 'required',
             'Good' => 'required',
             'Units' => 'required',
@@ -38,7 +37,6 @@ class Entitygood extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Entity',
         'Good',
         'Units',

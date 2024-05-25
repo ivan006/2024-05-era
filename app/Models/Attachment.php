@@ -18,7 +18,6 @@ class Attachment extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Name' => 'nullable',
             'Description' => 'nullable',
             'ContentType' => 'nullable',
@@ -31,7 +30,6 @@ class Attachment extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Name',
         'Description',
         'ContentType',

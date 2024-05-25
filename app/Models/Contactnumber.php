@@ -18,7 +18,6 @@ class Contactnumber extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Number' => 'required',
             'Type' => 'required',
             'Person' => 'nullable',
@@ -27,7 +26,6 @@ class Contactnumber extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Number',
         'Type',
         'Person',

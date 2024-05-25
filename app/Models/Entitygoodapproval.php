@@ -22,7 +22,6 @@ class Entitygoodapproval extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'ApprovedBy' => 'required',
             'ApprovedOn' => 'required',
             'InvoiceApprovedBy' => 'nullable',
@@ -39,7 +38,6 @@ class Entitygoodapproval extends Model
     }
 
     protected $fillable = [
-        'Id',
         'ApprovedBy',
         'ApprovedOn',
         'InvoiceApprovedBy',

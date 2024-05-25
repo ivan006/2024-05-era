@@ -18,7 +18,6 @@ class Entityevent extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'TableID' => 'nullable',
             'TableName' => 'nullable',
             'Event' => 'nullable',
@@ -28,7 +27,6 @@ class Entityevent extends Model
     }
 
     protected $fillable = [
-        'Id',
         'TableID',
         'TableName',
         'Event',

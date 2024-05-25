@@ -18,7 +18,6 @@ class Crm extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Entity' => 'nullable',
             'EntityProduct' => 'nullable',
             'Contact' => 'nullable',
@@ -28,7 +27,6 @@ class Crm extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Entity',
         'EntityProduct',
         'Contact',

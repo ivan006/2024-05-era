@@ -18,7 +18,6 @@ class Audit extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'TableName' => 'nullable',
             'CRUD' => 'nullable',
             'Data' => 'nullable',
@@ -31,7 +30,6 @@ class Audit extends Model
     }
 
     protected $fillable = [
-        'Id',
         'TableName',
         'CRUD',
         'Data',

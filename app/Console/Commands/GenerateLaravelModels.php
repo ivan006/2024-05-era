@@ -33,8 +33,12 @@ class GenerateLaravelModels extends Command
             foreach ($columns as $column) {
                 $fieldName = $column->Field;
                 $nullable = $column->Null === 'YES';
-                $fillable[] = "'$fieldName'";
-                $rules[] = "'$fieldName' => '" . ($nullable ? 'nullable' : 'required') . "'";
+                $autoIncrement = strpos($column->Extra, 'auto_increment') !== false;
+
+                if (!$autoIncrement) {
+                    $fillable[] = "'$fieldName'";
+                    $rules[] = "'$fieldName' => '" . ($nullable ? 'nullable' : 'required') . "'";
+                }
 
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
                     $relatedModel = $this->getRelatedModelName($fieldName, $relations['foreignKeys']);

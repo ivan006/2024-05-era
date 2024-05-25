@@ -18,7 +18,6 @@ class Objecttrait extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Name' => 'required',
             'Description' => 'nullable',
             'Object' => 'required',
@@ -34,7 +33,6 @@ class Objecttrait extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Name',
         'Description',
         'Object',

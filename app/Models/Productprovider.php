@@ -18,14 +18,12 @@ class Productprovider extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Name' => 'required',
             'Entity' => 'required'
         ];
     }
 
     protected $fillable = [
-        'Id',
         'Name',
         'Entity'
     ];

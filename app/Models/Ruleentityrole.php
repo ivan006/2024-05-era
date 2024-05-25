@@ -18,7 +18,6 @@ class Ruleentityrole extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'EntityRole' => 'nullable',
             'Entity' => 'nullable',
             'UserRole' => 'nullable',
@@ -32,7 +31,6 @@ class Ruleentityrole extends Model
     }
 
     protected $fillable = [
-        'Id',
         'EntityRole',
         'Entity',
         'UserRole',

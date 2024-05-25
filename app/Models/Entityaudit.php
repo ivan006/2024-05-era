@@ -18,7 +18,6 @@ class Entityaudit extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Entity Name' => 'required',
             'Entity Id' => 'required',
             'Operation' => 'required',
@@ -29,7 +28,6 @@ class Entityaudit extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Entity Name',
         'Entity Id',
         'Operation',

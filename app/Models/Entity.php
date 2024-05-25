@@ -25,7 +25,6 @@ class Entity extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'ExternalNo' => 'nullable',
             'Level' => 'nullable',
             'Type' => 'nullable',
@@ -45,7 +44,6 @@ class Entity extends Model
     }
 
     protected $fillable = [
-        'Id',
         'ExternalNo',
         'Level',
         'Type',

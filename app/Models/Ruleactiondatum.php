@@ -18,7 +18,6 @@ class Ruleactiondatum extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'Rule' => 'nullable',
             'TableName' => 'nullable',
             'ColumnName' => 'nullable',
@@ -27,7 +26,6 @@ class Ruleactiondatum extends Model
     }
 
     protected $fillable = [
-        'Id',
         'Rule',
         'TableName',
         'ColumnName',

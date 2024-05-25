@@ -18,7 +18,6 @@ class Tag extends Model
     public function rules()
     {
         return [
-            'id' => 'required',
             'created_at' => 'nullable',
             'updated_at' => 'nullable',
             'name' => 'required'
@@ -26,7 +25,6 @@ class Tag extends Model
     }
 
     protected $fillable = [
-        'id',
         'created_at',
         'updated_at',
         'name'

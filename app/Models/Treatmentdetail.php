@@ -19,7 +19,6 @@ class Treatmentdetail extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'ServiceRequestReport' => 'nullable',
             'OpeningBalance' => 'nullable',
             'Refurbished' => 'nullable',
@@ -32,7 +31,6 @@ class Treatmentdetail extends Model
     }
 
     protected $fillable = [
-        'Id',
         'ServiceRequestReport',
         'OpeningBalance',
         'Refurbished',

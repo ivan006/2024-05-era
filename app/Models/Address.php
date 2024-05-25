@@ -19,7 +19,6 @@ class Address extends Model
     public function rules()
     {
         return [
-            'Id' => 'required',
             'StreetNo' => 'nullable',
             'StreetName' => 'nullable',
             'Building' => 'nullable',
@@ -40,7 +39,6 @@ class Address extends Model
     }
 
     protected $fillable = [
-        'Id',
         'StreetNo',
         'StreetName',
         'Building',
