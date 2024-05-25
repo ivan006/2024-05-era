@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Krlove\EloquentModelGenerator\Generator;
 
-class GenerateModels extends Command
+class GenerateModelsOld extends Command
 {
     protected $signature = 'generate:models';
     protected $description = 'Generate models from database tables';

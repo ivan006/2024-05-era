@@ -39,7 +39,7 @@ class GenerateVuexOrmModels extends Command
                     $fieldMeta = "{ relationRules: { linkables: (user) => { return {} } } }";
                 }
                 $fields[] = "'$fieldName': this.attr('', $fieldMeta)";
-                $fieldsMetadata[] = "$fieldName: { }"; // Placeholder for actual metadata logic
+                $fieldsMetadata[] = "'$fieldName': { }"; // Placeholder for actual metadata logic
             }
 
             $fieldsString = implode(",\n            ", $fields);
