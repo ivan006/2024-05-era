@@ -1,19 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
+use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    protected $itemNameSingular = "Post";
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Post();
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Post::all();
+        $result = OrmApi::fetchAllWithFullQueryExposure($this->model, $request);
+        return response()->json($result);
     }
 
     /**
@@ -21,8 +31,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = Post::create($request->all());
-        return response()->json($post)
+        $result = OrmApi::createItemWithOptionalBulkRelations(
+            $request,
+            $this->model,
+            $this->itemNameSingular
+        );
+        return response()->json($result['res'], $result['code']);
     }
 
     /**
@@ -30,7 +44,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $result = OrmApi::fetchByIdWithFullQueryExposure($this->model, $id);
+        return response()->json($result);
     }
 
     /**
@@ -38,7 +53,13 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $result = OrmApi::updateItem(
+            $request,
+            $this->model,
+            $id,
+            $this->itemNameSingular
+        );
+        return response()->json($result['res'], $result['code']);
     }
 
     /**
@@ -46,6 +67,11 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = OrmApi::deleteItem(
+            $this->model,
+            $id,
+            $this->itemNameSingular
+        );
+        return response()->json($result['res'], $result['code']);
     }
 }

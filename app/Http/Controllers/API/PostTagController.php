@@ -1,19 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
+use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
 use App\Models\PostTag;
 use Illuminate\Http\Request;
 
 class PostTagController extends Controller
 {
+    protected $itemNameSingular = "Post Tag";
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new PostTag();
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $result = OrmApi::fetchAllWithFullQueryExposure($this->model, $request);
+        return response()->json($result);
     }
 
     /**
@@ -21,7 +31,12 @@ class PostTagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $result = OrmApi::createItemWithOptionalBulkRelations(
+            $request,
+            $this->model,
+            $this->itemNameSingular
+        );
+        return response()->json($result['res'], $result['code']);
     }
 
     /**
@@ -29,7 +44,8 @@ class PostTagController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $result = OrmApi::fetchByIdWithFullQueryExposure($this->model, $id);
+        return response()->json($result);
     }
 
     /**
@@ -37,7 +53,13 @@ class PostTagController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $result = OrmApi::updateItem(
+            $request,
+            $this->model,
+            $id,
+            $this->itemNameSingular
+        );
+        return response()->json($result['res'], $result['code']);
     }
 
     /**
@@ -45,6 +67,11 @@ class PostTagController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $result = OrmApi::deleteItem(
+            $this->model,
+            $id,
+            $this->itemNameSingular
+        );
+        return response()->json($result['res'], $result['code']);
     }
 }

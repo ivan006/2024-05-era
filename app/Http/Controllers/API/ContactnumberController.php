@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
-use App\Models\Tag;
+use App\Models\Contactnumber;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class ContactnumberController extends Controller
 {
-    protected $itemNameSingular = "Tag";
+    protected $itemNameSingular = "Contactnumber";
     protected $model;
 
     public function __construct()
     {
-        $this->model = new Tag();
+        $this->model = new Contactnumber();
     }
 
     /**

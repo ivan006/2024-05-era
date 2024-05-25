@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
-use App\Models\Tag;
+use App\Models\Userroleaccess;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class UserroleaccessController extends Controller
 {
-    protected $itemNameSingular = "Tag";
+    protected $itemNameSingular = "Userroleaccess";
     protected $model;
 
     public function __construct()
     {
-        $this->model = new Tag();
+        $this->model = new Userroleaccess();
     }
 
     /**

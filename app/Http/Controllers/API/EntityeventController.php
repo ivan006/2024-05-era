@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
-use App\Models\Tag;
+use App\Models\Entityevent;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class EntityeventController extends Controller
 {
-    protected $itemNameSingular = "Tag";
+    protected $itemNameSingular = "Entityevent";
     protected $model;
 
     public function __construct()
     {
-        $this->model = new Tag();
+        $this->model = new Entityevent();
     }
 
     /**
