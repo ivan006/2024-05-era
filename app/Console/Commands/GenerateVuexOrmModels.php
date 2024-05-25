@@ -18,7 +18,8 @@ class GenerateVuexOrmModels extends Command
         $database = env('DB_DATABASE');
 
         foreach ($tables as $table) {
-            $tableName = $table->{"Tables_in_$database"};
+            $tableArray = get_object_vars($table);
+            $tableName = $tableArray[array_key_first($tableArray)];
             $modelName = Str::studly(Str::singular($tableName));
             $jsModelName = Str::camel(Str::singular($tableName));
             $pluralTableName = Str::plural($tableName);
