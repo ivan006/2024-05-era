@@ -22,7 +22,7 @@ class RequirementController extends Controller
      */
     public function index(Request $request)
     {
-        $result = OrmApi::fetchAllWithFullQueryExposure($this->model, $request);
+        $result = OrmApi::fetchAllWithFullQueryExposure($this->model, $request, $this->itemNameSingular);
         return response()->json($result['res'], $result['code']);
     }
 
@@ -44,7 +44,7 @@ class RequirementController extends Controller
      */
     public function show(string $id)
     {
-        $result = OrmApi::fetchByIdWithFullQueryExposure($this->model, $id);
+        $result = OrmApi::fetchByIdWithFullQueryExposure($this->model, $id, $this->itemNameSingular);
         return response()->json($result['res'], $result['code']);
     }
 
