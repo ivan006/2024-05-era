@@ -13,7 +13,7 @@ class Documentdetail extends Model
     public function relationships()
     {
         return [
-            'documentDocument'
+            'document'
         ];
     }
 
@@ -44,7 +44,7 @@ class Documentdetail extends Model
         'CreatedOn'
     ];
 
-        public function documentDocument(): BelongsTo
+        public function document(): BelongsTo
     {
         return $this->belongsTo(Document::class, 'Document');
     }

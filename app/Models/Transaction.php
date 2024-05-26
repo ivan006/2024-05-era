@@ -13,7 +13,7 @@ class Transaction extends Model
     public function relationships()
     {
         return [
-            'systemcodeType'
+            'systemcode'
         ];
     }
 
@@ -52,7 +52,7 @@ class Transaction extends Model
         'Type'
     ];
 
-        public function systemcodeType(): BelongsTo
+        public function systemcode(): BelongsTo
     {
         return $this->belongsTo(Systemcode::class, 'Type');
     }

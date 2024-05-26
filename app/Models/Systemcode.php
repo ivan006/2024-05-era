@@ -13,14 +13,14 @@ class Systemcode extends Model
     public function relationships()
     {
         return [
-            'entityEntity',
-            'addressAddresses',
-            'addressAddresses1',
-            'contactnumberContactnumbers',
-            'emailEmails',
-            'servicerequestfrequencyServicerequestfrequencies',
-            'transactionTransactions',
-            'userconfigurationUserconfigurations'
+            'entity',
+            'addresses',
+            'addresses1',
+            'contactnumbers',
+            'emails',
+            'servicerequestfrequencies',
+            'transactions',
+            'userconfigurations'
         ];
     }
 
@@ -59,42 +59,42 @@ class Systemcode extends Model
         'Entity'
     ];
 
-        public function entityEntity(): BelongsTo
+        public function entity(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function addressAddresses(): HasMany
+        public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
     }
 
-        public function addressAddresses1(): HasMany
+        public function addresses1(): HasMany
     {
         return $this->hasMany(Address::class);
     }
 
-        public function contactnumberContactnumbers(): HasMany
+        public function contactnumbers(): HasMany
     {
         return $this->hasMany(Contactnumber::class);
     }
 
-        public function emailEmails(): HasMany
+        public function emails(): HasMany
     {
         return $this->hasMany(Email::class);
     }
 
-        public function servicerequestfrequencyServicerequestfrequencies(): HasMany
+        public function servicerequestfrequencies(): HasMany
     {
         return $this->hasMany(Servicerequestfrequency::class);
     }
 
-        public function transactionTransactions(): HasMany
+        public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
     }
 
-        public function userconfigurationUserconfigurations(): HasMany
+        public function userconfigurations(): HasMany
     {
         return $this->hasMany(Userconfiguration::class);
     }

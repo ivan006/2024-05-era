@@ -13,12 +13,12 @@ class Servicerequestreport extends Model
     public function relationships()
     {
         return [
-            'servicerequestServiceRequest',
-            'entityServiceProvider',
-            'systemuserCreatedBy',
-            'treatmentdetailTreatmentDetails',
-            'externalproducerExternalproducers',
-            'treatmentdetailTreatmentdetails'
+            'servicerequest',
+            'entity',
+            'systemuser',
+            'treatmentdetail',
+            'externalproducers',
+            'treatmentdetails'
         ];
     }
 
@@ -47,32 +47,32 @@ class Servicerequestreport extends Model
         'Rejected'
     ];
 
-        public function servicerequestServiceRequest(): BelongsTo
+        public function servicerequest(): BelongsTo
     {
         return $this->belongsTo(Servicerequest::class, 'ServiceRequest');
     }
 
-        public function entityServiceProvider(): BelongsTo
+        public function entity(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ServiceProvider');
     }
 
-        public function systemuserCreatedBy(): BelongsTo
+        public function systemuser(): BelongsTo
     {
         return $this->belongsTo(Systemuser::class, 'CreatedBy');
     }
 
-        public function treatmentdetailTreatmentDetails(): BelongsTo
+        public function treatmentdetail(): BelongsTo
     {
         return $this->belongsTo(Treatmentdetail::class, 'TreatmentDetails');
     }
 
-        public function externalproducerExternalproducers(): HasMany
+        public function externalproducers(): HasMany
     {
         return $this->hasMany(Externalproducer::class);
     }
 
-        public function treatmentdetailTreatmentdetails(): HasMany
+        public function treatmentdetails(): HasMany
     {
         return $this->hasMany(Treatmentdetail::class);
     }

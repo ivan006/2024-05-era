@@ -13,14 +13,14 @@ class Systemuser extends Model
     public function relationships()
     {
         return [
-            'communicationCommunications',
-            'domainuserDomainusers',
-            'entityauditEntityaudits',
-            'servicerequestServicerequests',
-            'servicerequestreportServicerequestreports',
-            'useraccessUseraccesses',
-            'userconfigurationUserconfigurations',
-            'userdeviceUserdevices'
+            'communications',
+            'domainusers',
+            'entityaudits',
+            'servicerequests',
+            'servicerequestreports',
+            'useraccesses',
+            'userconfigurations',
+            'userdevices'
         ];
     }
 
@@ -65,42 +65,42 @@ class Systemuser extends Model
 
     
 
-        public function communicationCommunications(): HasMany
+        public function communications(): HasMany
     {
         return $this->hasMany(Communication::class);
     }
 
-        public function domainuserDomainusers(): HasMany
+        public function domainusers(): HasMany
     {
         return $this->hasMany(Domainuser::class);
     }
 
-        public function entityauditEntityaudits(): HasMany
+        public function entityaudits(): HasMany
     {
         return $this->hasMany(Entityaudit::class);
     }
 
-        public function servicerequestServicerequests(): HasMany
+        public function servicerequests(): HasMany
     {
         return $this->hasMany(Servicerequest::class);
     }
 
-        public function servicerequestreportServicerequestreports(): HasMany
+        public function servicerequestreports(): HasMany
     {
         return $this->hasMany(Servicerequestreport::class);
     }
 
-        public function useraccessUseraccesses(): HasMany
+        public function useraccesses(): HasMany
     {
         return $this->hasMany(Useraccess::class);
     }
 
-        public function userconfigurationUserconfigurations(): HasMany
+        public function userconfigurations(): HasMany
     {
         return $this->hasMany(Userconfiguration::class);
     }
 
-        public function userdeviceUserdevices(): HasMany
+        public function userdevices(): HasMany
     {
         return $this->hasMany(Userdevice::class);
     }

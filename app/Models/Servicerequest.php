@@ -13,10 +13,10 @@ class Servicerequest extends Model
     public function relationships()
     {
         return [
-            'entityServiceProvider',
-            'systemuserCreatedBy',
-            'servicerequestfrequencyServicerequestfrequencies',
-            'servicerequestreportServicerequestreports'
+            'entity',
+            'systemuser',
+            'servicerequestfrequencies',
+            'servicerequestreports'
         ];
     }
 
@@ -49,22 +49,22 @@ class Servicerequest extends Model
         'DeliveryDate'
     ];
 
-        public function entityServiceProvider(): BelongsTo
+        public function entity(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ServiceProvider');
     }
 
-        public function systemuserCreatedBy(): BelongsTo
+        public function systemuser(): BelongsTo
     {
         return $this->belongsTo(Systemuser::class, 'CreatedBy');
     }
 
-        public function servicerequestfrequencyServicerequestfrequencies(): HasMany
+        public function servicerequestfrequencies(): HasMany
     {
         return $this->hasMany(Servicerequestfrequency::class);
     }
 
-        public function servicerequestreportServicerequestreports(): HasMany
+        public function servicerequestreports(): HasMany
     {
         return $this->hasMany(Servicerequestreport::class);
     }
