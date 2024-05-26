@@ -15,10 +15,11 @@ class GenerateVuexOrmModels extends Command
     public function handle()
     {
         $tables = DB::select('SHOW TABLES');
-        $database = env('DB_DATABASE');
 
         foreach ($tables as $table) {
-            $tableName = $table->{"Tables_in_$database"};
+            // Extract the table name dynamically
+            $tableArray = get_object_vars($table);
+            $tableName = reset($tableArray);
             $modelName = Str::studly(Str::singular($tableName));
             $jsModelName = Str::camel(Str::singular($tableName));
             $pluralTableName = Str::plural($tableName);
