@@ -30,6 +30,8 @@ class GenerateLaravelModels extends Command
             $hasManyMethods = [];
             $relations = $this->getModelRelations($tableName);
 
+            $attributeNames = [];
+
             foreach ($columns as $column) {
                 $fieldName = $column->Field;
                 $nullable = $column->Null === 'YES';
@@ -38,10 +40,14 @@ class GenerateLaravelModels extends Command
                 if (!$autoIncrement) {
                     $fillable[] = "'$fieldName'";
                     $rules[] = "'$fieldName' => '" . ($nullable ? 'nullable' : 'required') . "'";
+                    $attributeNames[] = strtolower($fieldName); // Store attribute names in lowercase for case-insensitive comparison
                 }
 
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
                     $relationshipName = Str::camel(Str::singular($fieldName));
+                    if (in_array(strtolower($relationshipName), $attributeNames)) { // Case-insensitive check for conflicts
+                        $relationshipName .= 'Rel';
+                    }
                     $relatedModel = $this->getRelatedModelName($fieldName, $relations['foreignKeys']);
                     $relationships[] = "'$relationshipName'";
                     $belongsToMethods[] = $this->generateBelongsToMethod($relatedModel, $relationshipName, $fieldName);
@@ -55,11 +61,13 @@ class GenerateLaravelModels extends Command
                     if (count($relationGroup) > 1) {
                         $relationshipName .= Str::studly($relation['COLUMN_NAME']);
                     }
+                    if (in_array(strtolower($relationshipName), $attributeNames)) { // Case-insensitive check for conflicts
+                        $relationshipName .= 'Rel';
+                    }
                     $relationships[] = "'$relationshipName'";
                     $hasManyMethods[] = $this->generateHasManyMethod($relation['model'], $relationshipName, $relation['COLUMN_NAME']);
                 }
             }
-
 
             $fillableString = implode(",\n        ", $fillable);
             $rulesString = implode(",\n            ", $rules);
@@ -172,7 +180,6 @@ EOT;
 EOT;
     }
 
-
     protected function generateHasManyMethod($relatedModel, $relationshipName, $foreignKey)
     {
         return <<<EOT
@@ -182,7 +189,6 @@ EOT;
     }
 EOT;
     }
-
 
     protected function groupHasManyRelations($hasManyRelations)
     {

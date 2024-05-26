@@ -13,7 +13,7 @@ class Externalproducer extends Model
     public function relationships()
     {
         return [
-            'serviceRequestReport'
+            'serviceRequestReportRel'
         ];
     }
 
@@ -30,7 +30,7 @@ class Externalproducer extends Model
         'ServiceRequestReport'
     ];
 
-        public function serviceRequestReport(): BelongsTo
+        public function serviceRequestReportRel(): BelongsTo
     {
         return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
     }

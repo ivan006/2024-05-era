@@ -13,7 +13,7 @@ class Systemcode extends Model
     public function relationships()
     {
         return [
-            'entity',
+            'entityRel',
             'addressesCountry',
             'addressesType',
             'contactnumbers',
@@ -59,7 +59,7 @@ class Systemcode extends Model
         'Entity'
     ];
 
-        public function entity(): BelongsTo
+        public function entityRel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }

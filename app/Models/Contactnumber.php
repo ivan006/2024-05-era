@@ -13,7 +13,7 @@ class Contactnumber extends Model
     public function relationships()
     {
         return [
-            'type'
+            'typeRel'
         ];
     }
 
@@ -34,7 +34,7 @@ class Contactnumber extends Model
         'Preferred'
     ];
 
-        public function type(): BelongsTo
+        public function typeRel(): BelongsTo
     {
         return $this->belongsTo(Systemcode::class, 'Type');
     }
