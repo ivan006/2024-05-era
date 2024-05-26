@@ -32,6 +32,7 @@ class GenerateVuexOrmModels extends Command
             $relations = $this->getModelRelations($tableName);
             $imports = $this->generateImports($modelName, $relations['imports']);
             $parentWithables = [];
+            $existingNames = [];
 
             foreach ($columns as $column) {
                 $fieldName = $column->Field;
@@ -45,9 +46,12 @@ class GenerateVuexOrmModels extends Command
                 $fieldsMetadata[] = "'$fieldName': $fieldMeta"; // Placeholder for actual metadata logic
             }
 
+            // Adjust relationship names, applying the unique name mechanism only to hasMany relationships
+            $uniqueRelations = $this->adjustRelationNames($relations['relations'], $existingNames);
+
             $fieldsString = implode(",\n            ", $fields);
             $fieldsMetadataString = implode(",\n            ", $fieldsMetadata);
-            $relationsString = implode(",\n            ", $relations['relations']);
+            $relationsString = implode(",\n            ", array_map(fn($rel) => "'{$rel['name']}': {$rel['definition']}", $uniqueRelations));
             $parentWithablesString = implode(",\n        ", $parentWithables);
 
             $jsModel = <<<EOT
@@ -176,7 +180,14 @@ EOT;
                 $imports[] = $relatedModel;
             }
 
-            $relations[] = "'$relationName': this.belongsTo($relatedModel, '$relationFieldName')";
+            $relationDefinition = "this.belongsTo($relatedModel, '$relationFieldName')";
+            $relations[] = [
+                'name' => $relationName,
+                'definition' => $relationDefinition,
+                'relatedModel' => $relatedModel,
+                'fieldName' => $relationFieldName,
+                'type' => 'belongsTo'
+            ];
             $foreignKeysArray[] = ['COLUMN_NAME' => $foreignKey->COLUMN_NAME, 'RELATED_MODEL' => $relatedModel];
         }
 
@@ -190,13 +201,56 @@ EOT;
         foreach ($childRelations as $childRelation) {
             $relationName = Str::camel(Str::plural($childRelation->TABLE_NAME));
             $relatedModel = Str::studly(Str::singular($childRelation->TABLE_NAME));
-            $relations[] = "'$relationName': this.hasMany($relatedModel, '{$childRelation->COLUMN_NAME}')";
+            $relationDefinition = "this.hasMany($relatedModel, '{$childRelation->COLUMN_NAME}')";
+            $relations[] = [
+                'name' => $relationName,
+                'definition' => $relationDefinition,
+                'relatedModel' => $relatedModel,
+                'fieldName' => $childRelation->COLUMN_NAME,
+                'type' => 'hasMany'
+            ];
             if (!in_array($relatedModel, $imports)) {
                 $imports[] = $relatedModel;
             }
         }
 
         return ['relations' => $relations, 'imports' => $imports, 'foreignKeys' => $foreignKeysArray];
+    }
+
+    protected function generateRelationshipName($relatedModel, $fieldName, &$existingNames)
+    {
+        $baseName = Str::camel(Str::singular($relatedModel) . Str::studly($fieldName));
+        $name = $baseName;
+        $counter = 1;
+        while (in_array($name, $existingNames)) {
+            $name = $baseName . $counter;
+            $counter++;
+        }
+        return $name;
+    }
+
+    protected function adjustRelationNames($relations, &$existingNames)
+    {
+        $relationCount = [];
+        foreach ($relations as $relation) {
+            $key = $relation['relatedModel'];
+            if (!isset($relationCount[$key])) {
+                $relationCount[$key] = 0;
+            }
+            $relationCount[$key]++;
+        }
+
+        foreach ($relations as &$relation) {
+            $key = $relation['relatedModel'];
+            if ($relationCount[$key] > 1 && $relation['type'] === 'hasMany') {
+                $relation['name'] = $this->generateRelationshipName($relation['relatedModel'], $relation['fieldName'], $existingNames);
+            } else {
+                $relation['name'] = Str::camel(Str::singular($relation['relatedModel']));
+            }
+            $existingNames[] = $relation['name'];
+        }
+
+        return $relations;
     }
 
     protected function generateFieldMetadata($fieldName)
