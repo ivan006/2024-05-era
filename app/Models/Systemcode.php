@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Systemcode extends Model
 {
+    protected $table = 'systemcode';
+
     public function relationships()
     {
         return [
             'entity',
             'addresses',
-            'addresses',
+            'addresses1',
             'contactnumbers',
             'emails',
             'servicerequestfrequencies',
@@ -67,10 +69,10 @@ class Systemcode extends Model
         return $this->hasMany(Address::class);
     }
 
-//        public function addresses(): HasMany
-//    {
-//        return $this->hasMany(Address::class);
-//    }
+        public function addresses1(): HasMany
+    {
+        return $this->hasMany(Address::class);
+    }
 
         public function contactnumbers(): HasMany
     {

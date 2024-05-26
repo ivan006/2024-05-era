@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Documentdetail extends Model
 {
+    protected $table = 'documentdetail';
+
     public function relationships()
     {
         return [

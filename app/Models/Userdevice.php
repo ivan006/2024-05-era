@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Userdevice extends Model
 {
+    protected $table = 'userdevice';
+
     public function relationships()
     {
         return [

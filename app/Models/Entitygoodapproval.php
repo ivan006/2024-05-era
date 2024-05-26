@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Entitygoodapproval extends Model
 {
+    protected $table = 'entitygoodapproval';
+
     public function relationships()
     {
         return [
             'entity',
-            'entity',
-            'entity',
+            'entity1',
+            'entity2',
             'queryheader',
             'entitygoods'
         ];
@@ -57,15 +59,15 @@ class Entitygoodapproval extends Model
         return $this->belongsTo(Entity::class, 'ApprovedBy');
     }
 
-//        public function entity(): BelongsTo
-//    {
-//        return $this->belongsTo(Entity::class, 'InvoiceApprovedBy');
-//    }
+        public function entity1(): BelongsTo
+    {
+        return $this->belongsTo(Entity::class, 'InvoiceApprovedBy');
+    }
 
-//        public function entity(): BelongsTo
-//    {
-//        return $this->belongsTo(Entity::class, 'Entity');
-//    }
+        public function entity2(): BelongsTo
+    {
+        return $this->belongsTo(Entity::class, 'Entity');
+    }
 
         public function queryheader(): BelongsTo
     {

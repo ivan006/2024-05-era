@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Queryheader extends Model
 {
+    protected $table = 'queryheader';
+
     public function relationships()
     {
         return [

@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Entity extends Model
 {
+    protected $table = 'entity';
+
     public function relationships()
     {
         return [
             'entitygoods',
             'entitygoodapprovals',
-            'entitygoodapprovals',
-            'entitygoodapprovals',
+            'entitygoodapprovals1',
+            'entitygoodapprovals2',
             'goods',
             'servicerequests',
             'servicerequestreports',
@@ -61,24 +63,24 @@ class Entity extends Model
         'IsPaid'
     ];
 
-
+    
 
         public function entitygoods(): HasMany
     {
         return $this->hasMany(Entitygood::class);
     }
 
-//        public function entitygoodapprovals(): HasMany
-//    {
-//        return $this->hasMany(Entitygoodapproval::class);
-//    }
-
-//        public function entitygoodapprovals(): HasMany
-//    {
-//        return $this->hasMany(Entitygoodapproval::class);
-//    }
-
         public function entitygoodapprovals(): HasMany
+    {
+        return $this->hasMany(Entitygoodapproval::class);
+    }
+
+        public function entitygoodapprovals1(): HasMany
+    {
+        return $this->hasMany(Entitygoodapproval::class);
+    }
+
+        public function entitygoodapprovals2(): HasMany
     {
         return $this->hasMany(Entitygoodapproval::class);
     }

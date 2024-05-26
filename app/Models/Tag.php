@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tag extends Model
 {
+    protected $table = 'tags';
+
     public function relationships()
     {
         return [

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PersonalAccessToken extends Model
 {
+    protected $table = 'personal_access_tokens';
+
     public function relationships()
     {
         return [

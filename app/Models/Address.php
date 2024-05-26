@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Address extends Model
 {
+    protected $table = 'address';
+
     public function relationships()
     {
         return [
             'systemcode',
-            'systemcode'
+            'systemcode1'
         ];
     }
 
@@ -62,10 +64,10 @@ class Address extends Model
         return $this->belongsTo(Systemcode::class, 'Country');
     }
 
-//        public function systemcode(): BelongsTo
-//    {
-//        return $this->belongsTo(Systemcode::class, 'Type');
-//    }
+        public function systemcode1(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Type');
+    }
 
-
+    
 }

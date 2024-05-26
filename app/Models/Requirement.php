@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Requirement extends Model
 {
+    protected $table = 'requirement';
+
     public function relationships()
     {
         return [

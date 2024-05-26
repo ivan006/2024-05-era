@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Crm extends Model
 {
+    protected $table = 'crm';
+
     public function relationships()
     {
         return [

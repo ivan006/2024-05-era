@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Systemlog extends Model
 {
+    protected $table = 'systemlog';
+
     public function relationships()
     {
         return [

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Ruleactiondatum extends Model
 {
+    protected $table = 'ruleactiondata';
+
     public function relationships()
     {
         return [

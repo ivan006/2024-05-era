@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Passwordhash extends Model
 {
+    protected $table = 'passwordhash';
+
     public function relationships()
     {
         return [

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class WebsiteProducerRegistration extends Model
 {
+    protected $table = 'website_producer_registrations';
+
     public function relationships()
     {
         return [

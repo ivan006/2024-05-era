@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Ruleentityrole extends Model
 {
+    protected $table = 'ruleentityrole';
+
     public function relationships()
     {
         return [

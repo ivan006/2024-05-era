@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Post extends Model
+class Object extends Model
 {
-    protected $table = 'posts';
+    protected $table = 'object';
 
     public function relationships()
     {
@@ -20,16 +20,18 @@ class Post extends Model
     public function rules()
     {
         return [
-            'created_at' => 'nullable',
-            'updated_at' => 'nullable',
-            'name' => 'required'
+            'Name' => 'required',
+            'Description' => 'required',
+            'Parent' => 'nullable',
+            'ChildType' => 'nullable'
         ];
     }
 
     protected $fillable = [
-        'created_at',
-        'updated_at',
-        'name'
+        'Name',
+        'Description',
+        'Parent',
+        'ChildType'
     ];
 
     

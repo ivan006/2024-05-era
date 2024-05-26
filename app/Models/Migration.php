@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Migration extends Model
 {
+    protected $table = 'migrations';
+
     public function relationships()
     {
         return [

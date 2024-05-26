@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PostTag extends Model
 {
+    protected $table = 'post_tags';
+
     public function relationships()
     {
         return [

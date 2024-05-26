@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Objecttrait extends Model
 {
+    protected $table = 'objecttrait';
+
     public function relationships()
     {
         return [

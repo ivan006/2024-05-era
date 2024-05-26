@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\File;
 class GenerateLaravelModels extends Command
 {
     protected $signature = 'generate:laravel-models';
-    protected $description = 'Generate Laravel models from database schema with relationships, rules, and fillable attributes';
+    protected $description = 'Generate Laravel models from database schema with relationships, rules, fillable attributes, and table name';
 
     public function handle()
     {
@@ -29,6 +29,7 @@ class GenerateLaravelModels extends Command
             $belongsToMethods = [];
             $hasManyMethods = [];
             $relations = $this->getModelRelations($tableName);
+            $relationNames = [];
 
             foreach ($columns as $column) {
                 $fieldName = $column->Field;
@@ -43,14 +44,19 @@ class GenerateLaravelModels extends Command
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
                     $relatedModel = $this->getRelatedModelName($fieldName, $relations['foreignKeys']);
                     $relationshipName = Str::camel(Str::singular($relatedModel));
+                    $relationshipName = $this->ensureUniqueName($relationshipName, $relationNames);
                     $relationships[] = "'$relationshipName'";
                     $belongsToMethods[] = $this->generateBelongsToMethod($relatedModel, $relationshipName, $fieldName);
+                    $relationNames[] = $relationshipName;
                 }
             }
 
             foreach ($relations['hasMany'] as $relation) {
-                $relationships[] = "'{$relation['name']}'";
-                $hasManyMethods[] = $this->generateHasManyMethod($relation['model'], $relation['name']);
+                $relationshipName = $relation['name'];
+                $relationshipName = $this->ensureUniqueName($relationshipName, $relationNames);
+                $relationships[] = "'$relationshipName'";
+                $hasManyMethods[] = $this->generateHasManyMethod($relation['model'], $relationshipName);
+                $relationNames[] = $relationshipName;
             }
 
             $fillableString = implode(",\n        ", $fillable);
@@ -70,6 +76,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class $modelName extends Model
 {
+    protected \$table = '$tableName';
+
     public function relationships()
     {
         return [
@@ -164,5 +172,16 @@ EOT;
         return \$this->hasMany($relatedModel::class);
     }
 EOT;
+    }
+
+    protected function ensureUniqueName($baseName, &$existingNames)
+    {
+        $name = $baseName;
+        $counter = 1;
+        while (in_array($name, $existingNames)) {
+            $name = $baseName . $counter;
+            $counter++;
+        }
+        return $name;
     }
 }

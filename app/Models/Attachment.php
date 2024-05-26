@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Attachment extends Model
 {
+    protected $table = 'attachment';
+
     public function relationships()
     {
         return [

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Entityaudit extends Model
 {
+    protected $table = 'entityaudit';
+
     public function relationships()
     {
         return [

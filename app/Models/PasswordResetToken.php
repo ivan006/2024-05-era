@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PasswordResetToken extends Model
 {
+    protected $table = 'password_reset_tokens';
+
     public function relationships()
     {
         return [

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Servicerequestreport extends Model
 {
+    protected $table = 'servicerequestreport';
+
     public function relationships()
     {
         return [
