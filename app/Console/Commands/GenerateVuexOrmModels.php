@@ -25,6 +25,7 @@ class GenerateVuexOrmModels extends Command
             $pluralTableName = Str::plural($tableName);
 
             $columns = DB::select("SHOW COLUMNS FROM $tableName");
+            $primaryKey = $this->getPrimaryKey($columns);
 
             $fields = [];
             $fieldsMetadata = [];
@@ -40,8 +41,8 @@ class GenerateVuexOrmModels extends Command
                     $parentWithables[] = "'$relatedFieldName'";
                     $fieldMeta = "{ relationRules: { linkables: (user) => { return {} } } }";
                 }
-                $fields[] = "'$fieldName': this.attr('', $fieldMeta)";
-                $fieldsMetadata[] = "'$fieldName': { }"; // Placeholder for actual metadata logic
+                $fields[] = "'$fieldName': this.attr('')";
+                $fieldsMetadata[] = "'$fieldName': $fieldMeta"; // Placeholder for actual metadata logic
             }
 
             $fieldsString = implode(",\n            ", $fields);
@@ -54,7 +55,8 @@ $imports
 
 export default class $modelName extends MyBaseModel {
     static entity = '$jsModelName';
-    static entityUrl = '/rest/v1/$pluralTableName';
+    static entityUrl = '/api/$pluralTableName';
+    static primaryKey = '$primaryKey';
 
     static parentWithables = [
         $parentWithablesString
@@ -72,7 +74,6 @@ export default class $modelName extends MyBaseModel {
 
     static fields() {
         return {
-            id: this.attr(null),
             $fieldsString,
             $relationsString
         };
@@ -140,6 +141,17 @@ EOT;
 
             $this->info("Generated Vuex ORM model for $tableName");
         }
+    }
+
+    protected function getPrimaryKey($columns)
+    {
+        foreach ($columns as $column) {
+            if ($column->Key === 'PRI') {
+                return $column->Field;
+            }
+        }
+
+        return 'id'; // Default primary key if none is found
     }
 
     protected function getModelRelations($tableName)

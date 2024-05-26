@@ -132,9 +132,9 @@ export default {
     methods: {
         openRecord(e) {
             router.push({
-                name: '/lists/$kebabModel/:cId',
+                name: '/lists/$kebabModel/:rId',
                 params: {
-                    cId: e.id,
+                    rId: e.id,
                 },
             })
         },
