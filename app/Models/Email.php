@@ -13,7 +13,7 @@ class Email extends Model
     public function relationships()
     {
         return [
-            'systemcode'
+            'type'
         ];
     }
 
@@ -34,7 +34,7 @@ class Email extends Model
         'Preferred'
     ];
 
-        public function systemcode(): BelongsTo
+        public function type(): BelongsTo
     {
         return $this->belongsTo(Systemcode::class, 'Type');
     }

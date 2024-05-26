@@ -14,8 +14,8 @@ class Systemcode extends Model
     {
         return [
             'entity',
-            'addresses',
-            'addresses1',
+            'addressesCountry',
+            'addressesType',
             'contactnumbers',
             'emails',
             'servicerequestfrequencies',
@@ -64,38 +64,38 @@ class Systemcode extends Model
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function addresses(): HasMany
+        public function addressesCountry(): HasMany
     {
-        return $this->hasMany(Address::class);
+        return $this->hasMany(Address::class, 'Country');
     }
 
-        public function addresses1(): HasMany
+        public function addressesType(): HasMany
     {
-        return $this->hasMany(Address::class);
+        return $this->hasMany(Address::class, 'Type');
     }
 
         public function contactnumbers(): HasMany
     {
-        return $this->hasMany(Contactnumber::class);
+        return $this->hasMany(Contactnumber::class, 'Type');
     }
 
         public function emails(): HasMany
     {
-        return $this->hasMany(Email::class);
+        return $this->hasMany(Email::class, 'Type');
     }
 
         public function servicerequestfrequencies(): HasMany
     {
-        return $this->hasMany(Servicerequestfrequency::class);
+        return $this->hasMany(Servicerequestfrequency::class, 'ReportFrequency');
     }
 
         public function transactions(): HasMany
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class, 'Type');
     }
 
         public function userconfigurations(): HasMany
     {
-        return $this->hasMany(Userconfiguration::class);
+        return $this->hasMany(Userconfiguration::class, 'Language');
     }
 }

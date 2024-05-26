@@ -44,6 +44,6 @@ class Userrole extends Model
 
         public function useraccesses(): HasMany
     {
-        return $this->hasMany(Useraccess::class);
+        return $this->hasMany(Useraccess::class, 'UserRole');
     }
 }

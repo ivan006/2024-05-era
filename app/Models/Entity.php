@@ -14,9 +14,9 @@ class Entity extends Model
     {
         return [
             'entitygoods',
-            'entitygoodapprovals',
-            'entitygoodapprovals1',
-            'entitygoodapprovals2',
+            'entitygoodapprovalsApprovedBy',
+            'entitygoodapprovalsInvoiceApprovedBy',
+            'entitygoodapprovalsEntity',
             'goods',
             'servicerequests',
             'servicerequestreports',
@@ -67,41 +67,41 @@ class Entity extends Model
 
         public function entitygoods(): HasMany
     {
-        return $this->hasMany(Entitygood::class);
+        return $this->hasMany(Entitygood::class, 'Entity');
     }
 
-        public function entitygoodapprovals(): HasMany
+        public function entitygoodapprovalsApprovedBy(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class);
+        return $this->hasMany(Entitygoodapproval::class, 'ApprovedBy');
     }
 
-        public function entitygoodapprovals1(): HasMany
+        public function entitygoodapprovalsInvoiceApprovedBy(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class);
+        return $this->hasMany(Entitygoodapproval::class, 'InvoiceApprovedBy');
     }
 
-        public function entitygoodapprovals2(): HasMany
+        public function entitygoodapprovalsEntity(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class);
+        return $this->hasMany(Entitygoodapproval::class, 'Entity');
     }
 
         public function goods(): HasMany
     {
-        return $this->hasMany(Good::class);
+        return $this->hasMany(Good::class, 'Sector');
     }
 
         public function servicerequests(): HasMany
     {
-        return $this->hasMany(Servicerequest::class);
+        return $this->hasMany(Servicerequest::class, 'ServiceProvider');
     }
 
         public function servicerequestreports(): HasMany
     {
-        return $this->hasMany(Servicerequestreport::class);
+        return $this->hasMany(Servicerequestreport::class, 'ServiceProvider');
     }
 
         public function systemcodes(): HasMany
     {
-        return $this->hasMany(Systemcode::class);
+        return $this->hasMany(Systemcode::class, 'Entity');
     }
 }

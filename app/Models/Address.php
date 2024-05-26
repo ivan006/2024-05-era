@@ -13,8 +13,8 @@ class Address extends Model
     public function relationships()
     {
         return [
-            'systemcode',
-            'systemcode1'
+            'country',
+            'type'
         ];
     }
 
@@ -59,12 +59,12 @@ class Address extends Model
         'Longitude'
     ];
 
-        public function systemcode(): BelongsTo
+        public function country(): BelongsTo
     {
         return $this->belongsTo(Systemcode::class, 'Country');
     }
 
-        public function systemcode1(): BelongsTo
+        public function type(): BelongsTo
     {
         return $this->belongsTo(Systemcode::class, 'Type');
     }

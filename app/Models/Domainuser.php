@@ -13,7 +13,7 @@ class Domainuser extends Model
     public function relationships()
     {
         return [
-            'systemuser'
+            'systemUser'
         ];
     }
 
@@ -40,7 +40,7 @@ class Domainuser extends Model
         'ChangedBy'
     ];
 
-        public function systemuser(): BelongsTo
+        public function systemUser(): BelongsTo
     {
         return $this->belongsTo(Systemuser::class, 'SystemUser');
     }

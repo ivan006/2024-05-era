@@ -50,15 +50,16 @@ class GenerateLaravelModels extends Command
 
             $hasManyRelationsGrouped = $this->groupHasManyRelations($relations['hasMany']);
             foreach ($hasManyRelationsGrouped as $relationGroup) {
-                foreach ($relationGroup as $index => $relation) {
-                    $relationshipName = Str::camel(Str::plural($relation['COLUMN_NAME']));
+                foreach ($relationGroup as $relation) {
+                    $relationshipName = Str::camel(Str::plural($relation['model']));
                     if (count($relationGroup) > 1) {
-                        $relationshipName .= Str::studly($relation['KEY_COLUMN_NAME']);
+                        $relationshipName .= Str::studly($relation['COLUMN_NAME']);
                     }
                     $relationships[] = "'$relationshipName'";
-                    $hasManyMethods[] = $this->generateHasManyMethod($relation['RELATED_MODEL'], $relationshipName, $relation['COLUMN_NAME']);
+                    $hasManyMethods[] = $this->generateHasManyMethod($relation['model'], $relationshipName, $relation['COLUMN_NAME']);
                 }
             }
+
 
             $fillableString = implode(",\n        ", $fillable);
             $rulesString = implode(",\n            ", $rules);
@@ -171,6 +172,7 @@ EOT;
 EOT;
     }
 
+
     protected function generateHasManyMethod($relatedModel, $relationshipName, $foreignKey)
     {
         return <<<EOT
@@ -180,6 +182,7 @@ EOT;
     }
 EOT;
     }
+
 
     protected function groupHasManyRelations($hasManyRelations)
     {

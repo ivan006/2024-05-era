@@ -44,6 +44,6 @@ class Document extends Model
 
         public function documentdetails(): HasMany
     {
-        return $this->hasMany(Documentdetail::class);
+        return $this->hasMany(Documentdetail::class, 'Document');
     }
 }

@@ -13,10 +13,10 @@ class Entitygoodapproval extends Model
     public function relationships()
     {
         return [
+            'approvedBy',
+            'invoiceApprovedBy',
             'entity',
-            'entity1',
-            'entity2',
-            'queryheader',
+            'query',
             'entitygoods'
         ];
     }
@@ -54,28 +54,28 @@ class Entitygoodapproval extends Model
         'Status'
     ];
 
-        public function entity(): BelongsTo
+        public function approvedBy(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ApprovedBy');
     }
 
-        public function entity1(): BelongsTo
+        public function invoiceApprovedBy(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'InvoiceApprovedBy');
     }
 
-        public function entity2(): BelongsTo
+        public function entity(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function queryheader(): BelongsTo
+        public function query(): BelongsTo
     {
         return $this->belongsTo(Queryheader::class, 'Query');
     }
 
         public function entitygoods(): HasMany
     {
-        return $this->hasMany(Entitygood::class);
+        return $this->hasMany(Entitygood::class, 'Invoice');
     }
 }

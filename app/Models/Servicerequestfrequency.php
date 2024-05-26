@@ -13,8 +13,8 @@ class Servicerequestfrequency extends Model
     public function relationships()
     {
         return [
-            'servicerequest',
-            'systemcode'
+            'serviceRequest',
+            'reportFrequency'
         ];
     }
 
@@ -33,12 +33,12 @@ class Servicerequestfrequency extends Model
         'Active'
     ];
 
-        public function servicerequest(): BelongsTo
+        public function serviceRequest(): BelongsTo
     {
         return $this->belongsTo(Servicerequest::class, 'ServiceRequest');
     }
 
-        public function systemcode(): BelongsTo
+        public function reportFrequency(): BelongsTo
     {
         return $this->belongsTo(Systemcode::class, 'ReportFrequency');
     }

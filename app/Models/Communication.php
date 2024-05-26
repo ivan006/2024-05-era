@@ -13,7 +13,7 @@ class Communication extends Model
     public function relationships()
     {
         return [
-            'systemuser'
+            'sentBy'
         ];
     }
 
@@ -42,7 +42,7 @@ class Communication extends Model
         'RelativeID'
     ];
 
-        public function systemuser(): BelongsTo
+        public function sentBy(): BelongsTo
     {
         return $this->belongsTo(Systemuser::class, 'SentBy');
     }
