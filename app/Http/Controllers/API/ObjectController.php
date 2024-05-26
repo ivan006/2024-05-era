@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
-use App\Models\ObjectModel;
+use App\Models\Object;
 use Illuminate\Http\Request;
 
 class ObjectController extends Controller
@@ -14,7 +14,7 @@ class ObjectController extends Controller
 
     public function __construct()
     {
-        $this->model = new ObjectModel();
+        $this->model = new Object();
     }
 
     /**
@@ -23,7 +23,7 @@ class ObjectController extends Controller
     public function index(Request $request)
     {
         $result = OrmApi::fetchAllWithFullQueryExposure($this->model, $request);
-        return response()->json($result);
+        return response()->json($result['res'], $result['code']);
     }
 
     /**
@@ -45,7 +45,7 @@ class ObjectController extends Controller
     public function show(string $id)
     {
         $result = OrmApi::fetchByIdWithFullQueryExposure($this->model, $id);
-        return response()->json($result);
+        return response()->json($result['res'], $result['code']);
     }
 
     /**

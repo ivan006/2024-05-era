@@ -23,7 +23,7 @@ class BankController extends Controller
     public function index(Request $request)
     {
         $result = OrmApi::fetchAllWithFullQueryExposure($this->model, $request);
-        return response()->json($result);
+        return response()->json($result['res'], $result['code']);
     }
 
     /**
@@ -45,7 +45,7 @@ class BankController extends Controller
     public function show(string $id)
     {
         $result = OrmApi::fetchByIdWithFullQueryExposure($this->model, $id);
-        return response()->json($result);
+        return response()->json($result['res'], $result['code']);
     }
 
     /**
