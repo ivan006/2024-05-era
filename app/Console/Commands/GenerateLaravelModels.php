@@ -44,7 +44,8 @@ class GenerateLaravelModels extends Command
                 }
 
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
-                    $relationshipName = Str::camel(Str::singular($fieldName));
+                    // Remove the 'id', 'ID', '_id', '_ID', etc. suffix from the foreign key
+                    $relationshipName = Str::camel(Str::singular(preg_replace('/(_?id)$/i', '', $fieldName)));
                     if (in_array(strtolower($relationshipName), $attributeNames)) { // Case-insensitive check for conflicts
                         $relationshipName .= 'Rel';
                     }
