@@ -13,9 +13,9 @@ class Entitygood extends Model
     public function relationships()
     {
         return [
-            'entity',
-            'good',
-            'entitygoodapproval'
+            'entityEntity',
+            'goodGood',
+            'entitygoodapprovalInvoice'
         ];
     }
 
@@ -54,17 +54,17 @@ class Entitygood extends Model
         'Invoice'
     ];
 
-        public function entity(): BelongsTo
+        public function entityEntity(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function good(): BelongsTo
+        public function goodGood(): BelongsTo
     {
         return $this->belongsTo(Good::class, 'Good');
     }
 
-        public function entitygoodapproval(): BelongsTo
+        public function entitygoodapprovalInvoice(): BelongsTo
     {
         return $this->belongsTo(Entitygoodapproval::class, 'Invoice');
     }

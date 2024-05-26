@@ -13,7 +13,7 @@ class Entityaudit extends Model
     public function relationships()
     {
         return [
-            'systemuser'
+            'systemuserSystemUser'
         ];
     }
 
@@ -38,7 +38,7 @@ class Entityaudit extends Model
         'Audit_TS'
     ];
 
-        public function systemuser(): BelongsTo
+        public function systemuserSystemUser(): BelongsTo
     {
         return $this->belongsTo(Systemuser::class, 'SystemUser');
     }

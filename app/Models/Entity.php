@@ -13,14 +13,14 @@ class Entity extends Model
     public function relationships()
     {
         return [
-            'entitygoods',
-            'entitygoodapprovals',
-            'entitygoodapprovals1',
-            'entitygoodapprovals2',
-            'goods',
-            'servicerequests',
-            'servicerequestreports',
-            'systemcodes'
+            'entitygoodEntitygoods',
+            'entitygoodapprovalEntitygoodapprovals',
+            'entitygoodapprovalEntitygoodapprovals1',
+            'entitygoodapprovalEntitygoodapprovals2',
+            'goodGoods',
+            'servicerequestServicerequests',
+            'servicerequestreportServicerequestreports',
+            'systemcodeSystemcodes'
         ];
     }
 
@@ -65,42 +65,42 @@ class Entity extends Model
 
     
 
-        public function entitygoods(): HasMany
+        public function entitygoodEntitygoods(): HasMany
     {
         return $this->hasMany(Entitygood::class);
     }
 
-        public function entitygoodapprovals(): HasMany
+        public function entitygoodapprovalEntitygoodapprovals(): HasMany
     {
         return $this->hasMany(Entitygoodapproval::class);
     }
 
-        public function entitygoodapprovals1(): HasMany
+        public function entitygoodapprovalEntitygoodapprovals1(): HasMany
     {
         return $this->hasMany(Entitygoodapproval::class);
     }
 
-        public function entitygoodapprovals2(): HasMany
+        public function entitygoodapprovalEntitygoodapprovals2(): HasMany
     {
         return $this->hasMany(Entitygoodapproval::class);
     }
 
-        public function goods(): HasMany
+        public function goodGoods(): HasMany
     {
         return $this->hasMany(Good::class);
     }
 
-        public function servicerequests(): HasMany
+        public function servicerequestServicerequests(): HasMany
     {
         return $this->hasMany(Servicerequest::class);
     }
 
-        public function servicerequestreports(): HasMany
+        public function servicerequestreportServicerequestreports(): HasMany
     {
         return $this->hasMany(Servicerequestreport::class);
     }
 
-        public function systemcodes(): HasMany
+        public function systemcodeSystemcodes(): HasMany
     {
         return $this->hasMany(Systemcode::class);
     }

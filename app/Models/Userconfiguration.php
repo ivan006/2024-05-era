@@ -13,8 +13,8 @@ class Userconfiguration extends Model
     public function relationships()
     {
         return [
-            'systemuser',
-            'systemcode'
+            'systemuserSystemUser',
+            'systemcodeLanguage'
         ];
     }
 
@@ -33,12 +33,12 @@ class Userconfiguration extends Model
         'FbId'
     ];
 
-        public function systemuser(): BelongsTo
+        public function systemuserSystemUser(): BelongsTo
     {
         return $this->belongsTo(Systemuser::class, 'SystemUser');
     }
 
-        public function systemcode(): BelongsTo
+        public function systemcodeLanguage(): BelongsTo
     {
         return $this->belongsTo(Systemcode::class, 'Language');
     }

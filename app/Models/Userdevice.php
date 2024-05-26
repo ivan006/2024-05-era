@@ -13,7 +13,7 @@ class Userdevice extends Model
     public function relationships()
     {
         return [
-            'systemuser'
+            'systemuserSystemUser'
         ];
     }
 
@@ -36,7 +36,7 @@ class Userdevice extends Model
         'FbId'
     ];
 
-        public function systemuser(): BelongsTo
+        public function systemuserSystemUser(): BelongsTo
     {
         return $this->belongsTo(Systemuser::class, 'SystemUser');
     }

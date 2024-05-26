@@ -43,8 +43,7 @@ class GenerateLaravelModels extends Command
 
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
                     $relatedModel = $this->getRelatedModelName($fieldName, $relations['foreignKeys']);
-                    $relationshipName = Str::camel(Str::singular($relatedModel));
-                    $relationshipName = $this->ensureUniqueName($relationshipName, $relationNames);
+                    $relationshipName = $this->generateRelationshipName($relatedModel, $fieldName, $relationNames);
                     $relationships[] = "'$relationshipName'";
                     $belongsToMethods[] = $this->generateBelongsToMethod($relatedModel, $relationshipName, $fieldName);
                     $relationNames[] = $relationshipName;
@@ -53,7 +52,7 @@ class GenerateLaravelModels extends Command
 
             foreach ($relations['hasMany'] as $relation) {
                 $relationshipName = $relation['name'];
-                $relationshipName = $this->ensureUniqueName($relationshipName, $relationNames);
+                $relationshipName = $this->generateRelationshipName($relation['model'], $relation['name'], $relationNames);
                 $relationships[] = "'$relationshipName'";
                 $hasManyMethods[] = $this->generateHasManyMethod($relation['model'], $relationshipName);
                 $relationNames[] = $relationshipName;
@@ -174,8 +173,9 @@ EOT;
 EOT;
     }
 
-    protected function ensureUniqueName($baseName, &$existingNames)
+    protected function generateRelationshipName($relatedModel, $fieldName, &$existingNames)
     {
+        $baseName = Str::camel(Str::singular($relatedModel) . Str::studly($fieldName));
         $name = $baseName;
         $counter = 1;
         while (in_array($name, $existingNames)) {
