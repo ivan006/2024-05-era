@@ -29,7 +29,7 @@ class GenerateVuexOrmModels extends Command
 
             $fields = [];
             $fieldsMetadata = [];
-            $relations = $this->getModelRelations($tableName);
+            $relations = $this->getModelRelations($tableName, $columns);
             $imports = $this->generateImports($modelName, $relations['imports']);
             $parentWithables = [];
 
@@ -154,7 +154,7 @@ EOT;
         return 'id'; // Default primary key if none is found
     }
 
-    protected function getModelRelations($tableName)
+    protected function getModelRelations($tableName, $columns)
     {
         $foreignKeys = DB::select("SELECT
             COLUMN_NAME,
@@ -166,11 +166,14 @@ EOT;
         $relations = [];
         $imports = [];
         $foreignKeysArray = [];
+        $existingFields = array_map(function ($column) {
+            return strtolower($column->Field);
+        }, $columns);
 
         foreach ($foreignKeys as $foreignKey) {
             $relationFieldName = $foreignKey->COLUMN_NAME;
             $relatedModel = Str::studly(Str::singular($foreignKey->REFERENCED_TABLE_NAME));
-            $relationName = Str::camel(Str::singular($foreignKey->COLUMN_NAME));
+            $relationName = $this->generateRelationName($relationFieldName, $existingFields);
 
             if (!in_array($relatedModel, $imports)) {
                 $imports[] = $relatedModel;
@@ -189,22 +192,39 @@ EOT;
 
         $childRelationNames = [];
         foreach ($childRelations as $childRelation) {
+            $relationFieldName = $childRelation->COLUMN_NAME;
             $relationName = Str::camel(Str::plural($childRelation->TABLE_NAME));
             $relatedModel = Str::studly(Str::singular($childRelation->TABLE_NAME));
 
             // Check for conflicts in hasMany relation names
             if (isset($childRelationNames[$relationName])) {
-                $relationName .= ucfirst(Str::camel($childRelation->COLUMN_NAME));
+                $relationName .= ucfirst(Str::camel($relationFieldName));
+            } else if (in_array(strtolower($relationName), $existingFields)) {
+                $relationName .= 'Rel';
             }
             $childRelationNames[$relationName] = true;
 
-            $relations[] = "'$relationName': this.hasMany($relatedModel, '{$childRelation->COLUMN_NAME}')";
+            $relations[] = "'$relationName': this.hasMany($relatedModel, '$relationFieldName')";
             if (!in_array($relatedModel, $imports)) {
                 $imports[] = $relatedModel;
             }
         }
 
         return ['relations' => $relations, 'imports' => $imports, 'foreignKeys' => $foreignKeysArray];
+    }
+
+    protected function generateRelationName($fieldName, $existingFields)
+    {
+        // Remove suffixes like _ID, _Id, _id, id, ID, Id
+        $relationName = preg_replace('/(_ID|_Id|_id|id|ID|Id)$/', '', $fieldName);
+        $relationName = Str::camel(Str::singular($relationName));
+
+        // Check for conflicts
+        if (in_array(strtolower($relationName), $existingFields)) {
+            $relationName .= 'Rel';
+        }
+
+        return $relationName;
     }
 
     protected function generateFieldMetadata($fieldName)
