@@ -29,7 +29,6 @@ class GenerateLaravelModels extends Command
             $belongsToMethods = [];
             $hasManyMethods = [];
             $relations = $this->getModelRelations($tableName);
-            $relationNames = [];
 
             foreach ($columns as $column) {
                 $fieldName = $column->Field;
@@ -42,21 +41,23 @@ class GenerateLaravelModels extends Command
                 }
 
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
+                    $relationshipName = Str::camel(Str::singular($fieldName));
                     $relatedModel = $this->getRelatedModelName($fieldName, $relations['foreignKeys']);
-                    $relationshipName = Str::camel(Str::singular($relatedModel));
-                    $relationshipName = $this->ensureUniqueName($relationshipName, $relationNames);
                     $relationships[] = "'$relationshipName'";
                     $belongsToMethods[] = $this->generateBelongsToMethod($relatedModel, $relationshipName, $fieldName);
-                    $relationNames[] = $relationshipName;
                 }
             }
 
-            foreach ($relations['hasMany'] as $relation) {
-                $relationshipName = Str::camel(Str::plural($relation['name']));
-                $relationshipName = $this->ensureUniqueName($relationshipName, $relationNames);
-                $relationships[] = "'$relationshipName'";
-                $hasManyMethods[] = $this->generateHasManyMethod($relation['model'], $relationshipName);
-                $relationNames[] = $relationshipName;
+            $hasManyRelationsGrouped = $this->groupHasManyRelations($relations['hasMany']);
+            foreach ($hasManyRelationsGrouped as $relationGroup) {
+                foreach ($relationGroup as $index => $relation) {
+                    $relationshipName = Str::camel(Str::plural($relation['COLUMN_NAME']));
+                    if (count($relationGroup) > 1) {
+                        $relationshipName .= Str::studly($relation['KEY_COLUMN_NAME']);
+                    }
+                    $relationships[] = "'$relationshipName'";
+                    $hasManyMethods[] = $this->generateHasManyMethod($relation['RELATED_MODEL'], $relationshipName, $relation['COLUMN_NAME']);
+                }
             }
 
             $fillableString = implode(",\n        ", $fillable);
@@ -114,13 +115,16 @@ EOT;
         $foreignKeys = DB::select("SELECT
             COLUMN_NAME,
             REFERENCED_TABLE_NAME,
-            REFERENCED_COLUMN_NAME
+            REFERENCED_COLUMN_NAME,
+            CONSTRAINT_NAME
             FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
             WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND REFERENCED_COLUMN_NAME IS NOT NULL", [env('DB_DATABASE'), $tableName]);
 
         $hasManyRelations = DB::select("SELECT
             TABLE_NAME,
-            COLUMN_NAME
+            COLUMN_NAME,
+            REFERENCED_COLUMN_NAME,
+            CONSTRAINT_NAME
             FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
             WHERE TABLE_SCHEMA = ? AND REFERENCED_TABLE_NAME = ?", [env('DB_DATABASE'), $tableName]);
 
@@ -137,7 +141,10 @@ EOT;
         foreach ($hasManyRelations as $relation) {
             $hasManyArray[] = [
                 'model' => Str::studly(Str::singular($relation->TABLE_NAME)),
-                'name' => Str::camel(Str::plural($relation->TABLE_NAME))
+                'name' => Str::camel(Str::plural($relation->TABLE_NAME)),
+                'COLUMN_NAME' => $relation->COLUMN_NAME,
+                'KEY_COLUMN_NAME' => $relation->REFERENCED_COLUMN_NAME,
+                'RELATED_MODEL' => Str::studly(Str::singular($relation->TABLE_NAME))
             ];
         }
 
@@ -164,34 +171,22 @@ EOT;
 EOT;
     }
 
-    protected function generateHasManyMethod($relatedModel, $relationshipName)
+    protected function generateHasManyMethod($relatedModel, $relationshipName, $foreignKey)
     {
         return <<<EOT
     public function $relationshipName(): HasMany
     {
-        return \$this->hasMany($relatedModel::class);
+        return \$this->hasMany($relatedModel::class, '$foreignKey');
     }
 EOT;
     }
 
-    protected function ensureUniqueName($baseName, &$existingNames)
+    protected function groupHasManyRelations($hasManyRelations)
     {
-        $name = $baseName;
-        $counter = 1;
-        while (in_array($name, $existingNames)) {
-            $name = $baseName . $counter;
-            $counter++;
+        $groupedRelations = [];
+        foreach ($hasManyRelations as $relation) {
+            $groupedRelations[$relation['model']][] = $relation;
         }
-        return $name;
-    }
-
-    protected function generateRelationshipName($relatedModel, $fieldName, &$existingNames)
-    {
-        $baseName = Str::camel(Str::singular($relatedModel));
-        $name = $baseName;
-        if (in_array($name, $existingNames)) {
-            $name = Str::camel(Str::singular($relatedModel) . Str::studly($fieldName));
-        }
-        return $this->ensureUniqueName($name, $existingNames);
+        return $groupedRelations;
     }
 }
