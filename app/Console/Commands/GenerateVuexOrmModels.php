@@ -37,7 +37,7 @@ class GenerateVuexOrmModels extends Command
                 $fieldName = $column->Field;
                 $fieldMeta = "{}";
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
-                    $relatedFieldName = Str::camel(Str::singular($fieldName));
+                    $relatedFieldName = $this->generateRelationName($fieldName, array_map(function ($column) { return strtolower($column->Field); }, $columns));
                     $parentWithables[] = "'$relatedFieldName'";
                     $fieldMeta = "{ relationRules: { linkables: (user) => { return {} } } }";
                 }
