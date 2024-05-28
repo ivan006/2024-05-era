@@ -129,6 +129,7 @@ class GenerateForeignKeyMigrations extends Command
 
                 $totalRecords = DB::table($table)->count();
                 $orphanedCount = $orphanedRecords->count();
+                $isNullable = $this->isColumnNullable($table, $column);
 
                 if ($orphanedCount > 0) {
                     $outputContent .= "Table: $table\n";
@@ -136,14 +137,19 @@ class GenerateForeignKeyMigrations extends Command
                     $outputContent .= "Referenced Table: $referencedTable\n";
                     $outputContent .= "Orphaned Records: $orphanedCount out of $totalRecords\n";
                     $outputContent .= "SELECT * FROM $table WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
-                    $outputContent .= "UPDATE $table SET $column = <valid_{$referencedTable}_id> WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n\n";
+                    if ($isNullable) {
+                        $outputContent .= "UPDATE $table SET $column = NULL WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
+                    } else {
+                        $outputContent .= "UPDATE $table SET $column = <valid_{$referencedTable}_id> WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
+                    }
+                    $outputContent .= "\n";
                 }
 
                 if ($orphanedCount === 0) {
                     $migrationName = "add_foreign_keys_to_{$table}_table";
                     $filename = database_path("migrations/{$timestamp}_{$migrationName}.php");
 
-                    $content = $this->generateMigrationContent($table, [$column => $referencedTable]);
+                    $content = $this->generateMigrationContent($table, [$column => $referencedTable], $isNullable);
 
                     File::put($filename, $content);
                     $this->info("Created migration: $filename");
@@ -162,15 +168,16 @@ class GenerateForeignKeyMigrations extends Command
      *
      * @param string $table
      * @param array $keys
+     * @param bool $isNullable
      * @return string
      */
-    protected function generateMigrationContent(string $table, array $keys): string
+    protected function generateMigrationContent(string $table, array $keys, bool $isNullable): string
     {
         $className = 'AddForeignKeysTo' . ucfirst($table) . 'Table';
 
         $foreignKeys = '';
         foreach ($keys as $column => $referencedTable) {
-            $foreignKeys .= "\$table->foreign('{$column}')->references('id')->on('{$referencedTable}');\n            ";
+            $foreignKeys .= "\$table->foreign('{$column}')->references('id')->on('{$referencedTable}')->onDelete('" . ($isNullable ? 'set null' : 'cascade') . "');\n            ";
         }
 
         return <<<EOT
@@ -239,5 +246,18 @@ EOT;
             }
         }
         return 'id'; // Default to 'id' if no auto-increment column is found
+    }
+
+    /**
+     * Check if a column is nullable.
+     *
+     * @param string $table
+     * @param string $column
+     * @return bool
+     */
+    protected function isColumnNullable(string $table, string $column): bool
+    {
+        $columnInfo = DB::select("SHOW COLUMNS FROM {$table} WHERE Field = '{$column}'");
+        return isset($columnInfo[0]) && $columnInfo[0]->Null === 'YES';
     }
 }
