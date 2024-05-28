@@ -115,16 +115,46 @@ class GenerateForeignKeyMigrations extends Command
         ];
 
         $timestamp = date('Y_m_d_His');
+        $outputFilePath = storage_path("foreign_key_issues_{$timestamp}.txt");
+        $outputContent = '';
 
         foreach ($foreignKeys as $table => $keys) {
-            $migrationName = "add_foreign_keys_to_{$table}_table";
-            $filename = database_path("migrations/{$timestamp}_{$migrationName}.php");
+            foreach ($keys as $column => $referencedTable) {
+                $referencedColumn = $this->getAutoIncrementColumn($referencedTable);
+                $orphanedRecords = DB::table($table)
+                    ->whereNotIn($column, function ($query) use ($referencedTable, $referencedColumn) {
+                        $query->select($referencedColumn)->from($referencedTable);
+                    })
+                    ->get();
 
-            $content = $this->generateMigrationContent($table, $keys);
+                $totalRecords = DB::table($table)->count();
+                $orphanedCount = $orphanedRecords->count();
 
-            File::put($filename, $content);
-            $this->info("Created migration: $filename");
+                if ($orphanedCount > 0) {
+                    $outputContent .= "Table: $table\n";
+                    $outputContent .= "Column: $column\n";
+                    $outputContent .= "Referenced Table: $referencedTable\n";
+                    $outputContent .= "Orphaned Records: $orphanedCount out of $totalRecords\n";
+                    $outputContent .= "SELECT * FROM $table WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
+                    $outputContent .= "UPDATE $table SET $column = <valid_{$referencedTable}_id> WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n\n";
+                }
+
+                if ($orphanedCount === 0) {
+                    $migrationName = "add_foreign_keys_to_{$table}_table";
+                    $filename = database_path("migrations/{$timestamp}_{$migrationName}.php");
+
+                    $content = $this->generateMigrationContent($table, [$column => $referencedTable]);
+
+                    File::put($filename, $content);
+                    $this->info("Created migration: $filename");
+                } else {
+                    $this->warn("Orphaned records found in {$table}. Please resolve them before generating the migration.");
+                }
+            }
         }
+
+        File::put($outputFilePath, $outputContent);
+        $this->info("Foreign key issues and suggested fixes have been written to: $outputFilePath");
     }
 
     /**
@@ -192,5 +222,22 @@ EOT;
             $dropForeignKeys .= "\$table->dropForeign(['{$column}']);\n            ";
         }
         return $dropForeignKeys;
+    }
+
+    /**
+     * Get the auto-increment column for a table.
+     *
+     * @param string $table
+     * @return string
+     */
+    protected function getAutoIncrementColumn(string $table): string
+    {
+        $columns = DB::select("SHOW COLUMNS FROM {$table}");
+        foreach ($columns as $column) {
+            if ($column->Extra === 'auto_increment') {
+                return $column->Field;
+            }
+        }
+        return 'id'; // Default to 'id' if no auto-increment column is found
     }
 }
