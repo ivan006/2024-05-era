@@ -33,7 +33,7 @@ class GenerateSchemaOutline extends Command
         $tableKey = 'Tables_in_' . env('DB_DATABASE');
 
         // Open a file to write the schema outline
-        $filePath = storage_path('schema_outline1.txt');
+        $filePath = storage_path('schema_outline.txt');
         $file = fopen($filePath, 'w');
 
         foreach ($tables as $table) {
@@ -48,6 +48,24 @@ class GenerateSchemaOutline extends Command
             foreach ($columns as $column) {
                 $columnName = $column->Field;
                 $columnType = $column->Type;
+
+                // Skip non-integer fields
+                if (strpos($columnType, 'int') === false) {
+                    continue;
+                }
+
+                // Check if the column is a foreign key
+                $isForeignKey = DB::select("
+                    SELECT CONSTRAINT_NAME
+                    FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+                    WHERE TABLE_NAME = '$tableName'
+                    AND COLUMN_NAME = '$columnName'
+                    AND REFERENCED_TABLE_NAME IS NOT NULL
+                ");
+
+                if (!empty($isForeignKey)) {
+                    continue;
+                }
 
                 // Write the column name and type
                 fwrite($file, "- $columnName ($columnType)\n");
