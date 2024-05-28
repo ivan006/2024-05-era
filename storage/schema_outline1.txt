@@ -1,0 +1,602 @@
+# address
+- Id (int)
+- StreetNo (varchar(8))
+- StreetName (varchar(45))
+- Building (varchar(1000))
+- Postal (varchar(45))
+- Suburb (varchar(45))
+- City (varchar(45))
+- Province (varchar(45))
+- Country (int)
+- PostCode (varchar(5))
+- Type (int)
+- Person (int)
+- MoveDate (date)
+- Preferred (tinyint(1))
+- Dispatch (tinyint(1))
+- Latitude (decimal(9,7))
+- Longitude (decimal(10,7))
+
+# attachment
+- Id (int)
+- Name (varchar(1000))
+- Description (varchar(1000))
+- ContentType (varchar(1000))
+- Path (varchar(1000))
+- RelativeName (varchar(1000))
+- RelativeID (int)
+- CreatedOn (timestamp)
+- CreatedBy (int)
+
+# audit
+- Id (int)
+- TableName (varchar(100))
+- CRUD (varchar(100))
+- Data (varchar(1000))
+- ChangeDate (date)
+- Entity (int)
+- PageNo (int)
+- NoOfLines (int)
+- CrudMessage (varchar(250))
+
+# bank
+- Id (int)
+- Name (int)
+- Branch (varchar(100))
+- BranchName (varchar(100))
+- Type (int)
+- BankType (int)
+- Account (varchar(100))
+- Verified (int)
+- Entity (int)
+
+# communication
+- Id (int)
+- Type (varchar(50))
+- Status (varchar(100))
+- SentBy (int)
+- SentTo (varchar(500))
+- SentOn (timestamp)
+- Content (longtext)
+- RelativeName (varchar(50))
+- RelativeID (int)
+
+# contactnumber
+- Id (int)
+- Number (varchar(45))
+- Type (int)
+- Person (int)
+- Preferred (tinyint(1))
+
+# crm
+- Id (int)
+- Entity (int)
+- EntityProduct (int)
+- Contact (date)
+- Description (varchar(100))
+- Status (int)
+
+# document
+- Id (int)
+- RelativeName (varchar(50))
+- RelativeID (int)
+- Comment (varchar(1000))
+- Title (varchar(100))
+- CreatedBy (int)
+- CreatedOn (timestamp)
+- Access (json)
+
+# documentdetail
+- Id (int)
+- Document (int)
+- Section (int)
+- Position (int)
+- Title (varchar(100))
+- Description (varchar(10000))
+- Comments (json)
+- Style (int)
+- CreatedBy (int)
+- CreatedOn (timestamp)
+
+# domainuser
+- SystemUser (int)
+- DomainName (varchar(155))
+- DomainAccount (varchar(20))
+- CreatedOn (timestamp)
+- CreatedBy (varchar(100))
+- ChangedOn (timestamp)
+- ChangedBy (varchar(100))
+
+# dummy
+- textData (mediumtext)
+
+# email
+- Id (int)
+- Address (varchar(254))
+- Type (int)
+- Person (int)
+- Preferred (tinyint(1))
+
+# entity
+- Id (int)
+- ExternalNo (varchar(100))
+- Level (int)
+- Type (int)
+- Title (int)
+- Name (varchar(80))
+- Surname (varchar(100))
+- Identity (varchar(100))
+- BirthDate (date)
+- Gender (int)
+- Language (int)
+- Status (int)
+- Note (varchar(100))
+- Passport (varchar(50))
+- HasPhoto (tinyint)
+- IsPaid (tinyint)
+
+# entityaudit
+- Id (int)
+- Entity Name (varchar(50))
+- Entity Id (int)
+- Operation (varchar(50))
+- SystemUser (int)
+- Changes (json)
+- Audit_TS (timestamp)
+
+# entityevent
+- Id (int)
+- TableID (int)
+- TableName (varchar(50))
+- Event (varchar(150))
+- Date (date)
+- Instance (int)
+
+# entitygood
+- Id (int)
+- Entity (int)
+- Good (int)
+- Units (int)
+- AvgKg (decimal(16,6))
+- AvgKgOld (decimal(16,6))
+- AvgLifeSpan (decimal(16,6))
+- TotalKg (decimal(16,6))
+- Tariff (decimal(16,6))
+- Selected (tinyint)
+- Dimension (int)
+- WasteClass (int)
+- Period (int)
+- Invoice (int)
+
+# entitygoodapproval
+- Id (int)
+- ApprovedBy (int)
+- ApprovedOn (datetime)
+- InvoiceApprovedBy (int)
+- InvoiceApprovedOn (datetime)
+- Entity (int)
+- Period (int)
+- PurchaseOrder (varchar(50))
+- InvoiceNo (varchar(50))
+- UseAR (tinyint)
+- UseVAT (tinyint)
+- Query (int)
+- Status (tinyint)
+
+# entityrelationship
+- Id (int)
+- EntityA (int)
+- EntityB (int)
+- EntityARelationship (int)
+- EntityBRelationship (int)
+- EntityAStatus (int)
+- EntityBStatus (int)
+- EntityAQualifier (int)
+- EntityBQualifier (int)
+- EntityALevel (int)
+- EntityBLevel (int)
+
+# externalproducers
+- Id (int)
+- Name (varchar(1000))
+- ServiceRequestReport (int)
+
+# failed_jobs
+- id (bigint unsigned)
+- uuid (varchar(255))
+- connection (text)
+- queue (text)
+- payload (longtext)
+- exception (longtext)
+- failed_at (timestamp)
+
+# good
+- Id (int)
+- HSCode (varchar(50))
+- Description (varchar(1000))
+- EU6 (int)
+- EU10 (int)
+- UNU (varchar(10))
+- AvgKg (decimal(16,6))
+- Category (int)
+- HazardSubstance (int)
+- Dimension (int)
+- Sector (int)
+
+# instanceno
+- Id (int)
+- ObjectName (varchar(50))
+
+# migrations
+- id (int unsigned)
+- migration (varchar(255))
+- batch (int)
+
+# object
+- Id (int)
+- Name (varchar(250))
+- Description (varchar(250))
+- Parent (int)
+- ChildType (int)
+
+# objecttrait
+- Id (int)
+- Name (varchar(250))
+- Description (varchar(250))
+- Object (int)
+- Type (varchar(50))
+- Level (varchar(50))
+- IsRule (tinyint)
+- SpecialType (tinyint)
+- IsDisabled (tinyint)
+- IsHidden (tinyint)
+- SystemCodeContext (varchar(50))
+- SystemCodeField (varchar(50))
+
+# objectvalue
+- Id (int)
+- Trait (int)
+- Value (varchar(250))
+- Instance (int)
+- ValueJson (json)
+- Object (int)
+- Entity (int)
+
+# password_reset_tokens
+- email (varchar(255))
+- token (varchar(255))
+- created_at (timestamp)
+
+# passwordhash
+- SystemUser (int)
+- Hash (varchar(256))
+- Salt (varchar(48))
+- CreatedOn (timestamp)
+- CreatedBy (varchar(100))
+- ChangedOn (timestamp)
+- ChangedBy (varchar(100))
+- FbId (int)
+
+# personal_access_tokens
+- id (bigint unsigned)
+- tokenable_type (varchar(255))
+- tokenable_id (bigint unsigned)
+- name (varchar(255))
+- token (varchar(64))
+- abilities (text)
+- last_used_at (timestamp)
+- expires_at (timestamp)
+- created_at (timestamp)
+- updated_at (timestamp)
+
+# post_tags
+- id (bigint unsigned)
+- created_at (timestamp)
+- updated_at (timestamp)
+- post_id (int)
+- tag_id (int)
+
+# posts
+- id (bigint unsigned)
+- created_at (timestamp)
+- updated_at (timestamp)
+- name (varchar(255))
+
+# productprovider
+- Id (int)
+- Name (varchar(250))
+- Entity (int)
+
+# query
+- Id (int)
+- ParentQuery (int)
+- AssignedTo (varchar(100))
+- Description (varchar(1000))
+- CreatedBy (int)
+- CreatedOn (timestamp)
+- ClosedOn (timestamp)
+- ClosedBy (int)
+
+# queryheader
+- Id (int)
+- Subject (varchar(150))
+- Status (int)
+- Type (int)
+- RelativeName (varchar(200))
+- RelativeID (int)
+- CreatedBy (int)
+- CreatedOn (timestamp)
+- ClosedBy (int)
+- ClosedOn (timestamp)
+
+# relative
+- Id (int)
+- Entity (int)
+- Relative (int)
+- Relationship (int)
+- Adopted (int)
+- Student (int)
+- Disabled (int)
+- TraditionalMarriage (int)
+
+# requirement
+- Id (int)
+- Service (varchar(50))
+- Category (varchar(50))
+- Code (int)
+- Name (varchar(1000))
+- Required (int)
+- Path (varchar(250))
+- Display (int)
+- SystemCodeContext (varchar(100))
+- SystemCodeField (varchar(100))
+- ValueType (int)
+
+# requirementdetail
+- Id (int)
+- Requirement (int)
+- RelativeID (int)
+- Service (varchar(50))
+- Category (varchar(50))
+- Value (varchar(100))
+- Comment (varchar(200))
+- Received (int)
+- Name (varchar(1000))
+- NameOriginal (varchar(1000))
+- ContentType (varchar(200))
+- Path (varchar(1000))
+- ChangedBy (int)
+- ChangedOn (datetime)
+
+# rule
+- Id (int)
+- Name (varchar(100))
+- Description (varchar(100))
+- RuleType (varchar(100))
+- NextRule (int)
+
+# ruleaction
+- Id (int)
+- Rule (int)
+- Process (varchar(100))
+- Result (varchar(100))
+- ResultNegative (varchar(100))
+- ResultType (varchar(50))
+- Description (varchar(100))
+- ResultSystemCode (varchar(100))
+- NegativeSystemCode (varchar(100))
+
+# ruleactiondata
+- Id (int)
+- Rule (int)
+- TableName (varchar(100))
+- ColumnName (varchar(100))
+- ColumnType (varchar(100))
+
+# ruleconfig
+- Id (int)
+- Rule (int)
+- TableName (varchar(100))
+- ColumnName (varchar(100))
+- ColumnType (varchar(100))
+- Operand (varchar(100))
+- Value (varchar(100))
+- Description (varchar(100))
+- SystemCodeValue (varchar(100))
+
+# ruleentityrole
+- Id (int)
+- EntityRole (varchar(50))
+- Entity (int)
+- UserRole (int)
+- Rule (int)
+- Priority (int)
+- CRUD_Create (int)
+- CRUD_Read (int)
+- CRUD_Update (int)
+- CRUD_Delete (int)
+
+# servicerequest
+- Id (int)
+- ServiceRequestNo (varchar(1000))
+- ServiceProvider (int)
+- CreatedBy (int)
+- CreatedOn (timestamp)
+- FromDate (timestamp)
+- ToDate (timestamp)
+- Services (text)
+- Locations (text)
+- Deliverables (text)
+- DeliveryDate (timestamp)
+
+# servicerequestfrequency
+- Id (int)
+- ServiceRequest (int)
+- ReportFrequency (int)
+- Active (tinyint)
+
+# servicerequestreport
+- Id (int)
+- ServiceRequest (int)
+- ServiceProvider (int)
+- CreatedBy (int)
+- TreatmentDetails (int)
+- CreatedOn (date)
+- ReportDate (date)
+- Approved (tinyint)
+- Rejected (tinyint)
+
+# systemaction
+- Id (int)
+- Module (varchar(45))
+- Context (varchar(45))
+- Action (varchar(45))
+- Description (varchar(100))
+- Available (tinyint(1))
+- CreatedOn (timestamp)
+- CreatedBy (varchar(100))
+- ChangedOn (timestamp)
+- ChangedBy (varchar(100))
+
+# systemcode
+- Id (int)
+- Context (varchar(45))
+- Field (varchar(45))
+- Description (varchar(150))
+- Value (varchar(500))
+- Code (varchar(45))
+- Active (tinyint(1))
+- UserGenerated (tinyint(1))
+- ContextualId (int)
+- CreatedOn (timestamp)
+- CreatedBy (varchar(100))
+- ChangedOn (timestamp)
+- ChangedBy (varchar(100))
+- Entity (int)
+
+# systemconfiguration
+- Id (int)
+- Name (varchar(45))
+- Value (json)
+
+# systemlog
+- Id (int)
+- LogDate (datetime)
+- LogLevel (varchar(5))
+- Logger (varchar(80))
+- SystemUser (varchar(50))
+- CallSite (text)
+- Message (text)
+- Exception (text)
+- StackTrace (text)
+
+# systemuser
+- Id (int)
+- Entity (int)
+- Username (varchar(250))
+- Active (tinyint(1))
+- LastSeen (timestamp)
+- LoginCount (int)
+- FailedLoginAttempts (int)
+- LockedSince (timestamp)
+- Secret (varchar(32))
+- Email (varchar(254))
+- Phone (varchar(45))
+- CreatedOn (timestamp)
+- CreatedBy (varchar(100))
+- ChangedOn (timestamp)
+- ChangedBy (varchar(100))
+- FbId (int)
+
+# tags
+- id (bigint unsigned)
+- created_at (timestamp)
+- updated_at (timestamp)
+- name (varchar(255))
+
+# transactions
+- Id (int)
+- TransNo (varchar(50))
+- Description (varchar(1000))
+- TransactionDate (date)
+- CaptureDate (date)
+- AccountCode (varchar(50))
+- Entity (int)
+- EntityProduct (int)
+- Debit (decimal(16,2))
+- Credit (decimal(16,2))
+- Source (varchar(50))
+- Period (int)
+- Reference (varchar(1000))
+- Type (int)
+
+# treatmentdetails
+- Id (int)
+- ServiceRequestReport (int)
+- OpeningBalance (decimal(20,6))
+- Refurbished (decimal(20,6))
+- Recovered (decimal(20,6))
+- Export (decimal(20,6))
+- Energy (decimal(20,6))
+- Landfill (decimal(20,6))
+- LocalSecondaryProducts (decimal(20,6))
+
+# useraccess
+- Id (int)
+- SystemUser (int)
+- UserRole (int)
+- SystemAction (int)
+- Entity (bigint)
+- CreatedOn (timestamp)
+- CreatedBy (varchar(100))
+- ChangedOn (timestamp)
+- ChangedBy (varchar(100))
+- FbId (int)
+
+# userconfiguration
+- SystemUser (int)
+- Language (int)
+- FbId (int)
+
+# userdevice
+- SystemUser (int)
+- DeviceKey (varchar(32))
+- Name (varchar(100))
+- LastUsed (timestamp)
+- FbId (int)
+
+# userrole
+- Id (int)
+- Name (varchar(45))
+- Active (tinyint(1))
+- CreatedOn (timestamp)
+- CreatedBy (varchar(100))
+- ChangedOn (timestamp)
+- ChangedBy (varchar(100))
+- FbId (int)
+
+# userroleaccess
+- UserRole (int)
+- SystemAction (int)
+- CreatedOn (timestamp)
+- CreatedBy (varchar(100))
+- ChangedOn (timestamp)
+- ChangedBy (varchar(100))
+- FbId (int)
+- Rule (int)
+
+# users
+- id (bigint unsigned)
+- name (varchar(255))
+- email (varchar(255))
+- email_verified_at (timestamp)
+- password (varchar(255))
+- remember_token (varchar(100))
+- created_at (timestamp)
+- updated_at (timestamp)
+
+# website_producer_registrations
+- Id (int)
+- Data (json)
+- ProducerId (int)
+
