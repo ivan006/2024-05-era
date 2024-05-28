@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class GenerateSchemaOutline extends Command
 {
@@ -48,9 +49,16 @@ class GenerateSchemaOutline extends Command
             foreach ($columns as $column) {
                 $columnName = $column->Field;
                 $columnType = $column->Type;
+                $nullable = $column->Null === 'YES' ? 'nullable' : 'not nullable';
+                $autoIncrement = strpos($column->Extra, 'auto_increment') !== false;
 
                 // Skip non-integer fields
                 if (strpos($columnType, 'int') === false) {
+                    continue;
+                }
+
+                // Skip auto-increment fields
+                if ($autoIncrement) {
                     continue;
                 }
 
@@ -67,8 +75,8 @@ class GenerateSchemaOutline extends Command
                     continue;
                 }
 
-                // Write the column name and type
-                fwrite($file, "- $columnName ($columnType)\n");
+                // Write the column name, type, and nullable information
+                fwrite($file, "- $columnName ($columnType - $nullable)\n");
             }
 
             // Add a new line after each table
