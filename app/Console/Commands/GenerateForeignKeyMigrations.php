@@ -115,7 +115,7 @@ class GenerateForeignKeyMigrations extends Command
         ];
 
         $timestamp = date('Y_m_d_His');
-        $outputFilePath = storage_path("foreign_key_issues_{$timestamp}.txt");
+        $outputFilePath = storage_path("foreign_key_issues_{$timestamp}.sql");
         $outputContent = '';
 
         foreach ($foreignKeys as $table => $keys) {
@@ -132,15 +132,16 @@ class GenerateForeignKeyMigrations extends Command
                 $isNullable = $this->isColumnNullable($table, $column);
 
                 if ($orphanedCount > 0) {
-                    $outputContent .= "Table: $table\n";
-                    $outputContent .= "Column: $column\n";
-                    $outputContent .= "Referenced Table: $referencedTable\n";
-                    $outputContent .= "Orphaned Records: $orphanedCount out of $totalRecords\n";
-                    $outputContent .= "SELECT * FROM $table WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
+                    $outputContent .= "-- Table: $table\n";
+                    $outputContent .= "-- Column: $column\n";
+                    $outputContent .= "-- Referenced Table: $referencedTable\n";
+                    $outputContent .= "-- Orphaned Records: $orphanedCount out of $totalRecords\n";
+                    $outputContent .= "-- SELECT * FROM $table WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
                     if ($isNullable) {
                         $outputContent .= "UPDATE $table SET $column = NULL WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
                     } else {
-                        $outputContent .= "UPDATE $table SET $column = <valid_{$referencedTable}_id> WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
+                        $validForeignKey = DB::table($referencedTable)->value($referencedColumn);
+                        $outputContent .= "UPDATE $table SET $column = $validForeignKey WHERE $column NOT IN (SELECT $referencedColumn FROM $referencedTable);\n";
                     }
                     $outputContent .= "\n";
                 }
