@@ -93,17 +93,19 @@ export default class $modelName extends MyBaseModel {
             [...this.parentWithables, ...relationships],
             flags,
             this.mergeHeaders(moreHeaders),
-            options
+            options,
+            this.adapator
         );
     }
 
     static FetchById(id, relationships = [], flags = {}, moreHeaders = {}) {
         return this.customSupabaseApiFetchById(
-            `\${this.baseUrl}\${this.entityUrl}?id=eq.\${id}`,
+            `\${this.baseUrl}\${this.entityUrl}`,
             id,
             [...this.parentWithables, ...relationships],
             flags,
-            this.mergeHeaders(moreHeaders)
+            this.mergeHeaders(moreHeaders),
+            this.adapator
         );
     }
 
@@ -113,24 +115,27 @@ export default class $modelName extends MyBaseModel {
             entity,
             [...this.parentWithables, ...relationships],
             flags,
-            this.mergeHeaders(moreHeaders)
+            this.mergeHeaders(moreHeaders),
+            this.adapator
         );
     }
 
     static Update(entity, relationships = [], flags = {}, moreHeaders = {}) {
         return this.customSupabaseApiUpdate(
-            `\${this.baseUrl}\${this.entityUrl}?id=eq.\${entity.id}`,
+            `\${this.baseUrl}\${this.entityUrl}`,
             entity,
             [...this.parentWithables, ...relationships],
             flags,
-            this.mergeHeaders(moreHeaders)
+            this.mergeHeaders(moreHeaders),
+            this.adapator
         );
     }
 
     static Delete(entityId, options = { flags: {}, moreHeaders: {} }) {
         return this.customSupabaseApiDelete(
-            `\${this.baseUrl}\${this.entityUrl}?id=eq.\${entityId}`,
-            entityId
+            `\${this.baseUrl}\${this.entityUrl}`,
+            entityId,
+            this.adapator
         );
     }
 }
