@@ -31,22 +31,22 @@ class GenerateForeignKeyMigrations extends Command
     {
         // Define the inferred foreign key relationships
         $foreignKeys = [
-            'address' => ['Person' => 'systemuser'],
-            'attachment' => ['RelativeID' => 'relative'],
+            'address' => ['Person' => 'entity'],
+            'attachment' => ['RelativeID' => 'entity'],
             'audit' => ['Entity' => 'entity'],
             'bank' => ['Entity' => 'entity'],
-            'communication' => ['RelativeID' => 'relative'],
-            'contactnumber' => ['Person' => 'systemuser'],
+            'communication' => ['RelativeID' => 'entity'],
+            'contactnumber' => ['Person' => 'entity'],
             'crm' => [
                 'Entity' => 'entity',
                 'EntityProduct' => 'entity'
             ],
             'document' => [
-                'RelativeID' => 'relative',
-                'CreatedBy' => 'systemuser'
+                'RelativeID' => 'entity',
+                'CreatedBy' => 'entity'
             ],
-            'documentdetail' => ['CreatedBy' => 'systemuser'],
-            'email' => ['Person' => 'systemuser'],
+            'documentdetail' => ['CreatedBy' => 'entity'],
+            'email' => ['Person' => 'entity'],
             'entityaudit' => ['Entity Id' => 'entity'],
             'entityevent' => [
                 'TableID' => 'entity',
@@ -74,13 +74,13 @@ class GenerateForeignKeyMigrations extends Command
             'productprovider' => ['Entity' => 'entity'],
             'query' => [
                 'ParentQuery' => 'query',
-                'CreatedBy' => 'systemuser',
-                'ClosedBy' => 'systemuser'
+                'CreatedBy' => 'entity',
+                'ClosedBy' => 'entity'
             ],
             'queryheader' => [
-                'RelativeID' => 'relative',
-                'CreatedBy' => 'systemuser',
-                'ClosedBy' => 'systemuser'
+                'RelativeID' => 'entity',
+                'CreatedBy' => 'entity',
+                'ClosedBy' => 'entity'
             ],
             'relative' => [
                 'Entity' => 'entity',
@@ -88,8 +88,8 @@ class GenerateForeignKeyMigrations extends Command
             ],
             'requirementdetail' => [
                 'Requirement' => 'requirement',
-                'RelativeID' => 'relative',
-                'ChangedBy' => 'systemuser'
+                'RelativeID' => 'entity',
+                'ChangedBy' => 'entity'
             ],
             'ruleaction' => ['Rule' => 'rule'],
             'ruleactiondata' => ['Rule' => 'rule'],
@@ -104,11 +104,11 @@ class GenerateForeignKeyMigrations extends Command
                 'EntityProduct' => 'entity'
             ],
             'useraccess' => ['Entity' => 'entity'],
-            'userrole' => ['FbId' => 'systemuser'],
+            'userrole' => ['FbId' => 'entity'],
             'userroleaccess' => [
                 'UserRole' => 'userrole',
                 'SystemAction' => 'systemaction',
-                'FbId' => 'systemuser',
+                'FbId' => 'entity',
                 'Rule' => 'rule'
             ],
             'website_producer_registrations' => ['ProducerId' => 'entity']
