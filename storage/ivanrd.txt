@@ -14,7 +14,7 @@
 # crm
 
 # document
-- documentdetail
+- documentdetail (Document)
 
 # documentdetail
 
@@ -25,33 +25,14 @@
 # email
 
 # entity
-- address
-- audit
-- bank
-- communication
-- contactnumber
-- crm
-- document
-- documentdetail
-- email
-- entityevent
-- entitygood
-- entitygoodapproval
-- entitygoodapproval
-- entitygoodapproval
-- entityrelationship
-- good
-- productprovider
-- queryheader
-- relative
-- requirementdetail
-- servicerequest
-- servicerequestreport
-- systemcode
-- systemuser
-- transactions
-- useraccess
-- userrole
+- entitygood (Entity)
+- entitygoodapproval (ApprovedBy)
+- entitygoodapproval (InvoiceApprovedBy)
+- entitygoodapproval (Entity)
+- good (Sector)
+- servicerequest (ServiceProvider)
+- servicerequestreport (ServiceProvider)
+- systemcode (Entity)
 
 # entityaudit
 
@@ -60,45 +41,31 @@
 # entitygood
 
 # entitygoodapproval
-- entitygood
+- entitygood (Invoice)
 
 # entityrelationship
 
 # externalproducers
 
-# failed_jobs
-
 # good
-- entitygood
+- entitygood (Good)
 
 # instanceno
 
-# migrations
-
 # object
-- objecttrait
-- objectvalue
 
 # objecttrait
 
 # objectvalue
 
-# password_reset_tokens
-
 # passwordhash
-
-# personal_access_tokens
-
-# post_tags
-
-# posts
 
 # productprovider
 
 # query
 
 # queryheader
-- entitygoodapproval
+- entitygoodapproval (Query)
 
 # relative
 
@@ -107,11 +74,6 @@
 # requirementdetail
 
 # rule
-- ruleaction
-- ruleactiondata
-- ruleconfig
-- ruleentityrole
-- userroleaccess
 
 # ruleaction
 
@@ -122,48 +84,45 @@
 # ruleentityrole
 
 # servicerequest
-- servicerequestfrequency
-- servicerequestreport
+- servicerequestfrequency (ServiceRequest)
+- servicerequestreport (ServiceRequest)
 
 # servicerequestfrequency
 
 # servicerequestreport
-- externalproducers
-- treatmentdetails
+- externalproducers (ServiceRequestReport)
+- treatmentdetails (ServiceRequestReport)
 
 # systemaction
-- useraccess
+- useraccess (SystemAction)
 
 # systemcode
-- address
-- address
-- contactnumber
-- email
-- servicerequestfrequency
-- transactions
-- userconfiguration
+- address (Country)
+- address (Type)
+- contactnumber (Type)
+- email (Type)
+- servicerequestfrequency (ReportFrequency)
+- transactions (Type)
+- userconfiguration (Language)
 
 # systemconfiguration
 
 # systemlog
 
 # systemuser
-- communication
-- domainuser
-- entityaudit
-- passwordhash
-- servicerequest
-- servicerequestreport
-- useraccess
-- userconfiguration
-- userdevice
-
-# tags
+- communication (SentBy)
+- domainuser (SystemUser)
+- entityaudit (SystemUser)
+- servicerequest (CreatedBy)
+- servicerequestreport (CreatedBy)
+- useraccess (SystemUser)
+- userconfiguration (SystemUser)
+- userdevice (SystemUser)
 
 # transactions
 
 # treatmentdetails
-- servicerequestreport
+- servicerequestreport (TreatmentDetails)
 
 # useraccess
 
@@ -172,10 +131,8 @@
 # userdevice
 
 # userrole
-- useraccess
+- useraccess (UserRole)
 
 # userroleaccess
-
-# users
 
 # website_producer_registrations

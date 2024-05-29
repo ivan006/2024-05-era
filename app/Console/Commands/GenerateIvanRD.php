@@ -39,8 +39,10 @@ class GenerateIvanRD extends Command
             $tableName = $table->$tableKey;
             $output .= "\n# $tableName\n";
             if (isset($relationships[$tableName])) {
-                foreach ($relationships[$tableName] as $childTable) {
-                    $output .= "- $childTable\n";
+                foreach ($relationships[$tableName] as $childTable => $details) {
+                    foreach ($details as $detail) {
+                        $output .= "- $childTable ($detail)\n";
+                    }
                 }
             }
         }
@@ -76,12 +78,18 @@ class GenerateIvanRD extends Command
         foreach ($foreignKeys as $foreignKey) {
             $table = $foreignKey->TABLE_NAME;
             $referencedTable = $foreignKey->REFERENCED_TABLE_NAME;
+            $column = $foreignKey->COLUMN_NAME;
+            $referencedColumn = $foreignKey->REFERENCED_COLUMN_NAME;
 
             if (!isset($relationships[$referencedTable])) {
                 $relationships[$referencedTable] = [];
             }
 
-            $relationships[$referencedTable][] = $table;
+            if (!isset($relationships[$referencedTable][$table])) {
+                $relationships[$referencedTable][$table] = [];
+            }
+
+            $relationships[$referencedTable][$table][] = "$column";
         }
 
         return $relationships;
