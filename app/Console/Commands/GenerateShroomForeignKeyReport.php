@@ -128,8 +128,11 @@ class GenerateShroomForeignKeyReport extends Command
                     })
                     ->get();
 
-                if ($orphanedRecords->count() > 0) {
-                    $faultyColumns[] = $column;
+                $totalRecords = DB::table($table)->count();
+                $orphanedCount = $orphanedRecords->count();
+
+                if ($orphanedCount > 0) {
+                    $faultyColumns[] = "$column $orphanedCount/$totalRecords";
                 }
             }
 
