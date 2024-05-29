@@ -1,0 +1,261 @@
+# address
+- Person (int - nullable)
+- Preferred (tinyint(1) - nullable)
+- Dispatch (tinyint(1) - nullable)
+
+# attachment
+- RelativeID (int - nullable)
+- CreatedBy (int - nullable)
+
+# audit
+- Entity (int - nullable)
+- PageNo (int - nullable)
+- NoOfLines (int - nullable)
+
+# bank
+- Name (int - nullable)
+- Type (int - nullable)
+- BankType (int - nullable)
+- Verified (int - nullable)
+- Entity (int - not nullable)
+
+# communication
+- RelativeID (int - nullable)
+
+# contactnumber
+- Person (int - nullable)
+- Preferred (tinyint(1) - not nullable)
+
+# crm
+- Entity (int - nullable)
+- EntityProduct (int - nullable)
+- Status (int - nullable)
+
+# document
+- RelativeID (int - nullable)
+- CreatedBy (int - nullable)
+
+# documentdetail
+- Section (int - nullable)
+- Position (int - nullable)
+- Style (int - nullable)
+- CreatedBy (int - nullable)
+
+# domainuser
+
+# dummy
+
+# email
+- Person (int - nullable)
+- Preferred (tinyint(1) - not nullable)
+
+# entity
+- Level (int - nullable)
+- Type (int - nullable)
+- Title (int - nullable)
+- Gender (int - nullable)
+- Language (int - nullable)
+- Status (int - nullable)
+- HasPhoto (tinyint - nullable)
+- IsPaid (tinyint - nullable)
+
+# entityaudit
+- Entity Id (int - not nullable)
+
+# entityevent
+- TableID (int - nullable)
+- Instance (int - nullable)
+
+# entitygood
+- Units (int - not nullable)
+- Selected (tinyint - nullable)
+- Dimension (int - nullable)
+- WasteClass (int - nullable)
+- Period (int - nullable)
+
+# entitygoodapproval
+- Period (int - not nullable)
+- UseAR (tinyint - not nullable)
+- UseVAT (tinyint - not nullable)
+- Status (tinyint - not nullable)
+
+# entityrelationship
+- EntityA (int - nullable)
+- EntityB (int - nullable)
+- EntityARelationship (int - nullable)
+- EntityBRelationship (int - nullable)
+- EntityAStatus (int - nullable)
+- EntityBStatus (int - nullable)
+- EntityAQualifier (int - nullable)
+- EntityBQualifier (int - nullable)
+- EntityALevel (int - nullable)
+- EntityBLevel (int - nullable)
+
+# externalproducers
+
+# failed_jobs
+
+# good
+- EU6 (int - nullable)
+- EU10 (int - nullable)
+- Category (int - nullable)
+- HazardSubstance (int - nullable)
+- Dimension (int - nullable)
+
+# instanceno
+
+# migrations
+- batch (int - not nullable)
+
+# object
+- Parent (int - nullable)
+- ChildType (int - nullable)
+
+# objecttrait
+- Object (int - not nullable)
+- IsRule (tinyint - nullable)
+- SpecialType (tinyint - nullable)
+- IsDisabled (tinyint - nullable)
+- IsHidden (tinyint - nullable)
+
+# objectvalue
+- Trait (int - nullable)
+- Instance (int - nullable)
+- Object (int - nullable)
+- Entity (int - nullable)
+
+# password_reset_tokens
+
+# passwordhash
+- SystemUser (int - not nullable)
+- FbId (int - nullable)
+
+# personal_access_tokens
+- tokenable_id (bigint unsigned - not nullable)
+
+# post_tags
+- post_id (int - not nullable)
+- tag_id (int - not nullable)
+
+# posts
+
+# productprovider
+- Entity (int - not nullable)
+
+# query
+- ParentQuery (int - not nullable)
+- CreatedBy (int - nullable)
+- ClosedBy (int - nullable)
+
+# queryheader
+- Status (int - nullable)
+- Type (int - nullable)
+- RelativeID (int - nullable)
+- CreatedBy (int - nullable)
+- ClosedBy (int - nullable)
+
+# relative
+- Entity (int - nullable)
+- Relative (int - nullable)
+- Relationship (int - nullable)
+- Adopted (int - nullable)
+- Student (int - nullable)
+- Disabled (int - nullable)
+- TraditionalMarriage (int - nullable)
+
+# requirement
+- Code (int - nullable)
+- Required (int - nullable)
+- Display (int - nullable)
+- ValueType (int - nullable)
+
+# requirementdetail
+- Requirement (int - nullable)
+- RelativeID (int - nullable)
+- Received (int - nullable)
+- ChangedBy (int - nullable)
+
+# rule
+- NextRule (int - nullable)
+
+# ruleaction
+- Rule (int - nullable)
+
+# ruleactiondata
+- Rule (int - nullable)
+
+# ruleconfig
+- Rule (int - nullable)
+
+# ruleentityrole
+- Entity (int - nullable)
+- UserRole (int - nullable)
+- Rule (int - not nullable)
+- Priority (int - nullable)
+- CRUD_Create (int - nullable)
+- CRUD_Read (int - nullable)
+- CRUD_Update (int - nullable)
+- CRUD_Delete (int - nullable)
+
+# servicerequest
+
+# servicerequestfrequency
+- Active (tinyint - nullable)
+
+# servicerequestreport
+- Approved (tinyint - not nullable)
+- Rejected (tinyint - not nullable)
+
+# systemaction
+- Available (tinyint(1) - nullable)
+
+# systemcode
+- Active (tinyint(1) - nullable)
+- UserGenerated (tinyint(1) - not nullable)
+- ContextualId (int - nullable)
+
+# systemconfiguration
+
+# systemlog
+
+# systemuser
+- Entity (int - not nullable)
+- Active (tinyint(1) - not nullable)
+- LoginCount (int - nullable)
+- FailedLoginAttempts (int - nullable)
+- FbId (int - nullable)
+
+# tags
+
+# transactions
+- Entity (int - nullable)
+- EntityProduct (int - nullable)
+- Period (int - nullable)
+
+# treatmentdetails
+
+# useraccess
+- Entity (bigint - nullable)
+- FbId (int - nullable)
+
+# userconfiguration
+- FbId (int - nullable)
+
+# userdevice
+- FbId (int - nullable)
+
+# userrole
+- Active (tinyint(1) - not nullable)
+- FbId (int - nullable)
+
+# userroleaccess
+- UserRole (int - not nullable)
+- SystemAction (int - not nullable)
+- FbId (int - nullable)
+- Rule (int - nullable)
+
+# users
+
+# website_producer_registrations
+- ProducerId (int - nullable)
+

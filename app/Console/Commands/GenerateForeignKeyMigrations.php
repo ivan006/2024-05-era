@@ -178,7 +178,8 @@ class GenerateForeignKeyMigrations extends Command
 
         $foreignKeys = '';
         foreach ($keys as $column => $referencedTable) {
-            $foreignKeys .= "\$table->foreign('{$column}')->references('id')->on('{$referencedTable}')->onDelete('" . ($isNullable ? 'set null' : 'cascade') . "');\n            ";
+            $referencedColumn = $this->getAutoIncrementColumn($referencedTable);
+            $foreignKeys .= "\$table->foreign('{$column}')->references('{$referencedColumn}')->on('{$referencedTable}')->onDelete('" . ($isNullable ? 'set null' : 'cascade') . "');\n            ";
         }
 
         return <<<EOT
@@ -210,12 +211,14 @@ class {$className} extends Migration
     public function down()
     {
         Schema::table('{$table}', function (Blueprint \$table) {
+            \$table->collation = 'utf8mb4_unicode_ci';
             {$this->generateDropForeignKeys($keys)}
         });
     }
 }
 EOT;
     }
+
 
     /**
      * Generate the content for dropping foreign keys in a migration file.

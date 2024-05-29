@@ -1,0 +1,181 @@
+
+# address
+
+# attachment
+
+# audit
+
+# bank
+
+# communication
+
+# contactnumber
+
+# crm
+
+# document
+- documentdetail
+
+# documentdetail
+
+# domainuser
+
+# dummy
+
+# email
+
+# entity
+- address
+- audit
+- bank
+- communication
+- contactnumber
+- crm
+- document
+- documentdetail
+- email
+- entityevent
+- entitygood
+- entitygoodapproval
+- entitygoodapproval
+- entitygoodapproval
+- entityrelationship
+- good
+- productprovider
+- queryheader
+- relative
+- requirementdetail
+- servicerequest
+- servicerequestreport
+- systemcode
+- systemuser
+- transactions
+- useraccess
+- userrole
+
+# entityaudit
+
+# entityevent
+
+# entitygood
+
+# entitygoodapproval
+- entitygood
+
+# entityrelationship
+
+# externalproducers
+
+# failed_jobs
+
+# good
+- entitygood
+
+# instanceno
+
+# migrations
+
+# object
+- objecttrait
+- objectvalue
+
+# objecttrait
+
+# objectvalue
+
+# password_reset_tokens
+
+# passwordhash
+
+# personal_access_tokens
+
+# post_tags
+
+# posts
+
+# productprovider
+
+# query
+
+# queryheader
+- entitygoodapproval
+
+# relative
+
+# requirement
+
+# requirementdetail
+
+# rule
+- ruleaction
+- ruleactiondata
+- ruleconfig
+- ruleentityrole
+- userroleaccess
+
+# ruleaction
+
+# ruleactiondata
+
+# ruleconfig
+
+# ruleentityrole
+
+# servicerequest
+- servicerequestfrequency
+- servicerequestreport
+
+# servicerequestfrequency
+
+# servicerequestreport
+- externalproducers
+- treatmentdetails
+
+# systemaction
+- useraccess
+
+# systemcode
+- address
+- address
+- contactnumber
+- email
+- servicerequestfrequency
+- transactions
+- userconfiguration
+
+# systemconfiguration
+
+# systemlog
+
+# systemuser
+- communication
+- domainuser
+- entityaudit
+- passwordhash
+- servicerequest
+- servicerequestreport
+- useraccess
+- userconfiguration
+- userdevice
+
+# tags
+
+# transactions
+
+# treatmentdetails
+- servicerequestreport
+
+# useraccess
+
+# userconfiguration
+
+# userdevice
+
+# userrole
+- useraccess
+
+# userroleaccess
+
+# users
+
+# website_producer_registrations

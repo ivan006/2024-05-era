@@ -1,0 +1,1558 @@
+{
+    "address": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "StreetNo": {
+                "type": "varchar(8)"
+            },
+            "StreetName": {
+                "type": "varchar(45)"
+            },
+            "Building": {
+                "type": "varchar(1000)"
+            },
+            "Postal": {
+                "type": "varchar(45)"
+            },
+            "Suburb": {
+                "type": "varchar(45)"
+            },
+            "City": {
+                "type": "varchar(45)"
+            },
+            "Province": {
+                "type": "varchar(45)"
+            },
+            "Country": {
+                "type": "int",
+                "parent": "systemcode"
+            },
+            "PostCode": {
+                "type": "varchar(5)"
+            },
+            "Type": {
+                "type": "int",
+                "parent": "systemcode"
+            },
+            "Person": {
+                "type": "int"
+            },
+            "MoveDate": {
+                "type": "date"
+            },
+            "Preferred": {
+                "type": "tinyint(1)"
+            },
+            "Dispatch": {
+                "type": "tinyint(1)"
+            },
+            "Latitude": {
+                "type": "decimal(9,7)"
+            },
+            "Longitude": {
+                "type": "decimal(10,7)"
+            }
+        }
+    },
+    "attachment": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(1000)"
+            },
+            "Description": {
+                "type": "varchar(1000)"
+            },
+            "ContentType": {
+                "type": "varchar(1000)"
+            },
+            "Path": {
+                "type": "varchar(1000)"
+            },
+            "RelativeName": {
+                "type": "varchar(1000)"
+            },
+            "RelativeID": {
+                "type": "int"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "int"
+            }
+        }
+    },
+    "audit": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "TableName": {
+                "type": "varchar(100)"
+            },
+            "CRUD": {
+                "type": "varchar(100)"
+            },
+            "Data": {
+                "type": "varchar(1000)"
+            },
+            "ChangeDate": {
+                "type": "date"
+            },
+            "Entity": {
+                "type": "int"
+            },
+            "PageNo": {
+                "type": "int"
+            },
+            "NoOfLines": {
+                "type": "int"
+            },
+            "CrudMessage": {
+                "type": "varchar(250)"
+            }
+        }
+    },
+    "bank": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "int"
+            },
+            "Branch": {
+                "type": "varchar(100)"
+            },
+            "BranchName": {
+                "type": "varchar(100)"
+            },
+            "Type": {
+                "type": "int"
+            },
+            "BankType": {
+                "type": "int"
+            },
+            "Account": {
+                "type": "varchar(100)"
+            },
+            "Verified": {
+                "type": "int"
+            },
+            "Entity": {
+                "type": "int"
+            }
+        }
+    },
+    "communication": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Type": {
+                "type": "varchar(50)"
+            },
+            "Status": {
+                "type": "varchar(100)"
+            },
+            "SentBy": {
+                "type": "int",
+                "parent": "systemuser"
+            },
+            "SentTo": {
+                "type": "varchar(500)"
+            },
+            "SentOn": {
+                "type": "timestamp"
+            },
+            "Content": {
+                "type": "longtext"
+            },
+            "RelativeName": {
+                "type": "varchar(50)"
+            },
+            "RelativeID": {
+                "type": "int"
+            }
+        }
+    },
+    "contactnumber": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Number": {
+                "type": "varchar(45)"
+            },
+            "Type": {
+                "type": "int",
+                "parent": "systemcode"
+            },
+            "Person": {
+                "type": "int"
+            },
+            "Preferred": {
+                "type": "tinyint(1)"
+            }
+        }
+    },
+    "crm": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Entity": {
+                "type": "int"
+            },
+            "EntityProduct": {
+                "type": "int"
+            },
+            "Contact": {
+                "type": "date"
+            },
+            "Description": {
+                "type": "varchar(100)"
+            },
+            "Status": {
+                "type": "int"
+            }
+        }
+    },
+    "document": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "RelativeName": {
+                "type": "varchar(50)"
+            },
+            "RelativeID": {
+                "type": "int"
+            },
+            "Comment": {
+                "type": "varchar(1000)"
+            },
+            "Title": {
+                "type": "varchar(100)"
+            },
+            "CreatedBy": {
+                "type": "int"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "Access": {
+                "type": "json"
+            }
+        }
+    },
+    "documentdetail": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Document": {
+                "type": "int",
+                "parent": "document"
+            },
+            "Section": {
+                "type": "int"
+            },
+            "Position": {
+                "type": "int"
+            },
+            "Title": {
+                "type": "varchar(100)"
+            },
+            "Description": {
+                "type": "varchar(10000)"
+            },
+            "Comments": {
+                "type": "json"
+            },
+            "Style": {
+                "type": "int"
+            },
+            "CreatedBy": {
+                "type": "int"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            }
+        }
+    },
+    "domainuser": {
+        "fields": {
+            "SystemUser": {
+                "type": "int",
+                "parent": "systemuser"
+            },
+            "DomainName": {
+                "type": "varchar(155)"
+            },
+            "DomainAccount": {
+                "type": "varchar(20)"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "varchar(100)"
+            },
+            "ChangedOn": {
+                "type": "timestamp"
+            },
+            "ChangedBy": {
+                "type": "varchar(100)"
+            }
+        }
+    },
+    "dummy": {
+        "fields": {
+            "textData": {
+                "type": "mediumtext"
+            }
+        }
+    },
+    "email": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Address": {
+                "type": "varchar(254)"
+            },
+            "Type": {
+                "type": "int",
+                "parent": "systemcode"
+            },
+            "Person": {
+                "type": "int"
+            },
+            "Preferred": {
+                "type": "tinyint(1)"
+            }
+        }
+    },
+    "entity": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "ExternalNo": {
+                "type": "varchar(100)"
+            },
+            "Level": {
+                "type": "int"
+            },
+            "Type": {
+                "type": "int"
+            },
+            "Title": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(80)"
+            },
+            "Surname": {
+                "type": "varchar(100)"
+            },
+            "Identity": {
+                "type": "varchar(100)"
+            },
+            "BirthDate": {
+                "type": "date"
+            },
+            "Gender": {
+                "type": "int"
+            },
+            "Language": {
+                "type": "int"
+            },
+            "Status": {
+                "type": "int"
+            },
+            "Note": {
+                "type": "varchar(100)"
+            },
+            "Passport": {
+                "type": "varchar(50)"
+            },
+            "HasPhoto": {
+                "type": "tinyint"
+            },
+            "IsPaid": {
+                "type": "tinyint"
+            }
+        }
+    },
+    "entityaudit": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Entity Name": {
+                "type": "varchar(50)"
+            },
+            "Entity Id": {
+                "type": "int"
+            },
+            "Operation": {
+                "type": "varchar(50)"
+            },
+            "SystemUser": {
+                "type": "int",
+                "parent": "systemuser"
+            },
+            "Changes": {
+                "type": "json"
+            },
+            "Audit_TS": {
+                "type": "timestamp"
+            }
+        }
+    },
+    "entityevent": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "TableID": {
+                "type": "int"
+            },
+            "TableName": {
+                "type": "varchar(50)"
+            },
+            "Event": {
+                "type": "varchar(150)"
+            },
+            "Date": {
+                "type": "date"
+            },
+            "Instance": {
+                "type": "int"
+            }
+        }
+    },
+    "entitygood": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Entity": {
+                "type": "int",
+                "parent": "entity"
+            },
+            "Good": {
+                "type": "int",
+                "parent": "good"
+            },
+            "Units": {
+                "type": "int"
+            },
+            "AvgKg": {
+                "type": "decimal(16,6)"
+            },
+            "AvgKgOld": {
+                "type": "decimal(16,6)"
+            },
+            "AvgLifeSpan": {
+                "type": "decimal(16,6)"
+            },
+            "TotalKg": {
+                "type": "decimal(16,6)"
+            },
+            "Tariff": {
+                "type": "decimal(16,6)"
+            },
+            "Selected": {
+                "type": "tinyint"
+            },
+            "Dimension": {
+                "type": "int"
+            },
+            "WasteClass": {
+                "type": "int"
+            },
+            "Period": {
+                "type": "int"
+            },
+            "Invoice": {
+                "type": "int",
+                "parent": "entitygoodapproval"
+            }
+        }
+    },
+    "entitygoodapproval": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "ApprovedBy": {
+                "type": "int",
+                "parent": "entity"
+            },
+            "ApprovedOn": {
+                "type": "datetime"
+            },
+            "InvoiceApprovedBy": {
+                "type": "int",
+                "parent": "entity"
+            },
+            "InvoiceApprovedOn": {
+                "type": "datetime"
+            },
+            "Entity": {
+                "type": "int",
+                "parent": "entity"
+            },
+            "Period": {
+                "type": "int"
+            },
+            "PurchaseOrder": {
+                "type": "varchar(50)"
+            },
+            "InvoiceNo": {
+                "type": "varchar(50)"
+            },
+            "UseAR": {
+                "type": "tinyint"
+            },
+            "UseVAT": {
+                "type": "tinyint"
+            },
+            "Query": {
+                "type": "int",
+                "parent": "queryheader"
+            },
+            "Status": {
+                "type": "tinyint"
+            }
+        }
+    },
+    "entityrelationship": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "EntityA": {
+                "type": "int"
+            },
+            "EntityB": {
+                "type": "int"
+            },
+            "EntityARelationship": {
+                "type": "int"
+            },
+            "EntityBRelationship": {
+                "type": "int"
+            },
+            "EntityAStatus": {
+                "type": "int"
+            },
+            "EntityBStatus": {
+                "type": "int"
+            },
+            "EntityAQualifier": {
+                "type": "int"
+            },
+            "EntityBQualifier": {
+                "type": "int"
+            },
+            "EntityALevel": {
+                "type": "int"
+            },
+            "EntityBLevel": {
+                "type": "int"
+            }
+        }
+    },
+    "externalproducers": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(1000)"
+            },
+            "ServiceRequestReport": {
+                "type": "int",
+                "parent": "servicerequestreport"
+            }
+        }
+    },
+    "good": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "HSCode": {
+                "type": "varchar(50)"
+            },
+            "Description": {
+                "type": "varchar(1000)"
+            },
+            "EU6": {
+                "type": "int"
+            },
+            "EU10": {
+                "type": "int"
+            },
+            "UNU": {
+                "type": "varchar(10)"
+            },
+            "AvgKg": {
+                "type": "decimal(16,6)"
+            },
+            "Category": {
+                "type": "int"
+            },
+            "HazardSubstance": {
+                "type": "int"
+            },
+            "Dimension": {
+                "type": "int"
+            },
+            "Sector": {
+                "type": "int",
+                "parent": "entity"
+            }
+        }
+    },
+    "instanceno": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "ObjectName": {
+                "type": "varchar(50)"
+            }
+        }
+    },
+    "object": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(250)"
+            },
+            "Description": {
+                "type": "varchar(250)"
+            },
+            "Parent": {
+                "type": "int"
+            },
+            "ChildType": {
+                "type": "int"
+            }
+        }
+    },
+    "objecttrait": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(250)"
+            },
+            "Description": {
+                "type": "varchar(250)"
+            },
+            "Object": {
+                "type": "int"
+            },
+            "Type": {
+                "type": "varchar(50)"
+            },
+            "Level": {
+                "type": "varchar(50)"
+            },
+            "IsRule": {
+                "type": "tinyint"
+            },
+            "SpecialType": {
+                "type": "tinyint"
+            },
+            "IsDisabled": {
+                "type": "tinyint"
+            },
+            "IsHidden": {
+                "type": "tinyint"
+            },
+            "SystemCodeContext": {
+                "type": "varchar(50)"
+            },
+            "SystemCodeField": {
+                "type": "varchar(50)"
+            }
+        }
+    },
+    "objectvalue": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Trait": {
+                "type": "int"
+            },
+            "Value": {
+                "type": "varchar(250)"
+            },
+            "Instance": {
+                "type": "int"
+            },
+            "ValueJson": {
+                "type": "json"
+            },
+            "Object": {
+                "type": "int"
+            },
+            "Entity": {
+                "type": "int"
+            }
+        }
+    },
+    "passwordhash": {
+        "fields": {
+            "SystemUser": {
+                "type": "int"
+            },
+            "Hash": {
+                "type": "varchar(256)"
+            },
+            "Salt": {
+                "type": "varchar(48)"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "varchar(100)"
+            },
+            "ChangedOn": {
+                "type": "timestamp"
+            },
+            "ChangedBy": {
+                "type": "varchar(100)"
+            },
+            "FbId": {
+                "type": "int"
+            }
+        }
+    },
+    "productprovider": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(250)"
+            },
+            "Entity": {
+                "type": "int"
+            }
+        }
+    },
+    "query": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "ParentQuery": {
+                "type": "int"
+            },
+            "AssignedTo": {
+                "type": "varchar(100)"
+            },
+            "Description": {
+                "type": "varchar(1000)"
+            },
+            "CreatedBy": {
+                "type": "int"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "ClosedOn": {
+                "type": "timestamp"
+            },
+            "ClosedBy": {
+                "type": "int"
+            }
+        }
+    },
+    "queryheader": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Subject": {
+                "type": "varchar(150)"
+            },
+            "Status": {
+                "type": "int"
+            },
+            "Type": {
+                "type": "int"
+            },
+            "RelativeName": {
+                "type": "varchar(200)"
+            },
+            "RelativeID": {
+                "type": "int"
+            },
+            "CreatedBy": {
+                "type": "int"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "ClosedBy": {
+                "type": "int"
+            },
+            "ClosedOn": {
+                "type": "timestamp"
+            }
+        }
+    },
+    "relative": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Entity": {
+                "type": "int"
+            },
+            "Relative": {
+                "type": "int"
+            },
+            "Relationship": {
+                "type": "int"
+            },
+            "Adopted": {
+                "type": "int"
+            },
+            "Student": {
+                "type": "int"
+            },
+            "Disabled": {
+                "type": "int"
+            },
+            "TraditionalMarriage": {
+                "type": "int"
+            }
+        }
+    },
+    "requirement": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Service": {
+                "type": "varchar(50)"
+            },
+            "Category": {
+                "type": "varchar(50)"
+            },
+            "Code": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(1000)"
+            },
+            "Required": {
+                "type": "int"
+            },
+            "Path": {
+                "type": "varchar(250)"
+            },
+            "Display": {
+                "type": "int"
+            },
+            "SystemCodeContext": {
+                "type": "varchar(100)"
+            },
+            "SystemCodeField": {
+                "type": "varchar(100)"
+            },
+            "ValueType": {
+                "type": "int"
+            }
+        }
+    },
+    "requirementdetail": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Requirement": {
+                "type": "int"
+            },
+            "RelativeID": {
+                "type": "int"
+            },
+            "Service": {
+                "type": "varchar(50)"
+            },
+            "Category": {
+                "type": "varchar(50)"
+            },
+            "Value": {
+                "type": "varchar(100)"
+            },
+            "Comment": {
+                "type": "varchar(200)"
+            },
+            "Received": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(1000)"
+            },
+            "NameOriginal": {
+                "type": "varchar(1000)"
+            },
+            "ContentType": {
+                "type": "varchar(200)"
+            },
+            "Path": {
+                "type": "varchar(1000)"
+            },
+            "ChangedBy": {
+                "type": "int"
+            },
+            "ChangedOn": {
+                "type": "datetime"
+            }
+        }
+    },
+    "rule": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(100)"
+            },
+            "Description": {
+                "type": "varchar(100)"
+            },
+            "RuleType": {
+                "type": "varchar(100)"
+            },
+            "NextRule": {
+                "type": "int"
+            }
+        }
+    },
+    "ruleaction": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Rule": {
+                "type": "int"
+            },
+            "Process": {
+                "type": "varchar(100)"
+            },
+            "Result": {
+                "type": "varchar(100)"
+            },
+            "ResultNegative": {
+                "type": "varchar(100)"
+            },
+            "ResultType": {
+                "type": "varchar(50)"
+            },
+            "Description": {
+                "type": "varchar(100)"
+            },
+            "ResultSystemCode": {
+                "type": "varchar(100)"
+            },
+            "NegativeSystemCode": {
+                "type": "varchar(100)"
+            }
+        }
+    },
+    "ruleactiondata": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Rule": {
+                "type": "int"
+            },
+            "TableName": {
+                "type": "varchar(100)"
+            },
+            "ColumnName": {
+                "type": "varchar(100)"
+            },
+            "ColumnType": {
+                "type": "varchar(100)"
+            }
+        }
+    },
+    "ruleconfig": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Rule": {
+                "type": "int"
+            },
+            "TableName": {
+                "type": "varchar(100)"
+            },
+            "ColumnName": {
+                "type": "varchar(100)"
+            },
+            "ColumnType": {
+                "type": "varchar(100)"
+            },
+            "Operand": {
+                "type": "varchar(100)"
+            },
+            "Value": {
+                "type": "varchar(100)"
+            },
+            "Description": {
+                "type": "varchar(100)"
+            },
+            "SystemCodeValue": {
+                "type": "varchar(100)"
+            }
+        }
+    },
+    "ruleentityrole": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "EntityRole": {
+                "type": "varchar(50)"
+            },
+            "Entity": {
+                "type": "int"
+            },
+            "UserRole": {
+                "type": "int"
+            },
+            "Rule": {
+                "type": "int"
+            },
+            "Priority": {
+                "type": "int"
+            },
+            "CRUD_Create": {
+                "type": "int"
+            },
+            "CRUD_Read": {
+                "type": "int"
+            },
+            "CRUD_Update": {
+                "type": "int"
+            },
+            "CRUD_Delete": {
+                "type": "int"
+            }
+        }
+    },
+    "servicerequest": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "ServiceRequestNo": {
+                "type": "varchar(1000)"
+            },
+            "ServiceProvider": {
+                "type": "int",
+                "parent": "entity"
+            },
+            "CreatedBy": {
+                "type": "int",
+                "parent": "systemuser"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "FromDate": {
+                "type": "timestamp"
+            },
+            "ToDate": {
+                "type": "timestamp"
+            },
+            "Services": {
+                "type": "text"
+            },
+            "Locations": {
+                "type": "text"
+            },
+            "Deliverables": {
+                "type": "text"
+            },
+            "DeliveryDate": {
+                "type": "timestamp"
+            }
+        }
+    },
+    "servicerequestfrequency": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "ServiceRequest": {
+                "type": "int",
+                "parent": "servicerequest"
+            },
+            "ReportFrequency": {
+                "type": "int",
+                "parent": "systemcode"
+            },
+            "Active": {
+                "type": "tinyint"
+            }
+        }
+    },
+    "servicerequestreport": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "ServiceRequest": {
+                "type": "int",
+                "parent": "servicerequest"
+            },
+            "ServiceProvider": {
+                "type": "int",
+                "parent": "entity"
+            },
+            "CreatedBy": {
+                "type": "int",
+                "parent": "systemuser"
+            },
+            "TreatmentDetails": {
+                "type": "int",
+                "parent": "treatmentdetails"
+            },
+            "CreatedOn": {
+                "type": "date"
+            },
+            "ReportDate": {
+                "type": "date"
+            },
+            "Approved": {
+                "type": "tinyint"
+            },
+            "Rejected": {
+                "type": "tinyint"
+            }
+        }
+    },
+    "systemaction": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Module": {
+                "type": "varchar(45)"
+            },
+            "Context": {
+                "type": "varchar(45)"
+            },
+            "Action": {
+                "type": "varchar(45)"
+            },
+            "Description": {
+                "type": "varchar(100)"
+            },
+            "Available": {
+                "type": "tinyint(1)"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "varchar(100)"
+            },
+            "ChangedOn": {
+                "type": "timestamp"
+            },
+            "ChangedBy": {
+                "type": "varchar(100)"
+            }
+        }
+    },
+    "systemcode": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Context": {
+                "type": "varchar(45)"
+            },
+            "Field": {
+                "type": "varchar(45)"
+            },
+            "Description": {
+                "type": "varchar(150)"
+            },
+            "Value": {
+                "type": "varchar(500)"
+            },
+            "Code": {
+                "type": "varchar(45)"
+            },
+            "Active": {
+                "type": "tinyint(1)"
+            },
+            "UserGenerated": {
+                "type": "tinyint(1)"
+            },
+            "ContextualId": {
+                "type": "int"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "varchar(100)"
+            },
+            "ChangedOn": {
+                "type": "timestamp"
+            },
+            "ChangedBy": {
+                "type": "varchar(100)"
+            },
+            "Entity": {
+                "type": "int",
+                "parent": "entity"
+            }
+        }
+    },
+    "systemconfiguration": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(45)"
+            },
+            "Value": {
+                "type": "json"
+            }
+        }
+    },
+    "systemlog": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "LogDate": {
+                "type": "datetime"
+            },
+            "LogLevel": {
+                "type": "varchar(5)"
+            },
+            "Logger": {
+                "type": "varchar(80)"
+            },
+            "SystemUser": {
+                "type": "varchar(50)"
+            },
+            "CallSite": {
+                "type": "text"
+            },
+            "Message": {
+                "type": "text"
+            },
+            "Exception": {
+                "type": "text"
+            },
+            "StackTrace": {
+                "type": "text"
+            }
+        }
+    },
+    "systemuser": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Entity": {
+                "type": "int"
+            },
+            "Username": {
+                "type": "varchar(250)"
+            },
+            "Active": {
+                "type": "tinyint(1)"
+            },
+            "LastSeen": {
+                "type": "timestamp"
+            },
+            "LoginCount": {
+                "type": "int"
+            },
+            "FailedLoginAttempts": {
+                "type": "int"
+            },
+            "LockedSince": {
+                "type": "timestamp"
+            },
+            "Secret": {
+                "type": "varchar(32)"
+            },
+            "Email": {
+                "type": "varchar(254)"
+            },
+            "Phone": {
+                "type": "varchar(45)"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "varchar(100)"
+            },
+            "ChangedOn": {
+                "type": "timestamp"
+            },
+            "ChangedBy": {
+                "type": "varchar(100)"
+            },
+            "FbId": {
+                "type": "int"
+            }
+        }
+    },
+    "transactions": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "TransNo": {
+                "type": "varchar(50)"
+            },
+            "Description": {
+                "type": "varchar(1000)"
+            },
+            "TransactionDate": {
+                "type": "date"
+            },
+            "CaptureDate": {
+                "type": "date"
+            },
+            "AccountCode": {
+                "type": "varchar(50)"
+            },
+            "Entity": {
+                "type": "int"
+            },
+            "EntityProduct": {
+                "type": "int"
+            },
+            "Debit": {
+                "type": "decimal(16,2)"
+            },
+            "Credit": {
+                "type": "decimal(16,2)"
+            },
+            "Source": {
+                "type": "varchar(50)"
+            },
+            "Period": {
+                "type": "int"
+            },
+            "Reference": {
+                "type": "varchar(1000)"
+            },
+            "Type": {
+                "type": "int",
+                "parent": "systemcode"
+            }
+        }
+    },
+    "treatmentdetails": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "ServiceRequestReport": {
+                "type": "int",
+                "parent": "servicerequestreport"
+            },
+            "OpeningBalance": {
+                "type": "decimal(20,6)"
+            },
+            "Refurbished": {
+                "type": "decimal(20,6)"
+            },
+            "Recovered": {
+                "type": "decimal(20,6)"
+            },
+            "Export": {
+                "type": "decimal(20,6)"
+            },
+            "Energy": {
+                "type": "decimal(20,6)"
+            },
+            "Landfill": {
+                "type": "decimal(20,6)"
+            },
+            "LocalSecondaryProducts": {
+                "type": "decimal(20,6)"
+            }
+        }
+    },
+    "useraccess": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "SystemUser": {
+                "type": "int",
+                "parent": "systemuser"
+            },
+            "UserRole": {
+                "type": "int",
+                "parent": "userrole"
+            },
+            "SystemAction": {
+                "type": "int",
+                "parent": "systemaction"
+            },
+            "Entity": {
+                "type": "bigint"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "varchar(100)"
+            },
+            "ChangedOn": {
+                "type": "timestamp"
+            },
+            "ChangedBy": {
+                "type": "varchar(100)"
+            },
+            "FbId": {
+                "type": "int"
+            }
+        }
+    },
+    "userconfiguration": {
+        "fields": {
+            "SystemUser": {
+                "type": "int",
+                "parent": "systemuser"
+            },
+            "Language": {
+                "type": "int",
+                "parent": "systemcode"
+            },
+            "FbId": {
+                "type": "int"
+            }
+        }
+    },
+    "userdevice": {
+        "fields": {
+            "SystemUser": {
+                "type": "int",
+                "parent": "systemuser"
+            },
+            "DeviceKey": {
+                "type": "varchar(32)"
+            },
+            "Name": {
+                "type": "varchar(100)"
+            },
+            "LastUsed": {
+                "type": "timestamp"
+            },
+            "FbId": {
+                "type": "int"
+            }
+        }
+    },
+    "userrole": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Name": {
+                "type": "varchar(45)"
+            },
+            "Active": {
+                "type": "tinyint(1)"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "varchar(100)"
+            },
+            "ChangedOn": {
+                "type": "timestamp"
+            },
+            "ChangedBy": {
+                "type": "varchar(100)"
+            },
+            "FbId": {
+                "type": "int"
+            }
+        }
+    },
+    "userroleaccess": {
+        "fields": {
+            "UserRole": {
+                "type": "int"
+            },
+            "SystemAction": {
+                "type": "int"
+            },
+            "CreatedOn": {
+                "type": "timestamp"
+            },
+            "CreatedBy": {
+                "type": "varchar(100)"
+            },
+            "ChangedOn": {
+                "type": "timestamp"
+            },
+            "ChangedBy": {
+                "type": "varchar(100)"
+            },
+            "FbId": {
+                "type": "int"
+            },
+            "Rule": {
+                "type": "int"
+            }
+        }
+    },
+    "website_producer_registrations": {
+        "fields": {
+            "Id": {
+                "type": "int"
+            },
+            "Data": {
+                "type": "json"
+            },
+            "ProducerId": {
+                "type": "int"
+            }
+        }
+    }
+}
