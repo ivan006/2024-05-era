@@ -1,885 +1,300 @@
 {
     "address": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Country": {
-            "general": "integer - NULL (systemcode)",
-            "assumption test": ""
-        },
-        "Type": {
-            "general": "integer - NULL (systemcode)",
-            "assumption test": ""
-        },
-        "Person": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Country": "ft: integer; n: NULL; rel: systemcode; at: ;",
+        "Type": "ft: integer; n: NULL; rel: systemcode; at: ;",
+        "Person": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "attachment": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "RelativeID": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "CreatedBy": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "RelativeID": "ft: integer; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "audit": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "PageNo": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "NoOfLines": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
+        "PageNo": "ft: integer; n: NULL; rel: ; at: ;",
+        "NoOfLines": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "bank": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Name": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Type": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "BankType": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Verified": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Name": "ft: integer; n: NULL; rel: ; at: ;",
+        "Type": "ft: integer; n: NULL; rel: ; at: ;",
+        "BankType": "ft: integer; n: NULL; rel: ; at: ;",
+        "Verified": "ft: integer; n: NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NOT NULL; rel: ; at: ;"
     },
     "communication": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "SentBy": {
-            "general": "integer - NULL (systemuser)",
-            "assumption test": ""
-        },
-        "RelativeID": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "SentBy": "ft: integer; n: NULL; rel: systemuser; at: ;",
+        "RelativeID": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "contactnumber": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Type": {
-            "general": "integer - NOT NULL (systemcode)",
-            "assumption test": ""
-        },
-        "Person": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Type": "ft: integer; n: NOT NULL; rel: systemcode; at: ;",
+        "Person": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "crm": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityProduct": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Status": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityProduct": "ft: integer; n: NULL; rel: ; at: ;",
+        "Status": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "document": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "RelativeID": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "CreatedBy": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "RelativeID": "ft: integer; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "documentdetail": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Document": {
-            "general": "integer - NULL (document)",
-            "assumption test": ""
-        },
-        "Section": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Position": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Style": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "CreatedBy": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Document": "ft: integer; n: NULL; rel: document; at: ;",
+        "Section": "ft: integer; n: NULL; rel: ; at: ;",
+        "Position": "ft: integer; n: NULL; rel: ; at: ;",
+        "Style": "ft: integer; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "domainuser": {
-        "SystemUser": {
-            "general": "integer - NOT NULL (systemuser)",
-            "assumption test": ""
-        }
+        "SystemUser": "ft: integer; n: NOT NULL; rel: systemuser; at: ;"
     },
     "dummy": [],
     "email": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Type": {
-            "general": "integer - NOT NULL (systemcode)",
-            "assumption test": ""
-        },
-        "Person": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Type": "ft: integer; n: NOT NULL; rel: systemcode; at: ;",
+        "Person": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "entity": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Level": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Type": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Title": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Gender": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Language": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Status": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Level": "ft: integer; n: NULL; rel: ; at: ;",
+        "Type": "ft: integer; n: NULL; rel: ; at: ;",
+        "Title": "ft: integer; n: NULL; rel: ; at: ;",
+        "Gender": "ft: integer; n: NULL; rel: ; at: ;",
+        "Language": "ft: integer; n: NULL; rel: ; at: ;",
+        "Status": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "entityaudit": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "SystemUser": {
-            "general": "integer - NULL (systemuser)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "SystemUser": "ft: integer; n: NULL; rel: systemuser; at: ;"
     },
     "entityevent": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "TableID": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Instance": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "TableID": "ft: integer; n: NULL; rel: ; at: ;",
+        "Instance": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "entitygood": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NOT NULL (entity)",
-            "assumption test": ""
-        },
-        "Good": {
-            "general": "integer - NOT NULL (good)",
-            "assumption test": ""
-        },
-        "Units": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Dimension": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "WasteClass": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Period": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Invoice": {
-            "general": "integer - NULL (entitygoodapproval)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;",
+        "Good": "ft: integer; n: NOT NULL; rel: good; at: ;",
+        "Units": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Dimension": "ft: integer; n: NULL; rel: ; at: ;",
+        "WasteClass": "ft: integer; n: NULL; rel: ; at: ;",
+        "Period": "ft: integer; n: NULL; rel: ; at: ;",
+        "Invoice": "ft: integer; n: NULL; rel: entitygoodapproval; at: ;"
     },
     "entitygoodapproval": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ApprovedBy": {
-            "general": "integer - NOT NULL (entity)",
-            "assumption test": ""
-        },
-        "InvoiceApprovedBy": {
-            "general": "integer - NULL (entity)",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NOT NULL (entity)",
-            "assumption test": ""
-        },
-        "Period": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Query": {
-            "general": "integer - NULL (queryheader)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ApprovedBy": "ft: integer; n: NOT NULL; rel: entity; at: ;",
+        "InvoiceApprovedBy": "ft: integer; n: NULL; rel: entity; at: ;",
+        "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;",
+        "Period": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Query": "ft: integer; n: NULL; rel: queryheader; at: ;"
     },
     "entityrelationship": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "EntityA": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityB": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityARelationship": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityBRelationship": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityAStatus": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityBStatus": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityAQualifier": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityBQualifier": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityALevel": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityBLevel": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "EntityA": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityB": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityARelationship": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityBRelationship": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityAStatus": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityBStatus": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityAQualifier": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityBQualifier": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityALevel": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityBLevel": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "externalproducers": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ServiceRequestReport": {
-            "general": "integer - NULL (servicerequestreport)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ServiceRequestReport": "ft: integer; n: NULL; rel: servicerequestreport; at: ;"
     },
     "good": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "EU6": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EU10": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Category": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "HazardSubstance": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Dimension": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Sector": {
-            "general": "integer - NOT NULL (entity)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "EU6": "ft: integer; n: NULL; rel: ; at: ;",
+        "EU10": "ft: integer; n: NULL; rel: ; at: ;",
+        "Category": "ft: integer; n: NULL; rel: ; at: ;",
+        "HazardSubstance": "ft: integer; n: NULL; rel: ; at: ;",
+        "Dimension": "ft: integer; n: NULL; rel: ; at: ;",
+        "Sector": "ft: integer; n: NOT NULL; rel: entity; at: ;"
     },
     "instanceno": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;"
     },
     "object": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Parent": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "ChildType": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Parent": "ft: integer; n: NULL; rel: ; at: ;",
+        "ChildType": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "objecttrait": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Object": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Object": "ft: integer; n: NOT NULL; rel: ; at: ;"
     },
     "objectvalue": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Trait": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Instance": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Object": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Trait": "ft: integer; n: NULL; rel: ; at: ;",
+        "Instance": "ft: integer; n: NULL; rel: ; at: ;",
+        "Object": "ft: integer; n: NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "passwordhash": {
-        "SystemUser": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "FbId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "SystemUser": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "productprovider": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NOT NULL; rel: ; at: ;"
     },
     "query": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ParentQuery": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "CreatedBy": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "ClosedBy": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ParentQuery": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;",
+        "ClosedBy": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "queryheader": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Status": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Type": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "RelativeID": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "CreatedBy": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "ClosedBy": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Status": "ft: integer; n: NULL; rel: ; at: ;",
+        "Type": "ft: integer; n: NULL; rel: ; at: ;",
+        "RelativeID": "ft: integer; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;",
+        "ClosedBy": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "relative": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Relative": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Relationship": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Adopted": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Student": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Disabled": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "TraditionalMarriage": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
+        "Relative": "ft: integer; n: NULL; rel: ; at: ;",
+        "Relationship": "ft: integer; n: NULL; rel: ; at: ;",
+        "Adopted": "ft: integer; n: NULL; rel: ; at: ;",
+        "Student": "ft: integer; n: NULL; rel: ; at: ;",
+        "Disabled": "ft: integer; n: NULL; rel: ; at: ;",
+        "TraditionalMarriage": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "requirement": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Code": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Required": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Display": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "ValueType": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Code": "ft: integer; n: NULL; rel: ; at: ;",
+        "Required": "ft: integer; n: NULL; rel: ; at: ;",
+        "Display": "ft: integer; n: NULL; rel: ; at: ;",
+        "ValueType": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "requirementdetail": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Requirement": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "RelativeID": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Received": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "ChangedBy": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Requirement": "ft: integer; n: NULL; rel: ; at: ;",
+        "RelativeID": "ft: integer; n: NULL; rel: ; at: ;",
+        "Received": "ft: integer; n: NULL; rel: ; at: ;",
+        "ChangedBy": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "rule": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "NextRule": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "NextRule": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "ruleaction": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Rule": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Rule": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "ruleactiondata": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Rule": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Rule": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "ruleconfig": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Rule": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Rule": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "ruleentityrole": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "UserRole": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Rule": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Priority": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "CRUD_Create": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "CRUD_Read": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "CRUD_Update": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "CRUD_Delete": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
+        "UserRole": "ft: integer; n: NULL; rel: ; at: ;",
+        "Rule": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Priority": "ft: integer; n: NULL; rel: ; at: ;",
+        "CRUD_Create": "ft: integer; n: NULL; rel: ; at: ;",
+        "CRUD_Read": "ft: integer; n: NULL; rel: ; at: ;",
+        "CRUD_Update": "ft: integer; n: NULL; rel: ; at: ;",
+        "CRUD_Delete": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "servicerequest": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ServiceProvider": {
-            "general": "integer - NOT NULL (entity)",
-            "assumption test": ""
-        },
-        "CreatedBy": {
-            "general": "integer - NOT NULL (systemuser)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ServiceProvider": "ft: integer; n: NOT NULL; rel: entity; at: ;",
+        "CreatedBy": "ft: integer; n: NOT NULL; rel: systemuser; at: ;"
     },
     "servicerequestfrequency": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ServiceRequest": {
-            "general": "integer - NOT NULL (servicerequest)",
-            "assumption test": ""
-        },
-        "ReportFrequency": {
-            "general": "integer - NOT NULL (systemcode)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ServiceRequest": "ft: integer; n: NOT NULL; rel: servicerequest; at: ;",
+        "ReportFrequency": "ft: integer; n: NOT NULL; rel: systemcode; at: ;"
     },
     "servicerequestreport": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ServiceRequest": {
-            "general": "integer - NOT NULL (servicerequest)",
-            "assumption test": ""
-        },
-        "ServiceProvider": {
-            "general": "integer - NOT NULL (entity)",
-            "assumption test": ""
-        },
-        "CreatedBy": {
-            "general": "integer - NULL (systemuser)",
-            "assumption test": ""
-        },
-        "TreatmentDetails": {
-            "general": "integer - NULL (treatmentdetails)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ServiceRequest": "ft: integer; n: NOT NULL; rel: servicerequest; at: ;",
+        "ServiceProvider": "ft: integer; n: NOT NULL; rel: entity; at: ;",
+        "CreatedBy": "ft: integer; n: NULL; rel: systemuser; at: ;",
+        "TreatmentDetails": "ft: integer; n: NULL; rel: treatmentdetails; at: ;"
     },
     "systemaction": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;"
     },
     "systemcode": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ContextualId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NULL (entity)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ContextualId": "ft: integer; n: NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: entity; at: ;"
     },
     "systemconfiguration": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;"
     },
     "systemlog": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;"
     },
     "systemuser": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "LoginCount": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "FailedLoginAttempts": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "FbId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "LoginCount": "ft: integer; n: NULL; rel: ; at: ;",
+        "FailedLoginAttempts": "ft: integer; n: NULL; rel: ; at: ;",
+        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "transactions": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "EntityProduct": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Period": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Type": {
-            "general": "integer - NULL (systemcode)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
+        "EntityProduct": "ft: integer; n: NULL; rel: ; at: ;",
+        "Period": "ft: integer; n: NULL; rel: ; at: ;",
+        "Type": "ft: integer; n: NULL; rel: systemcode; at: ;"
     },
     "treatmentdetails": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ServiceRequestReport": {
-            "general": "integer - NULL (servicerequestreport)",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ServiceRequestReport": "ft: integer; n: NULL; rel: servicerequestreport; at: ;"
     },
     "useraccess": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "SystemUser": {
-            "general": "integer - NULL (systemuser)",
-            "assumption test": ""
-        },
-        "UserRole": {
-            "general": "integer - NULL (userrole)",
-            "assumption test": ""
-        },
-        "SystemAction": {
-            "general": "integer - NULL (systemaction)",
-            "assumption test": ""
-        },
-        "Entity": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "FbId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "SystemUser": "ft: integer; n: NULL; rel: systemuser; at: ;",
+        "UserRole": "ft: integer; n: NULL; rel: userrole; at: ;",
+        "SystemAction": "ft: integer; n: NULL; rel: systemaction; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
+        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "userconfiguration": {
-        "SystemUser": {
-            "general": "integer - NOT NULL (systemuser)",
-            "assumption test": ""
-        },
-        "Language": {
-            "general": "integer - NOT NULL (systemcode)",
-            "assumption test": ""
-        },
-        "FbId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "SystemUser": "ft: integer; n: NOT NULL; rel: systemuser; at: ;",
+        "Language": "ft: integer; n: NOT NULL; rel: systemcode; at: ;",
+        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "userdevice": {
-        "SystemUser": {
-            "general": "integer - NOT NULL (systemuser)",
-            "assumption test": ""
-        },
-        "FbId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "SystemUser": "ft: integer; n: NOT NULL; rel: systemuser; at: ;",
+        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "userrole": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "FbId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "userroleaccess": {
-        "UserRole": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "SystemAction": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "FbId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        },
-        "Rule": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "UserRole": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "SystemAction": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "FbId": "ft: integer; n: NULL; rel: ; at: ;",
+        "Rule": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "website_producer_registrations": {
-        "Id": {
-            "general": "integer - NOT NULL ()",
-            "assumption test": ""
-        },
-        "ProducerId": {
-            "general": "integer - NULL ()",
-            "assumption test": ""
-        }
+        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ProducerId": "ft: integer; n: NULL; rel: ; at: ;"
     }
 }
