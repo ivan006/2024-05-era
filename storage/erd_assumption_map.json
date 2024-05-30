@@ -1,301 +1,205 @@
 {
-    "address": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Country": "ft: integer; n: NULL; rel: systemcode; at: ;",
-        "Type": "ft: integer; n: NULL; rel: systemcode; at: ;",
-        "Person": "ft: integer; n: NULL; rel: entity; at: ;"
-    },
-    "attachment": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "RelativeID": "ft: integer; n: NULL; rel: entity; at: ;",
-        "CreatedBy": "ft: integer; n: NULL; rel: entity; at: ;"
-    },
     "audit": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Entity": "ft: integer; n: NULL; rel: entity; at: ;",
+        "TableName": "ft: string; n: NULL; rel: ; at: ;",
+        "CRUD": "ft: string; n: NULL; rel: ; at: ;",
+        "Data": "ft: string; n: NULL; rel: ; at: ;",
+        "ChangeDate": "ft: string; n: NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
         "PageNo": "ft: integer; n: NULL; rel: ; at: ;",
-        "NoOfLines": "ft: integer; n: NULL; rel: ; at: ;"
+        "NoOfLines": "ft: integer; n: NULL; rel: ; at: ;",
+        "CrudMessage": "ft: string; n: NULL; rel: ; at: ;"
     },
-    "bank": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Name": "ft: integer; n: NULL; rel: ; at: ;",
-        "Type": "ft: integer; n: NULL; rel: systemcode; at: ;",
-        "BankType": "ft: integer; n: NULL; rel: systemcode; at: ;",
-        "Verified": "ft: integer; n: NULL; rel: ; at: ;",
-        "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;"
-    },
-    "communication": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "SentBy": "ft: integer; n: NULL; rel: systemuser; at: ;",
-        "RelativeID": "ft: integer; n: NULL; rel: entity; at: ;"
-    },
-    "contactnumber": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Type": "ft: integer; n: NOT NULL; rel: systemcode; at: ;",
-        "Person": "ft: integer; n: NULL; rel: entity; at: ;"
-    },
-    "crm": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Entity": "ft: integer; n: NULL; rel: entity; at: ;",
-        "EntityProduct": "ft: integer; n: NULL; rel: entityproduct; at: ;",
-        "Status": "ft: integer; n: NULL; rel: systemcode; at: ;"
-    },
-
     "document": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "RelativeID": "ft: integer; n: NULL; rel: entity; at: ;",
-        "CreatedBy": "ft: integer; n: NULL; rel: entity; at: ;"
-    },
-    "documentdetail": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Document": "ft: integer; n: NULL; rel: document; at: ;",
-        "Section": "ft: integer; n: NULL; rel: ; at: ;",
-        "Position": "ft: integer; n: NULL; rel: ; at: ;",
-        "Style": "ft: integer; n: NULL; rel: ; at: ;",
-        "CreatedBy": "ft: integer; n: NULL; rel: entity; at: ;"
-    },
-    "domainuser": {
-        "SystemUser": "ft: integer; n: NOT NULL; rel: systemuser; at: ;"
-    },
-    "dummy": [],
-    "email": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Type": "ft: integer; n: NOT NULL; rel: systemcode; at: ;",
-        "Person": "ft: integer; n: NULL; rel: entity; at: ;"
+        "RelativeName": "ft: string; n: NULL; rel: ; at: ;",
+        "RelativeID": "ft: integer; n: NULL; rel: ; at: ;",
+        "Comment": "ft: string; n: NULL; rel: ; at: ;",
+        "Title": "ft: string; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;",
+        "CreatedOn": "ft: datetime; n: NULL; rel: ; at: ;",
+        "Access": "ft: json; n: NULL; rel: ; at: ;"
     },
     "entity": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ExternalNo": "ft: string; n: NULL; rel: ; at: ;",
         "Level": "ft: integer; n: NULL; rel: ; at: ;",
-        "Type": "ft: integer; n: NULL; rel: systemcode; at: ;",
+        "Type": "ft: integer; n: NULL; rel: ; at: ;",
         "Title": "ft: integer; n: NULL; rel: ; at: ;",
-        "Gender": "ft: integer; n: NULL; rel: systemcode; at: ;",
-        "Language": "ft: integer; n: NULL; rel: systemcode; at: ;",
-        "Status": "ft: integer; n: NULL; rel: systemcode; at: ;"
+        "Name": "ft: string; n: NULL; rel: ; at: ;",
+        "Surname": "ft: string; n: NULL; rel: ; at: ;",
+        "Identity": "ft: string; n: NULL; rel: ; at: ;",
+        "BirthDate": "ft: string; n: NULL; rel: ; at: ;",
+        "Gender": "ft: integer; n: NULL; rel: ; at: ;",
+        "Language": "ft: integer; n: NULL; rel: ; at: ;",
+        "Status": "ft: integer; n: NULL; rel: ; at: ;",
+        "Note": "ft: string; n: NULL; rel: ; at: ;",
+        "Passport": "ft: string; n: NULL; rel: ; at: ;",
+        "HasPhoto": "ft: boolean; n: NULL; rel: ; at: ;",
+        "IsPaid": "ft: boolean; n: NULL; rel: ; at: ;"
     },
     "entityaudit": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Entity Id": "ft: integer; n: NOT NULL; rel: entity; at: ;",
-        "SystemUser": "ft: integer; n: NULL; rel: systemuser; at: ;"
-    },
-    "entityevent": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "TableID": "ft: integer; n: NULL; rel: ; at: ;",
-        "Instance": "ft: integer; n: NULL; rel: ; at: ;"
+        "Entity Name": "ft: string; n: NOT NULL; rel: ; at: ;",
+        "Entity Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Operation": "ft: string; n: NOT NULL; rel: ; at: ;",
+        "SystemUser": "ft: integer; n: NULL; rel: systemuser; at: ;",
+        "Changes": "ft: json; n: NULL; rel: ; at: ;",
+        "Audit_TS": "ft: datetime; n: NOT NULL; rel: ; at: ;"
     },
     "entitygood": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
         "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;",
         "Good": "ft: integer; n: NOT NULL; rel: good; at: ;",
         "Units": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "AvgKg": "ft: float; n: NOT NULL; rel: ; at: ;",
+        "AvgKgOld": "ft: float; n: NULL; rel: ; at: ;",
+        "AvgLifeSpan": "ft: float; n: NULL; rel: ; at: ;",
+        "TotalKg": "ft: float; n: NULL; rel: ; at: ;",
+        "Tariff": "ft: float; n: NULL; rel: ; at: ;",
+        "Selected": "ft: boolean; n: NULL; rel: ; at: ;",
         "Dimension": "ft: integer; n: NULL; rel: ; at: ;",
         "WasteClass": "ft: integer; n: NULL; rel: ; at: ;",
         "Period": "ft: integer; n: NULL; rel: ; at: ;",
         "Invoice": "ft: integer; n: NULL; rel: entitygoodapproval; at: ;"
     },
     "entitygoodapproval": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
         "ApprovedBy": "ft: integer; n: NOT NULL; rel: entity; at: ;",
+        "ApprovedOn": "ft: string; n: NOT NULL; rel: ; at: ;",
         "InvoiceApprovedBy": "ft: integer; n: NULL; rel: entity; at: ;",
+        "InvoiceApprovedOn": "ft: string; n: NULL; rel: ; at: ;",
         "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;",
         "Period": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Query": "ft: integer; n: NULL; rel: queryheader; at: ;"
-    },
-    "entityrelationship": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "EntityA": "ft: integer; n: NULL; rel: entity; at: ;",
-        "EntityB": "ft: integer; n: NULL; rel: entity; at: ;",
-        "EntityARelationship": "ft: integer; n: NULL; rel: ; at: ;",
-        "EntityBRelationship": "ft: integer; n: NULL; rel: ; at: ;",
-        "EntityAStatus": "ft: integer; n: NULL; rel: ; at: ;",
-        "EntityBStatus": "ft: integer; n: NULL; rel: ; at: ;",
-        "EntityAQualifier": "ft: integer; n: NULL; rel: ; at: ;",
-        "EntityBQualifier": "ft: integer; n: NULL; rel: ; at: ;",
-        "EntityALevel": "ft: integer; n: NULL; rel: ; at: ;",
-        "EntityBLevel": "ft: integer; n: NULL; rel: ; at: ;"
+        "PurchaseOrder": "ft: string; n: NULL; rel: ; at: ;",
+        "InvoiceNo": "ft: string; n: NULL; rel: ; at: ;",
+        "UseAR": "ft: boolean; n: NOT NULL; rel: ; at: ;",
+        "UseVAT": "ft: boolean; n: NOT NULL; rel: ; at: ;",
+        "Query": "ft: integer; n: NULL; rel: queryheader; at: ;",
+        "Status": "ft: boolean; n: NOT NULL; rel: ; at: ;"
     },
     "externalproducers": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Name": "ft: string; n: NOT NULL; rel: ; at: ;",
         "ServiceRequestReport": "ft: integer; n: NULL; rel: servicerequestreport; at: ;"
     },
     "good": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "HSCode": "ft: string; n: NULL; rel: ; at: ;",
+        "Description": "ft: string; n: NULL; rel: ; at: ;",
         "EU6": "ft: integer; n: NULL; rel: ; at: ;",
         "EU10": "ft: integer; n: NULL; rel: ; at: ;",
+        "UNU": "ft: string; n: NULL; rel: ; at: ;",
+        "AvgKg": "ft: float; n: NOT NULL; rel: ; at: ;",
         "Category": "ft: integer; n: NULL; rel: ; at: ;",
         "HazardSubstance": "ft: integer; n: NULL; rel: ; at: ;",
         "Dimension": "ft: integer; n: NULL; rel: ; at: ;",
         "Sector": "ft: integer; n: NOT NULL; rel: entity; at: ;"
     },
-    "instanceno": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;"
-    },
-    "object": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Parent": "ft: integer; n: NULL; rel: object; at: ;",
-        "ChildType": "ft: integer; n: NULL; rel: ; at: ;"
-    },
-    "objecttrait": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Object": "ft: integer; n: NOT NULL; rel: object; at: ;"
-    },
-    "objectvalue": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Trait": "ft: integer; n: NULL; rel: objecttrait; at: ;",
-        "Instance": "ft: integer; n: NULL; rel: instanceno; at: ;",
-        "Object": "ft: integer; n: NULL; rel: object; at: ;",
-        "Entity": "ft: integer; n: NULL; rel: entity; at: ;"
-    },
-    "passwordhash": {
-        "SystemUser": "ft: integer; n: NOT NULL; rel: systemuser; at: ;",
-        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
-    },
     "productprovider": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;"
-    },
-    "query": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "ParentQuery": "ft: integer; n: NOT NULL; rel: query; at: ;",
-        "CreatedBy": "ft: integer; n: NULL; rel: entity; at: ;",
-        "ClosedBy": "ft: integer; n: NULL; rel: entity; at: ;"
+        "Name": "ft: string; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NOT NULL; rel: ; at: ;"
     },
     "queryheader": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Status": "ft: integer; n: NULL; rel: systemcode; at: ;",
-        "Type": "ft: integer; n: NULL; rel: systemcode; at: ;",
-        "RelativeID": "ft: integer; n: NULL; rel: entity; at: ;",
-        "CreatedBy": "ft: integer; n: NULL; rel: entity; at: ;",
-        "ClosedBy": "ft: integer; n: NULL; rel: entity; at: ;"
-    },
-    "relative": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Entity": "ft: integer; n: NULL; rel: entity; at: ;",
-        "Relative": "ft: integer; n: NULL; rel: entity; at: ;",
-        "Relationship": "ft: integer; n: NULL; rel: entityrelationship; at: ;",
-        "Adopted": "ft: integer; n: NULL; rel: ; at: ;",
-        "Student": "ft: integer; n: NULL; rel: ; at: ;",
-        "Disabled": "ft: integer; n: NULL; rel: ; at: ;",
-        "TraditionalMarriage": "ft: integer; n: NULL; rel: ; at: ;"
-    },
-    "requirement": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Code": "ft: integer; n: NULL; rel: ; at: ;",
-        "Required": "ft: integer; n: NULL; rel: ; at: ;",
-        "Display": "ft: integer; n: NULL; rel: ; at: ;",
-        "ValueType": "ft: integer; n: NULL; rel: ; at: ;"
-    },
-    "requirementdetail": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Requirement": "ft: integer; n: NULL; rel: requirement; at: ;",
-        "RelativeID": "ft: integer; n: NULL; rel: entity; at: ;",
-        "Received": "ft: integer; n: NULL; rel: ; at: ;",
-        "ChangedBy": "ft: integer; n: NULL; rel: systemuser; at: ;"
-    },
-    "rule": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "NextRule": "ft: integer; n: NULL; rel: rule; at: ;"
-    },
-    "ruleaction": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Rule": "ft: integer; n: NULL; rel: rule; at: ;"
-    },
-    "ruleactiondata": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Rule": "ft: integer; n: NULL; rel: rule; at: ;"
-    },
-    "ruleconfig": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Rule": "ft: integer; n: NULL; rel: rule; at: ;"
-    },
-    "ruleentityrole": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Entity": "ft: integer; n: NULL; rel: entity; at: ;",
-        "UserRole": "ft: integer; n: NULL; rel: userrole; at: ;",
-        "Rule": "ft: integer; n: NOT NULL; rel: rule; at: ;",
-        "Priority": "ft: integer; n: NULL; rel: ; at: ;",
-        "CRUD_Create": "ft: integer; n: NULL; rel: ; at: ;",
-        "CRUD_Read": "ft: integer; n: NULL; rel: ; at: ;",
-        "CRUD_Update": "ft: integer; n: NULL; rel: ; at: ;",
-        "CRUD_Delete": "ft: integer; n: NULL; rel: ; at: ;"
+        "Subject": "ft: string; n: NULL; rel: ; at: ;",
+        "Status": "ft: integer; n: NULL; rel: ; at: ;",
+        "Type": "ft: integer; n: NULL; rel: ; at: ;",
+        "RelativeName": "ft: string; n: NULL; rel: ; at: ;",
+        "RelativeID": "ft: integer; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;",
+        "CreatedOn": "ft: datetime; n: NOT NULL; rel: ; at: ;",
+        "ClosedBy": "ft: integer; n: NULL; rel: ; at: ;",
+        "ClosedOn": "ft: datetime; n: NULL; rel: ; at: ;"
     },
     "servicerequest": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "ServiceRequestNo": "ft: string; n: NULL; rel: ; at: ;",
         "ServiceProvider": "ft: integer; n: NOT NULL; rel: entity; at: ;",
-        "CreatedBy": "ft: integer; n: NOT NULL; rel: systemuser; at: ;"
+        "CreatedBy": "ft: integer; n: NOT NULL; rel: systemuser; at: ;",
+        "CreatedOn": "ft: datetime; n: NOT NULL; rel: ; at: ;",
+        "FromDate": "ft: datetime; n: NOT NULL; rel: ; at: ;",
+        "ToDate": "ft: datetime; n: NOT NULL; rel: ; at: ;",
+        "Services": "ft: string; n: NULL; rel: ; at: ;",
+        "Locations": "ft: string; n: NULL; rel: ; at: ;",
+        "Deliverables": "ft: string; n: NULL; rel: ; at: ;",
+        "DeliveryDate": "ft: datetime; n: NULL; rel: ; at: ;"
     },
     "servicerequestfrequency": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
         "ServiceRequest": "ft: integer; n: NOT NULL; rel: servicerequest; at: ;",
-        "ReportFrequency": "ft: integer; n: NOT NULL; rel: systemcode; at: ;"
+        "ReportFrequency": "ft: integer; n: NOT NULL; rel: systemcode; at: ;",
+        "Active": "ft: boolean; n: NULL; rel: ; at: ;"
     },
     "servicerequestreport": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
         "ServiceRequest": "ft: integer; n: NOT NULL; rel: servicerequest; at: ;",
         "ServiceProvider": "ft: integer; n: NOT NULL; rel: entity; at: ;",
-        "CreatedBy": "ft: integer; n: NULL; rel: entity; at: ;",
-        "TreatmentDetails": "ft: integer; n: NULL; rel: treatmentdetails; at: ;"
+        "CreatedBy": "ft: integer; n: NULL; rel: systemuser; at: ;",
+        "TreatmentDetails": "ft: integer; n: NULL; rel: treatmentdetails; at: ;",
+        "CreatedOn": "ft: string; n: NULL; rel: ; at: ;",
+        "ReportDate": "ft: string; n: NULL; rel: ; at: ;",
+        "Approved": "ft: boolean; n: NOT NULL; rel: ; at: ;",
+        "Rejected": "ft: boolean; n: NOT NULL; rel: ; at: ;"
     },
     "systemaction": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;"
+        "Module": "ft: string; n: NOT NULL; rel: ; at: ;",
+        "Context": "ft: string; n: NOT NULL; rel: ; at: ;",
+        "Action": "ft: string; n: NOT NULL; rel: ; at: ;",
+        "Description": "ft: string; n: NULL; rel: ; at: ;",
+        "Available": "ft: boolean; n: NULL; rel: ; at: ;",
+        "CreatedOn": "ft: datetime; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: string; n: NULL; rel: ; at: ;",
+        "ChangedOn": "ft: datetime; n: NULL; rel: ; at: ;",
+        "ChangedBy": "ft: string; n: NULL; rel: ; at: ;"
     },
     "systemcode": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "ContextualId": "ft: integer; n: NULL; rel: systemcode; at: ;",
+        "Context": "ft: string; n: NULL; rel: ; at: ;",
+        "Field": "ft: string; n: NULL; rel: ; at: ;",
+        "Description": "ft: string; n: NULL; rel: ; at: ;",
+        "Value": "ft: string; n: NOT NULL; rel: ; at: ;",
+        "Code": "ft: string; n: NULL; rel: ; at: ;",
+        "Active": "ft: boolean; n: NULL; rel: ; at: ;",
+        "UserGenerated": "ft: boolean; n: NOT NULL; rel: ; at: ;",
+        "ContextualId": "ft: integer; n: NULL; rel: ; at: ;",
+        "CreatedOn": "ft: datetime; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: string; n: NULL; rel: ; at: ;",
+        "ChangedOn": "ft: datetime; n: NULL; rel: ; at: ;",
+        "ChangedBy": "ft: string; n: NULL; rel: ; at: ;",
         "Entity": "ft: integer; n: NULL; rel: entity; at: ;"
     },
-    "systemconfiguration": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;"
-    },
-    "systemlog": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;"
-    },
     "systemuser": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;",
+        "Entity": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Username": "ft: string; n: NULL; rel: ; at: ;",
+        "Active": "ft: boolean; n: NOT NULL; rel: ; at: ;",
+        "LastSeen": "ft: datetime; n: NULL; rel: ; at: ;",
         "LoginCount": "ft: integer; n: NULL; rel: ; at: ;",
         "FailedLoginAttempts": "ft: integer; n: NULL; rel: ; at: ;",
+        "LockedSince": "ft: datetime; n: NULL; rel: ; at: ;",
+        "Secret": "ft: string; n: NULL; rel: ; at: ;",
+        "Email": "ft: string; n: NULL; rel: ; at: ;",
+        "Phone": "ft: string; n: NULL; rel: ; at: ;",
+        "CreatedOn": "ft: datetime; n: NULL; rel: ; at: ;",
+        "CreatedBy": "ft: string; n: NULL; rel: ; at: ;",
+        "ChangedOn": "ft: datetime; n: NULL; rel: ; at: ;",
+        "ChangedBy": "ft: string; n: NULL; rel: ; at: ;",
         "FbId": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "transactions": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "Entity": "ft: integer; n: NULL; rel: entity; at: ;",
+        "TransNo": "ft: string; n: NOT NULL; rel: ; at: ;",
+        "Description": "ft: string; n: NULL; rel: ; at: ;",
+        "TransactionDate": "ft: string; n: NULL; rel: ; at: ;",
+        "CaptureDate": "ft: string; n: NULL; rel: ; at: ;",
+        "AccountCode": "ft: string; n: NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
         "EntityProduct": "ft: integer; n: NULL; rel: ; at: ;",
+        "Debit": "ft: float; n: NULL; rel: ; at: ;",
+        "Credit": "ft: float; n: NULL; rel: ; at: ;",
+        "Source": "ft: string; n: NULL; rel: ; at: ;",
         "Period": "ft: integer; n: NULL; rel: ; at: ;",
+        "Reference": "ft: string; n: NULL; rel: ; at: ;",
         "Type": "ft: integer; n: NULL; rel: systemcode; at: ;"
     },
     "treatmentdetails": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "ServiceRequestReport": "ft: integer; n: NULL; rel: servicerequestreport; at: ;"
-    },
-    "useraccess": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "SystemUser": "ft: integer; n: NULL; rel: systemuser; at: ;",
-        "UserRole": "ft: integer; n: NULL; rel: userrole; at: ;",
-        "SystemAction": "ft: integer; n: NULL; rel: systemaction; at: ;",
-        "Entity": "ft: integer; n: NULL; rel: entity; at: ;",
-        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
-    },
-    "userconfiguration": {
-        "SystemUser": "ft: integer; n: NOT NULL; rel: systemuser; at: ;",
-        "Language": "ft: integer; n: NOT NULL; rel: systemcode; at: ;",
-        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
-    },
-    "userdevice": {
-        "SystemUser": "ft: integer; n: NOT NULL; rel: systemuser; at: ;",
-        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
-    },
-    "userrole": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
-        "FbId": "ft: integer; n: NULL; rel: ; at: ;"
-    },
-    "userroleaccess": {
-        "UserRole": "ft: integer; n: NOT NULL; rel: userrole; at: ;",
-        "SystemAction": "ft: integer; n: NOT NULL; rel: systemaction; at: ;",
-        "FbId": "ft: integer; n: NULL; rel: ; at: ;",
-        "Rule": "ft: integer; n: NULL; rel: rule; at: ;"
+        "ServiceRequestReport": "ft: integer; n: NULL; rel: servicerequestreport; at: ;",
+        "OpeningBalance": "ft: float; n: NULL; rel: ; at: ;",
+        "Refurbished": "ft: float; n: NULL; rel: ; at: ;",
+        "Recovered": "ft: float; n: NULL; rel: ; at: ;",
+        "Export": "ft: float; n: NULL; rel: ; at: ;",
+        "Energy": "ft: float; n: NULL; rel: ; at: ;",
+        "Landfill": "ft: float; n: NULL; rel: ; at: ;",
+        "LocalSecondaryProducts": "ft: float; n: NULL; rel: ; at: ;"
     },
     "website_producer_registrations": {
-        "Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Data": "ft: json; n: NOT NULL; rel: ; at: ;",
         "ProducerId": "ft: integer; n: NULL; rel: ; at: ;"
     }
 }
