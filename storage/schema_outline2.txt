@@ -1,7 +1,7 @@
 # address
 - Person
-- Preferred - nullable)
-- Dispatch - nullable)
+- Preferred
+- Dispatch
 
 # attachment
 - RelativeID
@@ -24,7 +24,7 @@
 
 # contactnumber
 - Person
-- Preferred - not nullable)
+- Preferred
 
 # crm
 - Entity
@@ -47,7 +47,7 @@
 
 # email
 - Person
-- Preferred - not nullable)
+- Preferred
 
 # entity
 - Level
@@ -207,11 +207,11 @@
 - Rejected
 
 # systemaction
-- Available - nullable)
+- Available
 
 # systemcode
-- Active - nullable)
-- UserGenerated - not nullable)
+- Active
+- UserGenerated
 - ContextualId
 
 # systemconfiguration
@@ -220,7 +220,7 @@
 
 # systemuser
 - Entity
-- Active - not nullable)
+- Active
 - LoginCount
 - FailedLoginAttempts
 - FbId
@@ -245,7 +245,7 @@
 - FbId
 
 # userrole
-- Active - not nullable)
+- Active
 - FbId
 
 # userroleaccess
