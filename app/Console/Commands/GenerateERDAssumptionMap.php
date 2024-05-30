@@ -22,16 +22,18 @@ class GenerateERDAssumptionMap extends Command
             $map[$table] = [];
 
             foreach ($columns as $column) {
-                // Only consider numeric types as potential foreign keys
+                // Get column details
                 $type = Schema::getColumnType($table, $column);
-                if (!in_array($type, ['integer', 'bigint', 'smallint', 'tinyint'])) {
+                $columnDetails = Schema::getConnection()->getDoctrineColumn($table, $column);
+
+                // Skip primary keys and auto increment keys
+                if ($columnDetails->getAutoincrement() || $columnDetails->getPrimaryKey()) {
                     continue;
                 }
 
-                $nullability = Schema::getConnection()->getDoctrineColumn($table, $column)->getNotnull() ? 'NOT NULL' : 'NULL';
+                $nullability = $columnDetails->getNotnull() ? 'NOT NULL' : 'NULL';
                 $relation = $this->getForeignKeyRelation($table, $column);
-                $assumptionTest = ''; // Placeholder for assumption test
-                $map[$table][$column] = "ft: {$type}; n: {$nullability}; rel: " . ($relation ? $relation : '') . "; at: {$assumptionTest};";
+                $map[$table][$column] = "ft: {$type}; n: {$nullability}; rel: " . ($relation ? $relation : '') . "; at: ;";
             }
         }
 
