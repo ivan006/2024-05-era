@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\File;
 
 class GenerateERDAssumptionMap extends Command
 {
@@ -30,10 +30,8 @@ class GenerateERDAssumptionMap extends Command
 
                 $nullability = Schema::getConnection()->getDoctrineColumn($table, $column)->getNotnull() ? 'NOT NULL' : 'NULL';
                 $relation = $this->getForeignKeyRelation($table, $column);
-                $map[$table][$column] = [
-                    'general' => "{$type} - {$nullability}" . ($relation ? " ({$relation})" : " ()"),
-                    'assumption test' => "",
-                ];
+                $assumptionTest = ''; // Placeholder for assumption test
+                $map[$table][$column] = "ft: {$type}; n: {$nullability}; rel: " . ($relation ? $relation : '') . "; at: {$assumptionTest};";
             }
         }
 
