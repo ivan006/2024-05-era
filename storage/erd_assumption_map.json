@@ -1,0 +1,885 @@
+{
+    "address": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Country": {
+            "general": "integer - NULL (systemcode)",
+            "assumption test": ""
+        },
+        "Type": {
+            "general": "integer - NULL (systemcode)",
+            "assumption test": ""
+        },
+        "Person": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "attachment": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "RelativeID": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "CreatedBy": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "audit": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "PageNo": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "NoOfLines": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "bank": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Name": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Type": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "BankType": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Verified": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        }
+    },
+    "communication": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "SentBy": {
+            "general": "integer - NULL (systemuser)",
+            "assumption test": ""
+        },
+        "RelativeID": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "contactnumber": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Type": {
+            "general": "integer - NOT NULL (systemcode)",
+            "assumption test": ""
+        },
+        "Person": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "crm": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityProduct": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Status": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "document": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "RelativeID": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "CreatedBy": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "documentdetail": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Document": {
+            "general": "integer - NULL (document)",
+            "assumption test": ""
+        },
+        "Section": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Position": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Style": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "CreatedBy": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "domainuser": {
+        "SystemUser": {
+            "general": "integer - NOT NULL (systemuser)",
+            "assumption test": ""
+        }
+    },
+    "dummy": [],
+    "email": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Type": {
+            "general": "integer - NOT NULL (systemcode)",
+            "assumption test": ""
+        },
+        "Person": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "entity": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Level": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Type": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Title": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Gender": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Language": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Status": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "entityaudit": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "SystemUser": {
+            "general": "integer - NULL (systemuser)",
+            "assumption test": ""
+        }
+    },
+    "entityevent": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "TableID": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Instance": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "entitygood": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NOT NULL (entity)",
+            "assumption test": ""
+        },
+        "Good": {
+            "general": "integer - NOT NULL (good)",
+            "assumption test": ""
+        },
+        "Units": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Dimension": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "WasteClass": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Period": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Invoice": {
+            "general": "integer - NULL (entitygoodapproval)",
+            "assumption test": ""
+        }
+    },
+    "entitygoodapproval": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ApprovedBy": {
+            "general": "integer - NOT NULL (entity)",
+            "assumption test": ""
+        },
+        "InvoiceApprovedBy": {
+            "general": "integer - NULL (entity)",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NOT NULL (entity)",
+            "assumption test": ""
+        },
+        "Period": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Query": {
+            "general": "integer - NULL (queryheader)",
+            "assumption test": ""
+        }
+    },
+    "entityrelationship": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "EntityA": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityB": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityARelationship": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityBRelationship": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityAStatus": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityBStatus": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityAQualifier": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityBQualifier": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityALevel": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityBLevel": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "externalproducers": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ServiceRequestReport": {
+            "general": "integer - NULL (servicerequestreport)",
+            "assumption test": ""
+        }
+    },
+    "good": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "EU6": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EU10": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Category": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "HazardSubstance": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Dimension": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Sector": {
+            "general": "integer - NOT NULL (entity)",
+            "assumption test": ""
+        }
+    },
+    "instanceno": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        }
+    },
+    "object": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Parent": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "ChildType": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "objecttrait": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Object": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        }
+    },
+    "objectvalue": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Trait": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Instance": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Object": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "passwordhash": {
+        "SystemUser": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "FbId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "productprovider": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        }
+    },
+    "query": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ParentQuery": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "CreatedBy": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "ClosedBy": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "queryheader": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Status": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Type": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "RelativeID": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "CreatedBy": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "ClosedBy": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "relative": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Relative": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Relationship": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Adopted": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Student": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Disabled": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "TraditionalMarriage": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "requirement": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Code": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Required": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Display": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "ValueType": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "requirementdetail": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Requirement": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "RelativeID": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Received": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "ChangedBy": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "rule": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "NextRule": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "ruleaction": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Rule": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "ruleactiondata": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Rule": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "ruleconfig": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Rule": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "ruleentityrole": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "UserRole": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Rule": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Priority": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "CRUD_Create": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "CRUD_Read": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "CRUD_Update": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "CRUD_Delete": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "servicerequest": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ServiceProvider": {
+            "general": "integer - NOT NULL (entity)",
+            "assumption test": ""
+        },
+        "CreatedBy": {
+            "general": "integer - NOT NULL (systemuser)",
+            "assumption test": ""
+        }
+    },
+    "servicerequestfrequency": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ServiceRequest": {
+            "general": "integer - NOT NULL (servicerequest)",
+            "assumption test": ""
+        },
+        "ReportFrequency": {
+            "general": "integer - NOT NULL (systemcode)",
+            "assumption test": ""
+        }
+    },
+    "servicerequestreport": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ServiceRequest": {
+            "general": "integer - NOT NULL (servicerequest)",
+            "assumption test": ""
+        },
+        "ServiceProvider": {
+            "general": "integer - NOT NULL (entity)",
+            "assumption test": ""
+        },
+        "CreatedBy": {
+            "general": "integer - NULL (systemuser)",
+            "assumption test": ""
+        },
+        "TreatmentDetails": {
+            "general": "integer - NULL (treatmentdetails)",
+            "assumption test": ""
+        }
+    },
+    "systemaction": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        }
+    },
+    "systemcode": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ContextualId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NULL (entity)",
+            "assumption test": ""
+        }
+    },
+    "systemconfiguration": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        }
+    },
+    "systemlog": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        }
+    },
+    "systemuser": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "LoginCount": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "FailedLoginAttempts": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "FbId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "transactions": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "EntityProduct": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Period": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Type": {
+            "general": "integer - NULL (systemcode)",
+            "assumption test": ""
+        }
+    },
+    "treatmentdetails": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ServiceRequestReport": {
+            "general": "integer - NULL (servicerequestreport)",
+            "assumption test": ""
+        }
+    },
+    "useraccess": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "SystemUser": {
+            "general": "integer - NULL (systemuser)",
+            "assumption test": ""
+        },
+        "UserRole": {
+            "general": "integer - NULL (userrole)",
+            "assumption test": ""
+        },
+        "SystemAction": {
+            "general": "integer - NULL (systemaction)",
+            "assumption test": ""
+        },
+        "Entity": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "FbId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "userconfiguration": {
+        "SystemUser": {
+            "general": "integer - NOT NULL (systemuser)",
+            "assumption test": ""
+        },
+        "Language": {
+            "general": "integer - NOT NULL (systemcode)",
+            "assumption test": ""
+        },
+        "FbId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "userdevice": {
+        "SystemUser": {
+            "general": "integer - NOT NULL (systemuser)",
+            "assumption test": ""
+        },
+        "FbId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "userrole": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "FbId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "userroleaccess": {
+        "UserRole": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "SystemAction": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "FbId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        },
+        "Rule": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    },
+    "website_producer_registrations": {
+        "Id": {
+            "general": "integer - NOT NULL ()",
+            "assumption test": ""
+        },
+        "ProducerId": {
+            "general": "integer - NULL ()",
+            "assumption test": ""
+        }
+    }
+}

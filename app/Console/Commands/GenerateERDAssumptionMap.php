@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Storage;
 
 class GenerateERDAssumptionMap extends Command
 {
@@ -30,12 +30,15 @@ class GenerateERDAssumptionMap extends Command
 
                 $nullability = Schema::getConnection()->getDoctrineColumn($table, $column)->getNotnull() ? 'NOT NULL' : 'NULL';
                 $relation = $this->getForeignKeyRelation($table, $column);
-                $map[$table][$column] = "{$type} - {$nullability}" . ($relation ? " ({$relation})" : " ()");
+                $map[$table][$column] = [
+                    'general' => "{$type} - {$nullability}" . ($relation ? " ({$relation})" : " ()"),
+                    'assumption test' => "",
+                ];
             }
         }
 
         $json = json_encode($map, JSON_PRETTY_PRINT);
-        Storage::put('erd_assumption_map.json', $json);
+        File::put(storage_path("erd_assumption_map.json"), $json);
 
         $this->info('ERD assumption map has been generated and saved to storage/erd_assumption_map.json');
     }
