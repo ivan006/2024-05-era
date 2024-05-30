@@ -1,0 +1,260 @@
+# address
+- Person
+- Preferred - nullable)
+- Dispatch - nullable)
+
+# attachment
+- RelativeID
+- CreatedBy
+
+# audit
+- Entity
+- PageNo
+- NoOfLines
+
+# bank
+- Name
+- Type
+- BankType
+- Verified
+- Entity
+
+# communication
+- RelativeID
+
+# contactnumber
+- Person
+- Preferred - not nullable)
+
+# crm
+- Entity
+- EntityProduct
+- Status
+
+# document
+- RelativeID
+- CreatedBy
+
+# documentdetail
+- Section
+- Position
+- Style
+- CreatedBy
+
+# domainuser
+
+# dummy
+
+# email
+- Person
+- Preferred - not nullable)
+
+# entity
+- Level
+- Type
+- Title
+- Gender
+- Language
+- Status
+- HasPhoto
+- IsPaid
+
+# entityaudit
+- Entity Id
+
+# entityevent
+- TableID
+- Instance
+
+# entitygood
+- Units
+- Selected
+- Dimension
+- WasteClass
+- Period
+
+# entitygoodapproval
+- Period
+- UseAR
+- UseVAT
+- Status
+
+# entityrelationship
+- EntityA
+- EntityB
+- EntityARelationship
+- EntityBRelationship
+- EntityAStatus
+- EntityBStatus
+- EntityAQualifier
+- EntityBQualifier
+- EntityALevel
+- EntityBLevel
+
+# externalproducers
+
+# failed_jobs
+
+# good
+- EU6
+- EU10
+- Category
+- HazardSubstance
+- Dimension
+
+# instanceno
+
+# migrations
+- batch
+
+# object
+- Parent
+- ChildType
+
+# objecttrait
+- Object
+- IsRule
+- SpecialType
+- IsDisabled
+- IsHidden
+
+# objectvalue
+- Trait
+- Instance
+- Object
+- Entity
+
+# password_reset_tokens
+
+# passwordhash
+- SystemUser
+- FbId
+
+# personal_access_tokens
+- tokenable_id
+
+# post_tags
+- post_id
+- tag_id
+
+# posts
+
+# productprovider
+- Entity
+
+# query
+- ParentQuery
+- CreatedBy
+- ClosedBy
+
+# queryheader
+- Status
+- Type
+- RelativeID
+- CreatedBy
+- ClosedBy
+
+# relative
+- Entity
+- Relative
+- Relationship
+- Adopted
+- Student
+- Disabled
+- TraditionalMarriage
+
+# requirement
+- Code
+- Required
+- Display
+- ValueType
+
+# requirementdetail
+- Requirement
+- RelativeID
+- Received
+- ChangedBy
+
+# rule
+- NextRule
+
+# ruleaction
+- Rule
+
+# ruleactiondata
+- Rule
+
+# ruleconfig
+- Rule
+
+# ruleentityrole
+- Entity
+- UserRole
+- Rule
+- Priority
+- CRUD_Create
+- CRUD_Read
+- CRUD_Update
+- CRUD_Delete
+
+# servicerequest
+
+# servicerequestfrequency
+- Active
+
+# servicerequestreport
+- Approved
+- Rejected
+
+# systemaction
+- Available - nullable)
+
+# systemcode
+- Active - nullable)
+- UserGenerated - not nullable)
+- ContextualId
+
+# systemconfiguration
+
+# systemlog
+
+# systemuser
+- Entity
+- Active - not nullable)
+- LoginCount
+- FailedLoginAttempts
+- FbId
+
+# tags
+
+# transactions
+- Entity
+- EntityProduct
+- Period
+
+# treatmentdetails
+
+# useraccess
+- Entity
+- FbId
+
+# userconfiguration
+- FbId
+
+# userdevice
+- FbId
+
+# userrole
+- Active - not nullable)
+- FbId
+
+# userroleaccess
+- UserRole
+- SystemAction
+- FbId
+- Rule
+
+# users
+
+# website_producer_registrations
+- ProducerId
