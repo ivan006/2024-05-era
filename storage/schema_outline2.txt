@@ -1,14 +1,14 @@
 # address
-- Person, entity
+- Person (entity)
 - Preferred
 - Dispatch
 
 # attachment
-- RelativeID, entity
-- CreatedBy, entity
+- RelativeID (entity)
+- CreatedBy (entity)
 
 # audit
-- Entity, entity
+- Entity (entity)
 - PageNo
 - NoOfLines
 
@@ -17,36 +17,36 @@
 - Type
 - BankType
 - Verified
-- Entity, entity
+- Entity (entity)
 
 # communication
-- RelativeID, entity
+- RelativeID (entity)
 
 # contactnumber
-- Person, entity
+- Person (entity)
 - Preferred
 
 # crm
-- Entity, entity
-- EntityProduct, entity
+- Entity (entity)
+- EntityProduct (entity)
 - Status
 
 # document
-- RelativeID, entity
-- CreatedBy, entity
+- RelativeID (entity)
+- CreatedBy (entity)
 
 # documentdetail
 - Section
 - Position
 - Style
-- CreatedBy, entity
+- CreatedBy (entity)
 
 # domainuser
 
 # dummy
 
 # email
-- Person, entity
+- Person (entity)
 - Preferred
 
 # entity
@@ -60,7 +60,7 @@
 - IsPaid
 
 # entityaudit
-- Entity Id, entity
+- Entity Id (entity)
 
 # entityevent
 - TableID
@@ -80,8 +80,8 @@
 - Status
 
 # entityrelationship
-- EntityA, entity
-- EntityB, entity
+- EntityA (entity)
+- EntityB (entity)
 - EntityARelationship
 - EntityBRelationship
 - EntityAStatus
@@ -108,51 +108,51 @@
 - batch
 
 # object
-- Parent, object
+- Parent (object)
 - ChildType
 
 # objecttrait
-- Object, object
+- Object (object)
 
 # objectvalue
-- Trait, objecttrait
-- Instance, instanceno
-- Object, object
-- Entity, entity
+- Trait (objecttrait)
+- Instance (instanceno)
+- Object (object)
+- Entity (entity)
 
 # password_reset_tokens
 
 # passwordhash
-- SystemUser, systemuser
+- SystemUser (systemuser)
 - FbId
 
 # personal_access_tokens
 - tokenable_id
 
 # post_tags
-- post_id, posts
-- tag_id, tags
+- post_id (posts)
+- tag_id (tags)
 
 # posts
 
 # productprovider
-- Entity, entity
+- Entity (entity)
 
 # query
-- ParentQuery, query
-- CreatedBy, entity
-- ClosedBy, entity
+- ParentQuery (query)
+- CreatedBy (entity)
+- ClosedBy (entity)
 
 # queryheader
 - Status
 - Type
-- RelativeID, entity
-- CreatedBy, entity
-- ClosedBy, entity
+- RelativeID (entity)
+- CreatedBy (entity)
+- ClosedBy (entity)
 
 # relative
-- Entity, entity
-- Relative, entity
+- Entity (entity)
+- Relative (entity)
 - Relationship
 - Adopted
 - Student
@@ -166,27 +166,27 @@
 - ValueType
 
 # requirementdetail
-- Requirement, requirement
-- RelativeID, entity
+- Requirement (requirement)
+- RelativeID (entity)
 - Received
-- ChangedBy, entity
+- ChangedBy (entity)
 
 # rule
-- NextRule, rule
+- NextRule (rule)
 
 # ruleaction
-- Rule, rule
+- Rule (rule)
 
 # ruleactiondata
-- Rule, rule
+- Rule (rule)
 
 # ruleconfig
-- Rule, rule
+- Rule (rule)
 
 # ruleentityrole
-- Entity, entity
-- UserRole, userrole
-- Rule, rule
+- Entity (entity)
+- UserRole (userrole)
+- Rule (rule)
 - Priority
 - CRUD_Create
 - CRUD_Read
@@ -215,7 +215,7 @@
 # systemlog
 
 # systemuser
-- Entity, entity
+- Entity (entity)
 - Active
 - LoginCount
 - FailedLoginAttempts
@@ -224,14 +224,14 @@
 # tags
 
 # transactions
-- Entity, entity
-- EntityProduct, entity
+- Entity (entity)
+- EntityProduct (entity)
 - Period
 
 # treatmentdetails
 
 # useraccess
-- Entity, entity
+- Entity (entity)
 - FbId
 
 # userconfiguration
@@ -245,12 +245,12 @@
 - FbId
 
 # userroleaccess
-- UserRole, userrole
-- SystemAction, systemaction
+- UserRole (userrole)
+- SystemAction (systemaction)
 - FbId
-- Rule, rule
+- Rule (rule)
 
 # users
 
 # website_producer_registrations
-- ProducerId, entity
+- ProducerId (entity)
