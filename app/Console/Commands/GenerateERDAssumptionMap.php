@@ -27,6 +27,9 @@ class GenerateERDAssumptionMap extends Command
                 $type = Schema::getColumnType($table, $column);
                 $columnDetails = Schema::getConnection()->getDoctrineColumn($table, $column);
 
+                if (!in_array($type, ['integer', 'bigint', 'smallint', 'tinyint'])) {
+                    continue;
+                }
                 // Skip primary keys and auto increment keys
                 if (in_array($column, $primaryKeys) || $columnDetails->getAutoincrement()) {
                     continue;
