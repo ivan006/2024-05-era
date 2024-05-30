@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Storage;
 
 class GenerateERDAssumptionMap extends Command
 {
@@ -21,15 +22,22 @@ class GenerateERDAssumptionMap extends Command
             $map[$table] = [];
 
             foreach ($columns as $column) {
+                // Only consider numeric types as potential foreign keys
                 $type = Schema::getColumnType($table, $column);
-                $nullability = Schema::getConnection()->getDoctrineColumn($table, $column)->getNotnull() ? 'NOT NULL' : 'NULL';
+                if (!in_array($type, ['integer', 'bigint', 'smallint', 'tinyint'])) {
+                    continue;
+                }
 
+                $nullability = Schema::getConnection()->getDoctrineColumn($table, $column)->getNotnull() ? 'NOT NULL' : 'NULL';
                 $relation = $this->getForeignKeyRelation($table, $column);
                 $map[$table][$column] = "{$type} - {$nullability}" . ($relation ? " ({$relation})" : " ()");
             }
         }
 
-        $this->output->writeln(json_encode($map, JSON_PRETTY_PRINT));
+        $json = json_encode($map, JSON_PRETTY_PRINT);
+        Storage::put('erd_assumption_map.json', $json);
+
+        $this->info('ERD assumption map has been generated and saved to storage/erd_assumption_map.json');
     }
 
     private function getForeignKeyRelation($table, $column)
