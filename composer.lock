@@ -1394,7 +1394,7 @@
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "C:/Users/Admin/Documents/GitHub/2024-05-quicklists-laravel-orm-api",
+                "url": "../2024-05-quicklists-laravel-orm-api",
                 "reference": "bcd53b68e87ee22e8c9e5a56d978ea61f5696074"
             },
             "require": {

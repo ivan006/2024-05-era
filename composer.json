@@ -16,7 +16,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "C:\\Users\\Admin\\Documents\\GitHub\\2024-05-quicklists-laravel-orm-api"
+            "url": "..\\2024-05-quicklists-laravel-orm-api"
         }
     ],
     "require-dev": {
