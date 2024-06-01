@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
-use App\Models\Good;
+use App\Models\RequirementDetail;
 use Illuminate\Http\Request;
 
-class GoodController extends Controller
+class RequirementDetailController extends Controller
 {
-    protected $itemNameSingular = "Good";
+    protected $itemNameSingular = "Requirementdetail";
     protected $model;
 
     public function __construct()
     {
-        $this->model = new Good();
+        $this->model = new RequirementDetail();
     }
 
     /**

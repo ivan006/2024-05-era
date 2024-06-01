@@ -4,17 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use QuicklistsOrmApi\OrmApi;
 use App\Http\Controllers\Controller;
-use App\Models\Good;
+use App\Models\UserAccess;
 use Illuminate\Http\Request;
 
-class GoodController extends Controller
+class UserAccessController extends Controller
 {
-    protected $itemNameSingular = "Good";
+    protected $itemNameSingular = "Useraccess";
     protected $model;
 
     public function __construct()
     {
-        $this->model = new Good();
+        $this->model = new UserAccess();
     }
 
     /**
