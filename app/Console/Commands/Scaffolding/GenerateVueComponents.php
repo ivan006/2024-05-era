@@ -3,73 +3,41 @@
 namespace App\Console\Commands\Scaffolding;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use App\Console\Commands\WordSplitter;
 
 class GenerateVueComponents extends Command
 {
     protected $signature = 'generate:vue-components';
     protected $description = 'Generate Vue component files for each model';
+    protected $wordSplitter;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->wordSplitter = new WordSplitter();
+    }
 
     public function handle()
     {
-        $models = [
-            ['name' => 'Address', 'kebab' => 'address'],
-            ['name' => 'Attachment', 'kebab' => 'attachment'],
-            ['name' => 'Audit', 'kebab' => 'audit'],
-            ['name' => 'Bank', 'kebab' => 'bank'],
-            ['name' => 'Communication', 'kebab' => 'communication'],
-            ['name' => 'Contactnumber', 'kebab' => 'contactnumber'],
-            ['name' => 'Crm', 'kebab' => 'crm'],
-            ['name' => 'Document', 'kebab' => 'document'],
-            ['name' => 'Documentdetail', 'kebab' => 'document-detail'],
-            ['name' => 'Domainuser', 'kebab' => 'domain-user'],
-            ['name' => 'Dummy', 'kebab' => 'dummy'],
-            ['name' => 'Email', 'kebab' => 'email'],
-            ['name' => 'Entity', 'kebab' => 'entity'],
-            ['name' => 'Entityaudit', 'kebab' => 'entity-audit'],
-            ['name' => 'Entityevent', 'kebab' => 'entity-event'],
-            ['name' => 'Entitygood', 'kebab' => 'entity-good'],
-            ['name' => 'Entitygoodapproval', 'kebab' => 'entity-good-approval'],
-            ['name' => 'Entityrelationship', 'kebab' => 'entity-relationship'],
-            ['name' => 'Externalproducer', 'kebab' => 'external-producer'],
-            ['name' => 'Good', 'kebab' => 'good'],
-            ['name' => 'Instanceno', 'kebab' => 'instance-no'],
-            ['name' => 'Object', 'kebab' => 'object'],
-            ['name' => 'Objecttrait', 'kebab' => 'object-trait'],
-            ['name' => 'Objectvalue', 'kebab' => 'object-value'],
-            ['name' => 'Passwordhash', 'kebab' => 'password-hash'],
-            ['name' => 'Productprovider', 'kebab' => 'product-provider'],
-            ['name' => 'Query', 'kebab' => 'query'],
-            ['name' => 'Queryheader', 'kebab' => 'query-header'],
-            ['name' => 'Relative', 'kebab' => 'relative'],
-            ['name' => 'Requirement', 'kebab' => 'requirement'],
-            ['name' => 'Requirementdetail', 'kebab' => 'requirement-detail'],
-            ['name' => 'Rule', 'kebab' => 'rule'],
-            ['name' => 'Ruleaction', 'kebab' => 'rule-action'],
-            ['name' => 'Ruleactiondatum', 'kebab' => 'rule-action-datum'],
-            ['name' => 'Ruleconfig', 'kebab' => 'rule-config'],
-            ['name' => 'Ruleentityrole', 'kebab' => 'rule-entity-role'],
-            ['name' => 'Servicerequest', 'kebab' => 'service-request'],
-            ['name' => 'Servicerequestfrequency', 'kebab' => 'service-request-frequency'],
-            ['name' => 'Servicerequestreport', 'kebab' => 'service-request-report'],
-            ['name' => 'Systemaction', 'kebab' => 'system-action'],
-            ['name' => 'Systemcode', 'kebab' => 'system-code'],
-            ['name' => 'Systemconfiguration', 'kebab' => 'system-configuration'],
-            ['name' => 'Systemlog', 'kebab' => 'system-log'],
-            ['name' => 'Systemuser', 'kebab' => 'system-user'],
-            ['name' => 'Transaction', 'kebab' => 'transaction'],
-            ['name' => 'Treatmentdetail', 'kebab' => 'treatment-detail'],
-            ['name' => 'Useraccess', 'kebab' => 'user-access'],
-            ['name' => 'Userconfiguration', 'kebab' => 'user-configuration'],
-            ['name' => 'Userdevice', 'kebab' => 'user-device'],
-            ['name' => 'Userrole', 'kebab' => 'user-role'],
-            ['name' => 'Userroleaccess', 'kebab' => 'user-role-access'],
-            ['name' => 'WebsiteProducerRegistration', 'kebab' => 'website-producer-registration'],
-        ];
+        $tables = DB::select('SHOW TABLES');
 
-        foreach ($models as $model) {
-            $modelName = $model['name'];
-            $kebabModel = $model['kebab'];
+        foreach ($tables as $table) {
+            // Extract the table name dynamically
+            $tableArray = get_object_vars($table);
+            $tableName = reset($tableArray);
+            $cleanedTableName = preg_replace('/[^a-zA-Z]/', '', $tableName);
+            $this->info("Processing table: $tableName (cleaned: $cleanedTableName)");
+
+            $segmentationResult = $this->wordSplitter->split($cleanedTableName);
+            $segmentedTableName = $segmentationResult['words'];
+            $this->info("Segmented table name: " . implode(' ', $segmentedTableName));
+
+            $pascalTableName = implode('', array_map('ucfirst', $segmentedTableName));
+            $modelName = Str::singular($pascalTableName);
+            $kebabModel = Str::kebab(implode('-', $segmentedTableName));
 
             $listComponentContent = $this->getListComponentContent($modelName, $kebabModel);
             $readComponentContent = $this->getReadComponentContent($modelName, $kebabModel);
@@ -83,7 +51,7 @@ class GenerateVueComponents extends Command
             File::ensureDirectoryExists(dirname($readPath));
             File::put($readPath, $readComponentContent);
 
-            $this->info("Generated Vue components for $modelName");
+            $this->info("Generated Vue components for $tableName");
         }
     }
 
@@ -121,10 +89,10 @@ export default {
         },
         user() {
           let result = {}
-          // if (this.\$store.getters['entities/login-sessions/all']()?.[0]){
-          //   const id = this.\$store.getters['entities/login-sessions/all']()?.[0]?.\$id
-          //   result = this.\$store.state.entities['login-sessions'].data[id]?.user
-          // }
+          if (this.\$store.getters['entities/login-sessions/all']()?.[0]){
+            const id = this.\$store.getters['entities/login-sessions/all']()?.[0]?.\$id
+            result = this.\$store.state.entities['login-sessions'].data[id]?.user
+          }
           return result
         },
     },
