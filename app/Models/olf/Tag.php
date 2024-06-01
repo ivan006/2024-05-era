@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\olf;
 
+use App\Models\BelongsToMany;
+use App\Models\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Tag extends Model
 {
     use HasFactory;
 
@@ -13,9 +15,9 @@ class Post extends Model
         'name',
     ];
 
-    public function Tags(): BelongsToMany
+    public function Posts(): BelongsToMany
     {
-        return $this->belongsToMany(Tags::class);
+        return $this->belongsToMany(Post::class);
     }
 
     public function PostTags(): HasMany

@@ -6,11 +6,19 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use App\Console\Commands\WordSplitter;
 
 class GenerateLaravelModels extends Command
 {
     protected $signature = 'generate:laravel-models';
     protected $description = 'Generate Laravel models from database schema with relationships, rules, fillable attributes, and table name';
+    protected $wordSplitter;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->wordSplitter = new WordSplitter();
+    }
 
     public function handle()
     {
@@ -19,8 +27,14 @@ class GenerateLaravelModels extends Command
         foreach ($tables as $table) {
             $tableArray = get_object_vars($table);
             $tableName = reset($tableArray);
-            $modelName = Str::studly(Str::singular($tableName));
+            $cleanedTableName = preg_replace('/[^a-zA-Z]/', '', $tableName);
+            $this->info("Processing table: $tableName (cleaned: $cleanedTableName)");
 
+            $segmentationResult = $this->wordSplitter->split($cleanedTableName);
+            $segmentedTableName = $segmentationResult['words'];
+            $pascalTableName = implode('', array_map('ucfirst', $segmentedTableName));
+
+            $modelName = Str::singular($pascalTableName);
             $columns = DB::select("SHOW COLUMNS FROM $tableName");
 
             $fillable = [];
@@ -40,13 +54,12 @@ class GenerateLaravelModels extends Command
                 if (!$autoIncrement) {
                     $fillable[] = "'$fieldName'";
                     $rules[] = "'$fieldName' => '" . ($nullable ? 'nullable' : 'required') . "'";
-                    $attributeNames[] = strtolower($fieldName); // Store attribute names in lowercase for case-insensitive comparison
+                    $attributeNames[] = strtolower($fieldName);
                 }
 
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
-                    // Remove the 'id', 'ID', '_id', '_ID', etc. suffix from the foreign key
                     $relationshipName = Str::camel(Str::singular(preg_replace('/(_?id)$/i', '', $fieldName)));
-                    if (in_array(strtolower($relationshipName), $attributeNames)) { // Case-insensitive check for conflicts
+                    if (in_array(strtolower($relationshipName), $attributeNames)) {
                         $relationshipName .= 'Rel';
                     }
                     $relatedModel = $this->getRelatedModelName($fieldName, $relations['foreignKeys']);
@@ -62,7 +75,7 @@ class GenerateLaravelModels extends Command
                     if (count($relationGroup) > 1) {
                         $relationshipName .= Str::studly($relation['COLUMN_NAME']);
                     }
-                    if (in_array(strtolower($relationshipName), $attributeNames)) { // Case-insensitive check for conflicts
+                    if (in_array(strtolower($relationshipName), $attributeNames)) {
                         $relationshipName .= 'Rel';
                     }
                     $relationships[] = "'$relationshipName'";
