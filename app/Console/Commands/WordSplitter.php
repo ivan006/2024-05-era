@@ -58,6 +58,8 @@ class WordSplitter {
     }
 
     public function split($input) {
+        // Remove non-alphabetic characters
+        $input = preg_replace('/[^a-zA-Z]/', '', $input);
         $input = strtolower($input);
         $result = $this->splitRecursive($input);
         return ['words' => $result, 'log' => $this->createLog($result)];
