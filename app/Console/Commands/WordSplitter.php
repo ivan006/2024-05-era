@@ -6,7 +6,7 @@ class WordSplitter {
     private $commonWords;
 
     public function __construct($filename = null) {
-        $url = 'https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt';
+        $url = 'https://raw.githubusercontent.com/first20hours/google-10000-english/master/20k.txt';
         $savePath = storage_path('app/google-10000-english.txt');
         $sortedPath = storage_path('app/sorted-google-10000-english.txt');
 
