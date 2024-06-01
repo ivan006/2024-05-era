@@ -2,8 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Facades\Log;
-
 class WordSplitter {
     private $commonWords;
 
@@ -54,14 +52,11 @@ class WordSplitter {
     }
 
     public function split($input) {
-        Log::info("Starting split method for input: $input");
         $input = strtolower($input);
         $length = strlen($input);
         $cost = [0];
         $result = [];
         $segmentationLog = []; // To log the segmentation process
-
-        Log::info("Initialized variables. Starting dynamic programming loop.");
 
         for ($i = 1; $i <= $length; $i++) {
             $cost[$i] = PHP_INT_MAX;
@@ -76,14 +71,12 @@ class WordSplitter {
                     if ($cost[$j] + $wordCost < $cost[$i]) {
                         $cost[$i] = $cost[$j] + $wordCost;
                         $result[$i] = $word;
-                        Log::info("Found word: $word at position $j to $i with cost {$cost[$i]}");
                     }
                 }
             }
         }
 
-        Log::info("Completed dynamic programming loop. Constructing result.");
-
+        // Construct the result
         $words = [];
         $lastIndex = $length;
         while ($lastIndex > 0) {
@@ -100,7 +93,10 @@ class WordSplitter {
             $lastIndex -= strlen($segment);
         }
 
-        Log::info("Completed segmentation for input: $input");
+        // Check for single-character segments
+        if (count($words) > 1 && strlen($words[0]) == 1) {
+            return ['words' => [$input], 'log' => [['segment' => $input, 'position' => 0]]];
+        }
 
         return ['words' => $words, 'log' => $segmentationLog];
     }
