@@ -56,6 +56,7 @@ class WordSplitter {
         $length = strlen($input);
         $cost = [0];
         $result = [];
+        $segmentationLog = []; // To log the segmentation process
 
         for ($i = 1; $i <= $length; $i++) {
             $cost[$i] = PHP_INT_MAX;
@@ -78,8 +79,12 @@ class WordSplitter {
         $words = [];
         for ($i = $length; $i > 0; $i -= strlen($result[$i])) {
             array_unshift($words, $result[$i]);
+            $segmentationLog[] = [
+                'segment' => $result[$i],
+                'position' => $i - strlen($result[$i])
+            ]; // Log the segmentation process
         }
 
-        return $words;
+        return ['words' => $words, 'log' => $segmentationLog];
     }
 }

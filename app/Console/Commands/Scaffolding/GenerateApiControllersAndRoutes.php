@@ -23,11 +23,13 @@ class GenerateApiControllersAndRoutes extends Command
     public function handle()
     {
         $tables = DB::select('SHOW TABLES');
+        $report = [];
 
         foreach ($tables as $table) {
             $tableArray = get_object_vars($table);
             $tableName = reset($tableArray);
-            $segmentedTableName = $this->wordSplitter->split($tableName);
+            $segmentationResult = $this->wordSplitter->split($tableName);
+            $segmentedTableName = $segmentationResult['words'];
             $pascalTableName = implode('', array_map(function ($word) {
                 return ucfirst(strtolower($word));
             }, $segmentedTableName));
@@ -45,7 +47,11 @@ class GenerateApiControllersAndRoutes extends Command
             File::append($routePath, $routeContent);
 
             $this->info("Generated API controller and route for $tableName");
+
+            $report[$tableName] = $segmentationResult['log'];
         }
+
+        $this->generateReport($report);
     }
 
     protected function generateControllerContent($modelName, $controllerName, $itemNameSingular)
@@ -139,5 +145,22 @@ EOT;
 // API routes for $tableName
 Route::apiResource('$routeName', \\App\\Http\\Controllers\\Api\\$controllerName::class);
 EOT;
+    }
+
+    protected function generateReport($report)
+    {
+        $reportPath = storage_path('app/segmentation_report.txt');
+        $reportContent = '';
+
+        foreach ($report as $word => $log) {
+            $reportContent .= "Word: $word\n";
+            foreach ($log as $entry) {
+                $reportContent .= "  Segment: {$entry['segment']} at position {$entry['position']}\n";
+            }
+            $reportContent .= "\n";
+        }
+
+        file_put_contents($reportPath, $reportContent);
+        $this->info("Segmentation report generated at $reportPath");
     }
 }
