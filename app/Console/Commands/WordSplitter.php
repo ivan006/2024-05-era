@@ -89,7 +89,8 @@ class WordSplitter {
         while ($lastIndex > 0) {
             $segment = $result[$lastIndex];
             if ($segment === '') {
-                throw new \Exception("Segmentation failed for input: $input");
+                // Fallback: use the original input as a single segment
+                return ['words' => [$input], 'log' => [['segment' => $input, 'position' => 0]]];
             }
             array_unshift($words, $segment);
             $segmentationLog[] = [
