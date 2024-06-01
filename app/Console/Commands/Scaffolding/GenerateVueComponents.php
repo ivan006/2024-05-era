@@ -121,21 +121,21 @@ export default {
         },
         user() {
           let result = {}
-          if (this.\$store.getters['entities/login-sessions/all']()?.[0]){
-            const id = this.\$store.getters['entities/login-sessions/all']()?.[0]?.\$id
-            result = this.\$store.state.entities['login-sessions'].data[id]?.user
-          }
+          // if (this.\$store.getters['entities/login-sessions/all']()?.[0]){
+          //   const id = this.\$store.getters['entities/login-sessions/all']()?.[0]?.\$id
+          //   result = this.\$store.state.entities['login-sessions'].data[id]?.user
+          // }
           return result
         },
     },
     methods: {
         openRecord(e) {
-            router.push({
-                name: '/lists/$kebabModel/:rId',
-                params: {
-                    rId: e.id,
-                },
-            })
+            //router.push({
+            //    name: '/lists/$kebabModel/:rId',
+            //    params: {
+            //        rId: e.id,
+            //    },
+            //})
         },
     },
 }
@@ -173,10 +173,10 @@ export default {
         },
         user() {
           let result = {}
-          if (this.\$store.getters['entities/login-sessions/all']()?.[0]){
-            const id = this.\$store.getters['entities/login-sessions/all']()?.[0]?.\$id
-            result = this.\$store.state.entities['login-sessions'].data[id]?.user
-          }
+          // if (this.\$store.getters['entities/login-sessions/all']()?.[0]){
+          //   const id = this.\$store.getters['entities/login-sessions/all']()?.[0]?.\$id
+          //   result = this.\$store.state.entities['login-sessions'].data[id]?.user
+          // }
           return result
         },
     },
