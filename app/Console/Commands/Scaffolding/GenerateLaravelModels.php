@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\scafolding;
+namespace App\Console\Commands\Scaffolding;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;

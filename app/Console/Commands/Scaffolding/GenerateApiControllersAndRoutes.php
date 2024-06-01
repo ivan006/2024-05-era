@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\scafolding;
+namespace App\Console\Commands\Scaffolding;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +28,9 @@ class GenerateApiControllersAndRoutes extends Command
             $tableArray = get_object_vars($table);
             $tableName = reset($tableArray);
             $segmentedTableName = $this->wordSplitter->split($tableName);
-            $pascalTableName = implode('', array_map('ucfirst', $segmentedTableName));
+            $pascalTableName = implode('', array_map(function ($word) {
+                return ucfirst(strtolower($word));
+            }, $segmentedTableName));
             $modelName = Str::singular($pascalTableName);
             $controllerName = $modelName . 'Controller';
             $itemNameSingular = Str::title(Str::replace('_', ' ', Str::singular($tableName)));
