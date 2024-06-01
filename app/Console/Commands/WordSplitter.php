@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Support\Facades\Log;
+
 class WordSplitter {
     private $commonWords;
 
@@ -52,11 +54,14 @@ class WordSplitter {
     }
 
     public function split($input) {
+        Log::info("Starting split method for input: $input");
         $input = strtolower($input);
         $length = strlen($input);
         $cost = [0];
         $result = [];
         $segmentationLog = []; // To log the segmentation process
+
+        Log::info("Initialized variables. Starting dynamic programming loop.");
 
         for ($i = 1; $i <= $length; $i++) {
             $cost[$i] = PHP_INT_MAX;
@@ -71,19 +76,30 @@ class WordSplitter {
                     if ($cost[$j] + $wordCost < $cost[$i]) {
                         $cost[$i] = $cost[$j] + $wordCost;
                         $result[$i] = $word;
+                        Log::info("Found word: $word at position $j to $i with cost {$cost[$i]}");
                     }
                 }
             }
         }
 
+        Log::info("Completed dynamic programming loop. Constructing result.");
+
         $words = [];
-        for ($i = $length; $i > 0; $i -= strlen($result[$i])) {
-            array_unshift($words, $result[$i]);
+        $lastIndex = $length;
+        while ($lastIndex > 0) {
+            $segment = $result[$lastIndex];
+            if ($segment === '') {
+                throw new \Exception("Segmentation failed for input: $input");
+            }
+            array_unshift($words, $segment);
             $segmentationLog[] = [
-                'segment' => $result[$i],
-                'position' => $i - strlen($result[$i])
-            ]; // Log the segmentation process
+                'segment' => $segment,
+                'position' => $lastIndex - strlen($segment)
+            ];
+            $lastIndex -= strlen($segment);
         }
+
+        Log::info("Completed segmentation for input: $input");
 
         return ['words' => $words, 'log' => $segmentationLog];
     }
