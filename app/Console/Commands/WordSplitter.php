@@ -2,13 +2,15 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Support\Facades\Storage;
+
 class WordSplitter {
     private $commonWords;
 
     public function __construct($filename = null) {
         $url = 'https://raw.githubusercontent.com/first20hours/google-10000-english/master/20k.txt';
-        $savePath = storage_path('app/google-10000-english.txt');
-        $sortedPath = storage_path('app/sorted-google-10000-english.txt');
+        $savePath = storage_path('app/common-words.txt');
+        $sortedPath = storage_path('app/sorted-common-words.txt');
 
         if ($filename) {
             $savePath = $filename;
@@ -19,7 +21,7 @@ class WordSplitter {
         }
 
         if (!file_exists($sortedPath)) {
-            $words = $this->sortWordsByLength($savePath);
+            $words = $this->sortAndFilterWords($savePath);
             $this->saveSortedWords($words, $sortedPath);
         }
 
@@ -34,12 +36,16 @@ class WordSplitter {
         file_put_contents($savePath, $content);
     }
 
-    private function sortWordsByLength($filePath) {
+    private function sortAndFilterWords($filePath) {
         $words = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        usort($words, function($a, $b) {
+        $commonTwoLetterWords = ["am", "an", "as", "at", "be", "by", "do", "go", "he", "if", "in", "is", "it", "me", "my", "no", "of", "on", "or", "so", "to", "up", "us", "we"];
+        $filteredWords = array_filter($words, function($word) use ($commonTwoLetterWords) {
+            return strlen($word) >= 3 || in_array($word, $commonTwoLetterWords);
+        });
+        usort($filteredWords, function($a, $b) {
             return strlen($b) - strlen($a);
         });
-        return $words;
+        return $filteredWords;
     }
 
     private function saveSortedWords($words, $sortedFilePath) {
