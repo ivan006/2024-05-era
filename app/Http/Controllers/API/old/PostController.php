@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\old;
 
 use App\Http\Controllers\Controller;
-use App\Models\PostTag;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PostTagController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return Post::all();
     }
 
     /**
@@ -21,7 +21,8 @@ class PostTagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = Post::create($request->all());
+        return response()->json($post)
     }
 
     /**

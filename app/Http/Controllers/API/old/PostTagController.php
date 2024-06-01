@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\old;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class PostTagController extends Controller
 {
     /**
      * Display a listing of the resource.
