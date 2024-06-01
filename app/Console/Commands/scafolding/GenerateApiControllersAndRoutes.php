@@ -6,11 +6,19 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use App\Console\Commands\WordSplitter;
 
 class GenerateApiControllersAndRoutes extends Command
 {
     protected $signature = 'generate:api-controllers-and-routes';
     protected $description = 'Generate API controllers and routes from database schema';
+    protected $wordSplitter;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->wordSplitter = new WordSplitter();
+    }
 
     public function handle()
     {
@@ -19,7 +27,9 @@ class GenerateApiControllersAndRoutes extends Command
         foreach ($tables as $table) {
             $tableArray = get_object_vars($table);
             $tableName = reset($tableArray);
-            $modelName = Str::studly(Str::singular($tableName));
+            $segmentedTableName = $this->wordSplitter->split($tableName);
+            $pascalTableName = implode('', array_map('ucfirst', $segmentedTableName));
+            $modelName = Str::singular($pascalTableName);
             $controllerName = $modelName . 'Controller';
             $itemNameSingular = Str::title(Str::replace('_', ' ', Str::singular($tableName)));
 
