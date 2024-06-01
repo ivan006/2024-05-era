@@ -15,10 +15,10 @@ class GenerateLaravelModels extends Command
     public function handle()
     {
         $tables = DB::select('SHOW TABLES');
-        $database = env('DB_DATABASE');
 
         foreach ($tables as $table) {
-            $tableName = $table->{"Tables_in_$database"};
+            $tableArray = get_object_vars($table);
+            $tableName = reset($tableArray);
             $modelName = Str::studly(Str::singular($tableName));
 
             $columns = DB::select("SHOW COLUMNS FROM $tableName");

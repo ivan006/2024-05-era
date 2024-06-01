@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+class Dummy extends Model
+{
+    protected $table = 'dummy';
+
+    public function relationships()
+    {
+        return [
+            
+        ];
+    }
+
+    public function rules()
+    {
+        return [
+            'textData' => 'nullable'
+        ];
+    }
+
+    protected $fillable = [
+        'textData'
+    ];
+
+    
+
+    
+}
