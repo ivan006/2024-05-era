@@ -29,10 +29,11 @@ class GenerateApiControllersAndRoutes extends Command
             try {
                 $tableArray = get_object_vars($table);
                 $tableName = reset($tableArray);
-                $this->info("Processing table: $tableName");
+                $cleanedTableName = preg_replace('/[^a-zA-Z]/', '', $tableName);
+                $this->info("Processing table: $tableName (cleaned: $cleanedTableName)");
 
-                $this->info("Splitting table name: $tableName");
-                $segmentationResult = $this->wordSplitter->split($tableName);
+                $this->info("Splitting table name: $cleanedTableName");
+                $segmentationResult = $this->wordSplitter->split($cleanedTableName);
 
                 $segmentedTableName = $segmentationResult['words'];
                 $this->info("Segmented table name: " . implode(' ', $segmentedTableName));
@@ -50,7 +51,7 @@ class GenerateApiControllersAndRoutes extends Command
                 $controllerContent = $this->generateControllerContent($modelName, $controllerName, $itemNameSingular);
 
                 $this->info("Generating route content for: $controllerName");
-                $routeContent = $this->generateRouteContent($tableName, $controllerName);
+                $routeContent = $this->generateRouteContent($segmentedTableName, $controllerName);
 
                 $this->info("Saving controller file: $controllerName");
                 $controllerPath = app_path("Http/Controllers/Api/{$controllerName}.php");
@@ -156,14 +157,12 @@ class $controllerName extends Controller
 EOT;
     }
 
-    protected function generateRouteContent($tableName, $controllerName)
+    protected function generateRouteContent($segmentedTableName, $controllerName)
     {
-        $this->info("Creating route content for controller: $controllerName");
-
-        $routeName = Str::plural(Str::snake($tableName));
+        $routeName = Str::plural(Str::kebab(implode('-', $segmentedTableName)));
         return <<<EOT
 
-// API routes for $tableName
+// API routes for $routeName
 Route::apiResource('$routeName', \\App\\Http\\Controllers\\Api\\$controllerName::class);
 EOT;
     }
