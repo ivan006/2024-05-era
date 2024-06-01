@@ -53,51 +53,35 @@ class WordSplitter {
 
     public function split($input) {
         $input = strtolower($input);
+        $result = $this->splitRecursive($input);
+        return ['words' => $result, 'log' => $this->createLog($result)];
+    }
+
+    private function splitRecursive($input) {
         $length = strlen($input);
-        $cost = [0];
-        $result = [];
-        $segmentationLog = []; // To log the segmentation process
-
-        for ($i = 1; $i <= $length; $i++) {
-            $cost[$i] = PHP_INT_MAX;
-            $result[$i] = '';
+        if ($length === 0) {
+            return [];
         }
 
-        for ($i = 1; $i <= $length; $i++) {
-            for ($j = 0; $j < $i; $j++) {
-                $word = substr($input, $j, $i - $j);
-                if (isset($this->commonWords[$word])) {
-                    $wordCost = -log($this->commonWords[$word] + 1); // Add 1 to avoid log(0)
-                    if ($cost[$j] + $wordCost < $cost[$i]) {
-                        $cost[$i] = $cost[$j] + $wordCost;
-                        $result[$i] = $word;
-                    }
-                }
+        foreach ($this->commonWords as $word => $value) {
+            $wordLength = strlen($word);
+            if (substr($input, 0, $wordLength) === $word) {
+                $remaining = substr($input, $wordLength);
+                return array_merge([$word], $this->splitRecursive($remaining));
             }
         }
 
-        // Construct the result
-        $words = [];
-        $lastIndex = $length;
-        while ($lastIndex > 0) {
-            $segment = $result[$lastIndex];
-            if ($segment === '') {
-                // Fallback: use the original input as a single segment
-                return ['words' => [$input], 'log' => [['segment' => $input, 'position' => 0]]];
-            }
-            array_unshift($words, $segment);
-            $segmentationLog[] = [
-                'segment' => $segment,
-                'position' => $lastIndex - strlen($segment)
-            ];
-            $lastIndex -= strlen($segment);
-        }
+        // If no words matched, return the input as a single segment
+        return [$input];
+    }
 
-        // Check for single-character segments
-        if (count($words) > 1 && strlen($words[0]) == 1) {
-            return ['words' => [$input], 'log' => [['segment' => $input, 'position' => 0]]];
+    private function createLog($words) {
+        $log = [];
+        $position = 0;
+        foreach ($words as $word) {
+            $log[] = ['segment' => $word, 'position' => $position];
+            $position += strlen($word);
         }
-
-        return ['words' => $words, 'log' => $segmentationLog];
+        return $log;
     }
 }

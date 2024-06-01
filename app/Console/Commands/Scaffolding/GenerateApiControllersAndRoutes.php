@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Console\Commands\WordSplitter;
-use Illuminate\Support\Facades\Log;
 
 class GenerateApiControllersAndRoutes extends Command
 {
@@ -30,34 +29,42 @@ class GenerateApiControllersAndRoutes extends Command
             try {
                 $tableArray = get_object_vars($table);
                 $tableName = reset($tableArray);
-                $this->info("Processing table: $tableName"); // Log current table
-                Log::info("Processing table: $tableName"); // Log to file
+                $this->info("Processing table: $tableName");
 
+                $this->info("Splitting table name: $tableName");
                 $segmentationResult = $this->wordSplitter->split($tableName);
+
                 $segmentedTableName = $segmentationResult['words'];
+                $this->info("Segmented table name: " . implode(' ', $segmentedTableName));
+
                 $pascalTableName = implode('', array_map(function ($word) {
                     return ucfirst(strtolower($word));
                 }, $segmentedTableName));
+                $this->info("Pascal table name: $pascalTableName");
+
                 $modelName = Str::singular($pascalTableName);
                 $controllerName = $modelName . 'Controller';
                 $itemNameSingular = Str::title(Str::replace('_', ' ', Str::singular($tableName)));
 
+                $this->info("Generating controller content for: $controllerName");
                 $controllerContent = $this->generateControllerContent($modelName, $controllerName, $itemNameSingular);
+
+                $this->info("Generating route content for: $controllerName");
                 $routeContent = $this->generateRouteContent($tableName, $controllerName);
 
+                $this->info("Saving controller file: $controllerName");
                 $controllerPath = app_path("Http/Controllers/Api/{$controllerName}.php");
                 File::put($controllerPath, $controllerContent);
 
+                $this->info("Appending to route file for: $controllerName");
                 $routePath = base_path("routes/api.php");
                 File::append($routePath, $routeContent);
 
                 $this->info("Generated API controller and route for $tableName");
-                Log::info("Generated API controller and route for $tableName");
 
                 $report[$tableName] = $segmentationResult['log'];
             } catch (\Exception $e) {
-                $this->error("Failed to process table: $tableName");
-                Log::error("Failed to process table: $tableName. Error: " . $e->getMessage());
+                $this->error("Failed to process table: $tableName. Error: " . $e->getMessage());
             }
         }
 
@@ -66,6 +73,8 @@ class GenerateApiControllersAndRoutes extends Command
 
     protected function generateControllerContent($modelName, $controllerName, $itemNameSingular)
     {
+        $this->info("Creating controller content for model: $modelName");
+
         return <<<EOT
 <?php
 
@@ -149,6 +158,8 @@ EOT;
 
     protected function generateRouteContent($tableName, $controllerName)
     {
+        $this->info("Creating route content for controller: $controllerName");
+
         $routeName = Str::plural(Str::snake($tableName));
         return <<<EOT
 
@@ -172,6 +183,5 @@ EOT;
 
         file_put_contents($reportPath, $reportContent);
         $this->info("Segmentation report generated at $reportPath");
-        Log::info("Segmentation report generated at $reportPath");
     }
 }
