@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Console\Commands\WordSplitter;
+use Illuminate\Support\Facades\Log;
 
 class GenerateApiControllersAndRoutes extends Command
 {
@@ -26,29 +27,38 @@ class GenerateApiControllersAndRoutes extends Command
         $report = [];
 
         foreach ($tables as $table) {
-            $tableArray = get_object_vars($table);
-            $tableName = reset($tableArray);
-            $segmentationResult = $this->wordSplitter->split($tableName);
-            $segmentedTableName = $segmentationResult['words'];
-            $pascalTableName = implode('', array_map(function ($word) {
-                return ucfirst(strtolower($word));
-            }, $segmentedTableName));
-            $modelName = Str::singular($pascalTableName);
-            $controllerName = $modelName . 'Controller';
-            $itemNameSingular = Str::title(Str::replace('_', ' ', Str::singular($tableName)));
+            try {
+                $tableArray = get_object_vars($table);
+                $tableName = reset($tableArray);
+                $this->info("Processing table: $tableName"); // Log current table
+                Log::info("Processing table: $tableName"); // Log to file
 
-            $controllerContent = $this->generateControllerContent($modelName, $controllerName, $itemNameSingular);
-            $routeContent = $this->generateRouteContent($tableName, $controllerName);
+                $segmentationResult = $this->wordSplitter->split($tableName);
+                $segmentedTableName = $segmentationResult['words'];
+                $pascalTableName = implode('', array_map(function ($word) {
+                    return ucfirst(strtolower($word));
+                }, $segmentedTableName));
+                $modelName = Str::singular($pascalTableName);
+                $controllerName = $modelName . 'Controller';
+                $itemNameSingular = Str::title(Str::replace('_', ' ', Str::singular($tableName)));
 
-            $controllerPath = app_path("Http/Controllers/Api/{$controllerName}.php");
-            File::put($controllerPath, $controllerContent);
+                $controllerContent = $this->generateControllerContent($modelName, $controllerName, $itemNameSingular);
+                $routeContent = $this->generateRouteContent($tableName, $controllerName);
 
-            $routePath = base_path("routes/api.php");
-            File::append($routePath, $routeContent);
+                $controllerPath = app_path("Http/Controllers/Api/{$controllerName}.php");
+                File::put($controllerPath, $controllerContent);
 
-            $this->info("Generated API controller and route for $tableName");
+                $routePath = base_path("routes/api.php");
+                File::append($routePath, $routeContent);
 
-            $report[$tableName] = $segmentationResult['log'];
+                $this->info("Generated API controller and route for $tableName");
+                Log::info("Generated API controller and route for $tableName");
+
+                $report[$tableName] = $segmentationResult['log'];
+            } catch (\Exception $e) {
+                $this->error("Failed to process table: $tableName");
+                Log::error("Failed to process table: $tableName. Error: " . $e->getMessage());
+            }
         }
 
         $this->generateReport($report);
@@ -162,5 +172,6 @@ EOT;
 
         file_put_contents($reportPath, $reportContent);
         $this->info("Segmentation report generated at $reportPath");
+        Log::info("Segmentation report generated at $reportPath");
     }
 }
