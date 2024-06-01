@@ -15,10 +15,10 @@ class GenerateApiControllersAndRoutes extends Command
     public function handle()
     {
         $tables = DB::select('SHOW TABLES');
-        $database = env('DB_DATABASE');
 
         foreach ($tables as $table) {
-            $tableName = $table->{"Tables_in_$database"};
+            $tableArray = get_object_vars($table);
+            $tableName = reset($tableArray);
             $modelName = Str::studly(Str::singular($tableName));
             $controllerName = $modelName . 'Controller';
             $itemNameSingular = Str::title(Str::replace('_', ' ', Str::singular($tableName)));
