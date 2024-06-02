@@ -13,7 +13,7 @@ class Document extends Model
     public function relationships()
     {
         return [
-            'documentdetails'
+            
         ];
     }
 
@@ -42,8 +42,5 @@ class Document extends Model
 
     
 
-        public function documentdetails(): HasMany
-    {
-        return $this->hasMany(Documentdetail::class, 'Document');
-    }
+    
 }

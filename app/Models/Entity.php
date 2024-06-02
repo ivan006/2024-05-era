@@ -13,14 +13,7 @@ class Entity extends Model
     public function relationships()
     {
         return [
-            'entitygoods',
-            'entitygoodapprovalsApprovedBy',
-            'entitygoodapprovalsInvoiceApprovedBy',
-            'entitygoodapprovalsEntity',
-            'goods',
-            'servicerequests',
-            'servicerequestreports',
-            'systemcodes'
+            
         ];
     }
 
@@ -65,43 +58,5 @@ class Entity extends Model
 
     
 
-        public function entitygoods(): HasMany
-    {
-        return $this->hasMany(Entitygood::class, 'Entity');
-    }
-
-        public function entitygoodapprovalsApprovedBy(): HasMany
-    {
-        return $this->hasMany(Entitygoodapproval::class, 'ApprovedBy');
-    }
-
-        public function entitygoodapprovalsInvoiceApprovedBy(): HasMany
-    {
-        return $this->hasMany(Entitygoodapproval::class, 'InvoiceApprovedBy');
-    }
-
-        public function entitygoodapprovalsEntity(): HasMany
-    {
-        return $this->hasMany(Entitygoodapproval::class, 'Entity');
-    }
-
-        public function goods(): HasMany
-    {
-        return $this->hasMany(Good::class, 'Sector');
-    }
-
-        public function servicerequests(): HasMany
-    {
-        return $this->hasMany(Servicerequest::class, 'ServiceProvider');
-    }
-
-        public function servicerequestreports(): HasMany
-    {
-        return $this->hasMany(Servicerequestreport::class, 'ServiceProvider');
-    }
-
-        public function systemcodes(): HasMany
-    {
-        return $this->hasMany(Systemcode::class, 'Entity');
-    }
+    
 }
