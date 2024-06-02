@@ -6,11 +6,19 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use App\Console\Commands\WordSplitter;
 
 class GenerateVuexOrmModels extends Command
 {
     protected $signature = 'generate:vuex-orm-models';
     protected $description = 'Generate Vuex ORM models from database schema';
+    protected $wordSplitter;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->wordSplitter = new WordSplitter();
+    }
 
     public function handle()
     {
@@ -20,9 +28,17 @@ class GenerateVuexOrmModels extends Command
             // Extract the table name dynamically
             $tableArray = get_object_vars($table);
             $tableName = reset($tableArray);
-            $modelName = Str::studly(Str::singular($tableName));
-            $jsModelName = Str::camel(Str::singular($tableName));
-            $pluralTableName = Str::plural($tableName);
+            $cleanedTableName = preg_replace('/[^a-zA-Z]/', '', $tableName);
+            $this->info("Processing table: $tableName (cleaned: $cleanedTableName)");
+
+            $segmentationResult = $this->wordSplitter->split($cleanedTableName);
+            $segmentedTableName = $segmentationResult['words'];
+            $this->info("Segmented table name: " . implode(' ', $segmentedTableName));
+
+            $pascalTableName = implode('', array_map('ucfirst', $segmentedTableName));
+            $modelName = Str::singular($pascalTableName);
+            $jsModelName = Str::camel(Str::singular($cleanedTableName));
+            $pluralTableName = Str::plural(Str::kebab(implode('-', $segmentedTableName)));
 
             $columns = DB::select("SHOW COLUMNS FROM $tableName");
             $primaryKey = $this->getPrimaryKey($columns);
@@ -57,6 +73,14 @@ export default class $modelName extends MyBaseModel {
     static entity = '$jsModelName';
     static entityUrl = '/api/$pluralTableName';
     static primaryKey = '$primaryKey';
+    static openRecord(id){
+      router.push({
+        name: '/lists/$pluralTableName/:rId',
+        params: {
+          rId: $primaryKey,
+        },
+      })
+    }
 
     static parentWithables = [
         $parentWithablesString
@@ -244,7 +268,15 @@ EOT;
             return "import $relatedModel from './$relatedModel';";
         }, $relatedModels);
 
-        array_unshift($imports, "import MyBaseModel from '@/models/MyBaseModel';");
+        $imports = [
+            ...$imports,
+            "import router from '@/router';"
+        ];
+
+        array_unshift(
+            $imports,
+            "import MyBaseModel from '@/models/MyBaseModel';",
+        );
         return implode("\n", $imports);
     }
 }
