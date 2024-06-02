@@ -75,11 +75,11 @@ export default class $modelName extends MyBaseModel {
     static entity = '$jsModelName';
     static entityUrl = '/api/$pluralTableName';
     static primaryKey = '$primaryKey';
-    static openRecord(id){
+    static openRecord(pKey){
       router.push({
         name: '/lists/$pluralTableName/:rId',
         params: {
-          rId: $primaryKey,
+          rId: pKey,
         },
       })
     }
@@ -167,7 +167,7 @@ export default class $modelName extends MyBaseModel {
 }
 EOT;
 
-            $path = base_path("vuex-orm-models/{$modelName}.js");
+            $path = base_path("resources/js/models/{$modelName}.js");
             File::put($path, $jsModel);
 
             $this->info("Generated Vuex ORM model for $tableName");
