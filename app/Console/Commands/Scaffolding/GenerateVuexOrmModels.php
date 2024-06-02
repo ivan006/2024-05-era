@@ -23,6 +23,8 @@ class GenerateVuexOrmModels extends Command
     public function handle()
     {
         $tables = DB::select('SHOW TABLES');
+        $routes = [];
+        $models = [];
 
         foreach ($tables as $table) {
             // Extract the table name dynamically
@@ -169,8 +171,15 @@ EOT;
             File::put($path, $jsModel);
 
             $this->info("Generated Vuex ORM model for $tableName");
+
+            $models[] = [
+                'modelName' => $modelName
+            ];
         }
+
+        $this->generateStoreFile($models);
     }
+
 
     protected function getPrimaryKey($columns)
     {
@@ -279,4 +288,52 @@ EOT;
         );
         return implode("\n", $imports);
     }
+
+    protected function generateStoreFile($models)
+    {
+        $imports = array_map(function($model) {
+            return "import {$model['modelName']} from '@/models/{$model['modelName']}';";
+        }, $models);
+
+        $registrations = array_map(function($model) {
+            return "database.register({$model['modelName']});";
+        }, $models);
+
+        $importsString = implode("\n", $imports);
+        $registrationsString = implode("\n", $registrations);
+
+        $storeFileContent = <<<EOT
+import { createStore } from 'vuex';
+import VuexORM from '@vuex-orm/core';
+import VuexORMAxios from '@vuex-orm/plugin-axios';
+import axios from 'axios';
+
+import { DBCrudCacheSet } from 'quicklists-vue-orm-ui';
+
+$importsString
+
+VuexORM.use(VuexORMAxios, {
+  axios,
+  baseURL: 'https://your-api-url.com'  // Set your API base URL here
+});
+
+const database = new VuexORM.Database();
+
+database.register(DBCrudCacheSet);
+$registrationsString
+
+const store = createStore({
+  plugins: [VuexORM.install(database)]
+});
+
+export default store;
+EOT;
+
+        $storeFilePath = base_path('resources/js/store/index.js');
+        File::ensureDirectoryExists(dirname($storeFilePath));
+        File::put($storeFilePath, $storeFileContent);
+
+        $this->info('Generated store file');
+    }
+
 }
