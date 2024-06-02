@@ -19,6 +19,7 @@ class GenerateERDAssumptionMap extends Command
 
         foreach ($tables as $table) {
             $columns = Schema::getColumnListing($table);
+            $primaryKeys = Schema::getConnection()->getDoctrineSchemaManager()->listTableDetails($table)->getPrimaryKey()->getColumns();
             $map[$table] = [];
 
             foreach ($columns as $column) {
@@ -26,8 +27,11 @@ class GenerateERDAssumptionMap extends Command
                 $type = Schema::getColumnType($table, $column);
                 $columnDetails = Schema::getConnection()->getDoctrineColumn($table, $column);
 
+                if (!in_array($type, ['integer', 'bigint', 'smallint', 'tinyint'])) {
+                    continue;
+                }
                 // Skip primary keys and auto increment keys
-                if ($columnDetails->getAutoincrement() || $columnDetails->getPrimaryKey()) {
+                if (in_array($column, $primaryKeys) || $columnDetails->getAutoincrement()) {
                     continue;
                 }
 
