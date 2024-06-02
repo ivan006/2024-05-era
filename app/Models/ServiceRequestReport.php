@@ -16,7 +16,9 @@ class ServiceRequestReport extends Model
             'serviceRequestRel',
             'serviceProviderRel',
             'createdByRel',
-            'treatmentDetail'
+            'treatmentDetail',
+            'externalproducers',
+            'treatmentdetailsRel'
         ];
     }
 
@@ -65,5 +67,13 @@ class ServiceRequestReport extends Model
         return $this->belongsTo(Treatmentdetail::class, 'TreatmentDetails');
     }
 
-    
+        public function externalproducers(): HasMany
+    {
+        return $this->hasMany(Externalproducer::class, 'ServiceRequestReport');
+    }
+
+        public function treatmentdetailsRel(): HasMany
+    {
+        return $this->hasMany(Treatmentdetail::class, 'ServiceRequestReport');
+    }
 }

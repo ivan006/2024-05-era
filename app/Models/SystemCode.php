@@ -13,7 +13,14 @@ class SystemCode extends Model
     public function relationships()
     {
         return [
-            'entityRel'
+            'entityRel',
+            'addressesCountry',
+            'addressesType',
+            'contactnumbers',
+            'emails',
+            'servicerequestfrequencies',
+            'transactions',
+            'userconfigurations'
         ];
     }
 
@@ -57,5 +64,38 @@ class SystemCode extends Model
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-    
+        public function addressesCountry(): HasMany
+    {
+        return $this->hasMany(Address::class, 'Country');
+    }
+
+        public function addressesType(): HasMany
+    {
+        return $this->hasMany(Address::class, 'Type');
+    }
+
+        public function contactnumbers(): HasMany
+    {
+        return $this->hasMany(Contactnumber::class, 'Type');
+    }
+
+        public function emails(): HasMany
+    {
+        return $this->hasMany(Email::class, 'Type');
+    }
+
+        public function servicerequestfrequencies(): HasMany
+    {
+        return $this->hasMany(Servicerequestfrequency::class, 'ReportFrequency');
+    }
+
+        public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'Type');
+    }
+
+        public function userconfigurations(): HasMany
+    {
+        return $this->hasMany(Userconfiguration::class, 'Language');
+    }
 }

@@ -13,7 +13,7 @@ class SystemAction extends Model
     public function relationships()
     {
         return [
-            
+            'useraccesses'
         ];
     }
 
@@ -46,5 +46,8 @@ class SystemAction extends Model
 
     
 
-    
+        public function useraccesses(): HasMany
+    {
+        return $this->hasMany(Useraccess::class, 'SystemAction');
+    }
 }

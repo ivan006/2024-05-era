@@ -16,7 +16,8 @@ class EntityGoodApproval extends Model
             'approvedByRel',
             'invoiceApprovedByRel',
             'entityRel',
-            'queryRel'
+            'queryRel',
+            'entitygoods'
         ];
     }
 
@@ -73,5 +74,8 @@ class EntityGoodApproval extends Model
         return $this->belongsTo(Queryheader::class, 'Query');
     }
 
-    
+        public function entitygoods(): HasMany
+    {
+        return $this->hasMany(Entitygood::class, 'Invoice');
+    }
 }

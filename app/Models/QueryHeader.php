@@ -13,7 +13,7 @@ class QueryHeader extends Model
     public function relationships()
     {
         return [
-            
+            'entitygoodapprovals'
         ];
     }
 
@@ -46,5 +46,8 @@ class QueryHeader extends Model
 
     
 
-    
+        public function entitygoodapprovals(): HasMany
+    {
+        return $this->hasMany(Entitygoodapproval::class, 'Query');
+    }
 }

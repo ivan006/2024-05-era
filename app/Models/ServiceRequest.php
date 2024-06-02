@@ -14,7 +14,9 @@ class ServiceRequest extends Model
     {
         return [
             'serviceProviderRel',
-            'createdByRel'
+            'createdByRel',
+            'servicerequestfrequencies',
+            'servicerequestreports'
         ];
     }
 
@@ -57,5 +59,13 @@ class ServiceRequest extends Model
         return $this->belongsTo(Systemuser::class, 'CreatedBy');
     }
 
-    
+        public function servicerequestfrequencies(): HasMany
+    {
+        return $this->hasMany(Servicerequestfrequency::class, 'ServiceRequest');
+    }
+
+        public function servicerequestreports(): HasMany
+    {
+        return $this->hasMany(Servicerequestreport::class, 'ServiceRequest');
+    }
 }

@@ -13,7 +13,7 @@ class UserRole extends Model
     public function relationships()
     {
         return [
-            
+            'useraccesses'
         ];
     }
 
@@ -42,5 +42,8 @@ class UserRole extends Model
 
     
 
-    
+        public function useraccesses(): HasMany
+    {
+        return $this->hasMany(Useraccess::class, 'UserRole');
+    }
 }

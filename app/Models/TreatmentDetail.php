@@ -13,7 +13,8 @@ class TreatmentDetail extends Model
     public function relationships()
     {
         return [
-            'serviceRequestReportRel'
+            'serviceRequestReportRel',
+            'servicerequestreports'
         ];
     }
 
@@ -47,5 +48,8 @@ class TreatmentDetail extends Model
         return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
     }
 
-    
+        public function servicerequestreports(): HasMany
+    {
+        return $this->hasMany(Servicerequestreport::class, 'TreatmentDetails');
+    }
 }
