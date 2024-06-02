@@ -19,3 +19,9 @@ UPDATE object SET Parent = NULL WHERE Parent NOT IN (SELECT Id FROM object);
 -- SELECT * FROM objectvalue WHERE Entity NOT IN (SELECT Id FROM entity);
 UPDATE objectvalue SET Entity = NULL WHERE Entity NOT IN (SELECT Id FROM entity);
 
+-- Table: passwordhash
+-- Column: SystemUser
+-- Referenced Table: systemuser
+-- Orphaned Records: 3 out of 101
+-- SELECT * FROM passwordhash WHERE SystemUser NOT IN (SELECT Id FROM systemuser);
+UPDATE passwordhash SET SystemUser = 10266 WHERE SystemUser NOT IN (SELECT Id FROM systemuser);
