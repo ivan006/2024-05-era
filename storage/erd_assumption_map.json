@@ -1,12 +1,12 @@
 {
     "audit": {
-        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: entity; at: ;",
         "PageNo": "ft: integer; n: NULL; rel: ; at: ;",
         "NoOfLines": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "document": {
         "RelativeID": "ft: integer; n: NULL; rel: ; at: ;",
-        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;"
+        "CreatedBy": "ft: integer; n: NULL; rel: entity; at: ;"
     },
     "entity": {
         "Level": "ft: integer; n: NULL; rel: ; at: ;",
@@ -17,7 +17,7 @@
         "Status": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "entityaudit": {
-        "Entity Id": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity Id": "ft: integer; n: NOT NULL; rel: entity; at: ;",
         "SystemUser": "ft: integer; n: NULL; rel: systemuser; at: ;"
     },
     "entitygood": {
@@ -48,14 +48,14 @@
         "Sector": "ft: integer; n: NOT NULL; rel: entity; at: ;"
     },
     "productprovider": {
-        "Entity": "ft: integer; n: NOT NULL; rel: ; at: ;"
+        "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;"
     },
     "queryheader": {
         "Status": "ft: integer; n: NULL; rel: ; at: ;",
         "Type": "ft: integer; n: NULL; rel: ; at: ;",
         "RelativeID": "ft: integer; n: NULL; rel: ; at: ;",
-        "CreatedBy": "ft: integer; n: NULL; rel: ; at: ;",
-        "ClosedBy": "ft: integer; n: NULL; rel: ; at: ;"
+        "CreatedBy": "ft: integer; n: NULL; rel: entity; at: ;",
+        "ClosedBy": "ft: integer; n: NULL; rel: entity; at: ;"
     },
     "servicerequest": {
         "ServiceProvider": "ft: integer; n: NOT NULL; rel: entity; at: ;",
@@ -77,13 +77,13 @@
         "Entity": "ft: integer; n: NULL; rel: entity; at: ;"
     },
     "systemuser": {
-        "Entity": "ft: integer; n: NOT NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NOT NULL; rel: entity; at: ;",
         "LoginCount": "ft: integer; n: NULL; rel: ; at: ;",
         "FailedLoginAttempts": "ft: integer; n: NULL; rel: ; at: ;",
         "FbId": "ft: integer; n: NULL; rel: ; at: ;"
     },
     "transactions": {
-        "Entity": "ft: integer; n: NULL; rel: ; at: ;",
+        "Entity": "ft: integer; n: NULL; rel: entity; at: ;",
         "EntityProduct": "ft: integer; n: NULL; rel: ; at: ;",
         "Period": "ft: integer; n: NULL; rel: ; at: ;",
         "Type": "ft: integer; n: NULL; rel: systemcode; at: ;"
