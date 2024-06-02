@@ -19,11 +19,11 @@ class GenerateVueComponents extends Command
         parent::__construct();
         $this->wordSplitter = new WordSplitter();
     }
-
     public function handle()
     {
         $tables = DB::select('SHOW TABLES');
         $routes = [];
+        $models = [];
 
         foreach ($tables as $table) {
             // Extract the table name dynamically
@@ -58,10 +58,17 @@ class GenerateVueComponents extends Command
                 'model' => $modelName,
                 'kebab' => $pluralKebabModel
             ];
+
+            $models[] = [
+                'modelName' => $modelName
+            ];
         }
 
         $this->generateRouterFile($routes);
+        $this->generateMenuFile($routes);
     }
+
+
 
     protected function getListComponentContent($modelName, $pluralKebabModel)
     {
@@ -210,4 +217,119 @@ EOT;
 
         $this->info('Generated router file');
     }
+
+    protected function generateMenuFile($routes)
+    {
+        $menuLinks = array_map(function ($route) {
+            return <<<EOT
+        {
+            icon: '',
+            text: '{$route['model']}',
+            to: '/lists/{$route['kebab']}',
+        }
+EOT;
+        }, $routes);
+
+        $menuLinksString = implode(",\n                        ", $menuLinks);
+
+        $menuFileContent = <<<EOT
+<template>
+    <div>
+      <baseline-layout>
+        <template v-slot:sidebar>
+          <v-list nav density="compact">
+            <div v-for="(link, i) in links" :key="i">
+              <template v-if="!link.subLinks">
+                <MenuSystemItem :link="link" />
+              </template>
+              <v-list-group v-else :key="link.text" no-action :prepend-icon="link.icon" :value="false">
+                <template v-slot:activator="{props, isOpen}">
+                  <v-list-item v-bind="props" :key="link.text" :title="link.text"></v-list-item>
+                </template>
+                <div class="ml-2 pl-2" style="border-left: solid 1px Gainsboro">
+                  <template v-if="typeof link.subLinks == 'string'">
+                    <component :is="link.subLinks"> </component>
+                  </template>
+                  <template v-else>
+                    <template v-for="sublink in link.subLinks" :key="sublink.text">
+                      <MenuSystemItem :link="sublink" />
+                    </template>
+                  </template>
+                </div>
+              </v-list-group>
+            </div>
+          </v-list>
+        </template>
+        <template v-slot:header>
+          <v-spacer></v-spacer>
+        </template>
+        <template v-slot:main>
+          <slot name="main"></slot>
+        </template>
+      </baseline-layout>
+    </div>
+</template>
+
+<script>
+import VueCookies from 'vue-cookies'
+import MenuSystemItem from '@/views/global/MenuSystemItem.vue'
+import MyProversAndCustomerAsMenuList from '@/views/global/MyProversAndCustomerAsMenuList.vue'
+import BaselineLayout from "@/layouts/baselineLayout.vue";
+
+export default {
+    name: 'MenuSystem',
+    components: {
+        BaselineLayout,
+        MyProversAndCustomerAsMenuList,
+        MenuSystemItem,
+    },
+    data() {
+        return {
+            drawer: false,
+            appTitle: 'Insert title here',
+        }
+    },
+    methods: {
+        logout() {
+            VueCookies.remove('VITE_AUTH')
+        },
+    },
+    computed: {
+        links() {
+            return [
+                {
+                    icon: '',
+                    text: 'Home',
+                    to: '/',
+                },
+                {
+                    icon: '',
+                    text: 'Lists',
+                    subLinks: [
+                        $menuLinksString
+                    ],
+                },
+            ]
+        },
+    },
+    watch: {
+        drawer(newVal) {
+            this.\$emit('drawer', newVal)
+        },
+    },
+    mounted() {
+    },
+}
+</script>
+
+<style scoped></style>
+EOT;
+
+        $menuFilePath = base_path('resources/js/views/MenuView.vue');
+        File::ensureDirectoryExists(dirname($menuFilePath));
+        File::put($menuFilePath, $menuFileContent);
+
+        $this->info('Generated menu file');
+    }
+
 }
