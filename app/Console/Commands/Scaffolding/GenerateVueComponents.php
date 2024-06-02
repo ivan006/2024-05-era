@@ -11,7 +11,7 @@ use App\Console\Commands\WordSplitter;
 class GenerateVueComponents extends Command
 {
     protected $signature = 'generate:vue-components';
-    protected $description = 'Generate Vue component files for each model';
+    protected $description = 'Generate Vue component files for each model and a router file';
     protected $wordSplitter;
 
     public function __construct()
@@ -23,6 +23,7 @@ class GenerateVueComponents extends Command
     public function handle()
     {
         $tables = DB::select('SHOW TABLES');
+        $routes = [];
 
         foreach ($tables as $table) {
             // Extract the table name dynamically
@@ -37,13 +38,13 @@ class GenerateVueComponents extends Command
 
             $pascalTableName = implode('', array_map('ucfirst', $segmentedTableName));
             $modelName = Str::singular($pascalTableName);
-            $kebabModel = Str::kebab(implode('-', $segmentedTableName));
+            $pluralKebabModel = Str::kebab(Str::plural(implode('-', $segmentedTableName)));
 
-            $listComponentContent = $this->getListComponentContent($modelName, $kebabModel);
-            $readComponentContent = $this->getReadComponentContent($modelName, $kebabModel);
+            $listComponentContent = $this->getListComponentContent($modelName, $pluralKebabModel);
+            $readComponentContent = $this->getReadComponentContent($modelName, $pluralKebabModel);
 
-            $listPath = base_path("resources/js/views/lists/$kebabModel/{$modelName}List.vue");
-            $readPath = base_path("resources/js/views/lists/$kebabModel/{$modelName}Read.vue");
+            $listPath = base_path("resources/js/views/lists/$pluralKebabModel/{$modelName}List.vue");
+            $readPath = base_path("resources/js/views/lists/$pluralKebabModel/{$modelName}Read.vue");
 
             File::ensureDirectoryExists(dirname($listPath));
             File::put($listPath, $listComponentContent);
@@ -52,10 +53,17 @@ class GenerateVueComponents extends Command
             File::put($readPath, $readComponentContent);
 
             $this->info("Generated Vue components for $tableName");
+
+            $routes[] = [
+                'model' => $modelName,
+                'kebab' => $pluralKebabModel
+            ];
         }
+
+        $this->generateRouterFile($routes);
     }
 
-    protected function getListComponentContent($modelName, $kebabModel)
+    protected function getListComponentContent($modelName, $pluralKebabModel)
     {
         return <<<EOT
 <template>
@@ -89,17 +97,17 @@ export default {
         },
         user() {
           let result = {}
-          if (this.\$store.getters['entities/login-sessions/all']()?.[0]){
-            const id = this.\$store.getters['entities/login-sessions/all']()?.[0]?.\$id
-            result = this.\$store.state.entities['login-sessions'].data[id]?.user
-          }
+          // if (this.\$store.getters['entities/login-sessions/all']()?.[0]){
+          //   const id = this.\$store.getters['entities/login-sessions/all']()?.[0]?.\$id
+          //   result = this.\$store.state.entities['login-sessions'].data[id]?.user
+          // }
           return result
         },
     },
     methods: {
         openRecord(e) {
             //router.push({
-            //    name: '/lists/$kebabModel/:rId',
+            //    name: '/lists/$pluralKebabModel/:rId',
             //    params: {
             //        rId: e.id,
             //    },
@@ -111,7 +119,7 @@ export default {
 EOT;
     }
 
-    protected function getReadComponentContent($modelName, $kebabModel)
+    protected function getReadComponentContent($modelName, $pluralKebabModel)
     {
         return <<<EOT
 <template>
@@ -153,5 +161,53 @@ export default {
 
 <style scoped></style>
 EOT;
+    }
+
+    protected function generateRouterFile($routes)
+    {
+        $routeEntries = array_map(function ($route) {
+            return <<<EOT
+      {
+        path: '/lists/{$route['kebab']}',
+        name: '/lists/{$route['kebab']}',
+        component: () => import('@/views/lists/{$route['kebab']}/{$route['model']}List.vue'),
+      },
+      {
+        path: '/lists/{$route['kebab']}/:rId',
+        name: '/lists/{$route['kebab']}/:rId',
+        component: () => import('@/views/lists/{$route['kebab']}/{$route['model']}Read.vue'),
+      }
+EOT;
+        }, $routes);
+
+        $routesString = implode(",\n", $routeEntries);
+
+        $routerFileContent = <<<EOT
+import { createRouter, createWebHistory } from 'vue-router'
+
+const routes = [
+  {
+    path: '/',
+    name: '/',
+    component: () => import('../views/MenuView.vue'),
+    children: [
+$routesString
+    ],
+  },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+
+export default router
+EOT;
+
+        $routerFilePath = base_path('resources/js/router/index.js');
+        File::ensureDirectoryExists(dirname($routerFilePath));
+        File::put($routerFilePath, $routerFileContent);
+
+        $this->info('Generated router file');
     }
 }
