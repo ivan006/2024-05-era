@@ -7,17 +7,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Console\Commands\WordSplitter;
+use App\Console\Commands\ModelRelationHelper;
 
 class GenerateVuexOrmModels extends Command
 {
     protected $signature = 'generate:vuex-orm-models';
     protected $description = 'Generate Vuex ORM models from database schema';
     protected $wordSplitter;
+    protected $relationHelper;
 
     public function __construct()
     {
         parent::__construct();
         $this->wordSplitter = new WordSplitter();
+        $this->relationHelper = new ModelRelationHelper();
     }
 
     public function handle()
@@ -47,8 +50,8 @@ class GenerateVuexOrmModels extends Command
 
             $fields = [];
             $fieldsMetadata = [];
-            $relations = $this->getModelRelations($tableName, $columns);
-            $imports = $this->generateImports($modelName, $relations['imports']);
+            $relations = $this->relationHelper->getModelRelations($tableName, $columns);
+            $imports = $this->generateImports($modelName, $relations['foreignKeys'], $relations['hasMany']);
             $parentWithables = [];
 
             foreach ($columns as $column) {
@@ -65,7 +68,7 @@ class GenerateVuexOrmModels extends Command
 
             $fieldsString = implode(",\n            ", $fields);
             $fieldsMetadataString = implode(",\n            ", $fieldsMetadata);
-            $relationsString = implode(",\n            ", $relations['relations']);
+            $relationsString = $this->generateRelationsString($relations['foreignKeys'], $relations['hasMany'], $columns);
             $parentWithablesString = implode(",\n        ", $parentWithables);
 
             $jsModel = <<<EOT
@@ -180,7 +183,6 @@ EOT;
         $this->generateStoreFile($models);
     }
 
-
     protected function getPrimaryKey($columns)
     {
         foreach ($columns as $column) {
@@ -192,63 +194,36 @@ EOT;
         return 'id'; // Default primary key if none is found
     }
 
-    protected function getModelRelations($tableName, $columns)
+    protected function generateRelationsString($foreignKeys, $hasManyRelations, $columns)
     {
-        $foreignKeys = DB::select("SELECT
-            COLUMN_NAME,
-            REFERENCED_TABLE_NAME,
-            REFERENCED_COLUMN_NAME
-            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-            WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND REFERENCED_COLUMN_NAME IS NOT NULL", [env('DB_DATABASE'), $tableName]);
-
         $relations = [];
-        $imports = [];
-        $foreignKeysArray = [];
         $existingFields = array_map(function ($column) {
             return strtolower($column->Field);
         }, $columns);
 
         foreach ($foreignKeys as $foreignKey) {
-            $relationFieldName = $foreignKey->COLUMN_NAME;
-            $relatedModel = Str::studly(Str::singular($foreignKey->REFERENCED_TABLE_NAME));
+            $relationFieldName = $foreignKey['COLUMN_NAME'];
+            $relatedModel = $foreignKey['RELATED_MODEL'];
             $relationName = $this->generateRelationName($relationFieldName, $existingFields);
-
-            if (!in_array($relatedModel, $imports)) {
-                $imports[] = $relatedModel;
-            }
-
             $relations[] = "'$relationName': this.belongsTo($relatedModel, '$relationFieldName')";
-            $foreignKeysArray[] = ['COLUMN_NAME' => $foreignKey->COLUMN_NAME, 'RELATED_MODEL' => $relatedModel];
         }
 
-        // Add hasMany relationships
-        $childRelations = DB::select("SELECT
-            TABLE_NAME,
-            COLUMN_NAME
-            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-            WHERE TABLE_SCHEMA = ? AND REFERENCED_TABLE_NAME = ?", [env('DB_DATABASE'), $tableName]);
+        $groupedHasMany = $this->relationHelper->groupHasManyRelations($hasManyRelations);
+        foreach ($groupedHasMany as $model => $relationsArray) {
+            foreach ($relationsArray as $relation) {
+                $relationName = Str::camel(Str::plural($relation['name']));
+                $relatedModel = $relation['RELATED_MODEL'];
 
-        $childRelationNames = [];
-        foreach ($childRelations as $childRelation) {
-            $relationFieldName = $childRelation->COLUMN_NAME;
-            $relationName = Str::camel(Str::plural($childRelation->TABLE_NAME));
-            $relatedModel = Str::studly(Str::singular($childRelation->TABLE_NAME));
+                // Check for conflicts in hasMany relation names
+                if (in_array(strtolower($relationName), $existingFields)) {
+                    $relationName .= ucfirst(Str::camel($relation['COLUMN_NAME']));
+                }
 
-            // Check for conflicts in hasMany relation names
-            if (isset($childRelationNames[$relationName])) {
-                $relationName .= ucfirst(Str::camel($relationFieldName));
-            } else if (in_array(strtolower($relationName), $existingFields)) {
-                $relationName .= 'Rel';
-            }
-            $childRelationNames[$relationName] = true;
-
-            $relations[] = "'$relationName': this.hasMany($relatedModel, '$relationFieldName')";
-            if (!in_array($relatedModel, $imports)) {
-                $imports[] = $relatedModel;
+                $relations[] = "'$relationName': this.hasMany($relatedModel, '{$relation['COLUMN_NAME']}')";
             }
         }
 
-        return ['relations' => $relations, 'imports' => $imports, 'foreignKeys' => $foreignKeysArray];
+        return implode(",\n            ", $relations);
     }
 
     protected function generateRelationName($fieldName, $existingFields)
@@ -265,29 +240,25 @@ EOT;
         return $relationName;
     }
 
-    protected function generateFieldMetadata($fieldName)
+    protected function generateImports($modelName, $foreignKeys, $hasManyRelations)
     {
-        // Generate field metadata based on field name or other criteria
-        return "{}"; // Placeholder, should be replaced with actual metadata generation logic
-    }
+        $relatedModels = array_unique(array_merge(
+            array_column($foreignKeys, 'RELATED_MODEL'),
+            array_column($hasManyRelations, 'RELATED_MODEL')
+        ));
 
-    protected function generateImports($modelName, $relatedModels)
-    {
         $imports = array_map(function($relatedModel) {
-            return "import $relatedModel from './$relatedModel';";
+            $segmentationResult = $this->wordSplitter->split($relatedModel);
+            $segmentedModelName = implode('', array_map('ucfirst', $segmentationResult['words']));
+            $relatedModelFile = implode('', array_map('ucfirst', $segmentationResult['words']));
+            return "import $segmentedModelName from '@/models/$relatedModelFile';";
         }, $relatedModels);
 
-        $imports = [
-            ...$imports,
-            "import router from '@/router';"
-        ];
-
-        array_unshift(
-            $imports,
-            "import MyBaseModel from '@/models/MyBaseModel';",
-        );
+        array_unshift($imports, "import MyBaseModel from '@/models/MyBaseModel';", "import router from '@/router';");
         return implode("\n", $imports);
     }
+
+
 
     protected function generateStoreFile($models)
     {
@@ -335,5 +306,4 @@ EOT;
 
         $this->info('Generated store file');
     }
-
 }
