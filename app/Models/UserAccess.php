@@ -13,7 +13,9 @@ class UserAccess extends Model
     public function relationships()
     {
         return [
-            
+            'systemUserRel',
+            'userRoleRel',
+            'systemActionRel'
         ];
     }
 
@@ -44,7 +46,20 @@ class UserAccess extends Model
         'FbId'
     ];
 
-    
+        public function systemUserRel(): BelongsTo
+    {
+        return $this->belongsTo(Systemuser::class, 'SystemUser');
+    }
+
+        public function userRoleRel(): BelongsTo
+    {
+        return $this->belongsTo(Userrole::class, 'UserRole');
+    }
+
+        public function systemActionRel(): BelongsTo
+    {
+        return $this->belongsTo(Systemaction::class, 'SystemAction');
+    }
 
     
 }

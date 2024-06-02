@@ -13,7 +13,7 @@ class Transaction extends Model
     public function relationships()
     {
         return [
-            
+            'typeRel'
         ];
     }
 
@@ -52,7 +52,10 @@ class Transaction extends Model
         'Type'
     ];
 
-    
+        public function typeRel(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Type');
+    }
 
     
 }

@@ -13,7 +13,7 @@ class SystemCode extends Model
     public function relationships()
     {
         return [
-            
+            'entityRel'
         ];
     }
 
@@ -52,7 +52,10 @@ class SystemCode extends Model
         'Entity'
     ];
 
-    
+        public function entityRel(): BelongsTo
+    {
+        return $this->belongsTo(Entity::class, 'Entity');
+    }
 
     
 }

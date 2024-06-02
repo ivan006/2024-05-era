@@ -13,7 +13,7 @@ class DomainUser extends Model
     public function relationships()
     {
         return [
-            
+            'systemUserRel'
         ];
     }
 
@@ -40,7 +40,10 @@ class DomainUser extends Model
         'ChangedBy'
     ];
 
-    
+        public function systemUserRel(): BelongsTo
+    {
+        return $this->belongsTo(Systemuser::class, 'SystemUser');
+    }
 
     
 }

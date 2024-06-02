@@ -13,7 +13,9 @@ class EntityGood extends Model
     public function relationships()
     {
         return [
-            
+            'entityRel',
+            'goodRel',
+            'invoiceRel'
         ];
     }
 
@@ -52,7 +54,20 @@ class EntityGood extends Model
         'Invoice'
     ];
 
-    
+        public function entityRel(): BelongsTo
+    {
+        return $this->belongsTo(Entity::class, 'Entity');
+    }
+
+        public function goodRel(): BelongsTo
+    {
+        return $this->belongsTo(Good::class, 'Good');
+    }
+
+        public function invoiceRel(): BelongsTo
+    {
+        return $this->belongsTo(Entitygoodapproval::class, 'Invoice');
+    }
 
     
 }

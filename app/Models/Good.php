@@ -13,7 +13,7 @@ class Good extends Model
     public function relationships()
     {
         return [
-            
+            'sectorRel'
         ];
     }
 
@@ -46,7 +46,10 @@ class Good extends Model
         'Sector'
     ];
 
-    
+        public function sectorRel(): BelongsTo
+    {
+        return $this->belongsTo(Entity::class, 'Sector');
+    }
 
     
 }

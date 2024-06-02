@@ -13,7 +13,8 @@ class ServiceRequest extends Model
     public function relationships()
     {
         return [
-            
+            'serviceProviderRel',
+            'createdByRel'
         ];
     }
 
@@ -46,7 +47,15 @@ class ServiceRequest extends Model
         'DeliveryDate'
     ];
 
-    
+        public function serviceProviderRel(): BelongsTo
+    {
+        return $this->belongsTo(Entity::class, 'ServiceProvider');
+    }
+
+        public function createdByRel(): BelongsTo
+    {
+        return $this->belongsTo(Systemuser::class, 'CreatedBy');
+    }
 
     
 }

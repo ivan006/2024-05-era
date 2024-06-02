@@ -13,7 +13,7 @@ class TreatmentDetail extends Model
     public function relationships()
     {
         return [
-            
+            'serviceRequestReportRel'
         ];
     }
 
@@ -42,7 +42,10 @@ class TreatmentDetail extends Model
         'LocalSecondaryProducts'
     ];
 
-    
+        public function serviceRequestReportRel(): BelongsTo
+    {
+        return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
+    }
 
     
 }

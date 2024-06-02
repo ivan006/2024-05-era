@@ -13,7 +13,8 @@ class Address extends Model
     public function relationships()
     {
         return [
-            
+            'countryRel',
+            'typeRel'
         ];
     }
 
@@ -58,7 +59,15 @@ class Address extends Model
         'Longitude'
     ];
 
-    
+        public function countryRel(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Country');
+    }
+
+        public function typeRel(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Type');
+    }
 
     
 }

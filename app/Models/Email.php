@@ -13,7 +13,7 @@ class Email extends Model
     public function relationships()
     {
         return [
-            
+            'typeRel'
         ];
     }
 
@@ -34,7 +34,10 @@ class Email extends Model
         'Preferred'
     ];
 
-    
+        public function typeRel(): BelongsTo
+    {
+        return $this->belongsTo(Systemcode::class, 'Type');
+    }
 
     
 }

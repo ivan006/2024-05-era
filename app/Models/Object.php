@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ExternalProducer extends Model
+class Object extends Model
 {
-    protected $table = 'externalproducers';
+    protected $table = 'object';
 
     public function relationships()
     {
         return [
-            'serviceRequestReportRel'
+            
         ];
     }
 
@@ -21,19 +21,20 @@ class ExternalProducer extends Model
     {
         return [
             'Name' => 'required',
-            'ServiceRequestReport' => 'nullable'
+            'Description' => 'required',
+            'Parent' => 'nullable',
+            'ChildType' => 'nullable'
         ];
     }
 
     protected $fillable = [
         'Name',
-        'ServiceRequestReport'
+        'Description',
+        'Parent',
+        'ChildType'
     ];
 
-        public function serviceRequestReportRel(): BelongsTo
-    {
-        return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
-    }
+    
 
     
 }
