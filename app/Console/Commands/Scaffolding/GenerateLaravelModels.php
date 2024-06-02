@@ -13,6 +13,7 @@ class GenerateLaravelModels extends Command
     protected $signature = 'generate:laravel-models';
     protected $description = 'Generate Laravel models from database schema with relationships, rules, fillable attributes, and table name';
     protected $wordSplitter;
+    protected $report = [];
 
     public function __construct()
     {
@@ -35,7 +36,10 @@ class GenerateLaravelModels extends Command
             $pascalTableName = implode('', array_map('ucfirst', $segmentedTableName));
 
             $modelName = Str::singular($pascalTableName);
+            $this->info("Generated model name: $modelName");
+
             $columns = DB::select("SHOW COLUMNS FROM $tableName");
+            $this->info("Fetched columns for table: $tableName");
 
             $fillable = [];
             $rules = [];
@@ -43,6 +47,7 @@ class GenerateLaravelModels extends Command
             $belongsToMethods = [];
             $hasManyMethods = [];
             $relations = $this->getModelRelations($tableName);
+            $this->info("Fetched relations for table: $tableName");
 
             $attributeNames = [];
 
@@ -130,49 +135,80 @@ EOT;
             File::put($path, $phpModel);
 
             $this->info("Generated Laravel model for $tableName");
+
+            // Add to report
+            $this->report[] = [
+                'table' => $tableName,
+                'model' => $modelName,
+                'fillable' => $fillable,
+                'relationships' => $relationships,
+                'belongsToMethods' => $belongsToMethods,
+                'hasManyMethods' => $hasManyMethods,
+                'foreignKeys' => $relations['foreignKeys'], // Log the fetched foreign keys
+                'hasMany' => $relations['hasMany'] // Log the fetched hasMany relations
+            ];
         }
+
+        // Generate report
+        $this->generateReport();
     }
+
+
 
     protected function getModelRelations($tableName)
     {
+        $this->info("Fetching foreign keys for table: $tableName");
         $foreignKeys = DB::select("SELECT
-            COLUMN_NAME,
-            REFERENCED_TABLE_NAME,
-            REFERENCED_COLUMN_NAME,
-            CONSTRAINT_NAME
-            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-            WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND REFERENCED_COLUMN_NAME IS NOT NULL", [env('DB_DATABASE'), $tableName]);
+        COLUMN_NAME,
+        REFERENCED_TABLE_NAME,
+        REFERENCED_COLUMN_NAME,
+        CONSTRAINT_NAME
+        FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+        WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND REFERENCED_COLUMN_NAME IS NOT NULL", [env('DB_DATABASE'), $tableName]);
 
+        $this->info("Fetching hasMany relations for table: $tableName");
         $hasManyRelations = DB::select("SELECT
-            TABLE_NAME,
-            COLUMN_NAME,
-            REFERENCED_COLUMN_NAME,
-            CONSTRAINT_NAME
-            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-            WHERE TABLE_SCHEMA = ? AND REFERENCED_TABLE_NAME = ?", [env('DB_DATABASE'), $tableName]);
+        TABLE_NAME,
+        COLUMN_NAME,
+        REFERENCED_COLUMN_NAME,
+        CONSTRAINT_NAME
+        FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+        WHERE TABLE_SCHEMA = ? AND REFERENCED_TABLE_NAME = ?", [env('DB_DATABASE'), $tableName]);
 
         $foreignKeysArray = [];
         $hasManyArray = [];
 
+        $this->info("Processing foreign keys...");
         foreach ($foreignKeys as $foreignKey) {
             $foreignKeysArray[] = [
                 'COLUMN_NAME' => $foreignKey->COLUMN_NAME,
+                'REFERENCED_TABLE_NAME' => $foreignKey->REFERENCED_TABLE_NAME,
+                'REFERENCED_COLUMN_NAME' => $foreignKey->REFERENCED_COLUMN_NAME,
                 'RELATED_MODEL' => Str::studly(Str::singular($foreignKey->REFERENCED_TABLE_NAME))
             ];
         }
 
+        $this->info("Processing hasMany relations...");
         foreach ($hasManyRelations as $relation) {
-            $hasManyArray[] = [
-                'model' => Str::studly(Str::singular($relation->TABLE_NAME)),
-                'name' => Str::camel(Str::plural($relation->TABLE_NAME)),
-                'COLUMN_NAME' => $relation->COLUMN_NAME,
-                'KEY_COLUMN_NAME' => $relation->REFERENCED_COLUMN_NAME,
-                'RELATED_MODEL' => Str::studly(Str::singular($relation->TABLE_NAME))
-            ];
+            if ($relation->REFERENCED_TABLE_NAME == $tableName) {
+                $hasManyArray[] = [
+                    'model' => Str::studly(Str::singular($relation->TABLE_NAME)),
+                    'name' => Str::camel(Str::plural($relation->TABLE_NAME)),
+                    'COLUMN_NAME' => $relation->COLUMN_NAME,
+                    'KEY_COLUMN_NAME' => $relation->REFERENCED_COLUMN_NAME,
+                    'RELATED_MODEL' => Str::studly(Str::singular($relation->TABLE_NAME))
+                ];
+            }
         }
+
+        $this->info("Foreign Keys for $tableName: " . json_encode($foreignKeysArray));
+        $this->info("HasMany Relations for $tableName: " . json_encode($hasManyArray));
 
         return ['foreignKeys' => $foreignKeysArray, 'hasMany' => $hasManyArray];
     }
+
+
+
 
     protected function getRelatedModelName($fieldName, $foreignKeys)
     {
@@ -212,4 +248,30 @@ EOT;
         }
         return $groupedRelations;
     }
+
+    protected function generateReport()
+    {
+        $reportContent = "Laravel Model Generation Report\n\n";
+        foreach ($this->report as $item) {
+            $reportContent .= "Table: {$item['table']}\n";
+            $reportContent .= "Model: {$item['model']}\n";
+            $reportContent .= "Fillable: " . implode(', ', $item['fillable']) . "\n";
+            $reportContent .= "Relationships: " . implode(', ', $item['relationships']) . "\n";
+            $reportContent .= "BelongsTo Methods:\n" . implode("\n", array_map(function ($method) {
+                    return $method;
+                }, $item['belongsToMethods'])) . "\n";
+            $reportContent .= "HasMany Methods:\n" . implode("\n", array_map(function ($method) {
+                    return $method;
+                }, $item['hasManyMethods'])) . "\n";
+            $reportContent .= "Foreign Keys: " . json_encode($item['foreignKeys']) . "\n";
+            $reportContent .= "HasMany Relations: " . json_encode($item['hasMany']) . "\n";
+            $reportContent .= "\n";
+        }
+
+        $reportPath = storage_path('app/model_generation_report.txt');
+        File::put($reportPath, $reportContent);
+        $this->info("Model generation report generated at $reportPath");
+    }
+
+
 }
