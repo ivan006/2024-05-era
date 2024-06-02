@@ -205,7 +205,11 @@ EOT;
             $relationFieldName = $foreignKey['COLUMN_NAME'];
             $relatedModel = $foreignKey['RELATED_MODEL'];
             $relationName = $this->generateRelationName($relationFieldName, $existingFields);
-            $relations[] = "'$relationName': this.belongsTo($relatedModel, '$relationFieldName')";
+
+            $segmentationResult = $this->wordSplitter->split($relatedModel);
+            $segmentedModelName = implode('', array_map('ucfirst', $segmentationResult['words']));
+
+            $relations[] = "'$relationName': this.belongsTo($segmentedModelName, '$relationFieldName')";
         }
 
         $groupedHasMany = $this->relationHelper->groupHasManyRelations($hasManyRelations);
@@ -219,7 +223,10 @@ EOT;
                     $relationName .= ucfirst(Str::camel($relation['COLUMN_NAME']));
                 }
 
-                $relations[] = "'$relationName': this.hasMany($relatedModel, '{$relation['COLUMN_NAME']}')";
+                $segmentationResult = $this->wordSplitter->split($relatedModel);
+                $segmentedModelName = implode('', array_map('ucfirst', $segmentationResult['words']));
+
+                $relations[] = "'$relationName': this.hasMany($segmentedModelName, '{$relation['COLUMN_NAME']}')";
             }
         }
 
@@ -257,7 +264,6 @@ EOT;
         array_unshift($imports, "import MyBaseModel from '@/models/MyBaseModel';", "import router from '@/router';");
         return implode("\n", $imports);
     }
-
 
 
     protected function generateStoreFile($models)
