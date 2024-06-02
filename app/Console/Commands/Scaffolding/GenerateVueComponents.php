@@ -220,20 +220,21 @@ EOT;
         $this->info('Generated router file');
     }
 
+
     protected function generateMenuFile($routes)
     {
         $menuLinks = array_map(function ($route) {
-            $text = Str::title(Str::plural($route['model']));
+            $titleCaseText = ucwords(str_replace('-', ' ', Str::plural($route['kebab'])));
             return <<<EOT
-        {
-            icon: '',
-            text: '{$text}',
-            to: '/lists/{$route['kebab']}',
-        }
+                        {
+                            icon: '',
+                            text: '{$titleCaseText}',
+                            to: '/lists/{$route['kebab']}',
+                        }
 EOT;
         }, $routes);
 
-        $menuLinksString = implode(",\n                        ", $menuLinks);
+        $menuLinksString = implode(",\n", $menuLinks);
 
         $menuFileContent = <<<EOT
 <template>
@@ -309,7 +310,7 @@ export default {
                     icon: '',
                     text: 'Lists',
                     subLinks: [
-                        $menuLinksString
+$menuLinksString
                     ],
                 },
             ]
@@ -334,6 +335,7 @@ EOT;
 
         $this->info('Generated menu file');
     }
+
 
 
 }
