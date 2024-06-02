@@ -19,6 +19,7 @@ class GenerateVueComponents extends Command
         parent::__construct();
         $this->wordSplitter = new WordSplitter();
     }
+
     public function handle()
     {
         $tables = DB::select('SHOW TABLES');
@@ -67,6 +68,7 @@ class GenerateVueComponents extends Command
         $this->generateRouterFile($routes);
         $this->generateMenuFile($routes);
     }
+
 
 
 
@@ -221,10 +223,11 @@ EOT;
     protected function generateMenuFile($routes)
     {
         $menuLinks = array_map(function ($route) {
+            $text = Str::title(Str::plural($route['model']));
             return <<<EOT
         {
             icon: '',
-            text: '{$route['model']}',
+            text: '{$text}',
             to: '/lists/{$route['kebab']}',
         }
 EOT;
@@ -331,5 +334,6 @@ EOT;
 
         $this->info('Generated menu file');
     }
+
 
 }
