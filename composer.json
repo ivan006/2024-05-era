@@ -16,7 +16,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/yourusername/quicklists-laravel-orm-api.git"
+            "url": "https://github.com/ivan006/2024-05-quicklists-laravel-orm-api"
         }
     ],
     "require-dev": {
