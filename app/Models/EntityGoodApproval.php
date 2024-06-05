@@ -71,11 +71,11 @@ class EntityGoodApproval extends Model
 
         public function queryRel(): BelongsTo
     {
-        return $this->belongsTo(Queryheader::class, 'Query');
+        return $this->belongsTo(QueryHeader::class, 'Query');
     }
 
         public function entitygoods(): HasMany
     {
-        return $this->hasMany(Entitygood::class, 'Invoice');
+        return $this->hasMany(EntityGood::class, 'Invoice');
     }
 }

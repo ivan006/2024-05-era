@@ -48,6 +48,6 @@ class SystemAction extends Model
 
         public function useraccesses(): HasMany
     {
-        return $this->hasMany(Useraccess::class, 'SystemAction');
+        return $this->hasMany(UserAccess::class, 'SystemAction');
     }
 }

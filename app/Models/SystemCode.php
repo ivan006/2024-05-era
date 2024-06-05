@@ -76,7 +76,7 @@ class SystemCode extends Model
 
         public function contactnumbers(): HasMany
     {
-        return $this->hasMany(Contactnumber::class, 'Type');
+        return $this->hasMany(ContactNumber::class, 'Type');
     }
 
         public function emails(): HasMany
@@ -86,7 +86,7 @@ class SystemCode extends Model
 
         public function servicerequestfrequencies(): HasMany
     {
-        return $this->hasMany(Servicerequestfrequency::class, 'ReportFrequency');
+        return $this->hasMany(ServiceRequestFrequency::class, 'ReportFrequency');
     }
 
         public function transactions(): HasMany
@@ -96,6 +96,6 @@ class SystemCode extends Model
 
         public function userconfigurations(): HasMany
     {
-        return $this->hasMany(Userconfiguration::class, 'Language');
+        return $this->hasMany(UserConfiguration::class, 'Language');
     }
 }

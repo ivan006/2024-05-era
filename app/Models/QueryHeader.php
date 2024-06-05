@@ -48,6 +48,6 @@ class QueryHeader extends Model
 
         public function entitygoodapprovals(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class, 'Query');
+        return $this->hasMany(EntityGoodApproval::class, 'Query');
     }
 }

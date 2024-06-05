@@ -36,7 +36,7 @@ class ContactNumber extends Model
 
         public function typeRel(): BelongsTo
     {
-        return $this->belongsTo(Systemcode::class, 'Type');
+        return $this->belongsTo(SystemCode::class, 'Type');
     }
 
     

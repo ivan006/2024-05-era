@@ -44,7 +44,7 @@ class Communication extends Model
 
         public function sentByRel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'SentBy');
+        return $this->belongsTo(SystemUser::class, 'SentBy');
     }
 
     

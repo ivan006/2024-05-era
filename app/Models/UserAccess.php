@@ -48,17 +48,17 @@ class UserAccess extends Model
 
         public function systemUserRel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'SystemUser');
+        return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
         public function userRoleRel(): BelongsTo
     {
-        return $this->belongsTo(Userrole::class, 'UserRole');
+        return $this->belongsTo(UserRole::class, 'UserRole');
     }
 
         public function systemActionRel(): BelongsTo
     {
-        return $this->belongsTo(Systemaction::class, 'SystemAction');
+        return $this->belongsTo(SystemAction::class, 'SystemAction');
     }
 
     

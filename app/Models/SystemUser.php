@@ -72,36 +72,36 @@ class SystemUser extends Model
 
         public function domainusers(): HasMany
     {
-        return $this->hasMany(Domainuser::class, 'SystemUser');
+        return $this->hasMany(DomainUser::class, 'SystemUser');
     }
 
         public function entityaudits(): HasMany
     {
-        return $this->hasMany(Entityaudit::class, 'SystemUser');
+        return $this->hasMany(EntityAudit::class, 'SystemUser');
     }
 
         public function servicerequests(): HasMany
     {
-        return $this->hasMany(Servicerequest::class, 'CreatedBy');
+        return $this->hasMany(ServiceRequest::class, 'CreatedBy');
     }
 
         public function servicerequestreports(): HasMany
     {
-        return $this->hasMany(Servicerequestreport::class, 'CreatedBy');
+        return $this->hasMany(ServiceRequestReport::class, 'CreatedBy');
     }
 
         public function useraccesses(): HasMany
     {
-        return $this->hasMany(Useraccess::class, 'SystemUser');
+        return $this->hasMany(UserAccess::class, 'SystemUser');
     }
 
         public function userconfigurations(): HasMany
     {
-        return $this->hasMany(Userconfiguration::class, 'SystemUser');
+        return $this->hasMany(UserConfiguration::class, 'SystemUser');
     }
 
         public function userdevices(): HasMany
     {
-        return $this->hasMany(Userdevice::class, 'SystemUser');
+        return $this->hasMany(UserDevice::class, 'SystemUser');
     }
 }

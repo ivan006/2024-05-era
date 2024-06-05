@@ -49,7 +49,7 @@ class ServiceRequestReport extends Model
 
         public function serviceRequestRel(): BelongsTo
     {
-        return $this->belongsTo(Servicerequest::class, 'ServiceRequest');
+        return $this->belongsTo(ServiceRequest::class, 'ServiceRequest');
     }
 
         public function serviceProviderRel(): BelongsTo
@@ -59,21 +59,21 @@ class ServiceRequestReport extends Model
 
         public function createdByRel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'CreatedBy');
+        return $this->belongsTo(SystemUser::class, 'CreatedBy');
     }
 
         public function treatmentDetail(): BelongsTo
     {
-        return $this->belongsTo(Treatmentdetail::class, 'TreatmentDetails');
+        return $this->belongsTo(TreatmentDetail::class, 'TreatmentDetails');
     }
 
         public function externalproducers(): HasMany
     {
-        return $this->hasMany(Externalproducer::class, 'ServiceRequestReport');
+        return $this->hasMany(ExternalProducer::class, 'ServiceRequestReport');
     }
 
         public function treatmentdetailsRel(): HasMany
     {
-        return $this->hasMany(Treatmentdetail::class, 'ServiceRequestReport');
+        return $this->hasMany(TreatmentDetail::class, 'ServiceRequestReport');
     }
 }

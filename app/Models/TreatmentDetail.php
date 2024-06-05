@@ -45,11 +45,11 @@ class TreatmentDetail extends Model
 
         public function serviceRequestReportRel(): BelongsTo
     {
-        return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
+        return $this->belongsTo(ServiceRequestReport::class, 'ServiceRequestReport');
     }
 
         public function servicerequestreports(): HasMany
     {
-        return $this->hasMany(Servicerequestreport::class, 'TreatmentDetails');
+        return $this->hasMany(ServiceRequestReport::class, 'TreatmentDetails');
     }
 }

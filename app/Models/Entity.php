@@ -67,22 +67,22 @@ class Entity extends Model
 
         public function entitygoods(): HasMany
     {
-        return $this->hasMany(Entitygood::class, 'Entity');
+        return $this->hasMany(EntityGood::class, 'Entity');
     }
 
         public function entitygoodapprovalsApprovedBy(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class, 'ApprovedBy');
+        return $this->hasMany(EntityGoodApproval::class, 'ApprovedBy');
     }
 
         public function entitygoodapprovalsInvoiceApprovedBy(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class, 'InvoiceApprovedBy');
+        return $this->hasMany(EntityGoodApproval::class, 'InvoiceApprovedBy');
     }
 
         public function entitygoodapprovalsEntity(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class, 'Entity');
+        return $this->hasMany(EntityGoodApproval::class, 'Entity');
     }
 
         public function goods(): HasMany
@@ -92,16 +92,16 @@ class Entity extends Model
 
         public function servicerequests(): HasMany
     {
-        return $this->hasMany(Servicerequest::class, 'ServiceProvider');
+        return $this->hasMany(ServiceRequest::class, 'ServiceProvider');
     }
 
         public function servicerequestreports(): HasMany
     {
-        return $this->hasMany(Servicerequestreport::class, 'ServiceProvider');
+        return $this->hasMany(ServiceRequestReport::class, 'ServiceProvider');
     }
 
         public function systemcodes(): HasMany
     {
-        return $this->hasMany(Systemcode::class, 'Entity');
+        return $this->hasMany(SystemCode::class, 'Entity');
     }
 }

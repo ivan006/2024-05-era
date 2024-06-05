@@ -61,12 +61,12 @@ class Address extends Model
 
         public function countryRel(): BelongsTo
     {
-        return $this->belongsTo(Systemcode::class, 'Country');
+        return $this->belongsTo(SystemCode::class, 'Country');
     }
 
         public function typeRel(): BelongsTo
     {
-        return $this->belongsTo(Systemcode::class, 'Type');
+        return $this->belongsTo(SystemCode::class, 'Type');
     }
 
     

@@ -56,16 +56,16 @@ class ServiceRequest extends Model
 
         public function createdByRel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'CreatedBy');
+        return $this->belongsTo(SystemUser::class, 'CreatedBy');
     }
 
         public function servicerequestfrequencies(): HasMany
     {
-        return $this->hasMany(Servicerequestfrequency::class, 'ServiceRequest');
+        return $this->hasMany(ServiceRequestFrequency::class, 'ServiceRequest');
     }
 
         public function servicerequestreports(): HasMany
     {
-        return $this->hasMany(Servicerequestreport::class, 'ServiceRequest');
+        return $this->hasMany(ServiceRequestReport::class, 'ServiceRequest');
     }
 }

@@ -54,6 +54,6 @@ class Good extends Model
 
         public function entitygoods(): HasMany
     {
-        return $this->hasMany(Entitygood::class, 'Good');
+        return $this->hasMany(EntityGood::class, 'Good');
     }
 }

@@ -40,7 +40,7 @@ class EntityAudit extends Model
 
         public function systemUserRel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'SystemUser');
+        return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
     

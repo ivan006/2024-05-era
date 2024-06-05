@@ -35,12 +35,12 @@ class ServiceRequestFrequency extends Model
 
         public function serviceRequestRel(): BelongsTo
     {
-        return $this->belongsTo(Servicerequest::class, 'ServiceRequest');
+        return $this->belongsTo(ServiceRequest::class, 'ServiceRequest');
     }
 
         public function reportFrequencyRel(): BelongsTo
     {
-        return $this->belongsTo(Systemcode::class, 'ReportFrequency');
+        return $this->belongsTo(SystemCode::class, 'ReportFrequency');
     }
 
     

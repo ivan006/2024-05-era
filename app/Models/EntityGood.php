@@ -66,7 +66,7 @@ class EntityGood extends Model
 
         public function invoiceRel(): BelongsTo
     {
-        return $this->belongsTo(Entitygoodapproval::class, 'Invoice');
+        return $this->belongsTo(EntityGoodApproval::class, 'Invoice');
     }
 
     

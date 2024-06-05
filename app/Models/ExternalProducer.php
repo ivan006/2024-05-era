@@ -32,7 +32,7 @@ class ExternalProducer extends Model
 
         public function serviceRequestReportRel(): BelongsTo
     {
-        return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
+        return $this->belongsTo(ServiceRequestReport::class, 'ServiceRequestReport');
     }
 
     
