@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,22 +16,25 @@ return new class extends Migration {
                 ->on("servicerequest")
                 ->onUpdate("no action")
                 ->onDelete("cascade");
+
             $table
                 ->foreign(["ServiceProvider"], "FK2_serviceprovider")
                 ->references(["Id"])
                 ->on("entity")
                 ->onUpdate("no action")
                 ->onDelete("no action");
+
             $table
                 ->foreign(["CreatedBy"], "FK3_createdby")
                 ->references(["Id"])
                 ->on("systemuser")
                 ->onUpdate("no action")
                 ->onDelete("no action");
+
             $table
                 ->foreign(
                     ["TreatmentDetails"],
-                    "FK_servicerequestreport_eranpc_qa.treatmentdetails"
+                    "FK_servicerequestreport_eranpc_qa_treatmentdetails"
                 )
                 ->references(["Id"])
                 ->on("treatmentdetails")
@@ -51,7 +53,7 @@ return new class extends Migration {
             $table->dropForeign("FK2_serviceprovider");
             $table->dropForeign("FK3_createdby");
             $table->dropForeign(
-                "FK_servicerequestreport_eranpc_qa.treatmentdetails"
+                "FK_servicerequestreport_eranpc_qa_treatmentdetails"
             );
         });
     }
