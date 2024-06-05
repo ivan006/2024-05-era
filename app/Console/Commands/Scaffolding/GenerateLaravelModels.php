@@ -138,6 +138,13 @@ EOT;
 
     protected function generateBelongsToMethod($relatedModel, $relationshipName, $fieldName)
     {
+        $cleanedName = preg_replace('/[^a-zA-Z]/', '', $relatedModel);
+
+        $segmentationResult = $this->wordSplitter->split($cleanedName);
+        $segmentedTableName = $segmentationResult['words'];
+        $pascalName = implode('', array_map('ucfirst', $segmentedTableName));
+
+        $relatedModel = Str::singular($pascalName);
         return <<<EOT
     public function $relationshipName(): BelongsTo
     {
@@ -148,6 +155,14 @@ EOT;
 
     protected function generateHasManyMethod($relatedModel, $relationshipName, $foreignKey)
     {
+
+        $cleanedName = preg_replace('/[^a-zA-Z]/', '', $relatedModel);
+
+        $segmentationResult = $this->wordSplitter->split($cleanedName);
+        $segmentedTableName = $segmentationResult['words'];
+        $pascalName = implode('', array_map('ucfirst', $segmentedTableName));
+
+        $relatedModel = Str::singular($pascalName);
         return <<<EOT
     public function $relationshipName(): HasMany
     {
