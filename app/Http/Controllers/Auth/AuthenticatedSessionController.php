@@ -14,20 +14,32 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
+
     public function store(LoginRequest $request): JsonResponse
     {
+        // Authenticate the user
         $request->authenticate();
 
-        //         $request->session()->regenerate();
-
-        //         return response()->noContent();
-
+        // Retrieve the authenticated user
         $user = $request->user();
 
+        // Check if the user's email is verified
+        if (is_null($user->email_verified_at)) {
+            return response()->json([
+                'message' => 'Your email address is not verified.',
+            ], 403);
+        }
+
+        // Regenerate session
+        // $request->session()->regenerate();
+
+        // Delete existing tokens
         $user->tokens()->delete();
 
+        // Create a new token
         $token = $user->createToken('api-token');
 
+        // Return the response with user data and the token
         return response()->json([
             'user' => $user,
             'token' => $token->plainTextToken,
