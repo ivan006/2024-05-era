@@ -97,11 +97,11 @@ class GenerateLaravelModels extends Command
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class $modelName extends Model
+class $modelName extends OrmApiBaseModel
 {
     protected \$table = '$tableName';
 
