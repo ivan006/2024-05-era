@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class DomainUser extends Model
+class DomainUser extends OrmApiBaseModel
 {
     protected $table = 'domainuser';
 
@@ -45,5 +45,5 @@ class DomainUser extends Model
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
-    
+
 }

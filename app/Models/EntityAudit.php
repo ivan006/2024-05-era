@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class EntityAudit extends Model
+class EntityAudit extends OrmApiBaseModel
 {
     protected $table = 'entityaudit';
 
@@ -43,5 +43,5 @@ class EntityAudit extends Model
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
-    
+
 }

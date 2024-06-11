@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Bank extends Model
+class Bank extends OrmApiBaseModel
 {
     protected $table = 'bank';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -42,7 +42,7 @@ class Bank extends Model
         'Entity'
     ];
 
-    
 
-    
+
+
 }

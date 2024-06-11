@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class DocumentDetail extends Model
+class DocumentDetail extends OrmApiBaseModel
 {
     protected $table = 'documentdetail';
 
@@ -49,5 +49,5 @@ class DocumentDetail extends Model
         return $this->belongsTo(Document::class, 'Document');
     }
 
-    
+
 }

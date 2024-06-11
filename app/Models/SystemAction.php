@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SystemAction extends Model
+class SystemAction extends OrmApiBaseModel
 {
     protected $table = 'systemaction';
 
@@ -44,7 +44,7 @@ class SystemAction extends Model
         'ChangedBy'
     ];
 
-    
+
 
         public function useraccesses(): HasMany
     {

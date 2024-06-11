@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ExternalProducer extends Model
+class ExternalProducer extends OrmApiBaseModel
 {
     protected $table = 'externalproducers';
 
@@ -35,5 +35,5 @@ class ExternalProducer extends Model
         return $this->belongsTo(ServiceRequestReport::class, 'ServiceRequestReport');
     }
 
-    
+
 }

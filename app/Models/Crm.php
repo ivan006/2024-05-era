@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Crm extends Model
+class Crm extends OrmApiBaseModel
 {
     protected $table = 'crm';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -36,7 +36,7 @@ class Crm extends Model
         'Status'
     ];
 
-    
 
-    
+
+
 }

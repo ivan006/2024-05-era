@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ProductProvider extends Model
+class ProductProvider extends OrmApiBaseModel
 {
     protected $table = 'productprovider';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -30,7 +30,7 @@ class ProductProvider extends Model
         'Entity'
     ];
 
-    
 
-    
+
+
 }

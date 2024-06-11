@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class PersonalAccessToken extends Model
+class PersonalAccessToken extends OrmApiBaseModel
 {
     protected $table = 'personal_access_tokens';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -44,7 +44,7 @@ class PersonalAccessToken extends Model
         'updated_at'
     ];
 
-    
 
-    
+
+
 }

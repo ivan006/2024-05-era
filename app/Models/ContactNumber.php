@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ContactNumber extends Model
+class ContactNumber extends OrmApiBaseModel
 {
     protected $table = 'contactnumber';
 
@@ -39,5 +39,5 @@ class ContactNumber extends Model
         return $this->belongsTo(SystemCode::class, 'Type');
     }
 
-    
+
 }

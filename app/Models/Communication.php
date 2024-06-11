@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Communication extends Model
+class Communication extends OrmApiBaseModel
 {
     protected $table = 'communication';
 
@@ -47,5 +47,5 @@ class Communication extends Model
         return $this->belongsTo(SystemUser::class, 'SentBy');
     }
 
-    
+
 }

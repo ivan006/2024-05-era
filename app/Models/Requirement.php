@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Requirement extends Model
+class Requirement extends OrmApiBaseModel
 {
     protected $table = 'requirement';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -46,7 +46,7 @@ class Requirement extends Model
         'ValueType'
     ];
 
-    
 
-    
+
+
 }

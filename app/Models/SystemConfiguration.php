@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SystemConfiguration extends Model
+class SystemConfiguration extends OrmApiBaseModel
 {
     protected $table = 'systemconfiguration';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -30,7 +30,7 @@ class SystemConfiguration extends Model
         'Value'
     ];
 
-    
 
-    
+
+
 }

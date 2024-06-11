@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class PasswordResetToken extends Model
+class PasswordResetToken extends OrmApiBaseModel
 {
     protected $table = 'password_reset_tokens';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -32,7 +32,7 @@ class PasswordResetToken extends Model
         'created_at'
     ];
 
-    
 
-    
+
+
 }

@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class RuleActionDatum extends Model
+class RuleActionDatum extends OrmApiBaseModel
 {
     protected $table = 'ruleactiondata';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -34,7 +34,7 @@ class RuleActionDatum extends Model
         'ColumnType'
     ];
 
-    
 
-    
+
+
 }

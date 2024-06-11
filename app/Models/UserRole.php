@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserRole extends Model
+class UserRole extends OrmApiBaseModel
 {
     protected $table = 'userrole';
 
@@ -40,7 +40,7 @@ class UserRole extends Model
         'FbId'
     ];
 
-    
+
 
         public function useraccesses(): HasMany
     {

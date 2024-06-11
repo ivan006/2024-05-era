@@ -5,9 +5,9 @@ namespace App\Models\olf;
 use App\Models\BelongsToMany;
 use App\Models\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 
-class Tag extends Model
+class Tag extends OrmApiBaseModel
 {
     use HasFactory;
 

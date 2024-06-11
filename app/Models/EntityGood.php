@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class EntityGood extends Model
+class EntityGood extends OrmApiBaseModel
 {
     protected $table = 'entitygood';
+
+    public $timestamps = false;
 
     public function relationships()
     {
@@ -69,5 +71,5 @@ class EntityGood extends Model
         return $this->belongsTo(EntityGoodApproval::class, 'Invoice');
     }
 
-    
+
 }

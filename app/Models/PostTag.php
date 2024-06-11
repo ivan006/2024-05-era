@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class PostTag extends Model
+class PostTag extends OrmApiBaseModel
 {
     protected $table = 'post_tags';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -34,7 +34,7 @@ class PostTag extends Model
         'tag_id'
     ];
 
-    
 
-    
+
+
 }

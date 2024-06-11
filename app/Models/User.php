@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Model
+class User extends OrmApiBaseModel
 {
     protected $table = 'users';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -40,7 +40,7 @@ class User extends Model
         'updated_at'
     ];
 
-    
 
-    
+
+
 }

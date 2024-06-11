@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Entity extends Model
+class Entity extends OrmApiBaseModel
 {
     protected $table = 'entity';
 
@@ -63,7 +63,7 @@ class Entity extends Model
         'IsPaid'
     ];
 
-    
+
 
         public function entitygoods(): HasMany
     {

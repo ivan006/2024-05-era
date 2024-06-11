@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserDevice extends Model
+class UserDevice extends OrmApiBaseModel
 {
     protected $table = 'userdevice';
 
@@ -41,5 +41,5 @@ class UserDevice extends Model
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
-    
+
 }

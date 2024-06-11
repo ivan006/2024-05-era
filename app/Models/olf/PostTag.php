@@ -4,9 +4,9 @@ namespace App\Models\olf;
 
 use App\Models\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 
-class PostTag extends Model
+class PostTag extends OrmApiBaseModel
 {
     use HasFactory;
 

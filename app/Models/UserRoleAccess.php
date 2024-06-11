@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserRoleAccess extends Model
+class UserRoleAccess extends OrmApiBaseModel
 {
     protected $table = 'userroleaccess';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -42,7 +42,7 @@ class UserRoleAccess extends Model
         'Rule'
     ];
 
-    
 
-    
+
+
 }

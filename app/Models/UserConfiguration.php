@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserConfiguration extends Model
+class UserConfiguration extends OrmApiBaseModel
 {
     protected $table = 'userconfiguration';
 
@@ -43,5 +43,5 @@ class UserConfiguration extends Model
         return $this->belongsTo(SystemCode::class, 'Language');
     }
 
-    
+
 }

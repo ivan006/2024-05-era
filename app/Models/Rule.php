@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Rule extends Model
+class Rule extends OrmApiBaseModel
 {
     protected $table = 'rule';
 
     public function relationships()
     {
         return [
-            
+
         ];
     }
 
@@ -34,7 +34,7 @@ class Rule extends Model
         'NextRule'
     ];
 
-    
 
-    
+
+
 }
