@@ -65,12 +65,13 @@ class WebsiteProducerRegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $result = OrmApi::deleteItem(
             $this->model,
             $id,
-            $this->itemNameSingular
+            $this->itemNameSingular,
+            $request
         );
         return response()->json($result['res'], $result['code']);
     }
