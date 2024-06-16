@@ -12,6 +12,8 @@ class EntityGood extends OrmApiBaseModel
 
     public $timestamps = false;
 
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -47,7 +49,7 @@ class EntityGood extends OrmApiBaseModel
         'AvgKg',
         'AvgKgOld',
         'AvgLifeSpan',
-        'TotalKg',
+        //'TotalKg',
         'Tariff',
         'Selected',
         'Dimension',
