@@ -123,7 +123,7 @@ export default class $modelName extends MyBaseModel {
             flags,
             this.mergeHeaders(moreHeaders),
             options,
-            this.adapator
+            this
         );
     }
 
@@ -134,7 +134,7 @@ export default class $modelName extends MyBaseModel {
             [...this.parentWithables, ...relationships],
             flags,
             this.mergeHeaders(moreHeaders),
-            this.adapator
+            this
         );
     }
 
@@ -145,7 +145,7 @@ export default class $modelName extends MyBaseModel {
             [...this.parentWithables, ...relationships],
             flags,
             this.mergeHeaders(moreHeaders),
-            this.adapator
+            this
         );
     }
 
@@ -164,7 +164,7 @@ export default class $modelName extends MyBaseModel {
         return this.customSupabaseApiDelete(
             `\${this.baseUrl}\${this.entityUrl}`,
             entityId,
-            this.adapator
+            this
         );
     }
 }
@@ -244,8 +244,12 @@ EOT;
             $relationName .= 'Rel';
         }
 
+        // Convert to snake_case for consistency
+        $relationName = Str::snake($relationName);
+
         return $relationName;
     }
+
 
     protected function generateImports($modelName, $foreignKeys, $hasManyRelations)
     {
@@ -258,10 +262,10 @@ EOT;
             $segmentationResult = $this->wordSplitter->split($relatedModel);
             $segmentedModelName = implode('', array_map('ucfirst', $segmentationResult['words']));
             $relatedModelFile = implode('', array_map('ucfirst', $segmentationResult['words']));
-            return "import $segmentedModelName from '@/models/$relatedModelFile';";
+            return "import $segmentedModelName from 'src/models/$relatedModelFile';";
         }, $relatedModels);
 
-        array_unshift($imports, "import MyBaseModel from '@/models/MyBaseModel';", "import router from '@/router';");
+        array_unshift($imports, "import MyBaseModel from 'src/models/model-helpers/MyBaseModel';", "import router from 'src/router';");
         return implode("\n", $imports);
     }
 
@@ -269,7 +273,7 @@ EOT;
     protected function generateStoreFile($models)
     {
         $imports = array_map(function($model) {
-            return "import {$model['modelName']} from '@/models/{$model['modelName']}';";
+            return "import {$model['modelName']} from 'src/models/{$model['modelName']}';";
         }, $models);
 
         $registrations = array_map(function($model) {
