@@ -10,10 +10,14 @@ class Tag extends OrmApiBaseModel
 {
     protected $table = 'tags';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -32,7 +36,7 @@ class Tag extends OrmApiBaseModel
         'name'
     ];
 
+    
 
-
-
+    
 }

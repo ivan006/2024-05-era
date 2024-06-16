@@ -10,10 +10,14 @@ class ObjectTrait extends OrmApiBaseModel
 {
     protected $table = 'objecttrait';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -48,7 +52,7 @@ class ObjectTrait extends OrmApiBaseModel
         'SystemCodeField'
     ];
 
+    
 
-
-
+    
 }

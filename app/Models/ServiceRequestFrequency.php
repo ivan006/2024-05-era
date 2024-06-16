@@ -10,6 +10,10 @@ class ServiceRequestFrequency extends OrmApiBaseModel
 {
     protected $table = 'servicerequestfrequency';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -43,5 +47,5 @@ class ServiceRequestFrequency extends OrmApiBaseModel
         return $this->belongsTo(SystemCode::class, 'ReportFrequency');
     }
 
-
+    
 }

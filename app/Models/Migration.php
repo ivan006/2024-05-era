@@ -10,10 +10,14 @@ class Migration extends OrmApiBaseModel
 {
     protected $table = 'migrations';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -30,7 +34,7 @@ class Migration extends OrmApiBaseModel
         'batch'
     ];
 
+    
 
-
-
+    
 }

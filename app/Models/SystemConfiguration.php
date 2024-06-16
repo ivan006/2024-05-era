@@ -10,10 +10,14 @@ class SystemConfiguration extends OrmApiBaseModel
 {
     protected $table = 'systemconfiguration';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -30,7 +34,7 @@ class SystemConfiguration extends OrmApiBaseModel
         'Value'
     ];
 
+    
 
-
-
+    
 }

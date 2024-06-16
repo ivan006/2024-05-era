@@ -10,10 +10,14 @@ class Relative extends OrmApiBaseModel
 {
     protected $table = 'relative';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -40,7 +44,7 @@ class Relative extends OrmApiBaseModel
         'TraditionalMarriage'
     ];
 
+    
 
-
-
+    
 }

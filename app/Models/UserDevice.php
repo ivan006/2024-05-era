@@ -10,6 +10,10 @@ class UserDevice extends OrmApiBaseModel
 {
     protected $table = 'userdevice';
 
+    public $timestamps = false;
+
+    protected $primaryKey = '';
+
     public function relationships()
     {
         return [
@@ -41,5 +45,5 @@ class UserDevice extends OrmApiBaseModel
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
-
+    
 }

@@ -10,6 +10,10 @@ class UserRole extends OrmApiBaseModel
 {
     protected $table = 'userrole';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -40,7 +44,7 @@ class UserRole extends OrmApiBaseModel
         'FbId'
     ];
 
-
+    
 
         public function useraccesses(): HasMany
     {

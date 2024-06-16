@@ -10,10 +10,14 @@ class Rule extends OrmApiBaseModel
 {
     protected $table = 'rule';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -34,7 +38,7 @@ class Rule extends OrmApiBaseModel
         'NextRule'
     ];
 
+    
 
-
-
+    
 }

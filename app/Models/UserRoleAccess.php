@@ -10,10 +10,14 @@ class UserRoleAccess extends OrmApiBaseModel
 {
     protected $table = 'userroleaccess';
 
+    public $timestamps = false;
+
+    protected $primaryKey = '';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -42,7 +46,7 @@ class UserRoleAccess extends OrmApiBaseModel
         'Rule'
     ];
 
+    
 
-
-
+    
 }

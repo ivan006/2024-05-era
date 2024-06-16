@@ -10,6 +10,10 @@ class ServiceRequestReport extends OrmApiBaseModel
 {
     protected $table = 'servicerequestreport';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [

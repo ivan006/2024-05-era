@@ -10,10 +10,14 @@ class Requirement extends OrmApiBaseModel
 {
     protected $table = 'requirement';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -46,7 +50,7 @@ class Requirement extends OrmApiBaseModel
         'ValueType'
     ];
 
+    
 
-
-
+    
 }

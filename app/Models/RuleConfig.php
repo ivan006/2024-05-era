@@ -10,10 +10,14 @@ class RuleConfig extends OrmApiBaseModel
 {
     protected $table = 'ruleconfig';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -42,7 +46,7 @@ class RuleConfig extends OrmApiBaseModel
         'SystemCodeValue'
     ];
 
+    
 
-
-
+    
 }

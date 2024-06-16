@@ -10,10 +10,14 @@ class Crm extends OrmApiBaseModel
 {
     protected $table = 'crm';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -36,7 +40,7 @@ class Crm extends OrmApiBaseModel
         'Status'
     ];
 
+    
 
-
-
+    
 }

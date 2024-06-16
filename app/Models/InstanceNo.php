@@ -10,10 +10,14 @@ class InstanceNo extends OrmApiBaseModel
 {
     protected $table = 'instanceno';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -28,7 +32,7 @@ class InstanceNo extends OrmApiBaseModel
         'ObjectName'
     ];
 
+    
 
-
-
+    
 }

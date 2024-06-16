@@ -10,10 +10,14 @@ class Bank extends OrmApiBaseModel
 {
     protected $table = 'bank';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -42,7 +46,7 @@ class Bank extends OrmApiBaseModel
         'Entity'
     ];
 
+    
 
-
-
+    
 }

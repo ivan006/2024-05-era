@@ -10,10 +10,14 @@ class ObjectValue extends OrmApiBaseModel
 {
     protected $table = 'objectvalue';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -38,7 +42,7 @@ class ObjectValue extends OrmApiBaseModel
         'Entity'
     ];
 
+    
 
-
-
+    
 }

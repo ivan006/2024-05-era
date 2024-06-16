@@ -10,6 +10,10 @@ class Document extends OrmApiBaseModel
 {
     protected $table = 'document';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -40,7 +44,7 @@ class Document extends OrmApiBaseModel
         'Access'
     ];
 
-
+    
 
         public function documentdetails(): HasMany
     {

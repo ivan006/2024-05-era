@@ -10,6 +10,10 @@ class DocumentDetail extends OrmApiBaseModel
 {
     protected $table = 'documentdetail';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -49,5 +53,5 @@ class DocumentDetail extends OrmApiBaseModel
         return $this->belongsTo(Document::class, 'Document');
     }
 
-
+    
 }

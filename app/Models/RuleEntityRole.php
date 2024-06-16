@@ -10,10 +10,14 @@ class RuleEntityRole extends OrmApiBaseModel
 {
     protected $table = 'ruleentityrole';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -44,7 +48,7 @@ class RuleEntityRole extends OrmApiBaseModel
         'CRUD_Delete'
     ];
 
+    
 
-
-
+    
 }

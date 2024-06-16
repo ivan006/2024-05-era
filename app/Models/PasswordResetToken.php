@@ -10,10 +10,14 @@ class PasswordResetToken extends OrmApiBaseModel
 {
     protected $table = 'password_reset_tokens';
 
+    public $timestamps = false;
+
+    protected $primaryKey = '';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -32,7 +36,7 @@ class PasswordResetToken extends OrmApiBaseModel
         'created_at'
     ];
 
+    
 
-
-
+    
 }

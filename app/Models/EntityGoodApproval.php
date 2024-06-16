@@ -10,6 +10,10 @@ class EntityGoodApproval extends OrmApiBaseModel
 {
     protected $table = 'entitygoodapproval';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [

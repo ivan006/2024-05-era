@@ -10,6 +10,10 @@ class SystemUser extends OrmApiBaseModel
 {
     protected $table = 'systemuser';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -63,7 +67,7 @@ class SystemUser extends OrmApiBaseModel
         'FbId'
     ];
 
-
+    
 
         public function communications(): HasMany
     {

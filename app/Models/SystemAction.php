@@ -10,6 +10,10 @@ class SystemAction extends OrmApiBaseModel
 {
     protected $table = 'systemaction';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -44,7 +48,7 @@ class SystemAction extends OrmApiBaseModel
         'ChangedBy'
     ];
 
-
+    
 
         public function useraccesses(): HasMany
     {

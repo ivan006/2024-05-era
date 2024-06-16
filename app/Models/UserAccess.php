@@ -10,6 +10,10 @@ class UserAccess extends OrmApiBaseModel
 {
     protected $table = 'useraccess';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -61,5 +65,5 @@ class UserAccess extends OrmApiBaseModel
         return $this->belongsTo(SystemAction::class, 'SystemAction');
     }
 
-
+    
 }

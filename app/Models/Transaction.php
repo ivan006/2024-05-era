@@ -10,6 +10,10 @@ class Transaction extends OrmApiBaseModel
 {
     protected $table = 'transactions';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -57,5 +61,5 @@ class Transaction extends OrmApiBaseModel
         return $this->belongsTo(SystemCode::class, 'Type');
     }
 
-
+    
 }

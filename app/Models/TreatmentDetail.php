@@ -10,6 +10,10 @@ class TreatmentDetail extends OrmApiBaseModel
 {
     protected $table = 'treatmentdetails';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [

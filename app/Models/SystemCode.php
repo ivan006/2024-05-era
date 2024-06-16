@@ -10,6 +10,10 @@ class SystemCode extends OrmApiBaseModel
 {
     protected $table = 'systemcode';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [

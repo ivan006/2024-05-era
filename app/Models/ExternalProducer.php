@@ -10,6 +10,10 @@ class ExternalProducer extends OrmApiBaseModel
 {
     protected $table = 'externalproducers';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -35,5 +39,5 @@ class ExternalProducer extends OrmApiBaseModel
         return $this->belongsTo(ServiceRequestReport::class, 'ServiceRequestReport');
     }
 
-
+    
 }

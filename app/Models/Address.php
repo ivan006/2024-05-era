@@ -10,6 +10,10 @@ class Address extends OrmApiBaseModel
 {
     protected $table = 'address';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -69,5 +73,5 @@ class Address extends OrmApiBaseModel
         return $this->belongsTo(SystemCode::class, 'Type');
     }
 
-
+    
 }

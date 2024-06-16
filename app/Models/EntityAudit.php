@@ -10,6 +10,10 @@ class EntityAudit extends OrmApiBaseModel
 {
     protected $table = 'entityaudit';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -43,5 +47,5 @@ class EntityAudit extends OrmApiBaseModel
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
-
+    
 }

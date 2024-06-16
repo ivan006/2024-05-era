@@ -10,10 +10,14 @@ class Post extends OrmApiBaseModel
 {
     protected $table = 'posts';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -32,7 +36,7 @@ class Post extends OrmApiBaseModel
         'name'
     ];
 
+    
 
-
-
+    
 }

@@ -10,6 +10,10 @@ class Email extends OrmApiBaseModel
 {
     protected $table = 'email';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -39,5 +43,5 @@ class Email extends OrmApiBaseModel
         return $this->belongsTo(SystemCode::class, 'Type');
     }
 
-
+    
 }

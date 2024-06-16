@@ -10,6 +10,10 @@ class UserConfiguration extends OrmApiBaseModel
 {
     protected $table = 'userconfiguration';
 
+    public $timestamps = false;
+
+    protected $primaryKey = '';
+
     public function relationships()
     {
         return [
@@ -43,5 +47,5 @@ class UserConfiguration extends OrmApiBaseModel
         return $this->belongsTo(SystemCode::class, 'Language');
     }
 
-
+    
 }

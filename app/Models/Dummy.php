@@ -10,10 +10,14 @@ class Dummy extends OrmApiBaseModel
 {
     protected $table = 'dummy';
 
+    public $timestamps = false;
+
+    protected $primaryKey = '';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -28,7 +32,7 @@ class Dummy extends OrmApiBaseModel
         'textData'
     ];
 
+    
 
-
-
+    
 }

@@ -10,10 +10,14 @@ class Audit extends OrmApiBaseModel
 {
     protected $table = 'audit';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -42,7 +46,7 @@ class Audit extends OrmApiBaseModel
         'CrudMessage'
     ];
 
+    
 
-
-
+    
 }

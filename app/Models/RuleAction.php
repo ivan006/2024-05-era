@@ -10,10 +10,14 @@ class RuleAction extends OrmApiBaseModel
 {
     protected $table = 'ruleaction';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -42,7 +46,7 @@ class RuleAction extends OrmApiBaseModel
         'NegativeSystemCode'
     ];
 
+    
 
-
-
+    
 }

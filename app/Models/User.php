@@ -10,10 +10,14 @@ class User extends OrmApiBaseModel
 {
     protected $table = 'users';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -40,7 +44,7 @@ class User extends OrmApiBaseModel
         'updated_at'
     ];
 
+    
 
-
-
+    
 }

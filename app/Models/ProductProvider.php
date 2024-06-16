@@ -10,10 +10,14 @@ class ProductProvider extends OrmApiBaseModel
 {
     protected $table = 'productprovider';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -30,7 +34,7 @@ class ProductProvider extends OrmApiBaseModel
         'Entity'
     ];
 
+    
 
-
-
+    
 }

@@ -10,10 +10,14 @@ class SystemLog extends OrmApiBaseModel
 {
     protected $table = 'systemlog';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -42,7 +46,7 @@ class SystemLog extends OrmApiBaseModel
         'StackTrace'
     ];
 
+    
 
-
-
+    
 }

@@ -10,10 +10,14 @@ class FailedJob extends OrmApiBaseModel
 {
     protected $table = 'failed_jobs';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -38,7 +42,7 @@ class FailedJob extends OrmApiBaseModel
         'failed_at'
     ];
 
+    
 
-
-
+    
 }

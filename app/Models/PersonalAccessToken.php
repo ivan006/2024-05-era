@@ -10,10 +10,14 @@ class PersonalAccessToken extends OrmApiBaseModel
 {
     protected $table = 'personal_access_tokens';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -44,7 +48,7 @@ class PersonalAccessToken extends OrmApiBaseModel
         'updated_at'
     ];
 
+    
 
-
-
+    
 }

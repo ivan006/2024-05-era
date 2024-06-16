@@ -10,6 +10,10 @@ class ContactNumber extends OrmApiBaseModel
 {
     protected $table = 'contactnumber';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -39,5 +43,5 @@ class ContactNumber extends OrmApiBaseModel
         return $this->belongsTo(SystemCode::class, 'Type');
     }
 
-
+    
 }

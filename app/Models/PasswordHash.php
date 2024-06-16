@@ -10,10 +10,14 @@ class PasswordHash extends OrmApiBaseModel
 {
     protected $table = 'passwordhash';
 
+    public $timestamps = false;
+
+    protected $primaryKey = '';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -42,7 +46,7 @@ class PasswordHash extends OrmApiBaseModel
         'FbId'
     ];
 
+    
 
-
-
+    
 }

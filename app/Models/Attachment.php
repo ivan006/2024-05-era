@@ -10,10 +10,14 @@ class Attachment extends OrmApiBaseModel
 {
     protected $table = 'attachment';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -42,7 +46,7 @@ class Attachment extends OrmApiBaseModel
         'CreatedBy'
     ];
 
+    
 
-
-
+    
 }

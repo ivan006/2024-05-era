@@ -10,10 +10,14 @@ class Object extends OrmApiBaseModel
 {
     protected $table = 'object';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -34,7 +38,7 @@ class Object extends OrmApiBaseModel
         'ChildType'
     ];
 
+    
 
-
-
+    
 }

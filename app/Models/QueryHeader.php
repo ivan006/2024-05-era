@@ -10,6 +10,10 @@ class QueryHeader extends OrmApiBaseModel
 {
     protected $table = 'queryheader';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -44,7 +48,7 @@ class QueryHeader extends OrmApiBaseModel
         'ClosedOn'
     ];
 
-
+    
 
         public function entitygoodapprovals(): HasMany
     {

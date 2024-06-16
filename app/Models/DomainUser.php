@@ -10,6 +10,10 @@ class DomainUser extends OrmApiBaseModel
 {
     protected $table = 'domainuser';
 
+    public $timestamps = false;
+
+    protected $primaryKey = '';
+
     public function relationships()
     {
         return [
@@ -45,5 +49,5 @@ class DomainUser extends OrmApiBaseModel
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
-
+    
 }

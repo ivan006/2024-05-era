@@ -10,10 +10,14 @@ class WebsiteProducerRegistration extends OrmApiBaseModel
 {
     protected $table = 'website_producer_registrations';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -30,7 +34,7 @@ class WebsiteProducerRegistration extends OrmApiBaseModel
         'ProducerId'
     ];
 
+    
 
-
-
+    
 }

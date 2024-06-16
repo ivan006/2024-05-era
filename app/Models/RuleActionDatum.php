@@ -10,10 +10,14 @@ class RuleActionDatum extends OrmApiBaseModel
 {
     protected $table = 'ruleactiondata';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -34,7 +38,7 @@ class RuleActionDatum extends OrmApiBaseModel
         'ColumnType'
     ];
 
+    
 
-
-
+    
 }

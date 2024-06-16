@@ -10,6 +10,10 @@ class Entity extends OrmApiBaseModel
 {
     protected $table = 'entity';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -63,7 +67,7 @@ class Entity extends OrmApiBaseModel
         'IsPaid'
     ];
 
-
+    
 
         public function entitygoods(): HasMany
     {

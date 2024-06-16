@@ -10,10 +10,14 @@ class EntityRelationship extends OrmApiBaseModel
 {
     protected $table = 'entityrelationship';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -46,7 +50,7 @@ class EntityRelationship extends OrmApiBaseModel
         'EntityBLevel'
     ];
 
+    
 
-
-
+    
 }

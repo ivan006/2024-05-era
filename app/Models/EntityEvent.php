@@ -10,10 +10,14 @@ class EntityEvent extends OrmApiBaseModel
 {
     protected $table = 'entityevent';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -36,7 +40,7 @@ class EntityEvent extends OrmApiBaseModel
         'Instance'
     ];
 
+    
 
-
-
+    
 }

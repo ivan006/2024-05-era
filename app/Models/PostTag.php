@@ -10,10 +10,14 @@ class PostTag extends OrmApiBaseModel
 {
     protected $table = 'post_tags';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -34,7 +38,7 @@ class PostTag extends OrmApiBaseModel
         'tag_id'
     ];
 
+    
 
-
-
+    
 }

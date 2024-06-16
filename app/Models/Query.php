@@ -10,10 +10,14 @@ class Query extends OrmApiBaseModel
 {
     protected $table = 'query';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
-
+            
         ];
     }
 
@@ -40,7 +44,7 @@ class Query extends OrmApiBaseModel
         'ClosedBy'
     ];
 
+    
 
-
-
+    
 }

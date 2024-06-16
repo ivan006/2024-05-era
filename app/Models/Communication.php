@@ -10,6 +10,10 @@ class Communication extends OrmApiBaseModel
 {
     protected $table = 'communication';
 
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
+
     public function relationships()
     {
         return [
@@ -47,5 +51,5 @@ class Communication extends OrmApiBaseModel
         return $this->belongsTo(SystemUser::class, 'SentBy');
     }
 
-
+    
 }
