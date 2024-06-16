@@ -17,10 +17,10 @@ class EntityGoodApproval extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'approvedByRel',
-            'invoiceApprovedByRel',
-            'entityRel',
-            'queryRel',
+            'approved_by_rel',
+            'invoice_approved_by_rel',
+            'entity_rel',
+            'query_rel',
             'entitygoods'
         ];
     }
@@ -58,22 +58,22 @@ class EntityGoodApproval extends OrmApiBaseModel
         'Status'
     ];
 
-        public function approvedByRel(): BelongsTo
+        public function approved_by_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ApprovedBy');
     }
 
-        public function invoiceApprovedByRel(): BelongsTo
+        public function invoice_approved_by_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'InvoiceApprovedBy');
     }
 
-        public function entityRel(): BelongsTo
+        public function entity_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function queryRel(): BelongsTo
+        public function query_rel(): BelongsTo
     {
         return $this->belongsTo(QueryHeader::class, 'Query');
     }

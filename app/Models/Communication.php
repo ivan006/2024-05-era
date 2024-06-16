@@ -17,7 +17,7 @@ class Communication extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'sentByRel'
+            'sent_by_rel'
         ];
     }
 
@@ -46,7 +46,7 @@ class Communication extends OrmApiBaseModel
         'RelativeID'
     ];
 
-        public function sentByRel(): BelongsTo
+        public function sent_by_rel(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'SentBy');
     }

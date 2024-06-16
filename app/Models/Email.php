@@ -17,7 +17,7 @@ class Email extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'typeRel'
+            'type_rel'
         ];
     }
 
@@ -38,7 +38,7 @@ class Email extends OrmApiBaseModel
         'Preferred'
     ];
 
-        public function typeRel(): BelongsTo
+        public function type_rel(): BelongsTo
     {
         return $this->belongsTo(SystemCode::class, 'Type');
     }

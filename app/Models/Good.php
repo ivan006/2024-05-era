@@ -17,7 +17,7 @@ class Good extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'sectorRel',
+            'sector_rel',
             'entitygoods'
         ];
     }
@@ -51,7 +51,7 @@ class Good extends OrmApiBaseModel
         'Sector'
     ];
 
-        public function sectorRel(): BelongsTo
+        public function sector_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Sector');
     }

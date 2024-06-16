@@ -17,7 +17,7 @@ class EntityAudit extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'systemUserRel'
+            'system_user_rel'
         ];
     }
 
@@ -42,7 +42,7 @@ class EntityAudit extends OrmApiBaseModel
         'Audit_TS'
     ];
 
-        public function systemUserRel(): BelongsTo
+        public function system_user_rel(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }

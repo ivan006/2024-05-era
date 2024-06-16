@@ -17,9 +17,9 @@ class SystemCode extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'entityRel',
-            'addressesCountry',
-            'addressesType',
+            'entity_rel',
+            'addresses_country',
+            'addresses_type',
             'contactnumbers',
             'emails',
             'servicerequestfrequencies',
@@ -63,17 +63,17 @@ class SystemCode extends OrmApiBaseModel
         'Entity'
     ];
 
-        public function entityRel(): BelongsTo
+        public function entity_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function addressesCountry(): HasMany
+        public function addresses_country(): HasMany
     {
         return $this->hasMany(Address::class, 'Country');
     }
 
-        public function addressesType(): HasMany
+        public function addresses_type(): HasMany
     {
         return $this->hasMany(Address::class, 'Type');
     }

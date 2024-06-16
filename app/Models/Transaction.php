@@ -17,7 +17,7 @@ class Transaction extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'typeRel'
+            'type_rel'
         ];
     }
 
@@ -56,7 +56,7 @@ class Transaction extends OrmApiBaseModel
         'Type'
     ];
 
-        public function typeRel(): BelongsTo
+        public function type_rel(): BelongsTo
     {
         return $this->belongsTo(SystemCode::class, 'Type');
     }

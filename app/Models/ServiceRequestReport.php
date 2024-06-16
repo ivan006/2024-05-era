@@ -17,12 +17,12 @@ class ServiceRequestReport extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'serviceRequestRel',
-            'serviceProviderRel',
-            'createdByRel',
-            'treatmentDetail',
+            'service_request_rel',
+            'service_provider_rel',
+            'created_by_rel',
+            'treatment_detail',
             'externalproducers',
-            'treatmentdetailsRel'
+            'treatmentdetails_rel'
         ];
     }
 
@@ -51,22 +51,22 @@ class ServiceRequestReport extends OrmApiBaseModel
         'Rejected'
     ];
 
-        public function serviceRequestRel(): BelongsTo
+        public function service_request_rel(): BelongsTo
     {
         return $this->belongsTo(ServiceRequest::class, 'ServiceRequest');
     }
 
-        public function serviceProviderRel(): BelongsTo
+        public function service_provider_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ServiceProvider');
     }
 
-        public function createdByRel(): BelongsTo
+        public function created_by_rel(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'CreatedBy');
     }
 
-        public function treatmentDetail(): BelongsTo
+        public function treatment_detail(): BelongsTo
     {
         return $this->belongsTo(TreatmentDetail::class, 'TreatmentDetails');
     }
@@ -76,7 +76,7 @@ class ServiceRequestReport extends OrmApiBaseModel
         return $this->hasMany(ExternalProducer::class, 'ServiceRequestReport');
     }
 
-        public function treatmentdetailsRel(): HasMany
+        public function treatmentdetails_rel(): HasMany
     {
         return $this->hasMany(TreatmentDetail::class, 'ServiceRequestReport');
     }

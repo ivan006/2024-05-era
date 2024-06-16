@@ -17,7 +17,7 @@ class TreatmentDetail extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'serviceRequestReportRel',
+            'service_request_report_rel',
             'servicerequestreports'
         ];
     }
@@ -47,7 +47,7 @@ class TreatmentDetail extends OrmApiBaseModel
         'LocalSecondaryProducts'
     ];
 
-        public function serviceRequestReportRel(): BelongsTo
+        public function service_request_report_rel(): BelongsTo
     {
         return $this->belongsTo(ServiceRequestReport::class, 'ServiceRequestReport');
     }

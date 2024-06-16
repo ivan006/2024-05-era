@@ -17,8 +17,8 @@ class ServiceRequest extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'serviceProviderRel',
-            'createdByRel',
+            'service_provider_rel',
+            'created_by_rel',
             'servicerequestfrequencies',
             'servicerequestreports'
         ];
@@ -53,12 +53,12 @@ class ServiceRequest extends OrmApiBaseModel
         'DeliveryDate'
     ];
 
-        public function serviceProviderRel(): BelongsTo
+        public function service_provider_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ServiceProvider');
     }
 
-        public function createdByRel(): BelongsTo
+        public function created_by_rel(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'CreatedBy');
     }

@@ -17,8 +17,8 @@ class ServiceRequestFrequency extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'serviceRequestRel',
-            'reportFrequencyRel'
+            'service_request_rel',
+            'report_frequency_rel'
         ];
     }
 
@@ -37,12 +37,12 @@ class ServiceRequestFrequency extends OrmApiBaseModel
         'Active'
     ];
 
-        public function serviceRequestRel(): BelongsTo
+        public function service_request_rel(): BelongsTo
     {
         return $this->belongsTo(ServiceRequest::class, 'ServiceRequest');
     }
 
-        public function reportFrequencyRel(): BelongsTo
+        public function report_frequency_rel(): BelongsTo
     {
         return $this->belongsTo(SystemCode::class, 'ReportFrequency');
     }

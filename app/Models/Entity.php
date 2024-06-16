@@ -18,9 +18,9 @@ class Entity extends OrmApiBaseModel
     {
         return [
             'entitygoods',
-            'entitygoodapprovalsApprovedBy',
-            'entitygoodapprovalsInvoiceApprovedBy',
-            'entitygoodapprovalsEntity',
+            'entitygoodapprovals_approved_by',
+            'entitygoodapprovals_invoice_approved_by',
+            'entitygoodapprovals_entity',
             'goods',
             'servicerequests',
             'servicerequestreports',
@@ -74,17 +74,17 @@ class Entity extends OrmApiBaseModel
         return $this->hasMany(EntityGood::class, 'Entity');
     }
 
-        public function entitygoodapprovalsApprovedBy(): HasMany
+        public function entitygoodapprovals_approved_by(): HasMany
     {
         return $this->hasMany(EntityGoodApproval::class, 'ApprovedBy');
     }
 
-        public function entitygoodapprovalsInvoiceApprovedBy(): HasMany
+        public function entitygoodapprovals_invoice_approved_by(): HasMany
     {
         return $this->hasMany(EntityGoodApproval::class, 'InvoiceApprovedBy');
     }
 
-        public function entitygoodapprovalsEntity(): HasMany
+        public function entitygoodapprovals_entity(): HasMany
     {
         return $this->hasMany(EntityGoodApproval::class, 'Entity');
     }

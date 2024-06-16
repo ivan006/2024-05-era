@@ -17,9 +17,9 @@ class UserAccess extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'systemUserRel',
-            'userRoleRel',
-            'systemActionRel'
+            'system_user_rel',
+            'user_role_rel',
+            'system_action_rel'
         ];
     }
 
@@ -50,17 +50,17 @@ class UserAccess extends OrmApiBaseModel
         'FbId'
     ];
 
-        public function systemUserRel(): BelongsTo
+        public function system_user_rel(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
-        public function userRoleRel(): BelongsTo
+        public function user_role_rel(): BelongsTo
     {
         return $this->belongsTo(UserRole::class, 'UserRole');
     }
 
-        public function systemActionRel(): BelongsTo
+        public function system_action_rel(): BelongsTo
     {
         return $this->belongsTo(SystemAction::class, 'SystemAction');
     }

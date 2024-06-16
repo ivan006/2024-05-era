@@ -17,7 +17,7 @@ class UserDevice extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'systemUserRel'
+            'system_user_rel'
         ];
     }
 
@@ -40,7 +40,7 @@ class UserDevice extends OrmApiBaseModel
         'FbId'
     ];
 
-        public function systemUserRel(): BelongsTo
+        public function system_user_rel(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }

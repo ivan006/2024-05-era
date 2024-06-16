@@ -17,8 +17,8 @@ class Address extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'countryRel',
-            'typeRel'
+            'country_rel',
+            'type_rel'
         ];
     }
 
@@ -63,12 +63,12 @@ class Address extends OrmApiBaseModel
         'Longitude'
     ];
 
-        public function countryRel(): BelongsTo
+        public function country_rel(): BelongsTo
     {
         return $this->belongsTo(SystemCode::class, 'Country');
     }
 
-        public function typeRel(): BelongsTo
+        public function type_rel(): BelongsTo
     {
         return $this->belongsTo(SystemCode::class, 'Type');
     }

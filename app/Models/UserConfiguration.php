@@ -17,8 +17,8 @@ class UserConfiguration extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'systemUserRel',
-            'languageRel'
+            'system_user_rel',
+            'language_rel'
         ];
     }
 
@@ -37,12 +37,12 @@ class UserConfiguration extends OrmApiBaseModel
         'FbId'
     ];
 
-        public function systemUserRel(): BelongsTo
+        public function system_user_rel(): BelongsTo
     {
         return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
-        public function languageRel(): BelongsTo
+        public function language_rel(): BelongsTo
     {
         return $this->belongsTo(SystemCode::class, 'Language');
     }

@@ -17,9 +17,9 @@ class EntityGood extends OrmApiBaseModel
     public function relationships()
     {
         return [
-            'entityRel',
-            'goodRel',
-            'invoiceRel'
+            'entity_rel',
+            'good_rel',
+            'invoice_rel'
         ];
     }
 
@@ -49,7 +49,7 @@ class EntityGood extends OrmApiBaseModel
         'AvgKg',
         'AvgKgOld',
         'AvgLifeSpan',
-        //'TotalKg',
+        'TotalKg',
         'Tariff',
         'Selected',
         'Dimension',
@@ -58,20 +58,20 @@ class EntityGood extends OrmApiBaseModel
         'Invoice'
     ];
 
-        public function entityRel(): BelongsTo
+        public function entity_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function goodRel(): BelongsTo
+        public function good_rel(): BelongsTo
     {
         return $this->belongsTo(Good::class, 'Good');
     }
 
-        public function invoiceRel(): BelongsTo
+        public function invoice_rel(): BelongsTo
     {
         return $this->belongsTo(EntityGoodApproval::class, 'Invoice');
     }
 
-
+    
 }
