@@ -78,6 +78,7 @@ export default class $modelName extends MyBaseModel {
     static entity = '$jsModelName';
     static entityUrl = '/api/$pluralTableName';
     static primaryKey = '$primaryKey';
+    static titleKey = '$primaryKey';
     static openRecord(pKey){
       router.push({
         name: '/lists/$pluralTableName/:rId',
@@ -95,6 +96,7 @@ export default class $modelName extends MyBaseModel {
         readables: (user) => true,
         readable: (user, item) => true,
         editable: (user, item) => true,
+        creatable: (user) => true,
     };
 
     static fieldsMetadata = {
