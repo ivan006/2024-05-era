@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72667740a8fcc2232913dd29257f4aad",
+    "content-hash": "a91ac2317ef414d98fe928f5db201fa6",
     "packages": [
         {
             "name": "brick/math",
@@ -1396,17 +1396,11 @@
         },
         {
             "name": "ivanc006/quicklists-laravel-orm-api",
-            "version": "v1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ivan006/2024-05-quicklists-laravel-orm-api.git",
-                "reference": "6a431436762b176f2736ececd857bf0414a3183b"
-            },
+            "version": "dev-main",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ivan006/2024-05-quicklists-laravel-orm-api/zipball/6a431436762b176f2736ececd857bf0414a3183b",
-                "reference": "6a431436762b176f2736ececd857bf0414a3183b",
-                "shasum": ""
+                "type": "path",
+                "url": "../2024-05-quicklists-laravel-orm-api",
+                "reference": "6a431436762b176f2736ececd857bf0414a3183b"
             },
             "require": {
                 "laravel/framework": "^8.0|^9.0|^10.0",
@@ -1426,7 +1420,6 @@
                     "QuicklistsOrmApi\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1437,11 +1430,9 @@
                 }
             ],
             "description": "A Laravel ORM API package for QuickLists.",
-            "support": {
-                "issues": "https://github.com/ivan006/2024-05-quicklists-laravel-orm-api/issues",
-                "source": "https://github.com/ivan006/2024-05-quicklists-laravel-orm-api/tree/v1.0.3"
-            },
-            "time": "2024-06-02T18:54:23+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "krlove/code-generator",
@@ -8914,7 +8905,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ivanc006/quicklists-laravel-orm-api": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
