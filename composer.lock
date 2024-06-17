@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09109ade3944a153f17e7e0c56896ccc",
+    "content-hash": "2127ed5d93d9dc8745aa9b844b66dc2a",
     "packages": [
         {
             "name": "brick/math",
@@ -1397,10 +1397,16 @@
         {
             "name": "ivanc006/quicklists-laravel-orm-api",
             "version": "1.0.4",
-            "dist": {
-                "type": "path",
-                "url": "../2024-05-quicklists-laravel-orm-api",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ivan006/2024-05-quicklists-laravel-orm-api.git",
                 "reference": "e75ed464bb608945a6527d35b908bf5ef47227f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ivan006/2024-05-quicklists-laravel-orm-api/zipball/e75ed464bb608945a6527d35b908bf5ef47227f1",
+                "reference": "e75ed464bb608945a6527d35b908bf5ef47227f1",
+                "shasum": ""
             },
             "require": {
                 "laravel/framework": "^8.0|^9.0|^10.0",
@@ -1420,6 +1426,7 @@
                     "QuicklistsOrmApi\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1430,10 +1437,11 @@
                 }
             ],
             "description": "A Laravel ORM API package for QuickLists.",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/ivan006/2024-05-quicklists-laravel-orm-api/issues",
+                "source": "https://github.com/ivan006/2024-05-quicklists-laravel-orm-api/tree/v1.0.4"
+            },
+            "time": "2024-06-17T17:01:02+00:00"
         },
         {
             "name": "krlove/code-generator",
