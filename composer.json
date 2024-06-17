@@ -7,12 +7,18 @@
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
-        "ivanc006/quicklists-laravel-orm-api": "^1.0",
         "krlove/eloquent-model-generator": "^2.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "ivanc006/quicklists-laravel-orm-api": "dev-main"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "..\\2024-05-quicklists-laravel-orm-api"
+        }
+    ],
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "kitloong/laravel-migrations-generator": "^7.0",
