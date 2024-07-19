@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class EntityGood extends Model
+class EntityGood extends OrmApiBaseModel
 {
     protected $table = 'entitygood';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'entityRel',
-            'goodRel',
-            'invoiceRel'
+            'entity_rel',
+            'good_rel',
+            'invoice_rel'
         ];
     }
 
@@ -54,19 +58,19 @@ class EntityGood extends Model
         'Invoice'
     ];
 
-        public function entityRel(): BelongsTo
+        public function entity_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function goodRel(): BelongsTo
+        public function good_rel(): BelongsTo
     {
         return $this->belongsTo(Good::class, 'Good');
     }
 
-        public function invoiceRel(): BelongsTo
+        public function invoice_rel(): BelongsTo
     {
-        return $this->belongsTo(Entitygoodapproval::class, 'Invoice');
+        return $this->belongsTo(EntityGoodApproval::class, 'Invoice');
     }
 
     

@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class TreatmentDetail extends Model
+class TreatmentDetail extends OrmApiBaseModel
 {
     protected $table = 'treatmentdetails';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'serviceRequestReportRel',
+            'service_request_report_rel',
             'servicerequestreports'
         ];
     }
@@ -43,13 +47,13 @@ class TreatmentDetail extends Model
         'LocalSecondaryProducts'
     ];
 
-        public function serviceRequestReportRel(): BelongsTo
+        public function service_request_report_rel(): BelongsTo
     {
-        return $this->belongsTo(Servicerequestreport::class, 'ServiceRequestReport');
+        return $this->belongsTo(ServiceRequestReport::class, 'ServiceRequestReport');
     }
 
         public function servicerequestreports(): HasMany
     {
-        return $this->hasMany(Servicerequestreport::class, 'TreatmentDetails');
+        return $this->hasMany(ServiceRequestReport::class, 'TreatmentDetails');
     }
 }

@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserDevice extends Model
+class UserDevice extends OrmApiBaseModel
 {
     protected $table = 'userdevice';
+
+    public $timestamps = false;
+
+    protected $primaryKey = '';
 
     public function relationships()
     {
         return [
-            'systemUserRel'
+            'system_user_rel'
         ];
     }
 
@@ -36,9 +40,9 @@ class UserDevice extends Model
         'FbId'
     ];
 
-        public function systemUserRel(): BelongsTo
+        public function system_user_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'SystemUser');
+        return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
     

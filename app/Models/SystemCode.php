@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SystemCode extends Model
+class SystemCode extends OrmApiBaseModel
 {
     protected $table = 'systemcode';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'entityRel',
-            'addressesCountry',
-            'addressesType',
+            'entity_rel',
+            'addresses_country',
+            'addresses_type',
             'contactnumbers',
             'emails',
             'servicerequestfrequencies',
@@ -59,24 +63,24 @@ class SystemCode extends Model
         'Entity'
     ];
 
-        public function entityRel(): BelongsTo
+        public function entity_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function addressesCountry(): HasMany
+        public function addresses_country(): HasMany
     {
         return $this->hasMany(Address::class, 'Country');
     }
 
-        public function addressesType(): HasMany
+        public function addresses_type(): HasMany
     {
         return $this->hasMany(Address::class, 'Type');
     }
 
         public function contactnumbers(): HasMany
     {
-        return $this->hasMany(Contactnumber::class, 'Type');
+        return $this->hasMany(ContactNumber::class, 'Type');
     }
 
         public function emails(): HasMany
@@ -86,7 +90,7 @@ class SystemCode extends Model
 
         public function servicerequestfrequencies(): HasMany
     {
-        return $this->hasMany(Servicerequestfrequency::class, 'ReportFrequency');
+        return $this->hasMany(ServiceRequestFrequency::class, 'ReportFrequency');
     }
 
         public function transactions(): HasMany
@@ -96,6 +100,6 @@ class SystemCode extends Model
 
         public function userconfigurations(): HasMany
     {
-        return $this->hasMany(Userconfiguration::class, 'Language');
+        return $this->hasMany(UserConfiguration::class, 'Language');
     }
 }

@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class QueryHeader extends Model
+class QueryHeader extends OrmApiBaseModel
 {
     protected $table = 'queryheader';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
@@ -48,6 +52,6 @@ class QueryHeader extends Model
 
         public function entitygoodapprovals(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class, 'Query');
+        return $this->hasMany(EntityGoodApproval::class, 'Query');
     }
 }

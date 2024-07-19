@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class WebsiteProducerRegistration extends Model
+class WebsiteProducerRegistration extends OrmApiBaseModel
 {
     protected $table = 'website_producer_registrations';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {

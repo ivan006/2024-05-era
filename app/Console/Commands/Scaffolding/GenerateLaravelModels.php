@@ -49,15 +49,19 @@ class GenerateLaravelModels extends Command
 
             $attributeNames = [];
 
+            $autoIncrement = "";
+
             foreach ($columns as $column) {
                 $fieldName = $column->Field;
                 $nullable = $column->Null === 'YES';
-                $autoIncrement = strpos($column->Extra, 'auto_increment') !== false;
+                $isAutoIncrement = strpos($column->Extra, 'auto_increment') !== false;
 
-                if (!$autoIncrement) {
+                if (!$isAutoIncrement) {
                     $fillable[] = "'$fieldName'";
                     $rules[] = "'$fieldName' => '" . ($nullable ? 'nullable' : 'required') . "'";
                     $attributeNames[] = strtolower($fieldName);
+                } else {
+                    $autoIncrement = $fieldName;
                 }
 
                 if (in_array($fieldName, array_column($relations['foreignKeys'], 'COLUMN_NAME'))) {
@@ -65,6 +69,9 @@ class GenerateLaravelModels extends Command
                     if (in_array(strtolower($relationshipName), $attributeNames)) {
                         $relationshipName .= 'Rel';
                     }
+
+                    $relationshipName = Str::snake($relationshipName);
+
                     $relatedModel = $this->relationHelper->getRelatedModelName($fieldName, $relations['foreignKeys']);
                     $relationships[] = "'$relationshipName'";
                     $belongsToMethods[] = $this->generateBelongsToMethod($relatedModel, $relationshipName, $fieldName);
@@ -81,6 +88,9 @@ class GenerateLaravelModels extends Command
                     if (in_array(strtolower($relationshipName), $attributeNames)) {
                         $relationshipName .= 'Rel';
                     }
+
+                    $relationshipName = Str::snake($relationshipName);
+
                     $relationships[] = "'$relationshipName'";
                     $hasManyMethods[] = $this->generateHasManyMethod($relation['model'], $relationshipName, $relation['COLUMN_NAME']);
                 }
@@ -97,13 +107,17 @@ class GenerateLaravelModels extends Command
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class $modelName extends Model
+class $modelName extends OrmApiBaseModel
 {
     protected \$table = '$tableName';
+
+    public \$timestamps = false;
+
+    protected \$primaryKey = '$autoIncrement';
 
     public function relationships()
     {
@@ -138,6 +152,13 @@ EOT;
 
     protected function generateBelongsToMethod($relatedModel, $relationshipName, $fieldName)
     {
+        $cleanedName = preg_replace('/[^a-zA-Z]/', '', $relatedModel);
+
+        $segmentationResult = $this->wordSplitter->split($cleanedName);
+        $segmentedTableName = $segmentationResult['words'];
+        $pascalName = implode('', array_map('ucfirst', $segmentedTableName));
+
+        $relatedModel = Str::singular($pascalName);
         return <<<EOT
     public function $relationshipName(): BelongsTo
     {
@@ -148,6 +169,14 @@ EOT;
 
     protected function generateHasManyMethod($relatedModel, $relationshipName, $foreignKey)
     {
+
+        $cleanedName = preg_replace('/[^a-zA-Z]/', '', $relatedModel);
+
+        $segmentationResult = $this->wordSplitter->split($cleanedName);
+        $segmentedTableName = $segmentationResult['words'];
+        $pascalName = implode('', array_map('ucfirst', $segmentedTableName));
+
+        $relatedModel = Str::singular($pascalName);
         return <<<EOT
     public function $relationshipName(): HasMany
     {

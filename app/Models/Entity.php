@@ -2,21 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Entity extends Model
+class Entity extends OrmApiBaseModel
 {
     protected $table = 'entity';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
             'entitygoods',
-            'entitygoodapprovalsApprovedBy',
-            'entitygoodapprovalsInvoiceApprovedBy',
-            'entitygoodapprovalsEntity',
+            'entitygoodapprovals_approved_by',
+            'entitygoodapprovals_invoice_approved_by',
+            'entitygoodapprovals_entity',
             'goods',
             'servicerequests',
             'servicerequestreports',
@@ -67,22 +71,22 @@ class Entity extends Model
 
         public function entitygoods(): HasMany
     {
-        return $this->hasMany(Entitygood::class, 'Entity');
+        return $this->hasMany(EntityGood::class, 'Entity');
     }
 
-        public function entitygoodapprovalsApprovedBy(): HasMany
+        public function entitygoodapprovals_approved_by(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class, 'ApprovedBy');
+        return $this->hasMany(EntityGoodApproval::class, 'ApprovedBy');
     }
 
-        public function entitygoodapprovalsInvoiceApprovedBy(): HasMany
+        public function entitygoodapprovals_invoice_approved_by(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class, 'InvoiceApprovedBy');
+        return $this->hasMany(EntityGoodApproval::class, 'InvoiceApprovedBy');
     }
 
-        public function entitygoodapprovalsEntity(): HasMany
+        public function entitygoodapprovals_entity(): HasMany
     {
-        return $this->hasMany(Entitygoodapproval::class, 'Entity');
+        return $this->hasMany(EntityGoodApproval::class, 'Entity');
     }
 
         public function goods(): HasMany
@@ -92,16 +96,16 @@ class Entity extends Model
 
         public function servicerequests(): HasMany
     {
-        return $this->hasMany(Servicerequest::class, 'ServiceProvider');
+        return $this->hasMany(ServiceRequest::class, 'ServiceProvider');
     }
 
         public function servicerequestreports(): HasMany
     {
-        return $this->hasMany(Servicerequestreport::class, 'ServiceProvider');
+        return $this->hasMany(ServiceRequestReport::class, 'ServiceProvider');
     }
 
         public function systemcodes(): HasMany
     {
-        return $this->hasMany(Systemcode::class, 'Entity');
+        return $this->hasMany(SystemCode::class, 'Entity');
     }
 }

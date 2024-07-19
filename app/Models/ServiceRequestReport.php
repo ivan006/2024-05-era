@@ -2,23 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ServiceRequestReport extends Model
+class ServiceRequestReport extends OrmApiBaseModel
 {
     protected $table = 'servicerequestreport';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'serviceRequestRel',
-            'serviceProviderRel',
-            'createdByRel',
-            'treatmentDetail',
+            'service_request_rel',
+            'service_provider_rel',
+            'created_by_rel',
+            'treatment_detail',
             'externalproducers',
-            'treatmentdetailsRel'
+            'treatmentdetails_rel'
         ];
     }
 
@@ -47,33 +51,33 @@ class ServiceRequestReport extends Model
         'Rejected'
     ];
 
-        public function serviceRequestRel(): BelongsTo
+        public function service_request_rel(): BelongsTo
     {
-        return $this->belongsTo(Servicerequest::class, 'ServiceRequest');
+        return $this->belongsTo(ServiceRequest::class, 'ServiceRequest');
     }
 
-        public function serviceProviderRel(): BelongsTo
+        public function service_provider_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ServiceProvider');
     }
 
-        public function createdByRel(): BelongsTo
+        public function created_by_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'CreatedBy');
+        return $this->belongsTo(SystemUser::class, 'CreatedBy');
     }
 
-        public function treatmentDetail(): BelongsTo
+        public function treatment_detail(): BelongsTo
     {
-        return $this->belongsTo(Treatmentdetail::class, 'TreatmentDetails');
+        return $this->belongsTo(TreatmentDetail::class, 'TreatmentDetails');
     }
 
         public function externalproducers(): HasMany
     {
-        return $this->hasMany(Externalproducer::class, 'ServiceRequestReport');
+        return $this->hasMany(ExternalProducer::class, 'ServiceRequestReport');
     }
 
-        public function treatmentdetailsRel(): HasMany
+        public function treatmentdetails_rel(): HasMany
     {
-        return $this->hasMany(Treatmentdetail::class, 'ServiceRequestReport');
+        return $this->hasMany(TreatmentDetail::class, 'ServiceRequestReport');
     }
 }

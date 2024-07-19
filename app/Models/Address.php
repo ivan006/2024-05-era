@@ -2,19 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Address extends Model
+class Address extends OrmApiBaseModel
 {
     protected $table = 'address';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'countryRel',
-            'typeRel'
+            'country_rel',
+            'type_rel'
         ];
     }
 
@@ -59,14 +63,14 @@ class Address extends Model
         'Longitude'
     ];
 
-        public function countryRel(): BelongsTo
+        public function country_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemcode::class, 'Country');
+        return $this->belongsTo(SystemCode::class, 'Country');
     }
 
-        public function typeRel(): BelongsTo
+        public function type_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemcode::class, 'Type');
+        return $this->belongsTo(SystemCode::class, 'Type');
     }
 
     

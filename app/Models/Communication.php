@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Communication extends Model
+class Communication extends OrmApiBaseModel
 {
     protected $table = 'communication';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'sentByRel'
+            'sent_by_rel'
         ];
     }
 
@@ -42,9 +46,9 @@ class Communication extends Model
         'RelativeID'
     ];
 
-        public function sentByRel(): BelongsTo
+        public function sent_by_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'SentBy');
+        return $this->belongsTo(SystemUser::class, 'SentBy');
     }
 
     

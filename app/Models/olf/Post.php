@@ -6,9 +6,9 @@ use App\Models\BelongsToMany;
 use App\Models\HasMany;
 use App\Models\Tags;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 
-class Post extends Model
+class Post extends OrmApiBaseModel
 {
     use HasFactory;
 

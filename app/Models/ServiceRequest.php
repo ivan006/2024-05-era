@@ -2,19 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ServiceRequest extends Model
+class ServiceRequest extends OrmApiBaseModel
 {
     protected $table = 'servicerequest';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'serviceProviderRel',
-            'createdByRel',
+            'service_provider_rel',
+            'created_by_rel',
             'servicerequestfrequencies',
             'servicerequestreports'
         ];
@@ -49,23 +53,23 @@ class ServiceRequest extends Model
         'DeliveryDate'
     ];
 
-        public function serviceProviderRel(): BelongsTo
+        public function service_provider_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ServiceProvider');
     }
 
-        public function createdByRel(): BelongsTo
+        public function created_by_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'CreatedBy');
+        return $this->belongsTo(SystemUser::class, 'CreatedBy');
     }
 
         public function servicerequestfrequencies(): HasMany
     {
-        return $this->hasMany(Servicerequestfrequency::class, 'ServiceRequest');
+        return $this->hasMany(ServiceRequestFrequency::class, 'ServiceRequest');
     }
 
         public function servicerequestreports(): HasMany
     {
-        return $this->hasMany(Servicerequestreport::class, 'ServiceRequest');
+        return $this->hasMany(ServiceRequestReport::class, 'ServiceRequest');
     }
 }

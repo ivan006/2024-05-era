@@ -2,19 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ServiceRequestFrequency extends Model
+class ServiceRequestFrequency extends OrmApiBaseModel
 {
     protected $table = 'servicerequestfrequency';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'serviceRequestRel',
-            'reportFrequencyRel'
+            'service_request_rel',
+            'report_frequency_rel'
         ];
     }
 
@@ -33,14 +37,14 @@ class ServiceRequestFrequency extends Model
         'Active'
     ];
 
-        public function serviceRequestRel(): BelongsTo
+        public function service_request_rel(): BelongsTo
     {
-        return $this->belongsTo(Servicerequest::class, 'ServiceRequest');
+        return $this->belongsTo(ServiceRequest::class, 'ServiceRequest');
     }
 
-        public function reportFrequencyRel(): BelongsTo
+        public function report_frequency_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemcode::class, 'ReportFrequency');
+        return $this->belongsTo(SystemCode::class, 'ReportFrequency');
     }
 
     

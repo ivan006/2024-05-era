@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Document extends Model
+class Document extends OrmApiBaseModel
 {
     protected $table = 'document';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
@@ -44,6 +48,6 @@ class Document extends Model
 
         public function documentdetails(): HasMany
     {
-        return $this->hasMany(Documentdetail::class, 'Document');
+        return $this->hasMany(DocumentDetail::class, 'Document');
     }
 }

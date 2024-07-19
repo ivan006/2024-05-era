@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Good extends Model
+class Good extends OrmApiBaseModel
 {
     protected $table = 'good';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'sectorRel',
+            'sector_rel',
             'entitygoods'
         ];
     }
@@ -47,13 +51,13 @@ class Good extends Model
         'Sector'
     ];
 
-        public function sectorRel(): BelongsTo
+        public function sector_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Sector');
     }
 
         public function entitygoods(): HasMany
     {
-        return $this->hasMany(Entitygood::class, 'Good');
+        return $this->hasMany(EntityGood::class, 'Good');
     }
 }

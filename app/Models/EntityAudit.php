@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class EntityAudit extends Model
+class EntityAudit extends OrmApiBaseModel
 {
     protected $table = 'entityaudit';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'systemUserRel'
+            'system_user_rel'
         ];
     }
 
@@ -38,9 +42,9 @@ class EntityAudit extends Model
         'Audit_TS'
     ];
 
-        public function systemUserRel(): BelongsTo
+        public function system_user_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'SystemUser');
+        return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
     

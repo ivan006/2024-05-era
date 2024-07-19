@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class DocumentDetail extends Model
+class DocumentDetail extends OrmApiBaseModel
 {
     protected $table = 'documentdetail';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'documentRel'
+            'document_rel'
         ];
     }
 
@@ -44,7 +48,7 @@ class DocumentDetail extends Model
         'CreatedOn'
     ];
 
-        public function documentRel(): BelongsTo
+        public function document_rel(): BelongsTo
     {
         return $this->belongsTo(Document::class, 'Document');
     }

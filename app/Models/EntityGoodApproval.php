@@ -2,21 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class EntityGoodApproval extends Model
+class EntityGoodApproval extends OrmApiBaseModel
 {
     protected $table = 'entitygoodapproval';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'approvedByRel',
-            'invoiceApprovedByRel',
-            'entityRel',
-            'queryRel',
+            'approved_by_rel',
+            'invoice_approved_by_rel',
+            'entity_rel',
+            'query_rel',
             'entitygoods'
         ];
     }
@@ -54,28 +58,28 @@ class EntityGoodApproval extends Model
         'Status'
     ];
 
-        public function approvedByRel(): BelongsTo
+        public function approved_by_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'ApprovedBy');
     }
 
-        public function invoiceApprovedByRel(): BelongsTo
+        public function invoice_approved_by_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'InvoiceApprovedBy');
     }
 
-        public function entityRel(): BelongsTo
+        public function entity_rel(): BelongsTo
     {
         return $this->belongsTo(Entity::class, 'Entity');
     }
 
-        public function queryRel(): BelongsTo
+        public function query_rel(): BelongsTo
     {
-        return $this->belongsTo(Queryheader::class, 'Query');
+        return $this->belongsTo(QueryHeader::class, 'Query');
     }
 
         public function entitygoods(): HasMany
     {
-        return $this->hasMany(Entitygood::class, 'Invoice');
+        return $this->hasMany(EntityGood::class, 'Invoice');
     }
 }

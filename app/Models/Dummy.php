@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Dummy extends Model
+class Dummy extends OrmApiBaseModel
 {
     protected $table = 'dummy';
+
+    public $timestamps = false;
+
+    protected $primaryKey = '';
 
     public function relationships()
     {

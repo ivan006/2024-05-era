@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Transaction extends Model
+class Transaction extends OrmApiBaseModel
 {
     protected $table = 'transactions';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
         return [
-            'typeRel'
+            'type_rel'
         ];
     }
 
@@ -52,9 +56,9 @@ class Transaction extends Model
         'Type'
     ];
 
-        public function typeRel(): BelongsTo
+        public function type_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemcode::class, 'Type');
+        return $this->belongsTo(SystemCode::class, 'Type');
     }
 
     

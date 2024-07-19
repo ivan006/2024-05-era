@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class DomainUser extends Model
+class DomainUser extends OrmApiBaseModel
 {
     protected $table = 'domainuser';
+
+    public $timestamps = false;
+
+    protected $primaryKey = '';
 
     public function relationships()
     {
         return [
-            'systemUserRel'
+            'system_user_rel'
         ];
     }
 
@@ -40,9 +44,9 @@ class DomainUser extends Model
         'ChangedBy'
     ];
 
-        public function systemUserRel(): BelongsTo
+        public function system_user_rel(): BelongsTo
     {
-        return $this->belongsTo(Systemuser::class, 'SystemUser');
+        return $this->belongsTo(SystemUser::class, 'SystemUser');
     }
 
     

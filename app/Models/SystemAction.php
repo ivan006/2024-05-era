@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use QuicklistsOrmApi\OrmApiBaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SystemAction extends Model
+class SystemAction extends OrmApiBaseModel
 {
     protected $table = 'systemaction';
+
+    public $timestamps = false;
+
+    protected $primaryKey = 'Id';
 
     public function relationships()
     {
@@ -48,6 +52,6 @@ class SystemAction extends Model
 
         public function useraccesses(): HasMany
     {
-        return $this->hasMany(Useraccess::class, 'SystemAction');
+        return $this->hasMany(UserAccess::class, 'SystemAction');
     }
 }
